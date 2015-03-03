@@ -31,4 +31,7 @@ on
 TODO [aut, cre] \email{ 1 } \cr TODO [aut] \email{ 2 } TODO
 [aut] \email{ 3 }
 }
+\seealso{
+Other RTCGA: \code{\link{mergaTCGA}}
+}
 
