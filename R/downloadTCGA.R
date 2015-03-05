@@ -19,6 +19,8 @@ downloadTCGA <- function( cancerTypes, additionalInfo = "Merge_Clinical.Level_1"
                                                          value = TRUE ))]
       lastReleaseDate <- stri_extract( str = lastReleaseDate,
                                       regex = "stddata__201[0-9]_[0-9]{2}_[0-9]{2}" )
+                                      
+                          # this can be done once when package is loaded - need to change this !                                      
       
       elementIndex <- readLines( paste0("http://gdac.broadinstitute.org/runs/", lastReleaseDate,
                                         "/data/", element, "/", paste0(unlist(stri_extract_all(str = "stddata__2015_02_04", 
