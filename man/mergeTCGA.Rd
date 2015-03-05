@@ -10,6 +10,7 @@ mergaTCGA(clinical, names)
 TODO
 }
 \seealso{
-Other RTCGA: \code{\link{RTCGA-package}}
+Other RTCGA: \code{\link{RTCGA-package}};
+\code{\link{downloadTCGA}}
 }
 
