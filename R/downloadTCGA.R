@@ -17,6 +17,13 @@ downloadTCGA <- function( cancerTypes, additionalInfo = "Merge_Clinical.Level_1"
                               value = TRUE)[length( grep( pattern= "stddata__20", 
                                                          x = gdacContent, 
                                                          value = TRUE ))]
+                    # better than regex                                     
+#> library("rvest")
+#> "<li><a href=\"stddata__2015_02_04/\"> stddata__2015_02_04/</a></li>" %>% 
+#+   html() %>% 
+#+   html_text()
+#[1] " stddata__2015_02_04/"
+                                                         
       lastReleaseDate <- stri_extract( str = lastReleaseDate,
                                       regex = "stddata__201[0-9]_[0-9]{2}_[0-9]{2}" )
                                       
