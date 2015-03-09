@@ -39,6 +39,9 @@ downloadTCGA <- function( cancerTypes, additionalInfo = "Merge_Clinical.Level_1"
       
       
       # this doesn't work yet
+      
+      !!!!!!!!!!!!!!!!download.file {utils}!!!!!!!!!!!!!!!!!!
+      
       DATA <- getBinaryURL( linksToData, ssl.verifypeer = FALSE )
       file.create( paste0(writeDirectory, "/", cancerTypes ) )
       writeBin( DATA, con = paste0(writeDirectory, "/", cancerTypes ) )
