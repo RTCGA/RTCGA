@@ -1,0 +1,24 @@
+.RTCGAEnv <- new.env()
+
+.onAttach <- function(...) {
+    packageStartupMessage( "\n Welcome to the RTCGA package (ver 1.0)." )
+    
+    assign( x = ".gdacContent", value = readLines( "http://gdac.broadinstitute.org/runs/" ), envir = .RTCGAEnv )
+    assign( x = ".lastReleaseDate", value = stri_extract( grep( pattern= "stddata__20", 
+                                                           x = get( ".gdacContent", envir = .RTCGAEnv), 
+                                                           value = TRUE)[length( grep( pattern= "stddata__20", 
+                                                                                       x = get( ".gdacContent", envir = .RTCGAEnv), 
+                                                                                       value = TRUE ))], 
+                                                          regex = "stddata__201[0-9]_[0-9]{2}_[0-9]{2}"),
+                                                          envir = .RTCGAEnv )
+    
+    assign( x = ".GithubURL", value = "https://raw.githubusercontent.com/", envir = .RTCGAEnv )
+}
+
+
+.onDetach <- function( libpath ){
+    rm( .RTCGAEnv )
+}
+
+## no S4 methodology here; speedup :
+.noGenerics <- TRUE

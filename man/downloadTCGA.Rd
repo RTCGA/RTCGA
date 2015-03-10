@@ -4,11 +4,22 @@
 \alias{downloadTCGA}
 \title{download}
 \usage{
-downloadTCGA(cancerTypes, additionalInfo = "Merge_Clinical.Level_1",
-  writeDirectory)
+downloadTCGA(cancerTypes, additionalInfo = "Merge_Clinical.Level_1", destDir,
+  date = NULL)
 }
 \description{
 TODO
+}
+\examples{
+\dontrun{
+
+dir.create( "hre")
+
+downloadTCGA( cancerTypes = "BRCA", additionalInfo = "miR_gene_expression",
+destDir = "hre/" )
+
+downloadTCGA( cancerTypes = c("BRCA", "OV"), destDir = "hre/" )
+}
 }
 \seealso{
 Other RTCGA: \code{\link{RTCGA-package}};
