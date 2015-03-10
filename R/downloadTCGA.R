@@ -32,10 +32,8 @@ downloadTCGA <- function( cancerTypes, additionalInfo = "Merge_Clinical.Level_1"
         lastReleaseDate <- get( ".lastReleaseDate", envir = .RTCGAEnv ) # zzz.r file in source code
     }
     
-   sapply( cancerTypes, function( element ){
-      
-          
-                                                      
+   last = 0
+   for ( element in cancerTypes) {
       filesParentURL <- paste0("http://gdac.broadinstitute.org/runs/", lastReleaseDate,
                            "/data/", element, "/", paste0(unlist(stri_extract_all(str = lastReleaseDate, # "stddata__2015_02_04"
                                                                                   regex = "[0-9]+")), collapse = ""))                          
@@ -50,15 +48,11 @@ downloadTCGA <- function( cancerTypes, additionalInfo = "Merge_Clinical.Level_1"
       
       #http://gdac.broadinstitute.org/runs/stddata__2015_02_04/data/BRCA/20150204/
       
-      
-          
-      
-      
           
       file.create( paste0( destDir, linksToData ) )
-      download.file( url = paste0( filesParentURL, "/", linksToData ), destfile = paste0( destDir, linksToData ) )
-      
-         }
+      last = download.file( url = paste0( filesParentURL, "/", linksToData ), destfile = paste0( destDir, linksToData ) )
+      }
+    invisible(last)
    )
     
 }
