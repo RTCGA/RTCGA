@@ -53,6 +53,5 @@ downloadTCGA <- function( cancerTypes, additionalInfo = "Merge_Clinical.Level_1"
       last = download.file( url = paste0( filesParentURL, "/", linksToData ), destfile = paste0( destDir, linksToData ) )
       }
     invisible(last)
-   )
     
 }
