@@ -37,11 +37,19 @@
 downloadTCGA <- function( cancerTypes, dataSet = "Merge_Clinical.Level_1",
                           destDir, date = NULL ){
    
+    assert_that( is.character( cancerTypes ) & ( length( cancerTypes ) > 1 )  )
+    assert_that( is.character( dataSet ) )
+    assert_that( is.character( destDir ) )
+    assert_that( is.null( date )  || is.character( date ) )
+    
+    
     destDir <- checkDirectory( destDir )
     
     if( !is.null( date )  ){
         if( date %in% get( x= ".availableDates", envir = .RTCGAEnv ) ){ # .availableDates in zzz.r
         lastReleaseDate <- date # paste0("stddata__",date)
+        }else{
+            stop("Wrong date format or unavailable date of release. Use availableDates() function to recieve proper format and available dates.")
         }
     }else{
         lastReleaseDate <- get( ".lastReleaseDate", envir = .RTCGAEnv ) # zzz.r file in source code
