@@ -11,6 +11,6 @@ TODO
 }
 \seealso{
 Other RTCGA: \code{\link{RTCGA-package}};
-\code{\link{downloadTCGA}}
+\code{\link{availableDates}}; \code{\link{downloadTCGA}}
 }
 

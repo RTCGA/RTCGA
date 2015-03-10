@@ -2,20 +2,48 @@
 % Please edit documentation in R/downloadTCGA.R
 \name{downloadTCGA}
 \alias{downloadTCGA}
-\title{download}
+\title{Download TCGA data}
 \usage{
-downloadTCGA(cancerTypes, additionalInfo = "Merge_Clinical.Level_1", destDir,
+downloadTCGA(cancerTypes, dataSet = "Merge_Clinical.Level_1", destDir,
   date = NULL)
 }
+\arguments{
+  \item{cancerTypes}{A character vector containing
+  abbreviations (Cohort code) of types of cancers to
+  download from
+  \href{http://gdac.broadinstitute.org/}{http://gdac.broadinstitute.org/}.}
+
+  \item{dataSet}{A part of the name of dataSet to be
+  downloaded from
+  \href{http://gdac.broadinstitute.org/runs/}{http://gdac.broadinstitute.org/runs/}.
+  By default the Merged Clinical dataSet is downloaded
+  (value \code{dataSet = "Merge_Clinical.Level_1"}).}
+
+  \item{destDir}{A character specifying a directory into
+  which \code{dataSet}s will be downloaded.}
+
+  \item{date}{A \code{NULL} or character specifying from
+  which date \code{dataSet}s should be downloaded. By
+  default (\code{date = NULL}) the newest available date is
+  used. All available dates can be checked on
+  \href{http://gdac.broadinstitute.org/runs/}{http://gdac.broadinstitute.org/runs/}
+  or by using \link{availableDates} function. Required
+  format \code{"stddata__YYYY_MM_DD"}.}
+}
 \description{
-TODO
+Enables to download TCGA data from specified dates of
+releases of concrete Cohorts of cancer types. Pass a name
+of required dataset to the \code{dataSet} parameter. By
+default the Merged Clinical dataSet is downloaded (value
+\code{dataSet = "Merge_Clinical.Level_1"}) from the newest
+available date of release.
 }
 \examples{
 \dontrun{
 
 dir.create( "hre")
 
-downloadTCGA( cancerTypes = "BRCA", additionalInfo = "miR_gene_expression",
+downloadTCGA( cancerTypes = "BRCA", dataSet = "miR_gene_expression",
 destDir = "hre/" )
 
 downloadTCGA( cancerTypes = c("BRCA", "OV"), destDir = "hre/" )
@@ -23,6 +51,6 @@ downloadTCGA( cancerTypes = c("BRCA", "OV"), destDir = "hre/" )
 }
 \seealso{
 Other RTCGA: \code{\link{RTCGA-package}};
-\code{\link{mergaTCGA}}
+\code{\link{availableDates}}; \code{\link{mergaTCGA}}
 }
 

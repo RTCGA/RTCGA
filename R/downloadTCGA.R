@@ -1,8 +1,21 @@
 ##    RTCGA package for R
 ##
-#' @title download
+#' @title Download TCGA data
 #'
-#' @description TODO
+#' @description Enables to download TCGA data from specified dates of releases of concrete Cohorts of cancer types.
+#' Pass a name of required dataset to the \code{dataSet} parameter. By default the Merged Clinical
+#' dataSet is downloaded (value \code{dataSet = "Merge_Clinical.Level_1"}) from the newest available date of release.
+#' 
+#' @param cancerTypes A character vector containing abbreviations (Cohort code) of types of cancers to download from 
+#' \href{http://gdac.broadinstitute.org/}{http://gdac.broadinstitute.org/}.
+#' @param dataSet A part of the name of dataSet to be downloaded from 
+#' \href{http://gdac.broadinstitute.org/runs/}{http://gdac.broadinstitute.org/runs/}. By default the Merged Clinical
+#' dataSet is downloaded (value \code{dataSet = "Merge_Clinical.Level_1"}).
+#' @param destDir A character specifying a directory into which \code{dataSet}s will be downloaded.
+#' @param date A \code{NULL} or character specifying from which date \code{dataSet}s should be downloaded.
+#' By default (\code{date = NULL}) the newest available date is used. All available dates can be checked on 
+#' \href{http://gdac.broadinstitute.org/runs/}{http://gdac.broadinstitute.org/runs/} or by using \link{availableDates} 
+#' function. Required format \code{"stddata__YYYY_MM_DD"}.
 #' 
 #' @examples
 #' 
@@ -10,28 +23,32 @@
 #' 
 #' dir.create( "hre")
 #' 
-#' downloadTCGA( cancerTypes = "BRCA", additionalInfo = "miR_gene_expression", 
+#' downloadTCGA( cancerTypes = "BRCA", dataSet = "miR_gene_expression", 
 #' destDir = "hre/" )
 #'
 #' downloadTCGA( cancerTypes = c("BRCA", "OV"), destDir = "hre/" )
 #' }
 #' 
+#' 
+#' 
 #' @family RTCGA
 #' @rdname downloadTCGA
 #' @export
-downloadTCGA <- function( cancerTypes, additionalInfo = "Merge_Clinical.Level_1",
+downloadTCGA <- function( cancerTypes, dataSet = "Merge_Clinical.Level_1",
                           destDir, date = NULL ){
    
-    destDir <- archivist:::checkDirectory( destDir )
+    destDir <- checkDirectory( destDir )
     
     if( !is.null( date )  ){
-        if( date %in% availableDates ){ #TODO availableDates in zzz.r
-        lastReleaseDate <- paste0("stddata__",date)
+        if( date %in% get( x= ".availableDates", envir = .RTCGAEnv ) ){ # .availableDates in zzz.r
+        lastReleaseDate <- date # paste0("stddata__",date)
         }
     }else{
         lastReleaseDate <- get( ".lastReleaseDate", envir = .RTCGAEnv ) # zzz.r file in source code
     }
+   
     
+   invisible(     
    sapply( cancerTypes, function( element ){
       
           
@@ -42,7 +59,7 @@ downloadTCGA <- function( cancerTypes, additionalInfo = "Merge_Clinical.Level_1"
       
       elementIndex <- readLines( filesParentURL )
       # taking first element is not smart..
-      hrefsToData <- grep( x = elementIndex, pattern = additionalInfo, value = TRUE )[1] %>% html() %>% html_text()
+      hrefsToData <- grep( x = elementIndex, pattern = dataSet, value = TRUE )[1] %>% html() %>% html_text()
       
       # removing white spaces at the beggining...
       linksToData <- stri_extract( str = hrefsToData, 
@@ -60,5 +77,22 @@ downloadTCGA <- function( cancerTypes, additionalInfo = "Merge_Clinical.Level_1"
       
          }
    )
+   )
     
 }
+
+
+
+
+checkDirectory <- function(directory){
+#     if (is.null(directory)) {
+#         directory <- get(".repoDir", envir = .ArchivistEnv)
+#     }
+#     else {
+        if (!grepl("/$", x = directory, perl = TRUE)) {
+            directory <- paste0(directory, "/")
+        }
+#    }
+    return(directory)
+}
+
