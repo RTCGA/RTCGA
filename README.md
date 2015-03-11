@@ -1,7 +1,7 @@
 # RTCGA
 
 
-<h5> Installing RTCGA package: </h5>
+<h5> Installation of the RTCGA package: </h5>
 To get started, install the latest version of **RTCGA** from Bioconductor:
 ```{Ruby}
 # not there yet
