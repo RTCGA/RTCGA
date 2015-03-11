@@ -17,7 +17,9 @@ downloadTCGA(cancerTypes, dataSet = "Merge_Clinical.Level_1", destDir,
   downloaded from
   \href{http://gdac.broadinstitute.org/runs/}{http://gdac.broadinstitute.org/runs/}.
   By default the Merged Clinical dataSet is downloaded
-  (value \code{dataSet = "Merge_Clinical.Level_1"}).}
+  (value \code{dataSet = "Merge_Clinical.Level_1"}).
+  Available datasets' names can be checked using
+  \link{availableDataSets} function.}
 
   \item{destDir}{A character specifying a directory into
   which \code{dataSet}s will be downloaded.}

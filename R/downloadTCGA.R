@@ -10,7 +10,8 @@
 #' \href{http://gdac.broadinstitute.org/}{http://gdac.broadinstitute.org/}.
 #' @param dataSet A part of the name of dataSet to be downloaded from 
 #' \href{http://gdac.broadinstitute.org/runs/}{http://gdac.broadinstitute.org/runs/}. By default the Merged Clinical
-#' dataSet is downloaded (value \code{dataSet = "Merge_Clinical.Level_1"}).
+#' dataSet is downloaded (value \code{dataSet = "Merge_Clinical.Level_1"}). Available datasets' names can be checked
+#' using \link{availableDataSets} function.
 #' @param destDir A character specifying a directory into which \code{dataSet}s will be downloaded.
 #' @param date A \code{NULL} or character specifying from which date \code{dataSet}s should be downloaded.
 #' By default (\code{date = NULL}) the newest available date is used. All available dates can be checked on 
