@@ -51,6 +51,7 @@ downloadTCGA( cancerTypes = c("BRCA", "OV"), destDir = "hre/" )
 }
 \seealso{
 Other RTCGA: \code{\link{RTCGA-package}};
+\code{\link{availableDataSets}};
 \code{\link{availableDates}}; \code{\link{mergaTCGA}}
 }
 

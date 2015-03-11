@@ -2,12 +2,12 @@
 % Please edit documentation in R/availableDates.R
 \name{availableDates}
 \alias{availableDates}
-\title{TCGA datasets releases dates}
+\title{TCGA datasets' releases dates}
 \usage{
 availableDates()
 }
 \value{
-Vector of available dates to pass to the
+A vector of available dates to pass to the
 \link{downloadTCGA} function.
 }
 \description{
@@ -20,6 +20,7 @@ availableDates()
 }
 \seealso{
 Other RTCGA: \code{\link{RTCGA-package}};
+\code{\link{availableDataSets}};
 \code{\link{downloadTCGA}}; \code{\link{mergaTCGA}}
 }
 

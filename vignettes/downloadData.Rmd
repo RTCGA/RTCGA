@@ -16,7 +16,7 @@ output:
 ```{r, echo=FALSE}
 library(knitr)
 opts_chunk$set(comment="", message = FALSE, warning = FALSE,
-               tidy.opts=list(keep.blank.line=TRUE, width.cutoff=150),options(width=150), cache=TRUE)
+               tidy.opts=list(keep.blank.line=TRUE, width.cutoff=700),options(width=700), cache=TRUE)
 ```
 
 
@@ -36,10 +36,13 @@ The Cancer Genome Atlas (TCGA) Data Portal provides a platform for researchers t
 Datasets are available under this link [http://gdac.broadinstitute.org/](http://gdac.broadinstitute.org/).
 
 
+```{r}
+library( RTCGA )
+```
+
+
 ```{r, eval=FALSE}
 dir.create( "example" )
-
-library( RTCGA )
 
 downloadTCGA( cancerTypes = "BRCA", dataSet = "miR_gene_expression", destDir = "example/" )
 
@@ -56,4 +59,14 @@ cat( availableDates(), sep = "\n" )
 ```
 
 
+# Available datasets' names for TCGA releases
 
+## For BRCA cancer
+```{r}
+cat( availableDataSets( "BRCA" ), sep = "\n" )
+```
+
+## For OV cancer
+```{r, error=FALSE}
+cat( availableDataSets( "OV" ), sep = "\n" )
+```

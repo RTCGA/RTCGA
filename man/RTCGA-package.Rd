@@ -32,7 +32,8 @@ TODO [aut, cre] \email{ 1 } \cr TODO [aut] \email{ 2 } TODO
 [aut] \email{ 3 }
 }
 \seealso{
-Other RTCGA: \code{\link{availableDates}};
-\code{\link{downloadTCGA}}; \code{\link{mergaTCGA}}
+Other RTCGA: \code{\link{availableDataSets}};
+\code{\link{availableDates}}; \code{\link{downloadTCGA}};
+\code{\link{mergaTCGA}}
 }
 

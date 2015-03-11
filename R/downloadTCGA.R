@@ -42,29 +42,19 @@ downloadTCGA <- function( cancerTypes, dataSet = "Merge_Clinical.Level_1",
     assert_that( is.character( destDir ) )
     assert_that( is.null( date )  || is.character( date ) )
     
-    
+    # check if there was "/" mark at the end of directory
     destDir <- checkDirectory( destDir )
     
-    if( !is.null( date )  ){
-        if( date %in% get( x= ".availableDates", envir = .RTCGAEnv ) ){ # .availableDates in zzz.r
-        lastReleaseDate <- date # paste0("stddata__",date)
-        }else{
-            stop("Wrong date format or unavailable date of release. Use availableDates() function to recieve proper format and available dates.")
-        }
-    }else{
-        lastReleaseDate <- get( ".lastReleaseDate", envir = .RTCGAEnv ) # zzz.r file in source code
-    }
-   
+   # ensure which date was specified
+   lastReleaseDate  <- whichDateToUse( date = date )
     
    last <- 0 
    for ( element in  cancerTypes ){
       
-          
-                                                      
-      filesParentURL <- paste0("http://gdac.broadinstitute.org/runs/", lastReleaseDate,
-                           "/data/", element, "/", paste0(unlist(stri_extract_all(str = lastReleaseDate, # "stddata__2015_02_04"
-                                                                                  regex = "[0-9]+")), collapse = ""))                          
-      
+   
+       # get index of page containing datasets fot this date of release and Cohort Code
+       filesParentURL <- parentURL( lastReleaseDate, element ) 
+       
       elementIndex <- readLines( filesParentURL )
       # taking first element is not smart..
       hrefsToData <- grep( x = elementIndex, pattern = dataSet, value = TRUE )[1] %>% html() %>% html_text()
@@ -102,5 +92,27 @@ checkDirectory <- function(directory){
         }
 #    }
     return(directory)
+}
+
+
+
+parentURL <- function( lastReleaseDate, element ){
+    paste0("http://gdac.broadinstitute.org/runs/", lastReleaseDate,
+           "/data/", element, "/", paste0(unlist(stri_extract_all(str = lastReleaseDate, # "stddata__2015_02_04"
+                                                                  regex = "[0-9]+")), collapse = ""))
+}
+
+
+
+whichDateToUse <- function( date ){
+    if( !is.null( date )  ){
+        if( date %in% get( x= ".availableDates", envir = .RTCGAEnv ) ){ # .availableDates in zzz.r
+            date # paste0("stddata__",date)
+        }else{
+            stop("Wrong date format or unavailable date of release. Use availableDates() function to recieve proper format and available dates.")
+        }
+    }else{
+        get( ".lastReleaseDate", envir = .RTCGAEnv ) # zzz.r file in source code
+    }
 }
 
