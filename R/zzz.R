@@ -24,7 +24,7 @@
 
 
 .onDetach <- function( libpath ){
-    rm( .RTCGAEnv )
+    .RTCGAEnv <- NULL
 }
 
 ## no S4 methodology here; speedup :
