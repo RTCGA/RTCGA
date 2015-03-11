@@ -38,7 +38,7 @@
 downloadTCGA <- function( cancerTypes, dataSet = "Merge_Clinical.Level_1",
                           destDir, date = NULL ){
    
-    assert_that( is.character( cancerTypes ) & ( length( cancerTypes ) == 1 )  )
+    assert_that( is.character( cancerTypes ) & ( length( cancerTypes ) > 0 )  )
     assert_that( is.character( dataSet ) & ( length( dataSet ) > 1 ) )
     assert_that( is.character( destDir ) )
     assert_that(  is.null( date )  || ( is.character( date ) & ( length( date ) == 1 ) ) )
