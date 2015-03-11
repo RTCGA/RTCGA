@@ -38,10 +38,10 @@
 downloadTCGA <- function( cancerTypes, dataSet = "Merge_Clinical.Level_1",
                           destDir, date = NULL ){
    
-    assert_that( is.character( cancerTypes ) & ( length( cancerTypes ) > 1 )  )
+    assert_that( is.character( cancerTypes ) & ( length( cancerTypes ) == 1 )  )
     assert_that( is.character( dataSet ) & ( length( dataSet ) > 1 ) )
     assert_that( is.character( destDir ) )
-    assert_that( is.null( date )  || is.character( date ) )
+    assert_that(  is.null( date )  || ( is.character( date ) & ( length( date ) == 1 ) ) )
     
     # check if there was "/" mark at the end of directory
     destDir <- checkDirectory( destDir )

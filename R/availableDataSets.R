@@ -25,7 +25,7 @@
 availableDataSets <- function( cancerType, date = NULL ){
     
     assert_that( is.character( cancerType ) & ( length( cancerType ) == 1 )  )
-    assert_that( is.null( date )  || is.character( date ) )
+    assert_that(  is.null( date )  || ( is.character( date ) & ( length( date ) == 1 ) ) )
     
     # ensure which date was specified
     lastReleaseDate  <- whichDateToUse( date = date ) #downloadTCGA.r
