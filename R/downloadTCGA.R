@@ -56,8 +56,8 @@ downloadTCGA <- function( cancerTypes, dataSet = "Merge_Clinical.Level_1",
     }
    
     
-   invisible(     
-   sapply( cancerTypes, function( element ){
+   last <- 0 
+   for ( element in  cancerTypes ){
       
           
                                                       
@@ -81,11 +81,11 @@ downloadTCGA <- function( cancerTypes, dataSet = "Merge_Clinical.Level_1",
       
           
       file.create( paste0( destDir, linksToData ) )
-      download.file( url = paste0( filesParentURL, "/", linksToData ), destfile = paste0( destDir, linksToData ) )
+      last <- download.file( url = paste0( filesParentURL, "/", linksToData ), destfile = paste0( destDir, linksToData ) )
       
-         }
-   )
-   )
+   }
+   
+   invisible(last)
     
 }
 
