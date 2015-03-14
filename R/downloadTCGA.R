@@ -61,7 +61,7 @@ downloadTCGA <- function( cancerTypes, dataSet = "Merge_Clinical.Level_1",
        elementIndexes <- html(filesParentURL) %>% html_nodes("a") %>% html_text() %>% 
          grep(pattern = dataSet, value = TRUE) %>%
          gsub(pattern="^[ \t]+", replacement="") %>%
-         grep(pattern="gz$") #! md5
+         grep(pattern="gz$", value = TRUE) #! md5
        
        # taking first element is not smart..
        # maybe now is?
