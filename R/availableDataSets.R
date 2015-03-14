@@ -1,15 +1,15 @@
 ##    RTCGA package for R
 ##
-#' @title TCGA datasets' releases names
+#' @title TCGA datasets' names
 #'
-#' @description Enables to check dates of TCGA datasets releases.
+#' @description Enables to check TCGA datasets' names for current release date.
 #' 
 #' @param cancerType A character of length 1 containing abbreviation (Cohort code) of types of cancers to check for 
 #' available datasets' names on \href{http://gdac.broadinstitute.org/}{http://gdac.broadinstitute.org/}.
 #' @param date A \code{NULL} or character specifying from which date datasets' names should be checked.
 #' By default (\code{date = NULL}) the newest available date is used. All available dates can be checked on 
 #' \href{http://gdac.broadinstitute.org/runs/}{http://gdac.broadinstitute.org/runs/} or by using \link{availableDates} 
-#' function. Required format \code{"stddata__YYYY_MM_DD"}.
+#' function. Required format \code{"YYYY-MM-DD"}.
 #' 
 #' @return A vector of available datasets names to pass to the \link{downloadTCGA} function.
 #' 
@@ -45,3 +45,4 @@ availableDataSets <- function( cancerType, date = NULL ){
           unique( grep( x = dataSetsName, pattern = paste0("_",cancerType), value = TRUE ) ) )
     
 }
+

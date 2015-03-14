@@ -2,7 +2,7 @@
 ##
 #' @title TCGA datasets' releases dates
 #'
-#' @description Enables to check dates of TCGA datasets releases.
+#' @description Enables to check dates of TCGA datasets' releases.
 #' 
 #' @return A vector of available dates to pass to the \link{downloadTCGA} function.
 #' 

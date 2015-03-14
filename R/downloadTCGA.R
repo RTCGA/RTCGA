@@ -114,6 +114,10 @@ whichDateToUse <- function( date ){
         }
     }else{
         if( !exists( ".lastReleaseDate", envir = .RTCGAEnv ) ){
+            
+            if( !exists( "..availableDates", envir = .RTCGAEnv ) ){
+                invisible(availableDates())
+            }
             # happens only once
             assign( x = ".lastReleaseDate", 
                     value = get( x = ".availableDates", envir = .RTCGAEnv)[length(get( x = ".availableDates", envir = .RTCGAEnv))],
