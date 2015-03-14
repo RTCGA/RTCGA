@@ -1,5 +1,6 @@
 # RTCGA
 
+Project is (will be) supported by [Travis CI](https://travis-ci.org/) and [waffle.io](https://waffle.io/).
 
 <h5> Installation of the RTCGA package: </h5>
 To get started, install the latest version of **RTCGA** from Bioconductor:
