@@ -46,37 +46,31 @@ downloadTCGA <- function( cancerTypes, dataSet = "Merge_Clinical.Level_1",
     # check if there was "/" mark at the end of directory
     destDir <- checkDirectory( destDir )
     
+    # does the dir exist?
+    if (!file.exists(destDir)) {
+      dir.create(destDir)
+    }
+    
    # ensure which date was specified
    lastReleaseDate  <- whichDateToUse( date = date )
-    
    
    for ( element in  cancerTypes ){
-      
-   
        # get index of page containing datasets fot this date of release and Cohort Code
        filesParentURL <- parentURL( lastReleaseDate, element ) 
        
-      elementIndex <- readLines( filesParentURL )
-      # taking first element is not smart..
-      hrefsToData <- grep( x = elementIndex, pattern = dataSet, value = TRUE )[1] %>% html() %>% html_text()
-      
-      # removing white spaces at the beggining...
-      linksToData <- stri_extract( str = hrefsToData, 
-                    regex = "[\\S]+" )
-      
+       elementIndexes <- html(filesParentURL) %>% html_nodes("a") %>% html_text() %>% 
+         grep(pattern = dataSet, value = TRUE) %>%
+         gsub(pattern="^[ \t]+", replacement="") %>%
+         grep(pattern="gz$", value = TRUE) #! md5
+       
+       # taking first element is not smart..
+       # maybe now is?
+       linksToData <- elementIndexes[1]
+       
       #http://gdac.broadinstitute.org/runs/stddata__2015_02_04/data/BRCA/20150204/
-      
-      
-          
-      
-      
-          
       file.create( paste0( destDir, linksToData ) )
       download.file( url = paste0( filesParentURL, "/", linksToData ), destfile = paste0( destDir, linksToData ) )
-      
    }
-   
-   
     
 }
 
@@ -103,11 +97,9 @@ parentURL <- function( lastReleaseDate, element ){
                                                                   regex = "[0-9]+")), collapse = ""))
 }
 
-
-
 whichDateToUse <- function( date ){
     if( !is.null( date )  ){
-        if( date %in% get( x= ".availableDates2", envir = .RTCGAEnv ) ){ # .availableDates in availableDates function
+        if( date %in% availableDates() ){ # .availableDates in availableDates function
             paste0("stddata__", gsub(date, "-", "_") )
         }else{
             stop("Wrong date format or unavailable date of release. Use availableDates() function to recieve proper format and available dates.")
@@ -119,14 +111,13 @@ whichDateToUse <- function( date ){
                 invisible(availableDates())
             }
             # happens only once
-            assign( x = ".lastReleaseDate", 
-                    value = get( x = ".availableDates", envir = .RTCGAEnv)[length(get( x = ".availableDates", envir = .RTCGAEnv))],
-                    envir = .RTCGAEnv )
-            
-            get( ".lastReleaseDate", envir = .RTCGAEnv )            
-        }else{
-            get( ".lastReleaseDate", envir = .RTCGAEnv ) 
+            availableDates() %>%
+              tail(1) %>%
+              gsub(pattern="-", replacement="_", fixed = TRUE) %>%
+              paste0("stddata__", .) %>%
+              assign( x = ".lastReleaseDate", value = ., envir = .RTCGAEnv )
         }
+        get( ".lastReleaseDate", envir = .RTCGAEnv ) 
     }
 }
 
