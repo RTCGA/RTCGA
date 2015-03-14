@@ -113,7 +113,7 @@ whichDateToUse <- function( date ){
             stop("Wrong date format or unavailable date of release. Use availableDates() function to recieve proper format and available dates.")
         }
     }else{
-        if( !exist( ".lastReleaseDate", envir = .RTCGAEnv ) ){
+        if( !exists( ".lastReleaseDate", envir = .RTCGAEnv ) ){
             # happens only once
             assign( x = ".lastReleaseDate", 
                     value = get( x = ".availableDates", envir = .RTCGAEnv)[length(get( x = ".availableDates", envir = .RTCGAEnv))],

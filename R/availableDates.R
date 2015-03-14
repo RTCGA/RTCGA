@@ -16,7 +16,7 @@
 #' @export
 availableDates <- function( ){
     
-    if( !exist( x= ".availableDates", envir = .RTCGAEnv ) ){
+    if( !exists( x= ".availableDates", envir = .RTCGAEnv ) ){
          # happens only once
         assign( x = ".gdacContent", value = readLines( "http://gdac.broadinstitute.org/runs/" ), 
                 envir = .RTCGAEnv )
