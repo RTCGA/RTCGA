@@ -97,11 +97,9 @@ parentURL <- function( lastReleaseDate, element ){
                                                                   regex = "[0-9]+")), collapse = ""))
 }
 
-
-
 whichDateToUse <- function( date ){
     if( !is.null( date )  ){
-        if( date %in% get( x= ".availableDates2", envir = .RTCGAEnv ) ){ # .availableDates in availableDates function
+        if( date %in% availableDates() ){ # .availableDates in availableDates function
             paste0("stddata__", gsub(date, "-", "_") )
         }else{
             stop("Wrong date format or unavailable date of release. Use availableDates() function to recieve proper format and available dates.")
@@ -109,14 +107,13 @@ whichDateToUse <- function( date ){
     }else{
         if( !exists( ".lastReleaseDate", envir = .RTCGAEnv ) ){
             # happens only once
-            assign( x = ".lastReleaseDate", 
-                    value = get( x = ".availableDates", envir = .RTCGAEnv)[length(get( x = ".availableDates", envir = .RTCGAEnv))],
-                    envir = .RTCGAEnv )
-            
-            get( ".lastReleaseDate", envir = .RTCGAEnv )            
-        }else{
-            get( ".lastReleaseDate", envir = .RTCGAEnv ) 
+            availableDates() %>%
+              tail(1) %>%
+              gsub(pattern="-", replacement="_", fixed = TRUE) %>%
+              paste0("stddata__", .) %>%
+              assign( x = ".lastReleaseDate", value = ., envir = .RTCGAEnv )
         }
+        get( ".lastReleaseDate", envir = .RTCGAEnv ) 
     }
 }
 
