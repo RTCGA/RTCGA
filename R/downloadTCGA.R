@@ -16,7 +16,7 @@
 #' @param date A \code{NULL} or character specifying from which date \code{dataSet}s should be downloaded.
 #' By default (\code{date = NULL}) the newest available date is used. All available dates can be checked on 
 #' \href{http://gdac.broadinstitute.org/runs/}{http://gdac.broadinstitute.org/runs/} or by using \link{availableDates} 
-#' function. Required format \code{"stddata__YYYY_MM_DD"}.
+#' function. Required format \code{"YYYY-MM-DD"}.
 #' 
 #' @examples
 #' 
@@ -49,7 +49,7 @@ downloadTCGA <- function( cancerTypes, dataSet = "Merge_Clinical.Level_1",
    # ensure which date was specified
    lastReleaseDate  <- whichDateToUse( date = date )
     
-   last <- 0 
+   
    for ( element in  cancerTypes ){
       
    
@@ -72,11 +72,11 @@ downloadTCGA <- function( cancerTypes, dataSet = "Merge_Clinical.Level_1",
       
           
       file.create( paste0( destDir, linksToData ) )
-      last <- download.file( url = paste0( filesParentURL, "/", linksToData ), destfile = paste0( destDir, linksToData ) )
+      download.file( url = paste0( filesParentURL, "/", linksToData ), destfile = paste0( destDir, linksToData ) )
       
    }
    
-   invisible(last)
+   
     
 }
 
@@ -107,13 +107,22 @@ parentURL <- function( lastReleaseDate, element ){
 
 whichDateToUse <- function( date ){
     if( !is.null( date )  ){
-        if( date %in% get( x= ".availableDates", envir = .RTCGAEnv ) ){ # .availableDates in zzz.r
-            date # paste0("stddata__",date)
+        if( date %in% get( x= ".availableDates2", envir = .RTCGAEnv ) ){ # .availableDates in availableDates function
+            paste0("stddata__", gsub(date, "-", "_") )
         }else{
             stop("Wrong date format or unavailable date of release. Use availableDates() function to recieve proper format and available dates.")
         }
     }else{
-        get( ".lastReleaseDate", envir = .RTCGAEnv ) # zzz.r file in source code
+        if( !exist( ".lastReleaseDate", envir = .RTCGAEnv ) ){
+            # happens only once
+            assign( x = ".lastReleaseDate", 
+                    value = get( x = ".availableDates", envir = .RTCGAEnv)[length(get( x = ".availableDates", envir = .RTCGAEnv))],
+                    envir = .RTCGAEnv )
+            
+            get( ".lastReleaseDate", envir = .RTCGAEnv )            
+        }else{
+            get( ".lastReleaseDate", envir = .RTCGAEnv ) 
+        }
     }
 }
 
