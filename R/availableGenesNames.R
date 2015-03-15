@@ -22,7 +22,7 @@ checkGenesNamesAvailability <- function( rnaseqDir, genes ){
     assert_that( is.character( rnaseqDir ) & length( rnaseqDir ) == 1 )
     assert_that( is.character( genes ) & length( genes ) > 0 )
     
-    availableGenesNames( rnaseqDir, genes )
+    availableGenesNames( rnaseqDir )
     sapply( genes, function(element) 
         grep( pattern = element, 
               x = rnaseqv2[-1,1], 
@@ -33,10 +33,9 @@ checkGenesNamesAvailability <- function( rnaseqDir, genes ){
 #' @family RTCGA
 #' @rdname availableGenesNames
 #' @export
-availableGenesNames <- function( rnaseqDir, genes ){
+availableGenesNames <- function( rnaseqDir ){
     
     assert_that( is.character( rnaseqDir ) & length( rnaseqDir ) == 1 )
-    assert_that( is.character( genes ) & length( genes ) > 0 )
     
     fread( rnaseqDir, select = c(1), 
            data.table = FALSE,

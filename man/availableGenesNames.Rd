@@ -7,7 +7,7 @@
 \usage{
 checkGenesNamesAvailability(rnaseqDir, genes)
 
-availableGenesNames(rnaseqDir, genes)
+availableGenesNames(rnaseqDir)
 }
 \arguments{
   \item{rnaseqDir}{TODO}
