@@ -22,10 +22,9 @@ checkGenesNamesAvailability <- function( rnaseqDir, genes ){
     assert_that( is.character( rnaseqDir ) & length( rnaseqDir ) == 1 )
     assert_that( is.character( genes ) & length( genes ) > 0 )
     
-    availableGenesNames( rnaseqDir )
     sapply( genes, function(element) 
         grep( pattern = element, 
-              x = rnaseqv2[-1,1], 
+              x = availableGenesNames( rnaseqDir ), 
               value = TRUE )    
     )
 }
