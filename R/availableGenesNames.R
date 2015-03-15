@@ -30,6 +30,8 @@ checkGenesNamesAvailability <- function( rnaseqDir, genes ){
     )
 }
 
+#' @family RTCGA
+#' @rdname availableGenesNames
 #' @export
 availableGenesNames <- function( rnaseqDir, genes ){
     

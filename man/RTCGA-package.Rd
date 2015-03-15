@@ -34,8 +34,9 @@ TODO [aut, cre] \email{ 1 } \cr TODO [aut] \email{ 2 } TODO
 \seealso{
 Other RTCGA: \code{\link{availableDataSets}};
 \code{\link{availableDates}};
-\code{\link{checkDataSetsAvailability}};
+\code{\link{availableGenesNames}},
 \code{\link{checkGenesNamesAvailability}};
+\code{\link{checkDataSetsAvailability}};
 \code{\link{downloadTCGA}}; \code{\link{mergaTCGA}}
 }
 

@@ -37,8 +37,9 @@ availableDataSets( "OV", availableDates()[5] ) # error
 \seealso{
 Other RTCGA: \code{\link{RTCGA-package}};
 \code{\link{availableDates}};
-\code{\link{checkDataSetsAvailability}};
+\code{\link{availableGenesNames}},
 \code{\link{checkGenesNamesAvailability}};
+\code{\link{checkDataSetsAvailability}};
 \code{\link{downloadTCGA}}; \code{\link{mergaTCGA}}
 }
 
