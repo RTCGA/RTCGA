@@ -22,6 +22,7 @@ availableDates()
 Other RTCGA: \code{\link{RTCGA-package}};
 \code{\link{availableDataSets}};
 \code{\link{checkDataSetsAvailability}};
+\code{\link{checkGenesNamesAvailability}};
 \code{\link{downloadTCGA}}; \code{\link{mergaTCGA}}
 }
 

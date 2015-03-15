@@ -45,7 +45,8 @@ checkDataSetsAvailability( "BRCA", "Mutation_Packager_Calls.Level" )
 \seealso{
 Other RTCGA: \code{\link{RTCGA-package}};
 \code{\link{availableDataSets}};
-\code{\link{availableDates}}; \code{\link{downloadTCGA}};
-\code{\link{mergaTCGA}}
+\code{\link{availableDates}};
+\code{\link{checkGenesNamesAvailability}};
+\code{\link{downloadTCGA}}; \code{\link{mergaTCGA}}
 }
 
