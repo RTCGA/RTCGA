@@ -11,7 +11,7 @@ A vector of available dates to pass to the
 \link{downloadTCGA} function.
 }
 \description{
-Enables to check dates of TCGA datasets releases.
+Enables to check dates of TCGA datasets' releases.
 }
 \examples{
 \dontrun{
@@ -21,6 +21,7 @@ availableDates()
 \seealso{
 Other RTCGA: \code{\link{RTCGA-package}};
 \code{\link{availableDataSets}};
+\code{\link{checkDataSetsAvailability}};
 \code{\link{downloadTCGA}}; \code{\link{mergaTCGA}}
 }
 

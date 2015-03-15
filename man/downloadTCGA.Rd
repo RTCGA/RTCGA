@@ -30,7 +30,7 @@ downloadTCGA(cancerTypes, dataSet = "Merge_Clinical.Level_1", destDir,
   used. All available dates can be checked on
   \href{http://gdac.broadinstitute.org/runs/}{http://gdac.broadinstitute.org/runs/}
   or by using \link{availableDates} function. Required
-  format \code{"stddata__YYYY_MM_DD"}.}
+  format \code{"YYYY-MM-DD"}.}
 }
 \description{
 Enables to download TCGA data from specified dates of
@@ -54,6 +54,8 @@ downloadTCGA( cancerTypes = c("BRCA", "OV"), destDir = "hre/" )
 \seealso{
 Other RTCGA: \code{\link{RTCGA-package}};
 \code{\link{availableDataSets}};
-\code{\link{availableDates}}; \code{\link{mergaTCGA}}
+\code{\link{availableDates}};
+\code{\link{checkDataSetsAvailability}};
+\code{\link{mergaTCGA}}
 }
 

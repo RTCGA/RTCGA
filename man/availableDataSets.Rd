@@ -2,7 +2,7 @@
 % Please edit documentation in R/availableDataSets.R
 \name{availableDataSets}
 \alias{availableDataSets}
-\title{TCGA datasets' releases names}
+\title{TCGA datasets' names}
 \usage{
 availableDataSets(cancerType, date = NULL)
 }
@@ -18,14 +18,15 @@ availableDataSets(cancerType, date = NULL)
   All available dates can be checked on
   \href{http://gdac.broadinstitute.org/runs/}{http://gdac.broadinstitute.org/runs/}
   or by using \link{availableDates} function. Required
-  format \code{"stddata__YYYY_MM_DD"}.}
+  format \code{"YYYY-MM-DD"}.}
 }
 \value{
 A vector of available datasets names to pass to the
 \link{downloadTCGA} function.
 }
 \description{
-Enables to check dates of TCGA datasets releases.
+Enables to check TCGA datasets' names for current release
+date.
 }
 \examples{
 \dontrun{
@@ -35,7 +36,8 @@ availableDataSets( "OV", availableDates()[5] ) # error
 }
 \seealso{
 Other RTCGA: \code{\link{RTCGA-package}};
-\code{\link{availableDates}}; \code{\link{downloadTCGA}};
-\code{\link{mergaTCGA}}
+\code{\link{availableDates}};
+\code{\link{checkDataSetsAvailability}};
+\code{\link{downloadTCGA}}; \code{\link{mergaTCGA}}
 }
 

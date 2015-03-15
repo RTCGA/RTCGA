@@ -11,13 +11,15 @@
 #' \href{http://gdac.broadinstitute.org/runs/}{http://gdac.broadinstitute.org/runs/} or by using \link{availableDates} 
 #' function. Required format \code{"YYYY-MM-DD"}.
 #' @param pattern A character vector of length 1 containing a part of a dataset's name to be checked
-#' for availability for current \code{date} parameter.
+#' for availability for current \code{date} parameter. By default phrase \code{"Merge_Clinical.Level_1"}
+#' is checked.
 #' 
 #' @return A vector of available datasets names to pass to the \link{downloadTCGA} function.
 #' 
 #' @examples
 #' \dontrun{
 #' checkDataSetsAvailability( "BRCA" )
+#' checkDataSetsAvailability( c("BRCA", "OV") )
 #' checkDataSetsAvailability( "BRCA", "Mutation_Packager_Calls.Level" )
 #' }
 #' 
