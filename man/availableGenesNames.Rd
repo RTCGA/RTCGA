@@ -30,12 +30,14 @@ Other RTCGA: \code{\link{RTCGA-package}};
 \code{\link{availableDataSets}};
 \code{\link{availableDates}};
 \code{\link{checkDataSetsAvailability}};
-\code{\link{downloadTCGA}}; \code{\link{mergaTCGA}}
+\code{\link{downloadTCGA}}; \code{\link{mergaTCGA}},
+\code{\link{mergeTCGA_clinical_rnaseq}}
 
 Other RTCGA: \code{\link{RTCGA-package}};
 \code{\link{availableDataSets}};
 \code{\link{availableDates}};
 \code{\link{checkDataSetsAvailability}};
-\code{\link{downloadTCGA}}; \code{\link{mergaTCGA}}
+\code{\link{downloadTCGA}}; \code{\link{mergaTCGA}},
+\code{\link{mergeTCGA_clinical_rnaseq}}
 }
 

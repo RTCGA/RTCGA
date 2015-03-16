@@ -2,14 +2,37 @@
 % Please edit documentation in R/mergeTCGA.R
 \name{mergaTCGA}
 \alias{mergaTCGA}
+\alias{mergeTCGA_clinical_rnaseq}
 \title{Merge}
 \usage{
-mergaTCGA(clinical, names)
+mergaTCGA(clinicalDir, names)
+
+mergeTCGA_clinical_rnaseq(clinicalDir, rnaseqDir, genes = c("MDM2"))
+}
+\arguments{
+  \item{clinicalDir}{A directory to a
+  \code{cancerType.clin.merged.txt} file. \code{cancerType}
+  might be \code{BRCA, OV} etc.}
+
+  \item{rnaseqDir}{A directory to a
+  \code{cancerType.rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.data.txt}
+  file}
+}
+\value{
+A new \code{.txt} file is
 }
 \description{
 TODO
 }
 \seealso{
+Other RTCGA: \code{\link{RTCGA-package}};
+\code{\link{availableDataSets}};
+\code{\link{availableDates}};
+\code{\link{availableGenesNames}},
+\code{\link{checkGenesNamesAvailability}};
+\code{\link{checkDataSetsAvailability}};
+\code{\link{downloadTCGA}}
+
 Other RTCGA: \code{\link{RTCGA-package}};
 \code{\link{availableDataSets}};
 \code{\link{availableDates}};

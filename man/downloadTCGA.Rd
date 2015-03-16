@@ -58,6 +58,7 @@ Other RTCGA: \code{\link{RTCGA-package}};
 \code{\link{availableGenesNames}},
 \code{\link{checkGenesNamesAvailability}};
 \code{\link{checkDataSetsAvailability}};
-\code{\link{mergaTCGA}}
+\code{\link{mergaTCGA}},
+\code{\link{mergeTCGA_clinical_rnaseq}}
 }
 
