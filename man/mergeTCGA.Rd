@@ -2,12 +2,19 @@
 % Please edit documentation in R/mergeTCGA.R
 \name{mergaTCGA}
 \alias{mergaTCGA}
+\alias{mergeTCGA_clinical_mutations}
 \alias{mergeTCGA_clinical_rnaseq}
+\alias{prepareTCGA_mutations_for_merging}
 \title{Merge}
 \usage{
 mergaTCGA(clinicalDir, names)
 
 mergeTCGA_clinical_rnaseq(clinicalDir, rnaseqDir, genes = c("MDM2"))
+
+prepareTCGA_mutations_for_merging(clinicalDir, mutationDir, rnaseqDir)
+
+mergeTCGA_clinical_mutations(clinicalDir, mutationPreparedDir,
+  genes = c("TP53"))
 }
 \arguments{
   \item{clinicalDir}{A directory to a
@@ -25,6 +32,22 @@ A new \code{.txt} file is
 TODO
 }
 \seealso{
+Other RTCGA: \code{\link{RTCGA-package}};
+\code{\link{availableDataSets}};
+\code{\link{availableDates}};
+\code{\link{availableGenesNames}},
+\code{\link{checkGenesNamesAvailability}};
+\code{\link{checkDataSetsAvailability}};
+\code{\link{downloadTCGA}}
+
+Other RTCGA: \code{\link{RTCGA-package}};
+\code{\link{availableDataSets}};
+\code{\link{availableDates}};
+\code{\link{availableGenesNames}},
+\code{\link{checkGenesNamesAvailability}};
+\code{\link{checkDataSetsAvailability}};
+\code{\link{downloadTCGA}}
+
 Other RTCGA: \code{\link{RTCGA-package}};
 \code{\link{availableDataSets}};
 \code{\link{availableDates}};

@@ -101,3 +101,81 @@ mergeTCGA_clinical_rnaseq <- function( clinicalDir, rnaseqDir,
     
 }
 
+#' @family RTCGA
+#' @rdname mergeTCGA
+#' @export
+prepareTCGA_mutations_for_merging <- function( clinicalDir, mutationDir, rnaseqDir ){
+    assert_that( is.character(clinicalDir) & length(clinicalDir) == 1)
+    assert_that( is.character(rnaseqDir) & length(rnaseqDir) == 1)
+    assert_that( is.character(mutationDir) & length(mutationDir) == 1)
+    
+    mutationDir <- checkDirectory( mutationDir )
+    
+    genesNames <- availableGenesNames(rnaseqDir)
+    
+    clin.merged <- fread( clinicalDir, nrows = 21)[21, -1, with = FALSE] %>% 
+        toupper() %>% 
+        as.character() %>%
+        data.frame( barcode = . )
+    
+    clin.merged[, 1] <- clin.merged[, 1] %>% 
+        paste0( "-01")
+    
+    filesForExistingBARCODES <- clin.merged[, 1] %>%
+        sapply( function(element){
+            grep( pattern = element,
+                  x = list.files( mutationDir ),
+                  value = TRUE )
+        } ) %>%
+        unlist()
+    
+    mergedMutations <- data.frame( Hugo_Symbol = genesNames )
+#     mergedMutations %>%
+#         setnames( "Variant_Classification",
+#                   names(filesForExistingBARCODES[1])
+#         )
+    how_many_files <- length(filesForExistingBARCODES)
+    for( i in seq_along(filesForExistingBARCODES[1:5]) ){
+        
+        
+        mergedMutationsToAdd <- fread( paste0( mutationDir,
+                                          filesForExistingBARCODES[i] ), 
+                                  select= c(1,9) )
+        mergedMutationsToAdd %>% 
+            setnames( "Variant_Classification",
+                      names(filesForExistingBARCODES[i])
+            )
+        mergedMutations <- full_join(mergedMutations,
+                                      mergedMutationsToAdd,
+                                      by="Hugo_Symbol")    
+        cat( "\r Merged ", i, " out of ", how_many_files, " used files.")
+    }
+    
+    
+    file.create( paste0(mutationDir, "preparedForMerging.txt"))
+    write.table(mergedMutations, 
+                file = paste0(mutationDir, "preparedForMerging.txt"),
+                quote = FALSE,
+                row.names = FALSE,
+                col.names = TRUE,
+                sep = "\t"
+                )
+    
+    cat( "\n Data prepared for merging using mergeTCGA_clinical_mutations were saved in a file", paste0(mutationDir, "preparedForMerging.txt"))
+    return( paste0(mutationDir, "preparedForMerging.txt") )
+}
+
+
+#' @family RTCGA
+#' @rdname mergeTCGA
+#' @export
+mergeTCGA_clinical_mutations <- function( clinicalDir, mutationPreparedDir,
+                                       genes = c("TP53") ){
+    assert_that( is.character(clinicalDir) & length(clinicalDir) == 1)
+    assert_that( is.character(rnaseqDir) & length(rnaseqDir) == 1)
+    assert_that( is.character(genes) & length(genes) > 0)
+}
+
+
+
+
