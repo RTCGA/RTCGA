@@ -130,7 +130,7 @@ prepareTCGA_mutations_for_merging <- function( clinicalDir, mutationDir, rnaseqD
 #                   names(filesForExistingBARCODES[1])
 #         )
     how_many_files <- length(filesForExistingBARCODES)
-    for( i in seq_along(filesForExistingBARCODES[1:5]) ){
+    for( i in seq_along(filesForExistingBARCODES) ){
         
         
         mergedMutationsToAdd <- fread( paste0( mutationDir,
@@ -180,7 +180,7 @@ mergeTCGA_clinical_mutations <- function( clinicalDir, mutationPreparedDir,
 getPatientsBarcodes <- function( clinicalDir ){
 
 clin.merged <- fread( clinicalDir ) %>% 
-    filter( V1 == "patient.bcr_patient_barcode" ) %>%
+    filter( .[,1,with = FALSE] == "patient.bcr_patient_barcode" ) %>%
     toupper() %>%
     data.frame( barcode = . ) 
 clin.merged <- clin.merged[-1,1] %>%
