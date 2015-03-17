@@ -62,13 +62,7 @@ mergeTCGA_clinical_rnaseq <- function( clinicalDir, rnaseqDir,
         filter( Hybridizatio %in% realGenesNames )
     
     
-    clin.merged <- fread( clinicalDir ) %>% 
-        filter( V1 == "patient.bcr_patient_barcode" ) %>%
-        toupper() %>%
-        data.frame( barcode = . ) 
-    clin.merged <- clin.merged[-1,1] %>%
-        as.character() %>%
-        data.frame( barcode = .)
+    clin.merged <- getPatientsBarcodes( clinicalDir )
         
     
     
@@ -117,11 +111,7 @@ prepareTCGA_mutations_for_merging <- function( clinicalDir, mutationDir, rnaseqD
     
     genesNames <- availableGenesNames(rnaseqDir)
     
-    clin.merged <- fread( clinicalDir ) %>% 
-        filter( V1  = "patient.bcr_patient_barcode")
-        toupper() %>% 
-        as.character() %>%
-        data.frame( barcode = . )
+    clin.merged <- getPatientsBarcodes( clinicalDir )
     
     clin.merged[, 1] <- clin.merged[, 1] %>% 
         paste0( "-01")
@@ -183,4 +173,21 @@ mergeTCGA_clinical_mutations <- function( clinicalDir, mutationPreparedDir,
 
 
 
+
+
+
+
+getPatientsBarcodes <- function( clinicalDir ){
+
+clin.merged <- fread( clinicalDir ) %>% 
+    filter( V1 == "patient.bcr_patient_barcode" ) %>%
+    toupper() %>%
+    data.frame( barcode = . ) 
+clin.merged <- clin.merged[-1,1] %>%
+    as.character() %>%
+    data.frame( barcode = .)
+
+return(clin.merged)
+
+}
 
