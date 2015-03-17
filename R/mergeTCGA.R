@@ -35,14 +35,15 @@ mergeTCGA_clinical_rnaseq <- function( clinicalDir, rnaseqDir,
     rnaseqv2 <- fread( rnaseqDir )
     
     
-    # column names are not unique :|
+    # in case column names are not unique :| 
+    # mb they are uniqe
     rnaseqv2 <- rnaseqv2[,unique(names(rnaseqv2)),with=FALSE]
     
     rnaseqv2 %>% setnames( x=.,
                            old = names(rnaseqv2), 
                            new =  c("HybridizationREF", 
-                                    gsub(  ".", 
-                                           "-", 
+                                    gsub(  ".", #if a column name has "." instead of "-"
+                                           "-", # mb there isn't such any
                                            names(rnaseqv2)[-1],
                                            fixed = TRUE)
                                     ) %>%
@@ -63,16 +64,17 @@ mergeTCGA_clinical_rnaseq <- function( clinicalDir, rnaseqDir,
     
     clin.merged <- fread( clinicalDir, nrows = 21)[21, -1, with = FALSE] %>% 
         toupper() %>% 
+        as.character() %>%
         data.frame( barcode = . )
     
     
     
-    patientsOrder <- clin.merged %>%
-        sapply( function(element){
-            grep( x = names(rnaseqv2)[-1], pattern = element, value = TRUE)[1]
-        })
+#     patientsOrder <- clin.merged[,1] %>%
+#         sapply( function(element){
+#             grep( x = names(rnaseqv2)[-1], pattern = element, value = TRUE)[1]
+#         })
     
-    is.na(patientsOrder)
+    #sum(is.na(patientsOrder))
     
     rnaseqv2_short_frame <- cbind( data.frame( barcode = names(rnaseqv2_short) ),
                                        as.data.frame(t(rnaseqv2_short)) ) 
@@ -85,8 +87,15 @@ mergeTCGA_clinical_rnaseq <- function( clinicalDir, rnaseqDir,
     
     for( i in 1:(ncol(joinedFrames)-1)){
     
-        write.table( file = clinicalDir, append = TRUE, x = c(as.character(rnaseqv2_short_frame[1,i+1]), 
-                                                              as.character(joinedFrames[[i+1]])) )
+        write.table( file = clinicalDir, 
+                     append = TRUE, 
+                     x = strsplit(c(as.character(rnaseqv2_short_frame[1,i+1]), 
+                                                     as.character(joinedFrames[[i+1]])), split = "\t"),
+                     col.names = FALSE,
+                     row.names = FALSE,
+                     quote = FALSE, 
+                     sep = "\t"
+                     )
         
     }    
     
