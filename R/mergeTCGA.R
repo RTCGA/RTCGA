@@ -74,8 +74,10 @@ mergeTCGA_clinical_rnaseq <- function( clinicalDir, rnaseqDir,
     
     #sum(is.na(patientsOrder))
     
-    rnaseqv2_short_frame <- cbind( data.frame( barcode = names(rnaseqv2_short) ),
-                                       as.data.frame(t(rnaseqv2_short)) ) 
+    rnaseqv2_short_frame <- cbind( data.frame( barcode = names(rnaseqv2_short), 
+                                               stringsAsFactors = FALSE ),
+                                       as.data.frame(t(rnaseqv2_short)),
+                                   stringsAsFactors = FALSE) 
     # need to remove warning somehow
     
     joinedFrames <- left_join(clin.merged, rnaseqv2_short_frame[-1,], by = "barcode") 
@@ -88,7 +90,8 @@ mergeTCGA_clinical_rnaseq <- function( clinicalDir, rnaseqDir,
         write.table( file = clinicalDir, 
                      append = TRUE, 
                      x = strsplit(c(as.character(rnaseqv2_short_frame[1,i+1]), 
-                                                     as.character(joinedFrames[[i+1]])), split = "\t"),
+                                                     as.character(joinedFrames[[i+1]])), 
+                                  split = "\t"),
                      col.names = FALSE,
                      row.names = FALSE,
                      quote = FALSE, 
@@ -246,9 +249,10 @@ mergeTCGA_clinical_mutations <- function( clinicalDir, mutationDir,
 getPatientsBarcodes <- function( clinicalDir ){
 
 clin.merged <- read.delim( clinicalDir ) %>% # fread error
-    filter( .[,1] == "patient.bcr_patient_barcode" ) %>%
-    toupper() %>%
-    data.frame( barcode = .,stringsAsFactors = FALSE ) 
+    filter( .[,1] == "patient.bcr_patient_barcode" ) 
+clin.merged <- clin.merged %>%
+    sapply( toupper) %>%
+    data.frame( barcode = . ) 
 clin.merged <- clin.merged[-1,1] %>%
     as.data.frame( .,
                  stringsAsFactors = FALSE )
