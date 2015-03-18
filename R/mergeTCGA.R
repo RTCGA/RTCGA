@@ -252,7 +252,7 @@ clin.merged <- fread( clinicalDir ) %>%
 clin.merged <- clin.merged[-1,1] %>%
     as.data.frame( .,
                  stringsAsFactors = FALSE )
-
+names(clin.merged) <- "barcode"
 return(clin.merged)
 
 }
