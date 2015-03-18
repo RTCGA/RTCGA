@@ -245,8 +245,8 @@ mergeTCGA_clinical_mutations <- function( clinicalDir, mutationDir,
 
 getPatientsBarcodes <- function( clinicalDir ){
 
-clin.merged <- fread( clinicalDir ) %>% 
-    filter( .[,1,with = FALSE] == "patient.bcr_patient_barcode" ) %>%
+clin.merged <- read.delim( clinicalDir ) %>% # fread error
+    filter( .[,1] == "patient.bcr_patient_barcode" ) %>%
     toupper() %>%
     data.frame( barcode = .,stringsAsFactors = FALSE ) 
 clin.merged <- clin.merged[-1,1] %>%
@@ -257,3 +257,11 @@ return(clin.merged)
 
 }
 
+
+# gdy nie dopisalo sie danych z rnaseq to wykonywalo sie poprawnie,
+# jednak pozniej wystapil taki blad:
+# mozliwe, ze write.tables musi sie oknczyc albo zaczynac specjalnym znakiem
+
+# > fread( clinicalDir )
+# Error in fread(clinicalDir) : 
+#     Expected sep ('	') but new line, EOF (or other non printing character) ends field 376 on line 7 when detecting types: TP53	NA	NA	NA	NA	Nonsense_Mutation	NA	Missense_Mutation	Nonsense_Mutation	NA	NA	NA	NA	Missense_Mutation	NA	NA	NA	Nonsense_Mutation	NA	Missense_Mutation	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	Missense_Mutation	Missense_Mutation	Missense_Mutation	Missense_Mutation	Nonsense_Mutation	Missense_Mutation	Missense_Mutation	Missense_Mutation	Missense_Mutation	Missense_Mutation	Nonsense_Mutation	Missense_Mutation	Missense_Mutation	Frame_Shift_Del	Missense_Mutation	Missense_Mutation	NA	NA	NA	NA	Missense_Mutation	Missense_Mutation	Silent	NA	Missense_Mutation	Missense_Mutation	Missense_Mutation	Missense_Mutation	NA	NA	NA	Frame_Shift_Del	Missense_Mutation	NA	NA	Frame_Shift_Del	Missense_Mutation	Frame_Shift_Ins	Missense_Mutation	Frame_Shift_Del	Frame_Shift_Ins	Frame_Shift_Del	NA	NA	Nons
