@@ -10,6 +10,6 @@ BugReports: https://github.com/MarcinKosinski/RTCGA/issues
 License: GPL-2
 LazyLoad: yes
 LazyData: yes
-Depends:R (>= 3.0.0), magrittr, RCurl, rvest, stringi, assertthat, data.table
+Depends:R (>= 3.0.0), dplyr, RCurl, rvest, data.table
 Roxygen: list(wrap = TRUE)
 Repository: Bioconductor
