@@ -23,5 +23,11 @@ read.clinical <- function( clinicalDir, ...){
     comboClinical <- as.data.frame(t(comboClinical[, -1]), ...)
     names(comboClinical) <- colNames
     
+    comboClinical <- as.data.table(comboClinical)
+    comboClinical <- comboClinical[,unique(names(comboClinical)),with=FALSE]
+    comboClinical <- as.data.frame(comboClinical, ...)
+    
     return(comboClinical)
 }
+
+# comboClinical <- read.delim("D:/BioBigStat/TCGA/clinicalCombo.txt")
