@@ -32,7 +32,8 @@ Other RTCGA: \code{\link{RTCGA-package}};
 \code{\link{checkDataSetsAvailability}};
 \code{\link{downloadTCGA}}; \code{\link{mergaTCGA}},
 \code{\link{mergeTCGA_clinical_rnaseq}};
-\code{\link{mergeTCGA_clinical_mutations}}
+\code{\link{mergeTCGA_clinical_mutations}};
+\code{\link{read.clinical}}
 
 Other RTCGA: \code{\link{RTCGA-package}};
 \code{\link{availableDataSets}};
@@ -40,6 +41,7 @@ Other RTCGA: \code{\link{RTCGA-package}};
 \code{\link{checkDataSetsAvailability}};
 \code{\link{downloadTCGA}}; \code{\link{mergaTCGA}},
 \code{\link{mergeTCGA_clinical_rnaseq}};
-\code{\link{mergeTCGA_clinical_mutations}}
+\code{\link{mergeTCGA_clinical_mutations}};
+\code{\link{read.clinical}}
 }
 
