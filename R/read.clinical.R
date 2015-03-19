@@ -15,7 +15,7 @@
 #' @export
 read.clinical <- function( clinicalDir, ...){
     
-    assert_that( is.character(clinicalDir) & length(clinicalDir) ==1 )
+    assertthat::assert_that( is.character(clinicalDir) & length(clinicalDir) ==1 )
     comboClinical <- read.delim( clinicalDir )
     
     colNames <- comboClinical[,1]
