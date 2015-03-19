@@ -261,6 +261,8 @@ return(clin.merged)
 
 }
 
+# md <- data.frame(barcode = toupper(sapply(a[,-1], as.character)))
+
 
 # gdy nie dopisalo sie danych z rnaseq to wykonywalo sie poprawnie,
 # jednak pozniej wystapil taki blad:
