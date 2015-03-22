@@ -1,0 +1,78 @@
+---
+  title: "RTCGA package Vignette"
+author: "Przemyslaw Biecek"
+date: "March 22, 2015"
+output:
+  html_document:
+  theme: readable
+highlight: kate
+fig_width: 17
+fig_height: 10
+toc: true
+toc_depth: 3
+keep_md: true
+---
+  
+```{r, echo=FALSE}
+library(knitr)
+opts_chunk$set(comment="", message = FALSE, warning = FALSE,
+               tidy.opts=list(keep.blank.line=TRUE, width.cutoff=700),options(width=700), cache=TRUE)
+```
+
+Download data and create map of cancers with the use of RNAseq data
+
+```{r}
+# downlaod data
+downloadTCGA( cancerTypes = c("BRCA", "COAD", "OV", "HNSC"), 
+              dataSet = "rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level",
+              destDir = "data/" )
+
+# untar
+list.files( "data/", pattern = "tar.gz") %>% 
+  paste0( "data/", .) %>%
+  sapply( untar, exdir = "data/" )
+
+# untar
+list.files( "data/") %>% 
+  paste0( "data/", .) %>%
+  grep( pattern = "tar.gz", x = ., value = TRUE) %>%
+  sapply( file.remove )
+
+# dirty manual reading
+# an excuse: I had only 25 min to do the graph
+exprBRCA <- read.delim("data/gdac.broadinstitute.org_BRCA.Merge_rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level_3.2015020400.0.0/BRCA.rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.data.txt")
+exprCOAD <- read.delim("data/gdac.broadinstitute.org_COAD.Merge_rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level_3.2015020400.0.0/COAD.rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.data.txt")
+exprHNSC <- read.delim("data/gdac.broadinstitute.org_HNSC.Merge_rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level_3.2015020400.0.0/HNSC.rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.data.txt")
+exprOV <- read.delim("data/gdac.broadinstitute.org_OV.Merge_rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level_3.2015020400.0.0/OV.rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.data.txt")
+
+# marge the data
+eks <- list(exprBRCA, exprCOAD, exprHNSC, exprOV)
+
+# a matrix of numbers instead of dirty characters
+eks2 <- lapply(eks, function(x) {
+  expr2 <- t(x[-1,-1])
+  matrix(as.numeric(expr2), nrow = nrow(expr2), ncol = ncol(expr2))  
+})
+
+eks2All <- do.call(eks2, what = rbind)
+# it took a while, so better keep a copy
+#save(eks2All, file = "data/eks2All.rda")
+
+# will look better in log scale
+eks2All <- log(eks2All+1)
+
+# filtering, these stable bastards are not interesting at all
+iq <- apply(eks2All, 2, function(x) IQR(x))
+eks2AllI <- eks2All[,iq > 1]
+
+# pretty big PCA
+pd <- prcomp(eks2AllI)
+labs <- rep(c("BRCA", "COAD", "HNSC", "OV"), times = sapply(eks2, nrow))
+
+nc <- data.frame(PC1 = pd$x[,1], PC2 = pd$x[,2], labs = labs)
+
+# and plot it!
+library(ggplot2)
+ggplot(nc, aes(x=PC1, y=PC2, color=labs)) +
+  geom_point() + theme_bw() + ggtitle("RNAseq data")
+```
