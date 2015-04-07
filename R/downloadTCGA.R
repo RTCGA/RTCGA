@@ -98,7 +98,7 @@ parentURL <- function( lastReleaseDate, element ){
 whichDateToUse <- function( date ){
     if( !is.null( date )  ){
         if( date %in% availableDates() ){ # .availableDates in availableDates function
-            paste0("stddata__", gsub(date, "-", "_") )
+            paste0("stddata__", gsub( x = date, pattern = "-", replacement = "_") )
         }else{
             stop("Wrong date format or unavailable date of release. Use availableDates() function to recieve proper format and available dates.")
         }
