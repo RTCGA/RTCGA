@@ -63,8 +63,6 @@ downloadTCGA <- function( cancerTypes, dataSet = "Merge_Clinical.Level_1",
          gsub(pattern="^[ \t]+", replacement="") %>%
          grep(pattern="gz$", value = TRUE) #! md5
        
-       # taking first element is not smart..
-       # maybe now is?
        linksToData <- elementIndexes[1]
        
       #http://gdac.broadinstitute.org/runs/stddata__2015_02_04/data/BRCA/20150204/
