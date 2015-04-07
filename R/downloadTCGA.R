@@ -58,10 +58,15 @@ downloadTCGA <- function( cancerTypes, dataSet = "Merge_Clinical.Level_1",
        # get index of page containing datasets fot this date of release and Cohort Code
        filesParentURL <- parentURL( lastReleaseDate, element ) 
        
-       elementIndexes <- html(filesParentURL) %>% html_nodes("a") %>% html_text() %>% 
+       tryCatch({
+         elementIndexes <- html(filesParentURL) %>% html_nodes("a") %>% html_text() %>% 
          grep(pattern = dataSet, value = TRUE) %>%
          gsub(pattern="^[ \t]+", replacement="") %>%
-         grep(pattern="gz$", value = TRUE) #! md5
+         grep(pattern="gz$", value = TRUE)}, #! md5
+         error = function(con){
+            stop( paste("Data from ", lastReleaseDate, " can not be downloaded. Use other date from availableDates().") ) 
+         }
+       )
        
        linksToData <- elementIndexes[1]
        
