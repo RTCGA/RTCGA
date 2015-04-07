@@ -46,10 +46,10 @@ downloadTCGA <- function( cancerTypes, dataSet = "Merge_Clinical.Level_1",
     # check if there was "/" mark at the end of directory
     destDir <- checkDirectory( destDir )
     
-    # does the dir exist?
-    if (!file.exists(destDir)) {
-      dir.create(destDir)
-    }
+#     # does the dir exist?
+#     if (!file.exists(destDir)) {
+#       dir.create(destDir)
+#     }
     
    # ensure which date was specified
    lastReleaseDate  <- whichDateToUse( date = date )
