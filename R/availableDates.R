@@ -24,7 +24,7 @@ availableDates <- function( ){
          get( ".gdacContent", envir = .RTCGAEnv) %>%
              grep(pattern= "stddata__20",  value = TRUE) %>%
              gsub(pattern="(<[^>]+>)| |/", replacement="") %>%
-             substring( first = 1, last = 19 ) %>%
+             substring( first = 10, last = 19 ) %>%
              assign( x= ".availableDates", value=., envir = .RTCGAEnv)  
 
          get( ".availableDates", envir = .RTCGAEnv) %>%
