@@ -59,7 +59,7 @@ downloadTCGA <- function( cancerTypes, dataSet = "Merge_Clinical.Level_1",
        filesParentURL <- parentURL( lastReleaseDate, element ) 
        
        tryCatch({
-         elementIndexes <- html(filesParentURL) %>% html_nodes("a") %>% html_text() %>% 
+         elementIndexes <- html(filesParentURL) %>% html_nodes("a") %>% html_attr("href") %>% 
          grep(pattern = dataSet, value = TRUE) %>%
          gsub(pattern="^[ \t]+", replacement="") %>%
          grep(pattern="gz$", value = TRUE)}, #! md5
