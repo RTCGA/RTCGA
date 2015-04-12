@@ -16,7 +16,7 @@
 #' @export
 mergeTCGA <- function( clinicalDir, rnaseqDir = NULL, mutationDir = NULL, genes ){
    assert_that( is.character( genes ) )
-   assert_that( is.character( clinical ) )
+   assert_that( is.character( clinicalDir ) )
    assert_that( xor( is.character( rnaseqDir ), is.character( mutationDir ) ) )        
    assert_that( xor( is.null( rnaseqDir ), is.null( mutationDir ) ) ) 
     
@@ -210,7 +210,7 @@ mergeTCGA_clinical_mutations <- function( clinicalDir, mutationDir,
                                        genes = "TP53" ){
     assert_that( is.character(clinicalDir) & length(clinicalDir) == 1)
     assert_that( is.character(mutationDir) & length(mutationDir) == 1)
-    assert_that( is.character(gene) & length(gene) == 1)
+    assert_that( is.character(genes) & length(genes) == 1)
     
     
     
