@@ -212,7 +212,8 @@ mergeTCGA_clinical_mutations <- function( clinicalDir, mutationDir,
     assert_that( is.character(mutationDir) & length(mutationDir) == 1)
     assert_that( is.character(genes) & length(genes) == 1)
     
-    
+    #to be fixed :)
+    gene <- genes
     
     mutationDir <- checkDirectory( mutationDir )
          
