@@ -14,9 +14,21 @@
 #' @family RTCGA
 #' @rdname mergeTCGA
 #' @export
-mergaTCGA <- function( clinicalDir, names ){
-   assertthat::assert_that( is.list( names ) )
-   assertthat::assert_that( is.character( clinical ) )
+mergaTCGA <- function( clinicalDir, rnaseqDir = NULL, mutationDir = NULL, genes ){
+   assert_that( is.character( genes ) )
+   assert_that( is.character( clinical ) )
+   assert_that( xor( is.character( rnaseqDir ), is.character( mutationDir ) ) )        
+   assert_that( xor( is.null( rnaseqDir ), is.null( mutationDir ) ) ) 
+    
+   if( is.null( rnaseqDir ) && is.character( mutationDir ) ) 
+       mergeTCGA_clinical_mutations( clinicalDir = clinicalDir,
+                                     mutationDir = mutationDir,
+                                     genes = genes )
+   
+   if( is.character( rnaseqDir ) && is.null( mutationDir ) ) 
+       mergeTCGA_clinical_rnaseq( clinicalDir = clinicalDir,
+                                  mutationDir = mutationDir,
+                                  genes = genes )
 }
 
 
@@ -195,7 +207,7 @@ mergeTCGA_clinical_rnaseq <- function( clinicalDir, rnaseqDir,
 #' @rdname mergeTCGA
 #' @export
 mergeTCGA_clinical_mutations <- function( clinicalDir, mutationDir,
-                                       gene = "TP53" ){
+                                       genes = "TP53" ){
     assert_that( is.character(clinicalDir) & length(clinicalDir) == 1)
     assert_that( is.character(mutationDir) & length(mutationDir) == 1)
     assert_that( is.character(gene) & length(gene) == 1)

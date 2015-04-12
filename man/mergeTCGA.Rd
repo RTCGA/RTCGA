@@ -8,7 +8,7 @@
 \usage{
 infoTCGA()
 
-mergaTCGA(clinicalDir, names)
+mergaTCGA(clinicalDir, rnaseqDir = NULL, mutationDir = NULL, genes)
 
 mergeTCGA_clinical_rnaseq(clinicalDir, rnaseqDir, genes = c("MDM2"))
 }
