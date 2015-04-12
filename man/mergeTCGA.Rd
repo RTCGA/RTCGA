@@ -2,15 +2,12 @@
 % Please edit documentation in R/infoTCGA.R, R/mergeTCGA.R
 \name{infoTCGA}
 \alias{infoTCGA}
-\alias{mergaTCGA}
-\alias{mergeTCGA_clinical_rnaseq}
+\alias{mergeTCGA}
 \title{Information about cohorts from TCGA project}
 \usage{
 infoTCGA()
 
-mergaTCGA(clinicalDir, rnaseqDir = NULL, mutationDir = NULL, genes)
-
-mergeTCGA_clinical_rnaseq(clinicalDir, rnaseqDir, genes = c("MDM2"))
+mergeTCGA(clinicalDir, rnaseqDir = NULL, mutationDir = NULL, genes)
 }
 \arguments{
   \item{clinicalDir}{A directory to a
@@ -40,7 +37,8 @@ Other RTCGA: \code{\link{RTCGA-package}};
 \code{\link{checkGenesNamesAvailability}};
 \code{\link{checkDataSetsAvailability}};
 \code{\link{downloadTCGA}};
-\code{\link{mergeTCGA_clinical_mutations}};
+\code{\link{mergeTCGA_clinical_mutations}},
+\code{\link{mergeTCGA_clinical_rnaseq}};
 \code{\link{read.clinical}}
 
 Other RTCGA: \code{\link{RTCGA-package}};
@@ -50,17 +48,8 @@ Other RTCGA: \code{\link{RTCGA-package}};
 \code{\link{checkGenesNamesAvailability}};
 \code{\link{checkDataSetsAvailability}};
 \code{\link{downloadTCGA}};
-\code{\link{mergeTCGA_clinical_mutations}};
-\code{\link{read.clinical}}
-
-Other RTCGA: \code{\link{RTCGA-package}};
-\code{\link{availableDataSets}};
-\code{\link{availableDates}};
-\code{\link{availableGenesNames}},
-\code{\link{checkGenesNamesAvailability}};
-\code{\link{checkDataSetsAvailability}};
-\code{\link{downloadTCGA}};
-\code{\link{mergeTCGA_clinical_mutations}};
+\code{\link{mergeTCGA_clinical_mutations}},
+\code{\link{mergeTCGA_clinical_rnaseq}};
 \code{\link{read.clinical}}
 }
 

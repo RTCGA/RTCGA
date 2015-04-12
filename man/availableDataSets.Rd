@@ -41,9 +41,9 @@ Other RTCGA: \code{\link{RTCGA-package}};
 \code{\link{checkGenesNamesAvailability}};
 \code{\link{checkDataSetsAvailability}};
 \code{\link{downloadTCGA}}; \code{\link{infoTCGA}},
-\code{\link{mergaTCGA}},
+\code{\link{mergeTCGA}};
+\code{\link{mergeTCGA_clinical_mutations}},
 \code{\link{mergeTCGA_clinical_rnaseq}};
-\code{\link{mergeTCGA_clinical_mutations}};
 \code{\link{read.clinical}}
 }
 

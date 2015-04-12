@@ -14,7 +14,7 @@
 #' @family RTCGA
 #' @rdname mergeTCGA
 #' @export
-mergaTCGA <- function( clinicalDir, rnaseqDir = NULL, mutationDir = NULL, genes ){
+mergeTCGA <- function( clinicalDir, rnaseqDir = NULL, mutationDir = NULL, genes ){
    assert_that( is.character( genes ) )
    assert_that( is.character( clinical ) )
    assert_that( xor( is.character( rnaseqDir ), is.character( mutationDir ) ) )        
@@ -34,9 +34,9 @@ mergaTCGA <- function( clinicalDir, rnaseqDir = NULL, mutationDir = NULL, genes 
 
 
 
-#' @family RTCGA
-#' @rdname mergeTCGA
-#' @export
+# #' @family RTCGA
+# #' @rdname mergeTCGA
+# #' @export
 mergeTCGA_clinical_rnaseq <- function( clinicalDir, rnaseqDir,
                                        genes = c("MDM2") ){
     
