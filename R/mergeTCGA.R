@@ -27,7 +27,7 @@ mergeTCGA <- function( clinicalDir, rnaseqDir = NULL, mutationDir = NULL, genes 
    
    if( is.character( rnaseqDir ) && is.null( mutationDir ) ) 
        mergeTCGA_clinical_rnaseq( clinicalDir = clinicalDir,
-                                  rnaseqDir = mrnaseqDir,
+                                  rnaseqDir = rnaseqDir,
                                   genes = genes )
 }
 
