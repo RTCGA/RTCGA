@@ -88,8 +88,7 @@ mergeTCGA_clinical_rnaseq <- function( clinicalDir, rnaseqDir,
     
     rnaseqv2_short_frame <- cbind( data.frame( barcode = names(rnaseqv2_short), 
                                                stringsAsFactors = FALSE ),
-                                       as.data.frame(t(rnaseqv2_short)),
-                                   stringsAsFactors = FALSE) 
+                                       as.data.frame(t(rnaseqv2_short))) 
     # need to remove warning somehow
     
     joinedFrames <- left_join(clin.merged, rnaseqv2_short_frame[-1,], by = "barcode") 
