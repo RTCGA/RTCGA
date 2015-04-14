@@ -34,15 +34,27 @@ availableDataSets <- function( cancerType, date = NULL ){
     filesParentURL <- parentURL( lastReleaseDate, element = cancerType ) #downloadTCGA.r
     
     # get content of index page
-    elementIndex <- tryCatch( readLines( filesParentURL ) , error = function(e) stop( paste( "Probably dataset from this date needs authentication. \n \tCouldn't check available datasets' names.",
-                                                                                             "\n \tTry manually on", filesParentURL ))) 
-    dataSetsName <- sapply( elementIndex, function(element){
-        gsub(".*gdac.broadinstitute.org(.*)\".*", "\\1", element)
-    } )
+    elementIndex <- tryCatch( readLines( filesParentURL ) , error = function(e) 
+        stop( paste( "Probably dataset from this date needs authentication. \n \tCouldn't check available datasets' names.",
+                     "\n \tTry manually on", filesParentURL ))) 
     
-    # cat available dataSets' names
-    gsub( paste0("_", cancerType), cancerType, 
-          unique( grep( x = dataSetsName, pattern = paste0("_",cancerType), value = TRUE ) ) )
-    
+    #stopped working suddenly after change of indexing of pages like that 
+    # http://gdac.broadinstitute.org/runs/stddata__2015_04_02/data/BRCA/20150402/
+    # looks bad, but works fine....
+    # need to fix this mess
+                dataSetsName <- sapply( elementIndex, function(element){
+                    gsub(".*gdac.broadinstitute.org(.*)\".*", "\\1", element)
+                } )
+                
+                dataSetsName <- sapply( elementIndex, function(element){
+                    unlist(stri_extract_all_regex( pattern = "_.*tar\\.gz", str = element))
+                } )
+                dataSetsName %>% unlist() %>% na.omit() %>% unique() -> x
+                
+                
+                # cat available dataSets' names
+                gsub( paste0("_", cancerType), cancerType, 
+                      unique( grep( x = x, pattern = paste0("_",cancerType), value = TRUE ) ) )
+
 }
 
