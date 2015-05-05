@@ -2,7 +2,7 @@
 ##
 #' @title TCGA datasets' names
 #'
-#' @description Enables to check TCGA datasets' names for current release date.
+#' @description Enables to check TCGA datasets' names for current release date and cohort.
 #' 
 #' @param cancerType A character of length 1 containing abbreviation (Cohort code) of types of cancers to check for 
 #' available datasets' names on \href{http://gdac.broadinstitute.org/}{http://gdac.broadinstitute.org/}.
@@ -11,7 +11,7 @@
 #' \href{http://gdac.broadinstitute.org/runs/}{http://gdac.broadinstitute.org/runs/} or by using \link{availableDates} 
 #' function. Required format \code{"YYYY-MM-DD"}.
 #' 
-#' @return A vector of available datasets names to pass to the \link{downloadTCGA} function.
+#' @return A vector of available datasets' names to pass to the \link{downloadTCGA} function.
 #' 
 #' @examples
 #' \dontrun{

@@ -1,17 +1,19 @@
 ##    RTCGA package for R
 ##
-#' @title TCGA genes' names and availability in \code{Merge_rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level_3} dataset
+#' @title TCGA genes' names and availability in \code{Merge_rnaseqv2__...} dataset.
 #'
-#' @description TODO
+#' @description \code{availableGenesNames} returns all available genes' names from  genes' expressions dataset, 
+#' where \code{checkGenesNamesAvailability} checks whether genes specified in \code{genes} are available
+#' in \code{Merge_rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level_3} (genes' expressions) dataset.
 #' 
-#' @param rnaseqDir TODO
-#' @param genes TODO
+#' @param rnaseqDir A directory to a \code{cancerType.rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.data.txt} file
+#' @param genes A character - which genes to check for availability in a dataset.
 #' 
-#' @return TODO
+#' @return A vector containing genes' names that matched existing names.
 #' 
 #' @examples
 #' \dontrun{
-#' 
+#'    checkGenesNamesAvailability( rnaseqDir, "TP53" )
 #' }
 #' 
 #' @family RTCGA

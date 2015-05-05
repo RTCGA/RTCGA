@@ -3,26 +3,35 @@
 \name{checkGenesNamesAvailability}
 \alias{availableGenesNames}
 \alias{checkGenesNamesAvailability}
-\title{TCGA genes' names and availability in \code{Merge_rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level_3} dataset}
+\title{TCGA genes' names and availability in \code{Merge_rnaseqv2__...} dataset.}
 \usage{
 checkGenesNamesAvailability(rnaseqDir, genes)
 
 availableGenesNames(rnaseqDir)
 }
 \arguments{
-  \item{rnaseqDir}{TODO}
+  \item{rnaseqDir}{A directory to a
+  \code{cancerType.rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.data.txt}
+  file}
 
-  \item{genes}{TODO}
+  \item{genes}{A character - which genes to check for
+  availability in a dataset.}
 }
 \value{
-TODO
+A vector containing genes' names that matched existing
+names.
 }
 \description{
-TODO
+\code{availableGenesNames} returns all available genes'
+names from genes' expressions dataset, where
+\code{checkGenesNamesAvailability} checks whether genes
+specified in \code{genes} are available in
+\code{Merge_rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level_3}
+(genes' expressions) dataset.
 }
 \examples{
 \dontrun{
-
+   checkGenesNamesAvailability( rnaseqDir, "TP53" )
 }
 }
 \seealso{
@@ -30,20 +39,14 @@ Other RTCGA: \code{\link{RTCGA-package}};
 \code{\link{availableDataSets}};
 \code{\link{availableDates}};
 \code{\link{checkDataSetsAvailability}};
-\code{\link{downloadTCGA}}; \code{\link{infoTCGA}},
-\code{\link{mergeTCGA}};
-\code{\link{mergeTCGA_clinical_mutations}},
-\code{\link{mergeTCGA_clinical_rnaseq}};
-\code{\link{read.clinical}}
+\code{\link{downloadTCGA}}; \code{\link{infoTCGA}};
+\code{\link{mergeTCGA}}; \code{\link{read.clinical}}
 
 Other RTCGA: \code{\link{RTCGA-package}};
 \code{\link{availableDataSets}};
 \code{\link{availableDates}};
 \code{\link{checkDataSetsAvailability}};
-\code{\link{downloadTCGA}}; \code{\link{infoTCGA}},
-\code{\link{mergeTCGA}};
-\code{\link{mergeTCGA_clinical_mutations}},
-\code{\link{mergeTCGA_clinical_rnaseq}};
-\code{\link{read.clinical}}
+\code{\link{downloadTCGA}}; \code{\link{infoTCGA}};
+\code{\link{mergeTCGA}}; \code{\link{read.clinical}}
 }
 

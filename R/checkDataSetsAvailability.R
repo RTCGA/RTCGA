@@ -2,7 +2,7 @@
 ##
 #' @title TCGA datasets' names availability
 #'
-#' @description Enables to check TCGA datasets' names availability for current release date.
+#' @description Enables to check TCGA datasets' names availability for current release date and cancer type.
 #' 
 #' @param cancerTypes A character vector containing abbreviation (Cohort code) of types of cancers to check for 
 #' availability of datasets' name on \href{http://gdac.broadinstitute.org/}{http://gdac.broadinstitute.org/}.

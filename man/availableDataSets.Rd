@@ -21,12 +21,12 @@ availableDataSets(cancerType, date = NULL)
   format \code{"YYYY-MM-DD"}.}
 }
 \value{
-A vector of available datasets names to pass to the
+A vector of available datasets' names to pass to the
 \link{downloadTCGA} function.
 }
 \description{
 Enables to check TCGA datasets' names for current release
-date.
+date and cohort.
 }
 \examples{
 \dontrun{
@@ -40,10 +40,7 @@ Other RTCGA: \code{\link{RTCGA-package}};
 \code{\link{availableGenesNames}},
 \code{\link{checkGenesNamesAvailability}};
 \code{\link{checkDataSetsAvailability}};
-\code{\link{downloadTCGA}}; \code{\link{infoTCGA}},
-\code{\link{mergeTCGA}};
-\code{\link{mergeTCGA_clinical_mutations}},
-\code{\link{mergeTCGA_clinical_rnaseq}};
-\code{\link{read.clinical}}
+\code{\link{downloadTCGA}}; \code{\link{infoTCGA}};
+\code{\link{mergeTCGA}}; \code{\link{read.clinical}}
 }
 

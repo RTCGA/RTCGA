@@ -33,7 +33,7 @@ A vector of available datasets names to pass to the
 }
 \description{
 Enables to check TCGA datasets' names availability for
-current release date.
+current release date and cancer type.
 }
 \examples{
 \dontrun{
@@ -48,10 +48,7 @@ Other RTCGA: \code{\link{RTCGA-package}};
 \code{\link{availableDates}};
 \code{\link{availableGenesNames}},
 \code{\link{checkGenesNamesAvailability}};
-\code{\link{downloadTCGA}}; \code{\link{infoTCGA}},
-\code{\link{mergeTCGA}};
-\code{\link{mergeTCGA_clinical_mutations}},
-\code{\link{mergeTCGA_clinical_rnaseq}};
-\code{\link{read.clinical}}
+\code{\link{downloadTCGA}}; \code{\link{infoTCGA}};
+\code{\link{mergeTCGA}}; \code{\link{read.clinical}}
 }
 
