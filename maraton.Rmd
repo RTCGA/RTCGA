@@ -1,0 +1,70 @@
+---
+title: "Dane z The Cancer Genome Atlas"
+author: "Marcin Kosinski"
+date: "6 Maja 2015"
+output:
+  html_document:
+    theme: readable
+    highlight: tango
+    fig_width: 17
+    fig_height: 10
+    toc: true
+    toc_depth: 4
+    keep_md: true
+---
+
+
+```{r, echo=FALSE}
+library(knitr)
+opts_chunk$set(comment="", message=FALSE, warning = FALSE, tidy.opts=list(keep.blank.line=TRUE, width.cutoff=150),options(width=150), cache=TRUE)
+```
+
+# Co to za dane?
+
+The Cancer Genome Atlas Project to zakrojony na globalną skalę projekt gromadzący w jednym miejscu potężną liczbę danych związanych z sekwencjonowaniem ludzkiego genomu w przypadku, gdy pacjent został dotknięty chorobą nowotworową. Do ciekawszych zbiorów w tym repozytorium danych należą zbiory zawierająca dane kliniczne pacjenta (jeden pełen zbiór dla jednego nowotworu), dane dotyczące mutacji genów pacjenta (jeden zbiór dla każdego pacjenta) oraz dane dotyczące ekspresji genów u pacjentów (jeden pełny zbiór dla jednego nowotworu - ma ponad 20 tysięcy genów).
+
+# Skąd je pobrać?
+
+## Gotowe dane z dropboxa dla BRCA
+
+Dla raka piersi, kodowanego jako BRCA (*ang. breast cancer*), takie zbiory można znaleźć pod tym linkiem [http://bit.ly/1DUEuNr](http://bit.ly/1DUEuNr), gdzie dodatkowo w folderze **opis danych klinicznyh** zamieszczone są opisy do zbioru klinicznego zawierającego ponad 2000 zmiennych dla każdego pacjenta. Inne formy można pobrać z linków zawartych w pliku readme.txt.
+
+## Tradycyjnie bądź przy użyciu R
+
+Takie dane można ręcznie pobrać ze strony [http://gdac.broadinstitute.org/](http://gdac.broadinstitute.org/) bądź korzystając ze specjalnie przygotowanego do ściągania i łączenia danych z TCGA pakietu o nazwie [RTCGA](https://github.com/MarcinKosinski/RTCGA), który jest dodatkiem do pakietu statystycznego R. Na stronie pakietu [http://marcinkosinski.github.io/RTCGA/](http://marcinkosinski.github.io/RTCGA/) jest przygotowany skrypt prezentujący podstawowe funkcje pakietu do pobierania i łączenia danych klinicznych z danymi o ekspresjach i mutacjach genów. Przekopiowanie komend umożliwi pobranie danych klinicznych, o ekspresjach i o mutacjach genów dla 38 obecnie dostępnych nowotworów.
+
+
+## Pobieranie z RTCGA
+
+Pakiet można łatwo zainstalować poprzez użycie poniższej komendy w pakiecie R:
+
+```{r, eval=FALSE}
+if (!require(devtools)) {
+    install.packages("devtools")
+    library(devtools)
+}
+install_github("MarcinKosinski/RTCGA")
+```
+
+**Należy pamiętać aby w katalogu, w którym wywołuje się skrypt był stworzony foldero nazwie *data*.**
+
+Skrypt można do R skopiować z tego miejsca [https://raw.githubusercontent.com/MarcinKosinski/RTCGA/master/index.Rmd](https://raw.githubusercontent.com/MarcinKosinski/RTCGA/master/index.Rmd). Pobieranie danych i łączenie danych klinicznych z niektórymi informacjami o ekspresjach i mutacjach niektórych genów może zająć około godziny.
+
+
+Zbiór, który powstaje w wyniku wykonania skryptu, to zbiór zawierający dane kliniczne dla pacjentów dotkniętych wszystkimi nowotworami zebranymi w trakcie projektu TCGA oraz dodatkowo zawierający dodatkową zmienną z informacją o mutacji genu **TP53** oraz zmienną zawierającą informację o ekspresji genu **MDM2** - jest on również zamieszczony na dropboxie.
+
+
+Przegląd liczności zbiorów można uzyskać wywołując funkcję `infoTCGA()`.
+
+```{r}
+library(RTCGA)
+infoTCGA()
+```
+
+
+
+
+
+
+
+
