@@ -1,5 +1,4 @@
-##    RTCGA package for R
-##
+## RTCGA package for R
 #' @title The Caner Genome Atlas data integration
 #'
 #' @description
@@ -16,4 +15,4 @@
 #' @family RTCGA
 #' @name RTCGA-package
 #' @docType package
-invisible(NULL)
+invisible(NULL) 

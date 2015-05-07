@@ -1,5 +1,4 @@
-##    RTCGA package for R
-##
+## RTCGA package for R
 #' @title TCGA genes' names and availability in \code{Merge_rnaseqv2__...} dataset.
 #'
 #' @description \code{availableGenesNames} returns all available genes' names from  genes' expressions dataset, 
@@ -13,32 +12,28 @@
 #' 
 #' @examples
 #' \dontrun{
-#'    checkGenesNamesAvailability( rnaseqDir, "TP53" )
+#'    checkGenesNamesAvailability( rnaseqDir, 'TP53' )
 #' }
 #' 
 #' @family RTCGA
 #' @rdname availableGenesNames
 #' @export
-checkGenesNamesAvailability <- function( rnaseqDir, genes ){
+checkGenesNamesAvailability <- function(rnaseqDir, genes) {
     
-    assert_that( is.character( rnaseqDir ) & length( rnaseqDir ) == 1 )
-    assert_that( is.character( genes ) & length( genes ) > 0 )
+    assert_that(is.character(rnaseqDir) & length(rnaseqDir) == 1)
+    assert_that(is.character(genes) & length(genes) > 0)
     
-    sapply( genes, function(element) 
-        grep( pattern = element, 
-              x = availableGenesNames( rnaseqDir ), 
-              value = TRUE )    
-    )
+    sapply(genes, function(element) grep(pattern = element, x = availableGenesNames(rnaseqDir), 
+        value = TRUE))
 }
 
 #' @family RTCGA
 #' @rdname availableGenesNames
 #' @export
-availableGenesNames <- function( rnaseqDir ){
+availableGenesNames <- function(rnaseqDir) {
     
-    assert_that( is.character( rnaseqDir ) & length( rnaseqDir ) == 1 )
+    assert_that(is.character(rnaseqDir) & length(rnaseqDir) == 1)
     
-    fread( rnaseqDir, select = c(1), 
-           data.table = FALSE,
-           colClasses = "character")[-1,1]
-}
+    fread(rnaseqDir, select = c(1), data.table = FALSE, colClasses = "character")[-1, 
+        1]
+} 

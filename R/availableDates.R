@@ -1,5 +1,4 @@
-##    RTCGA package for R
-##
+## RTCGA package for R
 #' @title TCGA datasets' releases dates
 #'
 #' @description Enables to check dates of TCGA datasets' releases.
@@ -14,26 +13,21 @@
 #' @family RTCGA
 #' @rdname availableDates
 #' @export
-availableDates <- function( ){
+availableDates <- function() {
     
-    if( !exists( x= ".availableDates2", envir = .RTCGAEnv ) ){
-         # happens only once
-         readLines( "http://gdac.broadinstitute.org/runs/" ) %>%
-                 assign( x = ".gdacContent", value = ., envir = .RTCGAEnv )
-
-         get( ".gdacContent", envir = .RTCGAEnv) %>%
-             grep(pattern= "stddata__20",  value = TRUE) %>%
-             gsub(pattern="(<[^>]+>)| |/", replacement="") %>%
-             substring( first = 10, last = 19 ) %>%
-             assign( x= ".availableDates", value=., envir = .RTCGAEnv)  
-
-         get( ".availableDates", envir = .RTCGAEnv) %>%
-                 gsub(pattern="^[^0-9]{10}", replacement="") %>%
-                 gsub(pattern="_", replacement="-", fixed = TRUE) %>%
-                 assign( x = ".availableDates2", value = ., envir = .RTCGAEnv )
-        ############################################
+    if (!exists(x = ".availableDates2", envir = .RTCGAEnv)) {
+        # happens only once
+        readLines("http://gdac.broadinstitute.org/runs/") %>% assign(x = ".gdacContent", 
+            value = ., envir = .RTCGAEnv)
+        
+        get(".gdacContent", envir = .RTCGAEnv) %>% grep(pattern = "stddata__20", value = TRUE) %>% 
+            gsub(pattern = "(<[^>]+>)| |/", replacement = "") %>% substring(first = 10, 
+            last = 19) %>% assign(x = ".availableDates", value = ., envir = .RTCGAEnv)
+        
+        get(".availableDates", envir = .RTCGAEnv) %>% gsub(pattern = "^[^0-9]{10}", 
+            replacement = "") %>% gsub(pattern = "_", replacement = "-", fixed = TRUE) %>% 
+            assign(x = ".availableDates2", value = ., envir = .RTCGAEnv)
+        ############################################ 
     }
-  get( x = ".availableDates2", envir = .RTCGAEnv )
-}
-    
-    
+    get(x = ".availableDates2", envir = .RTCGAEnv)
+} 

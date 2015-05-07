@@ -1,5 +1,4 @@
-##    RTCGA package for R
-##
+## RTCGA package for R
 #' @title Information about cohorts from TCGA project
 #'
 #' @description Function restores codes and counts for each cohort from TCGA project.
@@ -9,6 +8,6 @@
 #' @family RTCGA
 #' @rdname infoTCGA
 #' @export
-infoTCGA <- function(){
-readHTMLTable("http://gdac.broadinstitute.org/")[-39]
-}
+infoTCGA <- function() {
+    readHTMLTable("http://gdac.broadinstitute.org/")[-39]
+} 
