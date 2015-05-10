@@ -92,7 +92,7 @@ file.info( paste0( "data/", grep( x = list.files("data/"), pattern = "gdac", val
 
 ### Mutations data
 
-Let us check if there is Mutations data available for all canser types.
+Let us check if there is Mutations data available for all cancer types.
 
 ```{r, cache = FALSE, message=FALSE, warning=FALSE}
 library(RTCGA)
@@ -122,7 +122,7 @@ error = function(cond){
 ```
 
 
-Let us check the names and sizes of downloaded the files.
+Let us check the names and sizes of the downloaded files.
 
 
 ```{r}
@@ -131,7 +131,7 @@ file.info( paste0( "data/", grep( x = list.files("data/"), pattern = "gdac", val
 
 ### RNA-Seq data
 
-Let us check if there is RNA-Seq data available for all canser types.
+Let us check if there is RNA-Seq data available for all cancer types.
 
 ```{r }
 
@@ -160,7 +160,7 @@ error = function(cond){
 }) 
 ```
 
-Let us check the names and sizes of downloaded files.
+Let us check the names and sizes of the downloaded files.
 
 
 ```{r}
@@ -169,7 +169,7 @@ file.info( paste0( "data/", grep( x = list.files("data/"), pattern = "gdac", val
 
 ## Untarring data
 
-Let us use the `untar()` function to untar all downloaded sets.
+Let us use the `untar()` function to untar the all downloaded sets.
 
 ```{r, warning=FALSE, results='hide'}
 
@@ -205,23 +205,25 @@ in `rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__d
 
 
 ```{r, cache=FALSE, echo=3:19, eval=FALSE}
+# this is not really necessary
 # addd interactive DT from DT/rstudio package
-
-genes <- list.files( "data/") %>%
-   grep( pattern = "rnaseqv2__illuminahiseq", x = ., value = TRUE ) %>%
-   paste0( "data/", . , "/") %>%
-   sapply( function( element ){ 
-      paste0( element, list.files( element ) ) }) %>%
-   sapply( availableGenesNames ) %>%
-   .[which( (lapply(., length) > 0) == TRUE ) ] %>%
-   as.data.frame( ) 
-
-names(genes) <- cohorts
-library(DT)
-
-datatable( genes , options=list(iDisplayLength = 10) )
-
-
+# https://github.com/rstudio/DT
+#
+# genes <- list.files( "data/") %>%
+#   grep( pattern = "rnaseqv2__illuminahiseq", x = ., value = TRUE ) %>%
+#   paste0( "data/", . , "/") %>%
+#   sapply( function( element ){ 
+#      paste0( element, list.files( element ) ) }) %>%
+#   sapply( availableGenesNames ) %>%
+#   .[which( (lapply(., length) > 0) == TRUE ) ] %>%
+#   as.data.frame( ) 
+#
+# names(genes) <- cohorts
+# library(DT)
+#
+# datatable( genes , options=list(iDisplayLength = 10) )
+#
+#
 ```
 
 ### Merging Clinical Data and RNA-Seq data
@@ -312,6 +314,10 @@ sapply( cohorts, function( element ){
 
 
 ## Joining all clinical.merged.files into one data set
+
+
+**This part was not checked yet. It might not been correct. It appears there
+are individual column names in most of the cancers**
 
 
 ```{r}
