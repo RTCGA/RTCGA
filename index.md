@@ -1,24 +1,9 @@
----
-title: "RTCGA package tutorial"
-author: "Marcin Kosinski"
-date: "May 5, 2015"
-output:
-  html_document:
-    theme: united
-    highlight: tango
-    fig_width: 17
-    fig_height: 10
-    toc: true
-    toc_depth: 4
-    keep_md: true
-    number_sections: true
----
+# RTCGA package tutorial
+Marcin Kosinski  
+May 5, 2015  
 
 
-```{r, echo=FALSE}
-library(knitr)
-opts_chunk$set(comment="", message=FALSE, warning = FALSE, tidy.opts=list(keep.blank.line=TRUE, width.cutoff=150),options(width=150), cache=TRUE, eval = FALSE)
-```
+
 
 
 # Mission
@@ -36,11 +21,13 @@ here [https://github.com/MarcinKosinski/RTCGA](https://github.com/MarcinKosinski
 
 ## Installation of the RTCGA package
 To get started, install the latest version of **RTCGA** from Bioconductor:
-```{r }
+
+```r
 # not there yet
 ```
 or use:
-```{r, eval=FALSE}
+
+```r
 if (!require(devtools)) {
     install.packages("devtools")
     library(devtools)
@@ -59,7 +46,8 @@ Below I'll show an example of how to use `RTCGA` package to download `BRCA` coho
 
 We will download data from the newest release date.
 
-```{r}
+
+```r
 library(RTCGA)
 date <- tail( availableDates() ,1 )
 # if server doesn't respond, just try
@@ -67,7 +55,8 @@ date <- tail( availableDates() ,1 )
 ```
 
 We will need a folder to which we will download data.
-```{r}
+
+```r
 dir.create("data")
 ```
 
@@ -76,7 +65,8 @@ dir.create("data")
 
 Let us download clinical data. Simply use this command
 
-```{r}
+
+```r
 downloadTCGA( cancerTypes = "BRCA", destDir = "data/", date = date )
 ```
 
@@ -84,7 +74,8 @@ downloadTCGA( cancerTypes = "BRCA", destDir = "data/", date = date )
 
 Let us download rnaseq v2 data. Simply use this command
 
-```{r}
+
+```r
 downloadTCGA( cancerTypes = "BRCA", destDir = "data/", date = date,
               dataSet = "rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level" )
 ```
@@ -93,7 +84,8 @@ downloadTCGA( cancerTypes = "BRCA", destDir = "data/", date = date,
 
 Let us download genes' mutations data. Simply use this command
 
-```{r}
+
+```r
 downloadTCGA( cancerTypes = "BRCA", destDir = "data/", date = date,
               dataSet = "Mutation_Packager_Calls.Level" )
 ```
@@ -103,12 +95,11 @@ downloadTCGA( cancerTypes = "BRCA", destDir = "data/", date = date,
 
 Let us use the `untar()` function to untar the all downloaded sets.
 
-```{r, warning=FALSE, results='hide'}
 
+```r
 list.files( "data/") %>% 
    paste0( "data/", .) %>%
    sapply( untar, exdir = "data/" )
-
 ```
 
 
@@ -118,7 +109,8 @@ list.files( "data/") %>%
 
 After datasets are untarred, the `tar.gz` files ar no longer needed and can be deleted.
 
-```{r, results='hide'}
+
+```r
 list.files( "data/") %>% 
    paste0( "data/", .) %>%
    grep( pattern = "tar.gz", x = ., value = TRUE) %>%
@@ -131,7 +123,8 @@ list.files( "data/") %>%
 
 Now, let us add information about **MDM2** expression into the `BRCA.clinical.merged.txt` file. Note that you can pass an abbreviation of the name of a gene as a parameter and then all matching genes will be added (example: for **TP53** 7 genes are added) at the end of `BRCA.clinical.merged.txt` file.
    
-```{r}
+
+```r
 # mergeTCGA(
 #       clinicalDir = get(paste0(element,".clin.path"), envir = .GlobalEnv),
 #       rnaseqDir = get(paste0(element,".rnaseq.path"), envir = .GlobalEnv),
@@ -144,7 +137,8 @@ Now, let us add information about **MDM2** expression into the `BRCA.clinical.me
 
 ## Available cohorts
 
-```{r}
+
+```r
 library(RTCGA)
 (cohorts <- infoTCGA() %>% 
    names() %>% 
@@ -156,8 +150,8 @@ library(RTCGA)
 ## Downloading data
 
 One can check what is the newest available date of release of TCGA datasets.
-```{r}
 
+```r
 tail( availableDates(), 2 )
 date <- tail( availableDates() ,1 )
 ```
@@ -168,7 +162,8 @@ For that date we can download datasets for **ALL** Cohorts to the
 ### Clinical data
 
 Can be downloaded using default settings. By default the dataset is downloaded from the newest available date of TCGA releases.
-```{r}
+
+```r
 #dir.create( "data" )
 downloadTCGA( cancerTypes = cohorts, destDir = "data/", date = date )
 ```
@@ -176,7 +171,8 @@ downloadTCGA( cancerTypes = cohorts, destDir = "data/", date = date )
 
 Let us check the names and sizes of the downloaded files.
 
-```{r}
+
+```r
 file.info( paste0( "data/", grep( x = list.files("data/"), pattern = "gdac", value = TRUE )) )[, 1:2]
 ```
 
@@ -185,7 +181,8 @@ file.info( paste0( "data/", grep( x = list.files("data/"), pattern = "gdac", val
 
 Let us check if there is Mutations data available for all cancer types.
 
-```{r, cache = FALSE, message=FALSE, warning=FALSE}
+
+```r
 library(RTCGA)
 library(dplyr)
 checkDataSetsAvailability( cohorts, 
@@ -193,12 +190,12 @@ checkDataSetsAvailability( cohorts,
                            date = date) %>%
    unlist() %>% 
    cat( sep="\n")
-
 ```
 
 
 Let us download it.
-```{r}
+
+```r
 sapply( cohorts, function(element){
 tryCatch({
 downloadTCGA( cancerTypes = element, 
@@ -216,7 +213,8 @@ error = function(cond){
 Let us check the names and sizes of the downloaded files.
 
 
-```{r}
+
+```r
 file.info( paste0( "data/", grep( x = list.files("data/"), pattern = "gdac", value = TRUE )) )[, 1:2]
 ```
 
@@ -224,20 +222,20 @@ file.info( paste0( "data/", grep( x = list.files("data/"), pattern = "gdac", val
 
 Let us check if there is RNA-Seq data available for all cancer types.
 
-```{r }
 
+```r
 checkDataSetsAvailability( cohorts,
                         "rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level",
                         date = date ) %>%
    unlist() %>%  
    cat( sep="\n")
-
 ```
 
 
 Let us download it.
 
-```{r}
+
+```r
 sapply( cohorts, function(element){
 tryCatch({
 downloadTCGA( cancerTypes = element, 
@@ -254,7 +252,8 @@ error = function(cond){
 Let us check the names and sizes of the downloaded files.
 
 
-```{r}
+
+```r
 file.info( paste0( "data/", grep( x = list.files("data/"), pattern = "gdac", value = TRUE )) )[, 1:2] 
 ```
 
@@ -262,12 +261,11 @@ file.info( paste0( "data/", grep( x = list.files("data/"), pattern = "gdac", val
 
 Let us use the `untar()` function to untar the all downloaded sets.
 
-```{r, warning=FALSE, results='hide'}
 
+```r
 list.files( "data/") %>% 
    paste0( "data/", .) %>%
    sapply( untar, exdir = "data/" )
-
 ```
 
 
@@ -275,7 +273,8 @@ list.files( "data/") %>%
 
 After datasets are untarred, the `tar.gz` files ar no longer needed and can be deleted.
 
-```{r, results='hide'}
+
+```r
 list.files( "data/") %>% 
    paste0( "data/", .) %>%
    grep( pattern = "tar.gz", x = ., value = TRUE) %>%
@@ -295,9 +294,8 @@ in `rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__d
 **Note: This is not really necessary!**
 
 
-```{r, cache=FALSE, echo=3:19, eval=FALSE}
-# this is not really necessary
 
+```r
 # if (!requireNamespace('htmlwidgets') || packageVersion('htmlwidgets') <= '0.3.2')
 #   devtools::install_github('ramnathv/htmlwidgets')
 # devtools::install_github('rstudio/DT')
@@ -315,14 +313,6 @@ in `rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__d
 #      paste0( element, list.files( element ) ) }) %>%
 #   sapply( availableGenesNames ) %>%
 #   .[which( (lapply(., length) > 0) == TRUE ) ] %>%
-#   as.data.frame( ) 
-#
-# names(genes) <- cohorts
-# library(DT)
-#
-# datatable( genes , options=list(iDisplayLength = 10) )
-#
-#
 ```
 
 ### Merging Clinical Data and RNA-Seq data
@@ -332,24 +322,22 @@ for each cancer type. Note that you can pass an abbreviation of the name of a ge
 
 #### Paths to clinical data
 
-```{r}
 
-```
 
-```{r, width.cutoff=120}
 
+```r
 sapply( cohorts, function( element ){
    folder <- grep( paste0( "(_",element,"\\.", "|","_",element,"-FFPE)", ".*Clinical"), list.files("data/"),value = TRUE)
    path <- paste0( "data/", folder, "/", element, ".clin.merged.txt")
    assign( value = path, x = paste0(element, ".clin.path"), envir = .GlobalEnv)
 }) 
-
 ```
 
 
 #### Paths to rnaseq data
 
-```{r}
+
+```r
 sapply( cohorts, function( element ){
    folder <- grep( paste0( "(_",element,"\\.", "|","_",element,"-FFPE)", ".*rnaseqv2"), list.files("data/"),value = TRUE)
    file <- grep( paste0(element, ".*rnaseqv2"), list.files( paste0( "data/",folder ) ),
@@ -360,9 +348,8 @@ sapply( cohorts, function( element ){
 ```
 
 
-```{r, warning=FALSE}
 
-
+```r
 sapply( cohorts, function( element ){
    tryCatch({
    mergeTCGA(
@@ -374,8 +361,6 @@ sapply( cohorts, function( element ){
    cat("Error: Maybe there weren't rnaseq data for ", element, " cancer.\n")
 })
 })
-
-
 ```
 
 
@@ -385,7 +370,8 @@ sapply( cohorts, function( element ){
 #### Paths to Muations data
 
 
-```{r}
+
+```r
 sapply( cohorts, function( element ){
    folder <- grep( paste0( "(_",element,"\\.", "|","_",element,"-FFPE)", ".*Mutation_Packager"), list.files("data/"),value = TRUE)
    path <- paste0( "data/", folder, "/")
@@ -395,7 +381,8 @@ sapply( cohorts, function( element ){
 
 Let us add information about the **TP53** gene mutations to `*clinical.merged.txt` files.
 
-```{r}
+
+```r
 sapply( cohorts, function( element ){
    tryCatch({
    mergeTCGA(
@@ -407,7 +394,6 @@ sapply( cohorts, function( element ){
    cat("Error: Maybe there weren't mutations data for ", element, " cancer.\n")
 })
 })
-
 ```
 
 
@@ -419,7 +405,8 @@ sapply( cohorts, function( element ){
 are individual column names in most of the cancers**
 
 
-```{r}
+
+```r
 sapply( cohorts, function(element){
    tryCatch({
     assign( value = read.delim(get(paste0(element,".clin.path"), envir = .GlobalEnv)),
@@ -434,8 +421,8 @@ sapply( cohorts, function(element){
 })
 ```
 
-```{r}
 
+```r
 # ClinicalDataNames <- grep( "clin.data", x = ls(), value = TRUE )
 # ClinicalDataNames
 # clinicalCombo <- get(ClinicalDataNames[1], envir = .GlobalEnv)
@@ -519,7 +506,6 @@ clinicalCombo <- full_join( clinicalCombo, UVM.clin.data, by = "V1")
 names(clinicalCombo)[-1] <- paste0("clinicalCombo", 2:ncol(clinicalCombo))
 
 table(unlist(as.matrix(clinicalCombo[which(clinicalCombo$V1 == "admin.disease_code"),])))
-
 ```
 
 
@@ -527,7 +513,8 @@ table(unlist(as.matrix(clinicalCombo[which(clinicalCombo$V1 == "admin.disease_co
 Let us save it into new file 
 
 
-```{r}
+
+```r
 file.create("clinicalComboHuge.txt")
 write.table(clinicalCombo,
             file = "clinicalComboHuge.txt",
@@ -537,7 +524,8 @@ write.table(clinicalCombo,
 ```
 
 Reimport
-```{r}
+
+```r
 clinicalCombo <- read.clinical("clinicalCombo.txt")
 ```
 

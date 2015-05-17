@@ -11,6 +11,9 @@
 #' @param mutationDir A directory to a \code{Mutation_Packager_Calls.Level} folder where are genes' Mutations files.
 #' @param genes For \code{rnaseqDir} - which genes' expressions to merge with clinical data in \code{clinicalDir}. For \code{mutationDir} which
 #' gene's mutations to merge with clinical data in \code{clinicalDir}.
+#' @param columnName A character specifing which column to extract from \code{Mutations} data for a gene passes to \code{genes} parameter.
+#' Works only when \code{mutationDir} was used.
+#' 
 #' 
 #' @return A \code{cancerType.clin.merged.txt} file is updated with newline containing informations about genes
 #' passed to \code{genes} argument.
@@ -22,7 +25,7 @@
 #' @family RTCGA
 #' @rdname mergeTCGA
 #' @export
-mergeTCGA <- function( clinicalDir, rnaseqDir = NULL, mutationDir = NULL, genes ){
+mergeTCGA <- function( clinicalDir, rnaseqDir = NULL, mutationDir = NULL, genes, columnName = "Variant_Classification" ){
    assert_that( is.character( genes ) )
    assert_that( is.character( clinicalDir ) )
    assert_that( xor( is.character( rnaseqDir ), is.character( mutationDir ) ) )        
@@ -31,7 +34,8 @@ mergeTCGA <- function( clinicalDir, rnaseqDir = NULL, mutationDir = NULL, genes 
    if( is.null( rnaseqDir ) && is.character( mutationDir ) ) 
       mergeTCGA_clinical_mutations( clinicalDir = clinicalDir,
                                     mutationDir = mutationDir,
-                                    genes = genes )
+                                    genes = genes,
+                                    columnName = columnName )
    
    if( is.character( rnaseqDir ) && is.null( mutationDir ) ) 
       mergeTCGA_clinical_rnaseq( clinicalDir = clinicalDir,
@@ -208,10 +212,11 @@ mergeTCGA_clinical_rnaseq <- function( clinicalDir, rnaseqDir,
 
 
 mergeTCGA_clinical_mutations <- function( clinicalDir, mutationDir,
-                                          genes = "TP53" ){
+                                          genes = "TP53", columnName = "Variant_Classification" ){
    assert_that( is.character(clinicalDir) & length(clinicalDir) == 1)
    assert_that( is.character(mutationDir) & length(mutationDir) == 1)
    assert_that( is.character(genes) & length(genes) == 1)
+   assert_that( is.character(columnName) & length(columnName) == 1)
    
    #to be fixed :)
    gene <- genes
@@ -233,7 +238,7 @@ mergeTCGA_clinical_mutations <- function( clinicalDir, mutationDir,
             fread( paste0(mutationDir,fileDir) ) %>%
                as.data.frame( ) %>%
                filter( Hugo_Symbol %in% gene ) %>%
-               select(  Variant_Classification )
+               select_( columnName )
          }else{
             return("NA")
          }
