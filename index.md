@@ -1,6 +1,6 @@
 # RTCGA package tutorial
 Marcin Kosinski  
-May 5, 2015  
+`r Sys.Date()`  
 
 
 
