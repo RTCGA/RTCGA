@@ -54,6 +54,7 @@ downloadTCGA <- function( cancerTypes, dataSet = "Merge_Clinical.Level_1",
    # ensure which date was specified
    lastReleaseDate  <- whichDateToUse( date = date )
    
+   
    for ( element in  cancerTypes ){
        # get index of page containing datasets fot this date of release and Cohort Code
        filesParentURL <- parentURL( lastReleaseDate, element ) 
@@ -102,7 +103,7 @@ parentURL <- function( lastReleaseDate, element ){
 
 whichDateToUse <- function( date ){
     if( !is.null( date )  ){
-        if( date %in% availableDates() ){ # .availableDates in availableDates function
+         if( date %in% availableDates() ){ # .availableDates in availableDates function
             paste0("stddata__", gsub( x = date, pattern = "-", replacement = "_") )
         }else{
             stop("Wrong date format or unavailable date of release. Use availableDates() function to recieve proper format and available dates.")
