@@ -1,0 +1,25 @@
+{
+    "contents" : "",
+    "created" : 1431862515340.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "9B8A9A70",
+    "lastKnownWriteTime" : 4696745617412671299,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "27nw5rs7ot",
+        "caption" : "TCGA.A1.A0SH.01.maf",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=TCGA.A1.A0SH.01.maf&cache_key=27nw5rs7ot",
+        "displayedObservations" : 94,
+        "environment" : "",
+        "object" : "TCGA.A1.A0SH.01.maf",
+        "totalObservations" : 94,
+        "variables" : 67
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}

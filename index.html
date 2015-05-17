@@ -80,45 +80,57 @@ img {
 
 <div id="TOC">
 <ul>
-<li><a href="#mission">Mission</a></li>
-<li><a href="#rtcga-package">RTCGA package</a><ul>
-<li><a href="#installation-of-the-rtcga-package">Installation of the RTCGA package</a></li>
+<li><a href="#mission"><span class="toc-section-number">1</span> Mission</a></li>
+<li><a href="#rtcga-package"><span class="toc-section-number">2</span> RTCGA package</a><ul>
+<li><a href="#installation-of-the-rtcga-package"><span class="toc-section-number">2.1</span> Installation of the RTCGA package</a></li>
 </ul></li>
-<li><a href="#data-manipulations">Data manipulations</a><ul>
-<li><a href="#available-cohorts">Available cohorts</a></li>
-<li><a href="#downloading-data">Downloading data</a><ul>
-<li><a href="#clinical-data">Clinical data</a></li>
-<li><a href="#mutations-data">Mutations data</a></li>
-<li><a href="#rna-seq-data">RNA-Seq data</a></li>
+<li><a href="#light-data-management-and-manipulations"><span class="toc-section-number">3</span> Light data management and manipulations</a><ul>
+<li><a href="#breast-cancer-brca-data-download"><span class="toc-section-number">3.1</span> Breast cancer (BRCA) data download</a><ul>
+<li><a href="#clinical-data"><span class="toc-section-number">3.1.1</span> Clinical data</a></li>
+<li><a href="#rnaseq-v2-data"><span class="toc-section-number">3.1.2</span> Rnaseq v2 data</a></li>
+<li><a href="#mutations-data"><span class="toc-section-number">3.1.3</span> Mutations data</a></li>
 </ul></li>
-<li><a href="#untarring-data">Untarring data</a><ul>
-<li><a href="#removing-no-longer-needed-tar.gz-files">Removing no longer needed <code>tar.gz</code> files</a></li>
-</ul></li>
-<li><a href="#combining-data">Combining data</a><ul>
-<li><a href="#available-genes-in-rna-seq-data">Available genes in RNA-Seq data</a></li>
-<li><a href="#merging-clinical-data-and-rna-seq-data">Merging Clinical Data and RNA-Seq data</a><ul>
-<li><a href="#paths-to-clinical-data">Paths to clinical data</a></li>
-<li><a href="#paths-to-rnaseq-data">Paths to rnaseq data</a></li>
-</ul></li>
-<li><a href="#merging-clinical-data-and-mutations-data">Merging Clinical Data and Mutations data</a><ul>
-<li><a href="#paths-to-muations-data">Paths to Muations data</a></li>
+<li><a href="#untarring-data"><span class="toc-section-number">3.2</span> Untarring data</a></li>
+<li><a href="#removing-no-longer-needed-tar.gz-files"><span class="toc-section-number">3.3</span> Removing no longer needed <code>tar.gz</code> files</a></li>
+<li><a href="#combining-data"><span class="toc-section-number">3.4</span> Combining data</a><ul>
+<li><a href="#merging-clinical-data-and-rna-seq-data"><span class="toc-section-number">3.4.1</span> Merging Clinical Data and RNA-Seq data</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#joining-all-clinical.merged.files-into-one-data-set">Joining all clinical.merged.files into one data set</a></li>
+<li><a href="#heavy-data-management-and-manipulations"><span class="toc-section-number">4</span> Heavy data management and manipulations</a><ul>
+<li><a href="#available-cohorts"><span class="toc-section-number">4.1</span> Available cohorts</a></li>
+<li><a href="#downloading-data"><span class="toc-section-number">4.2</span> Downloading data</a><ul>
+<li><a href="#clinical-data-1"><span class="toc-section-number">4.2.1</span> Clinical data</a></li>
+<li><a href="#mutations-data-1"><span class="toc-section-number">4.2.2</span> Mutations data</a></li>
+<li><a href="#rna-seq-data"><span class="toc-section-number">4.2.3</span> RNA-Seq data</a></li>
+</ul></li>
+<li><a href="#untarring-data-1"><span class="toc-section-number">4.3</span> Untarring data</a><ul>
+<li><a href="#removing-no-longer-needed-tar.gz-files-1"><span class="toc-section-number">4.3.1</span> Removing no longer needed <code>tar.gz</code> files</a></li>
+</ul></li>
+<li><a href="#combining-data-1"><span class="toc-section-number">4.4</span> Combining data</a><ul>
+<li><a href="#available-genes-in-rna-seq-data"><span class="toc-section-number">4.4.1</span> Available genes in RNA-Seq data</a></li>
+<li><a href="#merging-clinical-data-and-rna-seq-data-1"><span class="toc-section-number">4.4.2</span> Merging Clinical Data and RNA-Seq data</a><ul>
+<li><a href="#paths-to-clinical-data"><span class="toc-section-number">4.4.2.1</span> Paths to clinical data</a></li>
+<li><a href="#paths-to-rnaseq-data"><span class="toc-section-number">4.4.2.2</span> Paths to rnaseq data</a></li>
+</ul></li>
+<li><a href="#merging-clinical-data-and-mutations-data"><span class="toc-section-number">4.4.3</span> Merging Clinical Data and Mutations data</a><ul>
+<li><a href="#paths-to-muations-data"><span class="toc-section-number">4.4.3.1</span> Paths to Muations data</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#joining-all-clinical.merged.files-into-one-data-set"><span class="toc-section-number">4.5</span> Joining all clinical.merged.files into one data set</a></li>
 </ul></li>
 </ul>
 </div>
 
 <div id="mission" class="section level1">
-<h1>Mission</h1>
+<h1><span class="header-section-number">1</span> Mission</h1>
 <p>The Cancer Genome Atlas (TCGA) Data Portal provides a platform for researchers to search, download, and analyze data sets generated by TCGA. It contains clinical information, genomic characterization data, and high level sequence analysis of the tumor genomes[1]. The key is to understand genomics to improve cancer care.</p>
-<p>RTCGA package offers download and integration of the variety and volume of TCGA data using patient barcode key, what enables easier data possession. This may have an benefcial infuence on impact on development of science and improvement of patients’ treatment. RTCGA is an open-source R package, available to download from Bioconductor[2]. Furthermore, RTCGA package transforms TCGA data to form which is convenient to use in R statistical package. Those data transformations can be a part of statistical analysis pipeline which can be more reproducible with RTCGA.</p>
+<p>The RTCGA package offers an easy interface for downloading and integrating variety of the TCGA data using patient barcode key. This allows for easier data acquisition facilitating development of science and improvement of patients’ treatment. RTCGA is an open-source R package available to download from Bioconductor[2]. Furthermore, the RTCGA package transforms the TCGA data to a form which is convenient to use with R statistical package. The data transformation can be a part of the statistical analysis pipeline which can be more reproducible with RTCGA.</p>
 </div>
 <div id="rtcga-package" class="section level1">
-<h1>RTCGA package</h1>
+<h1><span class="header-section-number">2</span> RTCGA package</h1>
 <p>More detail information about this package can be found here <a href="https://github.com/MarcinKosinski/RTCGA"><a href="https://github.com/MarcinKosinski/RTCGA" class="uri">https://github.com/MarcinKosinski/RTCGA</a></a>.</p>
 <div id="installation-of-the-rtcga-package" class="section level2">
-<h2>Installation of the RTCGA package</h2>
+<h2><span class="header-section-number">2.1</span> Installation of the RTCGA package</h2>
 <p>To get started, install the latest version of <strong>RTCGA</strong> from Bioconductor:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># not there yet</span></code></pre>
 <p>or use:</p>
@@ -130,32 +142,91 @@ img {
 <p>Make sure you have <a href="http://cran.r-project.org/bin/windows/Rtools/">rtools</a> installed on your computer.</p>
 </div>
 </div>
-<div id="data-manipulations" class="section level1">
-<h1>Data manipulations</h1>
+<div id="light-data-management-and-manipulations" class="section level1">
+<h1><span class="header-section-number">3</span> Light data management and manipulations</h1>
+<p>Below I’ll show an example of how to use <code>RTCGA</code> package to download <code>BRCA</code> cohort data that contains: <code>clinical</code> data, <code>mutations</code> data, and <code>rnaseq v2</code> data. Furthermore, I’ll show how to add an information about <code>MDM2</code> gene expression from <code>rnaseq v2</code> dataset to clinical data. Finally, I’ll provide an example on how to add an information about <code>TP53</code> <code>variant classification</code> and <code>amino_acid_change_WU</code> to the <code>clinical</code> data - both variables are located in genes <code>mutations</code> dataset.</p>
+<div id="breast-cancer-brca-data-download" class="section level2">
+<h2><span class="header-section-number">3.1</span> Breast cancer (BRCA) data download</h2>
+<p>We will download data from the newest release date.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(RTCGA)
+date &lt;-<span class="st"> </span><span class="kw">tail</span>( <span class="kw">availableDates</span>() ,<span class="dv">1</span> )
+<span class="co"># if server doesn't respond, just try</span>
+<span class="co"># date &lt;- &quot;2015-04-02&quot;</span></code></pre>
+<p>We will need a folder to which we will download data.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dir.create</span>(<span class="st">&quot;data&quot;</span>)</code></pre>
+<div id="clinical-data" class="section level3">
+<h3><span class="header-section-number">3.1.1</span> Clinical data</h3>
+<p>Let us download clinical data. Simply use this command</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">downloadTCGA</span>( <span class="dt">cancerTypes =</span> <span class="st">&quot;BRCA&quot;</span>, <span class="dt">destDir =</span> <span class="st">&quot;data/&quot;</span>, <span class="dt">date =</span> date )</code></pre>
+</div>
+<div id="rnaseq-v2-data" class="section level3">
+<h3><span class="header-section-number">3.1.2</span> Rnaseq v2 data</h3>
+<p>Let us download rnaseq v2 data. Simply use this command</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">downloadTCGA</span>( <span class="dt">cancerTypes =</span> <span class="st">&quot;BRCA&quot;</span>, <span class="dt">destDir =</span> <span class="st">&quot;data/&quot;</span>, <span class="dt">date =</span> date,
+              <span class="dt">dataSet =</span> <span class="st">&quot;rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level&quot;</span> )</code></pre>
+</div>
+<div id="mutations-data" class="section level3">
+<h3><span class="header-section-number">3.1.3</span> Mutations data</h3>
+<p>Let us download genes’ mutations data. Simply use this command</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">downloadTCGA</span>( <span class="dt">cancerTypes =</span> <span class="st">&quot;BRCA&quot;</span>, <span class="dt">destDir =</span> <span class="st">&quot;data/&quot;</span>, <span class="dt">date =</span> date,
+              <span class="dt">dataSet =</span> <span class="st">&quot;Mutation_Packager_Calls.Level&quot;</span> )</code></pre>
+</div>
+</div>
+<div id="untarring-data" class="section level2">
+<h2><span class="header-section-number">3.2</span> Untarring data</h2>
+<p>Let us use the <code>untar()</code> function to untar the all downloaded sets.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list.files</span>( <span class="st">&quot;data/&quot;</span>) %&gt;%<span class="st"> </span>
+<span class="st">   </span><span class="kw">paste0</span>( <span class="st">&quot;data/&quot;</span>, .) %&gt;%
+<span class="st">   </span><span class="kw">sapply</span>( untar, <span class="dt">exdir =</span> <span class="st">&quot;data/&quot;</span> )</code></pre>
+</div>
+<div id="removing-no-longer-needed-tar.gz-files" class="section level2">
+<h2><span class="header-section-number">3.3</span> Removing no longer needed <code>tar.gz</code> files</h2>
+<p><strong>Note if this command removes all your files in <code>data</code> directory, not only <code>tar.gz</code> files, you’ll need to download data again and <code>untar</code> them manually. It has been observed that on small amount of systems this command deletes also all unpacked files.</strong></p>
+<p>After datasets are untarred, the <code>tar.gz</code> files ar no longer needed and can be deleted.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list.files</span>( <span class="st">&quot;data/&quot;</span>) %&gt;%<span class="st"> </span>
+<span class="st">   </span><span class="kw">paste0</span>( <span class="st">&quot;data/&quot;</span>, .) %&gt;%
+<span class="st">   </span><span class="kw">grep</span>( <span class="dt">pattern =</span> <span class="st">&quot;tar.gz&quot;</span>, <span class="dt">x =</span> ., <span class="dt">value =</span> <span class="ot">TRUE</span>) %&gt;%
+<span class="st">   </span><span class="kw">sapply</span>( file.remove )</code></pre>
+</div>
+<div id="combining-data" class="section level2">
+<h2><span class="header-section-number">3.4</span> Combining data</h2>
+<div id="merging-clinical-data-and-rna-seq-data" class="section level3">
+<h3><span class="header-section-number">3.4.1</span> Merging Clinical Data and RNA-Seq data</h3>
+<p>Now, let us add information about <strong>MDM2</strong> expression into the <code>BRCA.clinical.merged.txt</code> file. Note that you can pass an abbreviation of the name of a gene as a parameter and then all matching genes will be added (example: for <strong>TP53</strong> 7 genes are added) at the end of <code>BRCA.clinical.merged.txt</code> file.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># mergeTCGA(</span>
+<span class="co">#       clinicalDir = get(paste0(element,&quot;.clin.path&quot;), envir = .GlobalEnv),</span>
+<span class="co">#       rnaseqDir = get(paste0(element,&quot;.rnaseq.path&quot;), envir = .GlobalEnv),</span>
+<span class="co">#       genes = c(&quot;MDM2&quot;)</span>
+<span class="co">#    )</span></code></pre>
+</div>
+</div>
+</div>
+<div id="heavy-data-management-and-manipulations" class="section level1">
+<h1><span class="header-section-number">4</span> Heavy data management and manipulations</h1>
 <div id="available-cohorts" class="section level2">
-<h2>Available cohorts</h2>
+<h2><span class="header-section-number">4.1</span> Available cohorts</h2>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(RTCGA)
 (cohorts &lt;-<span class="st"> </span><span class="kw">infoTCGA</span>() %&gt;%<span class="st"> </span>
 <span class="st">   </span><span class="kw">names</span>() %&gt;%<span class="st"> </span>
 <span class="st">   </span><span class="kw">sub</span>(<span class="st">&quot;-counts&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="dt">x=</span>.))</code></pre>
 </div>
 <div id="downloading-data" class="section level2">
-<h2>Downloading data</h2>
+<h2><span class="header-section-number">4.2</span> Downloading data</h2>
 <p>One can check what is the newest available date of release of TCGA datasets.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tail</span>( <span class="kw">availableDates</span>(), <span class="dv">2</span> )
 date &lt;-<span class="st"> </span><span class="kw">tail</span>( <span class="kw">availableDates</span>() ,<span class="dv">1</span> )</code></pre>
 <p>For that date we can download datasets for <strong>ALL</strong> Cohorts to the <code>data</code> folder.</p>
-<div id="clinical-data" class="section level3">
-<h3>Clinical data</h3>
+<div id="clinical-data-1" class="section level3">
+<h3><span class="header-section-number">4.2.1</span> Clinical data</h3>
 <p>Can be downloaded using default settings. By default the dataset is downloaded from the newest available date of TCGA releases.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co">#dir.create( &quot;data&quot; )</span>
 <span class="kw">downloadTCGA</span>( <span class="dt">cancerTypes =</span> cohorts, <span class="dt">destDir =</span> <span class="st">&quot;data/&quot;</span>, <span class="dt">date =</span> date )</code></pre>
-<p>Let us check what are the names and sizes of downloaded files.</p>
+<p>Let us check the names and sizes of the downloaded files.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">file.info</span>( <span class="kw">paste0</span>( <span class="st">&quot;data/&quot;</span>, <span class="kw">grep</span>( <span class="dt">x =</span> <span class="kw">list.files</span>(<span class="st">&quot;data/&quot;</span>), <span class="dt">pattern =</span> <span class="st">&quot;gdac&quot;</span>, <span class="dt">value =</span> <span class="ot">TRUE</span> )) )[, <span class="dv">1</span>:<span class="dv">2</span>]</code></pre>
 </div>
-<div id="mutations-data" class="section level3">
-<h3>Mutations data</h3>
-<p>Let us check if there are Mutations data available for all canser types.</p>
+<div id="mutations-data-1" class="section level3">
+<h3><span class="header-section-number">4.2.2</span> Mutations data</h3>
+<p>Let us check if there is Mutations data available for all cancer types.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(RTCGA)
 <span class="kw">library</span>(dplyr)
 <span class="kw">checkDataSetsAvailability</span>( cohorts, 
@@ -163,7 +234,7 @@ date &lt;-<span class="st"> </span><span class="kw">tail</span>( <span class="kw
                            <span class="dt">date =</span> date) %&gt;%
 <span class="st">   </span><span class="kw">unlist</span>() %&gt;%<span class="st"> </span>
 <span class="st">   </span><span class="kw">cat</span>( <span class="dt">sep=</span><span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</code></pre>
-<p>Let us download them.</p>
+<p>Let us download it.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sapply</span>( cohorts, function(element){
 <span class="kw">tryCatch</span>({
 <span class="kw">downloadTCGA</span>( <span class="dt">cancerTypes =</span> element, 
@@ -175,18 +246,18 @@ date &lt;-<span class="st"> </span><span class="kw">tail</span>( <span class="kw
 }
 )
 })</code></pre>
-<p>Let us check what are the names and sizes of downloaded files.</p>
+<p>Let us check the names and sizes of the downloaded files.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">file.info</span>( <span class="kw">paste0</span>( <span class="st">&quot;data/&quot;</span>, <span class="kw">grep</span>( <span class="dt">x =</span> <span class="kw">list.files</span>(<span class="st">&quot;data/&quot;</span>), <span class="dt">pattern =</span> <span class="st">&quot;gdac&quot;</span>, <span class="dt">value =</span> <span class="ot">TRUE</span> )) )[, <span class="dv">1</span>:<span class="dv">2</span>]</code></pre>
 </div>
 <div id="rna-seq-data" class="section level3">
-<h3>RNA-Seq data</h3>
-<p>Let us check if there are RNA-Seq data available for all canser types.</p>
+<h3><span class="header-section-number">4.2.3</span> RNA-Seq data</h3>
+<p>Let us check if there is RNA-Seq data available for all cancer types.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">checkDataSetsAvailability</span>( cohorts,
                         <span class="st">&quot;rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level&quot;</span>,
                         <span class="dt">date =</span> date ) %&gt;%
 <span class="st">   </span><span class="kw">unlist</span>() %&gt;%<span class="st">  </span>
 <span class="st">   </span><span class="kw">cat</span>( <span class="dt">sep=</span><span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</code></pre>
-<p>Let us download them.</p>
+<p>Let us download it.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sapply</span>( cohorts, function(element){
 <span class="kw">tryCatch</span>({
 <span class="kw">downloadTCGA</span>( <span class="dt">cancerTypes =</span> element, 
@@ -198,18 +269,18 @@ date &lt;-<span class="st"> </span><span class="kw">tail</span>( <span class="kw
 }
 )
 }) </code></pre>
-<p>Let us check what are the names and sizes of downloaded files.</p>
+<p>Let us check the names and sizes of the downloaded files.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">file.info</span>( <span class="kw">paste0</span>( <span class="st">&quot;data/&quot;</span>, <span class="kw">grep</span>( <span class="dt">x =</span> <span class="kw">list.files</span>(<span class="st">&quot;data/&quot;</span>), <span class="dt">pattern =</span> <span class="st">&quot;gdac&quot;</span>, <span class="dt">value =</span> <span class="ot">TRUE</span> )) )[, <span class="dv">1</span>:<span class="dv">2</span>] </code></pre>
 </div>
 </div>
-<div id="untarring-data" class="section level2">
-<h2>Untarring data</h2>
-<p>Let’s use <code>untar()</code> function to untar all downloaded sets.</p>
+<div id="untarring-data-1" class="section level2">
+<h2><span class="header-section-number">4.3</span> Untarring data</h2>
+<p>Let us use the <code>untar()</code> function to untar the all downloaded sets.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list.files</span>( <span class="st">&quot;data/&quot;</span>) %&gt;%<span class="st"> </span>
 <span class="st">   </span><span class="kw">paste0</span>( <span class="st">&quot;data/&quot;</span>, .) %&gt;%
 <span class="st">   </span><span class="kw">sapply</span>( untar, <span class="dt">exdir =</span> <span class="st">&quot;data/&quot;</span> )</code></pre>
-<div id="removing-no-longer-needed-tar.gz-files" class="section level3">
-<h3>Removing no longer needed <code>tar.gz</code> files</h3>
+<div id="removing-no-longer-needed-tar.gz-files-1" class="section level3">
+<h3><span class="header-section-number">4.3.1</span> Removing no longer needed <code>tar.gz</code> files</h3>
 <p>After datasets are untarred, the <code>tar.gz</code> files ar no longer needed and can be deleted.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list.files</span>( <span class="st">&quot;data/&quot;</span>) %&gt;%<span class="st"> </span>
 <span class="st">   </span><span class="kw">paste0</span>( <span class="st">&quot;data/&quot;</span>, .) %&gt;%
@@ -217,34 +288,35 @@ date &lt;-<span class="st"> </span><span class="kw">tail</span>( <span class="kw
 <span class="st">   </span><span class="kw">sapply</span>( file.remove )</code></pre>
 </div>
 </div>
-<div id="combining-data" class="section level2">
-<h2>Combining data</h2>
+<div id="combining-data-1" class="section level2">
+<h2><span class="header-section-number">4.4</span> Combining data</h2>
 <div id="available-genes-in-rna-seq-data" class="section level3">
-<h3>Available genes in RNA-Seq data</h3>
-<p>Let’s check what are available genes names for <strong>ALL</strong> cancers in <code>rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level</code> datasets</p>
-<pre class="sourceCode r"><code class="sourceCode r">genes &lt;-<span class="st"> </span><span class="kw">list.files</span>( <span class="st">&quot;data/&quot;</span>) %&gt;%
-<span class="st">   </span><span class="kw">grep</span>( <span class="dt">pattern =</span> <span class="st">&quot;rnaseqv2__illuminahiseq&quot;</span>, <span class="dt">x =</span> ., <span class="dt">value =</span> <span class="ot">TRUE</span> ) %&gt;%
-<span class="st">   </span><span class="kw">paste0</span>( <span class="st">&quot;data/&quot;</span>, . , <span class="st">&quot;/&quot;</span>) %&gt;%
-<span class="st">   </span><span class="kw">sapply</span>( function( element ){ 
-      <span class="kw">paste0</span>( element, <span class="kw">list.files</span>( element ) ) }) %&gt;%
-<span class="st">   </span><span class="kw">sapply</span>( availableGenesNames ) %&gt;%
-<span class="st">   </span>.[<span class="kw">which</span>( (<span class="kw">lapply</span>(., length) &gt;<span class="st"> </span><span class="dv">0</span>) ==<span class="st"> </span><span class="ot">TRUE</span> ) ] %&gt;%
-<span class="st">   </span><span class="kw">as.data.frame</span>( ) 
-
-<span class="kw">names</span>(genes) &lt;-<span class="st"> </span>cohorts
-<span class="kw">library</span>(DT)
-
-<span class="kw">datatable</span>( genes , <span class="dt">options=</span><span class="kw">list</span>(<span class="dt">iDisplayLength =</span> <span class="dv">10</span>) )
+<h3><span class="header-section-number">4.4.1</span> Available genes in RNA-Seq data</h3>
+<p>Let us check the available genes names for <strong>ALL</strong> cancers in <code>rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level</code> datasets</p>
+<p><strong>Note: This is not really necessary!</strong></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># if (!requireNamespace('htmlwidgets') || packageVersion('htmlwidgets') &lt;= '0.3.2')</span>
+<span class="co">#   devtools::install_github('ramnathv/htmlwidgets')</span>
+<span class="co"># devtools::install_github('rstudio/DT')</span>
+<span class="co"># # then try DT::datatable(iris) as a hello world example</span>
 
 
-<span class="ot">NA</span>
-<span class="ot">NA</span></code></pre>
+
+<span class="co"># addd interactive DT from DT/rstudio package</span>
+<span class="co"># https://github.com/rstudio/DT</span>
+<span class="co">#</span>
+<span class="co"># genes &lt;- list.files( &quot;data/&quot;) %&gt;%</span>
+<span class="co">#   grep( pattern = &quot;rnaseqv2__illuminahiseq&quot;, x = ., value = TRUE ) %&gt;%</span>
+<span class="co">#   paste0( &quot;data/&quot;, . , &quot;/&quot;) %&gt;%</span>
+<span class="co">#   sapply( function( element ){ </span>
+<span class="co">#      paste0( element, list.files( element ) ) }) %&gt;%</span>
+<span class="co">#   sapply( availableGenesNames ) %&gt;%</span>
+<span class="co">#   .[which( (lapply(., length) &gt; 0) == TRUE ) ] %&gt;%</span></code></pre>
 </div>
-<div id="merging-clinical-data-and-rna-seq-data" class="section level3">
-<h3>Merging Clinical Data and RNA-Seq data</h3>
-<p>Now, let’s add information about <strong>MDM2</strong> expression into the <code>.clinical.merged.txt</code> files for each cancer type. Note that you can pass an abbreviation of the name of a gene as a parameter and then all matching genes will be added (example: for <strong>TP53</strong> 7 genes are added) at the end of <code>.clinical.merged.txt</code> file.</p>
+<div id="merging-clinical-data-and-rna-seq-data-1" class="section level3">
+<h3><span class="header-section-number">4.4.2</span> Merging Clinical Data and RNA-Seq data</h3>
+<p>Now, let us add information about <strong>MDM2</strong> expression into the <code>.clinical.merged.txt</code> files, for each cancer type. Note that you can pass an abbreviation of the name of a gene as a parameter and then all matching genes will be added (example: for <strong>TP53</strong> 7 genes are added) at the end of <code>.clinical.merged.txt</code> file.</p>
 <div id="paths-to-clinical-data" class="section level4">
-<h4>Paths to clinical data</h4>
+<h4><span class="header-section-number">4.4.2.1</span> Paths to clinical data</h4>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sapply</span>( cohorts, function( element ){
    folder &lt;-<span class="st"> </span><span class="kw">grep</span>( <span class="kw">paste0</span>( <span class="st">&quot;(_&quot;</span>,element,<span class="st">&quot;</span><span class="ch">\\</span><span class="st">.&quot;</span>, <span class="st">&quot;|&quot;</span>,<span class="st">&quot;_&quot;</span>,element,<span class="st">&quot;-FFPE)&quot;</span>, <span class="st">&quot;.*Clinical&quot;</span>), <span class="kw">list.files</span>(<span class="st">&quot;data/&quot;</span>),<span class="dt">value =</span> <span class="ot">TRUE</span>)
    path &lt;-<span class="st"> </span><span class="kw">paste0</span>( <span class="st">&quot;data/&quot;</span>, folder, <span class="st">&quot;/&quot;</span>, element, <span class="st">&quot;.clin.merged.txt&quot;</span>)
@@ -252,7 +324,7 @@ date &lt;-<span class="st"> </span><span class="kw">tail</span>( <span class="kw
 }) </code></pre>
 </div>
 <div id="paths-to-rnaseq-data" class="section level4">
-<h4>Paths to rnaseq data</h4>
+<h4><span class="header-section-number">4.4.2.2</span> Paths to rnaseq data</h4>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sapply</span>( cohorts, function( element ){
    folder &lt;-<span class="st"> </span><span class="kw">grep</span>( <span class="kw">paste0</span>( <span class="st">&quot;(_&quot;</span>,element,<span class="st">&quot;</span><span class="ch">\\</span><span class="st">.&quot;</span>, <span class="st">&quot;|&quot;</span>,<span class="st">&quot;_&quot;</span>,element,<span class="st">&quot;-FFPE)&quot;</span>, <span class="st">&quot;.*rnaseqv2&quot;</span>), <span class="kw">list.files</span>(<span class="st">&quot;data/&quot;</span>),<span class="dt">value =</span> <span class="ot">TRUE</span>)
    file &lt;-<span class="st"> </span><span class="kw">grep</span>( <span class="kw">paste0</span>(element, <span class="st">&quot;.*rnaseqv2&quot;</span>), <span class="kw">list.files</span>( <span class="kw">paste0</span>( <span class="st">&quot;data/&quot;</span>,folder ) ),
@@ -274,15 +346,15 @@ date &lt;-<span class="st"> </span><span class="kw">tail</span>( <span class="kw
 </div>
 </div>
 <div id="merging-clinical-data-and-mutations-data" class="section level3">
-<h3>Merging Clinical Data and Mutations data</h3>
+<h3><span class="header-section-number">4.4.3</span> Merging Clinical Data and Mutations data</h3>
 <div id="paths-to-muations-data" class="section level4">
-<h4>Paths to Muations data</h4>
+<h4><span class="header-section-number">4.4.3.1</span> Paths to Muations data</h4>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sapply</span>( cohorts, function( element ){
    folder &lt;-<span class="st"> </span><span class="kw">grep</span>( <span class="kw">paste0</span>( <span class="st">&quot;(_&quot;</span>,element,<span class="st">&quot;</span><span class="ch">\\</span><span class="st">.&quot;</span>, <span class="st">&quot;|&quot;</span>,<span class="st">&quot;_&quot;</span>,element,<span class="st">&quot;-FFPE)&quot;</span>, <span class="st">&quot;.*Mutation_Packager&quot;</span>), <span class="kw">list.files</span>(<span class="st">&quot;data/&quot;</span>),<span class="dt">value =</span> <span class="ot">TRUE</span>)
    path &lt;-<span class="st"> </span><span class="kw">paste0</span>( <span class="st">&quot;data/&quot;</span>, folder, <span class="st">&quot;/&quot;</span>)
    <span class="kw">assign</span>( <span class="dt">value =</span> path, <span class="dt">x =</span> <span class="kw">paste0</span>(element, <span class="st">&quot;.mutations.dir&quot;</span>), <span class="dt">envir =</span> .GlobalEnv)
 })</code></pre>
-<p>Let’s add information about <strong>TP53</strong> gene mutations to <code>*clinical.merged.txt</code> files.</p>
+<p>Let us add information about the <strong>TP53</strong> gene mutations to <code>*clinical.merged.txt</code> files.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sapply</span>( cohorts, function( element ){
    <span class="kw">tryCatch</span>({
    <span class="kw">mergeTCGA</span>(
@@ -298,7 +370,8 @@ date &lt;-<span class="st"> </span><span class="kw">tail</span>( <span class="kw
 </div>
 </div>
 <div id="joining-all-clinical.merged.files-into-one-data-set" class="section level2">
-<h2>Joining all clinical.merged.files into one data set</h2>
+<h2><span class="header-section-number">4.5</span> Joining all clinical.merged.files into one data set</h2>
+<p><strong>This part was not checked yet. It might not been correct. It appears there are individual column names in most of the cancers</strong></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sapply</span>( cohorts, function(element){
    <span class="kw">tryCatch</span>({
     <span class="kw">assign</span>( <span class="dt">value =</span> <span class="kw">read.delim</span>(<span class="kw">get</span>(<span class="kw">paste0</span>(element,<span class="st">&quot;.clin.path&quot;</span>), <span class="dt">envir =</span> .GlobalEnv)),
@@ -394,7 +467,7 @@ clinicalCombo &lt;-<span class="st"> </span><span class="kw">full_join</span>( c
 <span class="kw">names</span>(clinicalCombo)[-<span class="dv">1</span>] &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;clinicalCombo&quot;</span>, <span class="dv">2</span>:<span class="kw">ncol</span>(clinicalCombo))
 
 <span class="kw">table</span>(<span class="kw">unlist</span>(<span class="kw">as.matrix</span>(clinicalCombo[<span class="kw">which</span>(clinicalCombo$V1 ==<span class="st"> &quot;admin.disease_code&quot;</span>),])))</code></pre>
-<p>Let’s save it into new file</p>
+<p>Let us save it into new file</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">file.create</span>(<span class="st">&quot;clinicalComboHuge.txt&quot;</span>)
 <span class="kw">write.table</span>(clinicalCombo,
             <span class="dt">file =</span> <span class="st">&quot;clinicalComboHuge.txt&quot;</span>,
