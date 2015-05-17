@@ -224,9 +224,15 @@ date &lt;-<span class="st"> </span><span class="kw">tail</span>( <span class="kw
 <p>Let us check the names and sizes of the downloaded files.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">file.info</span>( <span class="kw">paste0</span>( <span class="st">&quot;data/&quot;</span>, <span class="kw">grep</span>( <span class="dt">x =</span> <span class="kw">list.files</span>(<span class="st">&quot;data/&quot;</span>), <span class="dt">pattern =</span> <span class="st">&quot;gdac&quot;</span>, <span class="dt">value =</span> <span class="ot">TRUE</span> )) )[, <span class="dv">1</span>:<span class="dv">2</span>]</code></pre>
 </div>
+<<<<<<< HEAD
 <div id="mutations-data-1" class="section level3">
 <h3><span class="header-section-number">4.2.2</span> Mutations data</h3>
 <p>Let us check if there is Mutations data available for all cancer types.</p>
+=======
+<div id="mutations-data" class="section level3">
+<h3>Mutations data</h3>
+<p>Let us check if there is Mutations data available for all canser types.</p>
+>>>>>>> fb2f6139d89c65d380ae2fab37f3ec772ef3e642
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(RTCGA)
 <span class="kw">library</span>(dplyr)
 <span class="kw">checkDataSetsAvailability</span>( cohorts, 
@@ -246,12 +252,21 @@ date &lt;-<span class="st"> </span><span class="kw">tail</span>( <span class="kw
 }
 )
 })</code></pre>
+<<<<<<< HEAD
 <p>Let us check the names and sizes of the downloaded files.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">file.info</span>( <span class="kw">paste0</span>( <span class="st">&quot;data/&quot;</span>, <span class="kw">grep</span>( <span class="dt">x =</span> <span class="kw">list.files</span>(<span class="st">&quot;data/&quot;</span>), <span class="dt">pattern =</span> <span class="st">&quot;gdac&quot;</span>, <span class="dt">value =</span> <span class="ot">TRUE</span> )) )[, <span class="dv">1</span>:<span class="dv">2</span>]</code></pre>
 </div>
 <div id="rna-seq-data" class="section level3">
 <h3><span class="header-section-number">4.2.3</span> RNA-Seq data</h3>
 <p>Let us check if there is RNA-Seq data available for all cancer types.</p>
+=======
+<p>Let us check the names and sizes of downloaded the files.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">file.info</span>( <span class="kw">paste0</span>( <span class="st">&quot;data/&quot;</span>, <span class="kw">grep</span>( <span class="dt">x =</span> <span class="kw">list.files</span>(<span class="st">&quot;data/&quot;</span>), <span class="dt">pattern =</span> <span class="st">&quot;gdac&quot;</span>, <span class="dt">value =</span> <span class="ot">TRUE</span> )) )[, <span class="dv">1</span>:<span class="dv">2</span>]</code></pre>
+</div>
+<div id="rna-seq-data" class="section level3">
+<h3>RNA-Seq data</h3>
+<p>Let us check if there is RNA-Seq data available for all canser types.</p>
+>>>>>>> fb2f6139d89c65d380ae2fab37f3ec772ef3e642
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">checkDataSetsAvailability</span>( cohorts,
                         <span class="st">&quot;rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level&quot;</span>,
                         <span class="dt">date =</span> date ) %&gt;%
@@ -269,6 +284,7 @@ date &lt;-<span class="st"> </span><span class="kw">tail</span>( <span class="kw
 }
 )
 }) </code></pre>
+<<<<<<< HEAD
 <p>Let us check the names and sizes of the downloaded files.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">file.info</span>( <span class="kw">paste0</span>( <span class="st">&quot;data/&quot;</span>, <span class="kw">grep</span>( <span class="dt">x =</span> <span class="kw">list.files</span>(<span class="st">&quot;data/&quot;</span>), <span class="dt">pattern =</span> <span class="st">&quot;gdac&quot;</span>, <span class="dt">value =</span> <span class="ot">TRUE</span> )) )[, <span class="dv">1</span>:<span class="dv">2</span>] </code></pre>
 </div>
@@ -276,6 +292,15 @@ date &lt;-<span class="st"> </span><span class="kw">tail</span>( <span class="kw
 <div id="untarring-data-1" class="section level2">
 <h2><span class="header-section-number">4.3</span> Untarring data</h2>
 <p>Let us use the <code>untar()</code> function to untar the all downloaded sets.</p>
+=======
+<p>Let us check the names and sizes of downloaded files.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">file.info</span>( <span class="kw">paste0</span>( <span class="st">&quot;data/&quot;</span>, <span class="kw">grep</span>( <span class="dt">x =</span> <span class="kw">list.files</span>(<span class="st">&quot;data/&quot;</span>), <span class="dt">pattern =</span> <span class="st">&quot;gdac&quot;</span>, <span class="dt">value =</span> <span class="ot">TRUE</span> )) )[, <span class="dv">1</span>:<span class="dv">2</span>] </code></pre>
+</div>
+</div>
+<div id="untarring-data" class="section level2">
+<h2>Untarring data</h2>
+<p>Let us use the <code>untar()</code> function to untar all downloaded sets.</p>
+>>>>>>> fb2f6139d89c65d380ae2fab37f3ec772ef3e642
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list.files</span>( <span class="st">&quot;data/&quot;</span>) %&gt;%<span class="st"> </span>
 <span class="st">   </span><span class="kw">paste0</span>( <span class="st">&quot;data/&quot;</span>, .) %&gt;%
 <span class="st">   </span><span class="kw">sapply</span>( untar, <span class="dt">exdir =</span> <span class="st">&quot;data/&quot;</span> )</code></pre>
@@ -291,6 +316,7 @@ date &lt;-<span class="st"> </span><span class="kw">tail</span>( <span class="kw
 <div id="combining-data-1" class="section level2">
 <h2><span class="header-section-number">4.4</span> Combining data</h2>
 <div id="available-genes-in-rna-seq-data" class="section level3">
+<<<<<<< HEAD
 <h3><span class="header-section-number">4.4.1</span> Available genes in RNA-Seq data</h3>
 <p>Let us check the available genes names for <strong>ALL</strong> cancers in <code>rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level</code> datasets</p>
 <p><strong>Note: This is not really necessary!</strong></p>
@@ -298,6 +324,18 @@ date &lt;-<span class="st"> </span><span class="kw">tail</span>( <span class="kw
 <span class="co">#   devtools::install_github('ramnathv/htmlwidgets')</span>
 <span class="co"># devtools::install_github('rstudio/DT')</span>
 <span class="co"># # then try DT::datatable(iris) as a hello world example</span>
+=======
+<h3>Available genes in RNA-Seq data</h3>
+<p>Let us check the available genes names for <strong>ALL</strong> cancers in <code>rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level</code> datasets</p>
+<pre class="sourceCode r"><code class="sourceCode r">genes &lt;-<span class="st"> </span><span class="kw">list.files</span>( <span class="st">&quot;data/&quot;</span>) %&gt;%
+<span class="st">   </span><span class="kw">grep</span>( <span class="dt">pattern =</span> <span class="st">&quot;rnaseqv2__illuminahiseq&quot;</span>, <span class="dt">x =</span> ., <span class="dt">value =</span> <span class="ot">TRUE</span> ) %&gt;%
+<span class="st">   </span><span class="kw">paste0</span>( <span class="st">&quot;data/&quot;</span>, . , <span class="st">&quot;/&quot;</span>) %&gt;%
+<span class="st">   </span><span class="kw">sapply</span>( function( element ){ 
+      <span class="kw">paste0</span>( element, <span class="kw">list.files</span>( element ) ) }) %&gt;%
+<span class="st">   </span><span class="kw">sapply</span>( availableGenesNames ) %&gt;%
+<span class="st">   </span>.[<span class="kw">which</span>( (<span class="kw">lapply</span>(., length) &gt;<span class="st"> </span><span class="dv">0</span>) ==<span class="st"> </span><span class="ot">TRUE</span> ) ] %&gt;%
+<span class="st">   </span><span class="kw">as.data.frame</span>( ) 
+>>>>>>> fb2f6139d89c65d380ae2fab37f3ec772ef3e642
 
 
 
@@ -312,8 +350,13 @@ date &lt;-<span class="st"> </span><span class="kw">tail</span>( <span class="kw
 <span class="co">#   sapply( availableGenesNames ) %&gt;%</span>
 <span class="co">#   .[which( (lapply(., length) &gt; 0) == TRUE ) ] %&gt;%</span></code></pre>
 </div>
+<<<<<<< HEAD
 <div id="merging-clinical-data-and-rna-seq-data-1" class="section level3">
 <h3><span class="header-section-number">4.4.2</span> Merging Clinical Data and RNA-Seq data</h3>
+=======
+<div id="merging-clinical-data-and-rna-seq-data" class="section level3">
+<h3>Merging Clinical Data and RNA-Seq data</h3>
+>>>>>>> fb2f6139d89c65d380ae2fab37f3ec772ef3e642
 <p>Now, let us add information about <strong>MDM2</strong> expression into the <code>.clinical.merged.txt</code> files, for each cancer type. Note that you can pass an abbreviation of the name of a gene as a parameter and then all matching genes will be added (example: for <strong>TP53</strong> 7 genes are added) at the end of <code>.clinical.merged.txt</code> file.</p>
 <div id="paths-to-clinical-data" class="section level4">
 <h4><span class="header-section-number">4.4.2.1</span> Paths to clinical data</h4>
