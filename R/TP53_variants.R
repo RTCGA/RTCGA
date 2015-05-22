@@ -27,10 +27,11 @@ calculate_cooccurence <- function(path = "gdac.broadinstitute.org_BRCA.Mutation_
                                   position = "amino_acid_change_WU",
                                   onlyMissense = TRUE,
                                   minCount = 5) {
-
+  
   allPatients <- lapply(list.files(path, pattern = ".maf"), function(p) {
       t <- read.table(paste0(path,"/",p), header=TRUE, fill=TRUE, sep="\t", quote="\"")
-      cbind(t[,c("Hugo_Symbol", "Variant_Classification",position)], 
+      colnames(t) <- tolower(colnames(t))
+      cbind(t[,c("hugo_symbol", "variant_classification",position)], 
             patientID = strsplit(p, split=".", fixed=T)[[1]][1])
   })
   allPatientsDF <- do.call(rbind, allPatients)
@@ -39,17 +40,18 @@ calculate_cooccurence <- function(path = "gdac.broadinstitute.org_BRCA.Mutation_
                                    pattern="[^0-9]+", replacement="")
   
   # patients with change in gene
-  ids <- unique(as.character(allPatientsDF[allPatientsDF$Hugo_Symbol == gene,"patientID"]))
+  ids <- unique(as.character(allPatientsDF[allPatientsDF$hugo_symbol == gene,"patientID"]))
   mutatedPatientsDF <- unique(allPatientsDF[allPatientsDF$patientID %in% ids,])
   
-  toChange <- mutatedPatientsDF[mutatedPatientsDF$Hugo_Symbol == gene, ]
+  toChange <- mutatedPatientsDF[mutatedPatientsDF$hugo_symbol == gene, ]
   for (i in 1:nrow(toChange)) {
       mutatedPatientsDF[mutatedPatientsDF$patientID == toChange[i,"patientID"],position] = toChange[i,position]
   }
   
-  tab <- table(factor(mutatedPatientsDF$Hugo_Symbol), factor(mutatedPatientsDF[,position]))
+  tab <- table(factor(mutatedPatientsDF$hugo_symbol), factor(mutatedPatientsDF[,position]))
   tab <- tab[,tab[gene,] >= minCount]
   tab <- tab[rowSums(tab) > 0,]
   tab <- tab[order(-rowSums(tab)),]
   tab
 }
+
