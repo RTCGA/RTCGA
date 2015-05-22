@@ -7,6 +7,12 @@
 #' 
 #' @return A cooccurence matrix.
 #' 
+#' @param path path to the folder with MAF files
+#' @param gene name of gene
+#' @param position name of collumn with position of mutation 
+#' @param onlyMissense should mutations be limited only to missense
+#' @param minCount only positions with counts greater or equal will be retured
+#' 
 #' @examples
 #' \dontrun{
 #' calculate_cooccurence()
@@ -19,7 +25,8 @@
 calculate_cooccurence <- function(path = "gdac.broadinstitute.org_BRCA.Mutation_Packager_Calls.Level_3.2015020400.0.0/", 
                                   gene = "TP53", 
                                   position = "amino_acid_change_WU",
-                                  onlyMissense = TRUE) {
+                                  onlyMissense = TRUE,
+                                  minCount = 5) {
 
   allPatients <- lapply(list.files(path, pattern = ".maf"), function(p) {
       t <- read.table(paste0(path,"/",p), header=TRUE, fill=TRUE, sep="\t", quote="\"")
@@ -33,11 +40,16 @@ calculate_cooccurence <- function(path = "gdac.broadinstitute.org_BRCA.Mutation_
   
   # patients with change in gene
   ids <- unique(as.character(allPatientsDF[allPatientsDF$Hugo_Symbol == gene,"patientID"]))
-  pos <- unique(as.character(allPatientsDF[allPatientsDF$Hugo_Symbol == gene,position]))
-  gen <- unique(as.character(allPatientsDF$Hugo_Symbol))
-  
   mutatedPatientsDF <- unique(allPatientsDF[allPatientsDF$patientID %in% ids,])
   
-  table(mutatedPatientsDF$Hugo_Symbol, mutatedPatientsDF[,position])
+  toChange <- mutatedPatientsDF[mutatedPatientsDF$Hugo_Symbol == gene, ]
+  for (i in 1:nrow(toChange)) {
+      mutatedPatientsDF[mutatedPatientsDF$patientID == toChange[i,"patientID"],position] = toChange[i,position]
+  }
+  
+  tab <- table(factor(mutatedPatientsDF$Hugo_Symbol), factor(mutatedPatientsDF[,position]))
+  tab <- tab[,tab[gene,] >= minCount]
+  tab <- tab[rowSums(tab) > 0,]
+  tab <- tab[order(-rowSums(tab)),]
+  tab
 }
-
