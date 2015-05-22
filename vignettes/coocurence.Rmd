@@ -36,9 +36,9 @@ calculate_cooccurence <- function(path = "gdac.broadinstitute.org_BRCA.Mutation_
   }
   
   tab <- table(factor(mutatedPatientsDF$hugo_symbol), factor(mutatedPatientsDF[,position]))
-  tab <- tab[,tab[gene,] >= minCount]
-  tab <- tab[rowSums(tab) > 0,]
-  tab <- tab[order(-rowSums(tab)),]
+  tab <- tab[,tab[gene,] >= minCount, drop = FALSE]
+  tab <- tab[rowSums(tab) > 0,,drop=FALSE]
+  tab <- tab[order(-rowSums(tab)),,drop=FALSE]
   tab
 }
 
@@ -51,10 +51,12 @@ for (di in dirs) {
                                       gene = "TP53", 
                                       position = "start_position",
                                       minCount = 0)
-        tab <- head(tab[order(-rowSums(tab)), order(-colSums(tab))], 20)
-        tab <- tab[,1:min(15, ncol(tab))]
-        cat(paste0("<h1>", di, "</h1>\n\n"))
-        cat(kable(tab, format = "html"))
+        if (min(dim(tab))>1) {
+            tab <- head(tab[order(-rowSums(tab)), order(-colSums(tab))], 20)
+            tab <- tab[,1:min(15, ncol(tab))]
+            cat(paste0("<h1>", di, "</h1>\n\n"))
+            cat(kable(tab, format = "html"))
+        }
     }
 }
 
