@@ -31,6 +31,7 @@ calculate_cooccurence <- function(path = "gdac.broadinstitute.org_BRCA.Mutation_
   mutatedPatientsDF <- unique(allPatientsDF[allPatientsDF$patientID %in% ids,])
   
   toChange <- mutatedPatientsDF[mutatedPatientsDF$hugo_symbol == gene, ]
+  if (nrow(toChange)==0) return(toChange)
   for (i in 1:nrow(toChange)) {
       mutatedPatientsDF[mutatedPatientsDF$patientID == toChange[i,"patientID"],position] = toChange[i,position]
   }
