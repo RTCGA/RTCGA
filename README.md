@@ -6,6 +6,10 @@ RTCGA package offers download and integration of the variety and volume of TCGA 
 
 # RTCGA
 
+>
+> Clinical and rna-seq data downloaded using RTCGA are available in [RTCGA.data](https://github.com/mi2-warsaw/RTCGA.data) package.
+>
+
 Project is (will be) supported by [Travis CI](https://travis-ci.org/) and [waffle.io](https://waffle.io/).
 
 <h5> Installation of the RTCGA package: </h5>
