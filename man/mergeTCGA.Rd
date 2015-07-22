@@ -11,25 +11,18 @@ mergeTCGA(clinicalDir, rnaseqDir = NULL, mutationDir = NULL, genes,
   \item{clinicalDir}{A directory to a
   \code{cancerType.clin.merged.txt} file. \code{cancerType}
   might be \code{BRCA, OV} etc. Can be checked using
-  \link{infoTCGA} function.}
-
-  \item{rnaseqDir}{A directory to a
+  \link{infoTCGA} function.} \item{rnaseqDir}{A directory to a
   \code{cancerType.rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.data.txt}
   file, which is a set with gene's Expressions.}
-
   \item{mutationDir}{A directory to a
   \code{Mutation_Packager_Calls.Level} folder where are
-  genes' Mutations files.}
-
-  \item{genes}{For \code{rnaseqDir} - which genes'
-  expressions to merge with clinical data in
-  \code{clinicalDir}. For \code{mutationDir} which gene's
-  mutations to merge with clinical data in
-  \code{clinicalDir}.}
-
-  \item{columnName}{A character specifing which column to
-  extract from \code{Mutations} data for a gene passes to
-  \code{genes} parameter. Works only when
+  genes' Mutations files.} \item{genes}{For \code{rnaseqDir}
+  - which genes' expressions to merge with clinical
+  data in \code{clinicalDir}. For \code{mutationDir}
+  which gene's mutations to merge with clinical data in
+  \code{clinicalDir}.} \item{columnName}{A character specifing
+  which column to extract from \code{Mutations} data for
+  a gene passes to \code{genes} parameter. Works only when
   \code{mutationDir} was used.}
 }
 \value{
@@ -42,20 +35,14 @@ newline containing informations about genes passed to
 }
 \note{
 Original \code{cancerType.clin.merged.txt} file will be
-changed after performing merge operation.
-
-Only one of \code{rnaseqDir} and \code{mutationDir} can be
-used at a time.
+changed after performing merge operation. Only one of
+\code{rnaseqDir} and \code{mutationDir} can be used at a
+time.
 }
 \seealso{
 Other RTCGA: \code{\link{RTCGA-package}};
-\code{\link{availableDataSets}};
-\code{\link{availableDates}};
-\code{\link{availableGenesNames}},
-\code{\link{checkGenesNamesAvailability}};
 \code{\link{calculate_cooccurence}};
-\code{\link{checkDataSetsAvailability}};
-\code{\link{downloadTCGA}}; \code{\link{infoTCGA}};
-\code{\link{read.clinical}}
+\code{\link{checkTCGA}}; \code{\link{downloadTCGA}};
+\code{\link{infoTCGA}}; \code{\link{read.clinical}}
 }
 

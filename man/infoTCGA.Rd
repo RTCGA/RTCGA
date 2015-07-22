@@ -7,22 +7,17 @@
 infoTCGA()
 }
 \value{
-A list with a tabular information from
-\href{http://gdac.broadinstitute.org/}{http://gdac.broadinstitute.org/}.
+A list with a tabular information from \href{http://
+gdac.broadinstitute.org/}{http://gdac.broadinstitute.org/}.
 }
 \description{
-Function restores codes and counts for each cohort from
-TCGA project.
+Function restores codes and counts for each cohort from TCGA
+project.
 }
 \seealso{
 Other RTCGA: \code{\link{RTCGA-package}};
-\code{\link{availableDataSets}};
-\code{\link{availableDates}};
-\code{\link{availableGenesNames}},
-\code{\link{checkGenesNamesAvailability}};
 \code{\link{calculate_cooccurence}};
-\code{\link{checkDataSetsAvailability}};
-\code{\link{downloadTCGA}}; \code{\link{mergeTCGA}};
-\code{\link{read.clinical}}
+\code{\link{checkTCGA}}; \code{\link{downloadTCGA}};
+\code{\link{mergeTCGA}}; \code{\link{read.clinical}}
 }
 

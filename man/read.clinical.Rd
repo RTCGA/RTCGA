@@ -19,13 +19,8 @@ TODO
 }
 \seealso{
 Other RTCGA: \code{\link{RTCGA-package}};
-\code{\link{availableDataSets}};
-\code{\link{availableDates}};
-\code{\link{availableGenesNames}},
-\code{\link{checkGenesNamesAvailability}};
 \code{\link{calculate_cooccurence}};
-\code{\link{checkDataSetsAvailability}};
-\code{\link{downloadTCGA}}; \code{\link{infoTCGA}};
-\code{\link{mergeTCGA}}
+\code{\link{checkTCGA}}; \code{\link{downloadTCGA}};
+\code{\link{infoTCGA}}; \code{\link{mergeTCGA}}
 }
 

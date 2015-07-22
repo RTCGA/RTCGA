@@ -10,18 +10,11 @@
   minCount = 5)
 }
 \arguments{
-  \item{path}{path to the folder with MAF files}
-
-  \item{gene}{name of gene}
-
-  \item{position}{name of collumn with position of
-  mutation}
-
-  \item{onlyMissense}{should mutations be limited only to
-  missense}
-
-  \item{minCount}{only positions with counts greater or
-  equal will be retured}
+  \item{path}{path to the folder with MAF files} \item{gene}
+  {name of gene} \item{position}{name of collumn with position
+  of mutation} \item{onlyMissense}{should mutations be limited
+  only to missense} \item{minCount}{only positions with counts
+  greater or equal will be retured}
 }
 \value{
 A cooccurence matrix.
@@ -29,11 +22,11 @@ A cooccurence matrix.
 \description{
 First you need to download MAF files from TCGA
 Mutation_Packager_Calls. The format is: mutations for one
-patient are stored in one MAF file. This functions read
-data from all MAF files, filter out only patients with
-mutations in gene 'gene'. For given gene calculates
-cooccurence of mutations in different genes and poistions
-of mutations in gene 'gene'.
+patient are stored in one MAF file. This functions read data
+from all MAF files, filter out only patients with mutations
+in gene 'gene'. For given gene calculates cooccurence of
+mutations in different genes and poistions of mutations in
+gene 'gene'.
 }
 \examples{
 \dontrun{
@@ -42,12 +35,8 @@ calculate_cooccurence()
 }
 \seealso{
 Other RTCGA: \code{\link{RTCGA-package}};
-\code{\link{availableDataSets}};
-\code{\link{availableDates}};
-\code{\link{availableGenesNames}},
-\code{\link{checkGenesNamesAvailability}};
-\code{\link{checkDataSetsAvailability}};
-\code{\link{downloadTCGA}}; \code{\link{infoTCGA}};
-\code{\link{mergeTCGA}}; \code{\link{read.clinical}}
+\code{\link{checkTCGA}}; \code{\link{downloadTCGA}};
+\code{\link{infoTCGA}}; \code{\link{mergeTCGA}};
+\code{\link{read.clinical}}
 }
 

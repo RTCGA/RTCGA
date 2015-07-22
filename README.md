@@ -7,10 +7,14 @@ RTCGA package offers download and integration of the variety and volume of TCGA 
 # RTCGA
 
 >
-> Clinical and rna-seq data downloaded with the usage of `RTCGA` are available in [`RTCGA.data`](https://github.com/mi2-warsaw/RTCGA.data) package.
+> The usage of `RTCGA` is shown on the [`RTCGA.data`](https://github.com/mi2-warsaw/RTCGA.data) package website.
+>
+> Also visit the [`RTCGA`](https://github.com/MarcinKosinski/RTCGA) package website. 
+>
+> For special tools for RTCGA.data family data management and processing visit [`RTCGA.tools`](https://github.com/mi2-warsaw/RTCGA.tools) package website.
 >
 
-Project is (will be) supported by [Travis CI](https://travis-ci.org/) and [waffle.io](https://waffle.io/).
+Project is (will be) supported by [Travis CI](https://travis-ci.org/).
 
 <h5> Installation of the RTCGA package: </h5>
 To get started, install the latest version of **RTCGA** from Bioconductor:
@@ -32,112 +36,5 @@ Make sure you have [rtools](http://cran.r-project.org/bin/windows/Rtools/) insta
 help(package="RTCGA")
 ```
 
-**To run examples below use those packages**
-```{Ruby}
-library(RTCGA)
-library(dplyr)
-```
-
-<h5> Information about available TCGA data:</h5>
-```{Ruby}
-infoTCGA()
-```
-
-<h5> Cohorts names:</h5>
-```{Ruby}
-(cohorts <- infoTCGA() %>% 
-   names() %>% 
-   sub("-counts", "", x=.))
-```
-
-Cohorts codes are explained here: [http://gdac.broadinstitute.org/](http://gdac.broadinstitute.org/).
-
-<h5> Dates of reales: </h5>
-```{Ruby}
-availableDates()
-```
-It is always save to use almost the last date, because sometimes data from the newest date are not available in 100%. So that's why I suggest using such date:
-```{Ruby}
-date <- tail( availableDates(), 2 )[1]
-```
-
-<h3> Clinical data</h3>
-Can be downloaded using default settings. By default the dataset is downloaded from the newest available date of TCGA releases.
-
-```{Ruby}
-#dir.create( "data" )
-downloadTCGA( cancerTypes = cohorts, destDir = "data/", date = date )
-```
-<h3> Mutations data</h3>
-Let us check if there are Mutations data available for all canser types.
-
-```{Ruby}
-checkDataSetsAvailability( cohorts, 
-                           pattern = "Mutation_Packager_Calls.Level", 
-                           date = date) %>%
-   unlist() %>% 
-   cat( sep="\n")
-```
-Let us download them.
-```{Ruby}
-sapply( cohorts, function(element){
-   tryCatch({
-      downloadTCGA( cancerTypes = element, 
-                    dataSet = "Mutation_Packager_Calls.Level",
-                    destDir = "data/", 
-                    date = date )},
-      error = function(cond){
-         cat("Error: Maybe there weren't mutations data for ", element, " cancer.\n")
-   })
-})
-```
-<h3> Genes expressions - RNA-Seq data </h3>
-Let us check if there are RNA-Seq data available for all canser types.
-```{Ruby}
-checkDataSetsAvailability( cohorts,
-                        "rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level",
-                        date = date ) %>%
-   unlist() %>%  
-   cat( sep="\n")
-```
-
-Let us download them.
-```{Ruby}
-sapply( cohorts, function(element){
-   tryCatch({
-      downloadTCGA( cancerTypes = element, 
-                    dataSet = "rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level",
-                    destDir = "data/", 
-                    date = date )},
-      error = function(cond){
-         cat("Error: Maybe there weren't rnaseq data for ", element, " cancer.\n")
-   })
-}) 
-```
-
-
-<h3> Untarring data </h3>
-
-Let’s use `untar()` function to untar all downloaded sets.
-```{Ruby}
-list.files( "data/") %>% 
-   paste0( "data/", .) %>%
-   sapply( untar, exdir = "data/" )
-```
-
-<h3> Removing no longer needed `tar.gz` files </h3>
-
-After datasets are untarred, the `tar.gz` files ar no longer needed and can be deleted.
-```{Ruby}
-list.files( "data/") %>% 
-   paste0( "data/", .) %>%
-   grep( pattern = "tar.gz", x = ., value = TRUE) %>%
-   sapply( file.remove )
-```
-
-
-<h4> The list of use-cases: </h4>
-
-TODO.
 
 

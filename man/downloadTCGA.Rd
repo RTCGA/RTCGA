@@ -10,27 +10,24 @@ downloadTCGA(cancerTypes, dataSet = "Merge_Clinical.Level_1", destDir,
 \arguments{
   \item{cancerTypes}{A character vector containing
   abbreviations (Cohort code) of types of cancers to
-  download from
-  \href{http://gdac.broadinstitute.org/}{http://gdac.broadinstitute.org/}.}
-
-  \item{dataSet}{A part of the name of dataSet to be
-  downloaded from
-  \href{http://gdac.broadinstitute.org/runs/}{http://gdac.broadinstitute.org/runs/}.
-  By default the Merged Clinical dataSet is downloaded
-  (value \code{dataSet = "Merge_Clinical.Level_1"}).
-  Available datasets' names can be checked using
-  \link{availableDataSets} function.}
-
-  \item{destDir}{A character specifying a directory into
-  which \code{dataSet}s will be downloaded.}
-
-  \item{date}{A \code{NULL} or character specifying from
-  which date \code{dataSet}s should be downloaded. By
-  default (\code{date = NULL}) the newest available date is
-  used. All available dates can be checked on
-  \href{http://gdac.broadinstitute.org/runs/}{http://gdac.broadinstitute.org/runs/}
-  or by using \link{availableDates} function. Required
-  format \code{"YYYY-MM-DD"}.}
+  download from \href{http://gdac.broadinstitute.org/}
+  {http://gdac.broadinstitute.org/}.} \item{dataSet}
+  {A part of the name of dataSet to be downloaded from
+  \href{http://gdac.broadinstitute.org/runs/}{http://
+  gdac.broadinstitute.org/runs/}. By default the Merged
+  Clinical dataSet is downloaded (value \code{dataSet
+  = "Merge_Clinical.Level_1"}). Available datasets'
+  names can be checked using \link{availableDataSets}
+  function.} \item{destDir}{A character specifying
+  a directory into which \code{dataSet}s will be
+  downloaded.} \item{date}{A \code{NULL} or character
+  specifying from which date \code{dataSet}s should be
+  downloaded. By default (\code{date = NULL}) the newest
+  available date is used. All available dates can be
+  checked on \href{http://gdac.broadinstitute.org/runs/}
+  {http://gdac.broadinstitute.org/runs/} or by using
+  \link{availableDates} function. Required format \code{"YYYY-
+  MM-DD"}.}
 }
 \description{
 Enables to download TCGA data from specified dates of
@@ -53,13 +50,8 @@ downloadTCGA( cancerTypes = c("BRCA", "OV"), destDir = "hre/" )
 }
 \seealso{
 Other RTCGA: \code{\link{RTCGA-package}};
-\code{\link{availableDataSets}};
-\code{\link{availableDates}};
-\code{\link{availableGenesNames}},
-\code{\link{checkGenesNamesAvailability}};
 \code{\link{calculate_cooccurence}};
-\code{\link{checkDataSetsAvailability}};
-\code{\link{infoTCGA}}; \code{\link{mergeTCGA}};
-\code{\link{read.clinical}}
+\code{\link{checkTCGA}}; \code{\link{infoTCGA}};
+\code{\link{mergeTCGA}}; \code{\link{read.clinical}}
 }
 
