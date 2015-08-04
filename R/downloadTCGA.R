@@ -4,19 +4,23 @@
 #'
 #' @description Enables to download TCGA data from specified dates of releases of concrete Cohorts of cancer types.
 #' Pass a name of required dataset to the \code{dataSet} parameter. By default the Merged Clinical
-#' dataSet is downloaded (value \code{dataSet = "Merge_Clinical.Level_1"}) from the newest available date of release.
+#' dataSet is downloaded (value \code{dataSet = "Merge_Clinical.Level_1"}) from the newest available date of the release.
 #' 
 #' @param cancerTypes A character vector containing abbreviations (Cohort code) of types of cancers to download from 
-#' \href{http://gdac.broadinstitute.org/}{http://gdac.broadinstitute.org/}.
-#' @param dataSet A part of the name of dataSet to be downloaded from 
-#' \href{http://gdac.broadinstitute.org/runs/}{http://gdac.broadinstitute.org/runs/}. By default the Merged Clinical
-#' dataSet is downloaded (value \code{dataSet = "Merge_Clinical.Level_1"}). Available datasets' names can be checked
-#' using \link{availableDataSets} function.
+#' \href{http://gdac.broadinstitute.org/}{http://gdac.broadinstitute.org/}. For easy access from R check details below.
+#' 
+#' @param dataSet A part of the name of dataSet to be downloaded from \href{http://gdac.broadinstitute.org/runs/}{http://gdac.broadinstitute.org/runs/}. By default the Merged Clinical dataSet is downloaded (value \code{dataSet = "Merge_Clinical.Level_1"}). Available datasets' names can be checked using \link{checkTCGA} function.
+#' 
 #' @param destDir A character specifying a directory into which \code{dataSet}s will be downloaded.
+#' 
 #' @param date A \code{NULL} or character specifying from which date \code{dataSet}s should be downloaded.
 #' By default (\code{date = NULL}) the newest available date is used. All available dates can be checked on 
-#' \href{http://gdac.broadinstitute.org/runs/}{http://gdac.broadinstitute.org/runs/} or by using \link{availableDates} 
+#' \href{http://gdac.broadinstitute.org/runs/}{http://gdac.broadinstitute.org/runs/} or by using \link{checkTCGA} 
 #' function. Required format \code{"YYYY-MM-DD"}.
+#' 
+#' 
+#' @details 
+#' All cohort names can be checked using: \code{ sub( names( infoTCGA() ), "-counts", "", x=.)}.
 #' 
 #' @examples
 #' 
@@ -28,6 +32,9 @@
 #' destDir = "hre/" )
 #'
 #' downloadTCGA( cancerTypes = c("BRCA", "OV"), destDir = "hre/" )
+#' 
+#' downloadTCGA( cancerTypes = c("BRCA", "OV"), destDir = "hre/",
+#'  date = tail( checkTCGA('Dates'), 2 )[1] )
 #' }
 #' 
 #' 

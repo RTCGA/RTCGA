@@ -7,37 +7,33 @@
 checkTCGA(what, cancerType, date = NULL)
 }
 \arguments{
-  \item{cancerType}{A character of length 1
-  containing abbreviation (Cohort code - \href{http://
-  gdac.broadinstitute.org/}{http://gdac.broadinstitute.org/})
-  of types of cancers to check for.} \item{date}{A \code{NULL}
-  or character specifying from which date informations
-  should be checked. By default (\code{date = NULL}) the
-  newest available date is used. All available dates can
-  be checked on \href{http://gdac.broadinstitute.org/
-  runs/}{http://gdac.broadinstitute.org/runs/} or by using
-  \link{checkTCGA("Dates")} function. Required format
-  \code{'YYYY-MM-DD'}.}
+\item{cancerType}{A character of length 1 containing abbreviation (Cohort code - \href{http://gdac.broadinstitute.org/}{http://gdac.broadinstitute.org/})
+of types of cancers to check for.}
+
+\item{date}{A \code{NULL} or character specifying from which date informations should be checked.
+By default (\code{date = NULL}) the newest available date is used. All available dates can be checked on
+\href{http://gdac.broadinstitute.org/runs/}{http://gdac.broadinstitute.org/runs/} or by using \link{checkTCGA("Dates")}
+function. Required format \code{'YYYY-MM-DD'}.}
 }
 \value{
-If \code{what='DataSets'} a vector of available datasets'
-names to pass to the \link{downloadTCGA} function. If
-\code{what='Dates'} a vector of available dates to pass to
-the \link{downloadTCGA} function. If \code{GenesNames}
+\itemize{
+     \item If \code{what='DataSets'} a vector of available datasets' names to pass to the \link{downloadTCGA} function.
+     \item If \code{what='Dates'} a vector of available dates to pass to the \link{downloadTCGA} function.
+     }
 }
 \description{
-The \code{checkTCGA} function let's to check #'
-\itemize{ \item \code{DataSets}: TCGA datasets' names for
-current release date and cohort. \item \code{Dates}: TCGA
-datasets' releases dates \item \code{GenesNames}: TCGA
-genes' names and availability in \code{Merge_rnaseqv2__...}
-dataset \item labelx \item labely }
+The \code{checkTCGA} function let's to check
+
+\itemize{
+     \item \code{DataSets}: TCGA datasets' names for current release date and cohort.
+     \item \code{Dates}: TCGA datasets' releases dates.
+ }
 }
 \details{
-If \code{what='DataSets'} enables to check TCGA
-datasets' names for current release date and cohort. If
-\code{what='Dates'} enables to check dates of TCGA datasets'
-releases. If \code{GenesNames}
+\itemize{
+     \item If \code{what='DataSets'} enables to check TCGA datasets' names for current release date and cohort.
+     \item If \code{what='Dates'} enables to check dates of TCGA datasets' releases.
+     }
 }
 \examples{
 \dontrun{
@@ -114,8 +110,7 @@ fread(rnaseqDir, select = c(1),
 }
 \seealso{
 Other RTCGA: \code{\link{RTCGA-package}};
-\code{\link{calculate_cooccurence}};
-\code{\link{downloadTCGA}}; \code{\link{infoTCGA}};
-\code{\link{mergeTCGA}}; \code{\link{read.clinical}}
+  \code{\link{downloadTCGA}}; \code{\link{infoTCGA}};
+  \code{\link{readTCGA}}
 }
 

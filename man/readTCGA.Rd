@@ -7,10 +7,9 @@
 readTCGA(path, dataType, ...)
 }
 \arguments{
-\item{path}{If \code{dataType = "clinical"} a directory to a \code{cancerType.clin.merged.txt} file.
-\code{cancerType} might be \code{BRCA, OV} etc.}
+\item{path}{If \code{dataType = "clinical"} a directory to a \code{cancerType.clin.merged.txt} file.}
 
-\item{dataType}{TODO}
+\item{dataType}{One of \code{"clinical", "rnaseq", "mutations"}}
 
 \item{...}{Further arguments passed to the \link{as.data.frame}.}
 }
@@ -18,17 +17,25 @@ readTCGA(path, dataType, ...)
 An output:
 \itemize{
      \item If \code{dataType = "clinical"} a \code{data.frame} with clinical data.
+     \item If \code{dataType = "rnaseq"} a \code{data.frame} with rnaseq data.
+     \item If \code{dataType = "mutations"} a \code{data.frame} with mutations data.
 }
 }
 \description{
-TODO
+TODO \code{cancerType} might be \code{BRCA, OV} etc.
+}
+\details{
+All cohort names can be checked using: \code{ sub( names( infoTCGA() ), "-counts", "", x=.)}.
 }
 \examples{
 \dontrun{
 
+
 ##############
 ##### clinical
 ##############
+
+dir.create("hre/")
 
 # downloading clinical data
 downloadTCGA( cancerTypes = c("BRCA", "OV"), destDir = "hre/" )
@@ -52,6 +59,71 @@ path <- paste0( "hre/", folder, "/", element, ".clin.merged.txt")
 assign( value = readTCGA( path, "clinical" ),
          x = paste0(element, ".clin.data"), envir = .GlobalEnv)
          })
+
+##############
+##### rnaseq
+##############
+
+dir.create("data2/")
+
+# downloading rnaseq data
+downloadTCGA( cancerTypes = 'BRCA',
+dataSet = "rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level",
+destDir = "data2/" )
+
+# untarring files
+list.files( "data2/") \%>\%
+    paste0( "data2/", .) \%>\%
+    sapply( untar, exdir = "data2/" )
+
+# removing *.tar.gz files
+list.files( "data2/") \%>\%
+    paste0( "data2/", .) \%>\%
+    grep( pattern = "tar.gz", x = ., value = TRUE) \%>\%
+    sapply( file.remove )
+# shortening paths and directories
+list.files( "data2/") \%>\%
+    paste0( "data2/", .) \%>\%
+    file.rename( to = substr(.,start=1,stop=50))
+
+# reading data
+list.files( "data2/") \%>\%
+    paste0( "data2/", .) -> folder
+
+folder \%>\%
+    list.files \%>\%
+    paste0( folder, "/", .) \%>\%
+    grep( pattern = "illuminahiseq", x = ., value = TRUE) -> pathRNA
+readTCGA( path = pathRNA, dataType = "rnaseq" ) -> my_data
+
+
+##############
+##### mutations
+##############
+
+dir.create("data3/")
+
+
+downloadTCGA( cancerTypes = 'OV',
+              dataSet = "Mutation_Packager_Calls.Level",
+              destDir = "data3/" )
+# untarring files
+list.files( "data3/") \%>\%
+    paste0( "data3/", .) \%>\%
+    sapply( untar, exdir = "data3/" )
+
+# removing *.tar.gz files
+list.files( "data3/") \%>\%
+    paste0( "data3/", .) \%>\%
+    grep( pattern = "tar.gz", x = ., value = TRUE) \%>\%
+    sapply( file.remove )
+
+# reading data
+list.files( "data3/") \%>\%
+    paste0( "data3/", .) -> folder
+
+readTCGA(folder, "mutations") -> mut_file
+
 }
 }
 \seealso{

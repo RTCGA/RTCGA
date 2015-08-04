@@ -8,34 +8,25 @@ downloadTCGA(cancerTypes, dataSet = "Merge_Clinical.Level_1", destDir,
   date = NULL)
 }
 \arguments{
-  \item{cancerTypes}{A character vector containing
-  abbreviations (Cohort code) of types of cancers to
-  download from \href{http://gdac.broadinstitute.org/}
-  {http://gdac.broadinstitute.org/}.} \item{dataSet}
-  {A part of the name of dataSet to be downloaded from
-  \href{http://gdac.broadinstitute.org/runs/}{http://
-  gdac.broadinstitute.org/runs/}. By default the Merged
-  Clinical dataSet is downloaded (value \code{dataSet
-  = "Merge_Clinical.Level_1"}). Available datasets'
-  names can be checked using \link{availableDataSets}
-  function.} \item{destDir}{A character specifying
-  a directory into which \code{dataSet}s will be
-  downloaded.} \item{date}{A \code{NULL} or character
-  specifying from which date \code{dataSet}s should be
-  downloaded. By default (\code{date = NULL}) the newest
-  available date is used. All available dates can be
-  checked on \href{http://gdac.broadinstitute.org/runs/}
-  {http://gdac.broadinstitute.org/runs/} or by using
-  \link{availableDates} function. Required format \code{"YYYY-
-  MM-DD"}.}
+\item{cancerTypes}{A character vector containing abbreviations (Cohort code) of types of cancers to download from
+\href{http://gdac.broadinstitute.org/}{http://gdac.broadinstitute.org/}. For easy access from R check details below.}
+
+\item{dataSet}{A part of the name of dataSet to be downloaded from \href{http://gdac.broadinstitute.org/runs/}{http://gdac.broadinstitute.org/runs/}. By default the Merged Clinical dataSet is downloaded (value \code{dataSet = "Merge_Clinical.Level_1"}). Available datasets' names can be checked using \link{checkTCGA} function.}
+
+\item{destDir}{A character specifying a directory into which \code{dataSet}s will be downloaded.}
+
+\item{date}{A \code{NULL} or character specifying from which date \code{dataSet}s should be downloaded.
+By default (\code{date = NULL}) the newest available date is used. All available dates can be checked on
+\href{http://gdac.broadinstitute.org/runs/}{http://gdac.broadinstitute.org/runs/} or by using \link{checkTCGA}
+function. Required format \code{"YYYY-MM-DD"}.}
 }
 \description{
-Enables to download TCGA data from specified dates of
-releases of concrete Cohorts of cancer types. Pass a name
-of required dataset to the \code{dataSet} parameter. By
-default the Merged Clinical dataSet is downloaded (value
-\code{dataSet = "Merge_Clinical.Level_1"}) from the newest
-available date of release.
+Enables to download TCGA data from specified dates of releases of concrete Cohorts of cancer types.
+Pass a name of required dataset to the \code{dataSet} parameter. By default the Merged Clinical
+dataSet is downloaded (value \code{dataSet = "Merge_Clinical.Level_1"}) from the newest available date of the release.
+}
+\details{
+All cohort names can be checked using: \code{ sub( names( infoTCGA() ), "-counts", "", x=.)}.
 }
 \examples{
 \dontrun{
@@ -46,12 +37,14 @@ downloadTCGA( cancerTypes = "BRCA", dataSet = "miR_gene_expression",
 destDir = "hre/" )
 
 downloadTCGA( cancerTypes = c("BRCA", "OV"), destDir = "hre/" )
+
+downloadTCGA( cancerTypes = c("BRCA", "OV"), destDir = "hre/",
+ date = tail( checkTCGA('Dates'), 2 )[1] )
 }
 }
 \seealso{
 Other RTCGA: \code{\link{RTCGA-package}};
-\code{\link{calculate_cooccurence}};
-\code{\link{checkTCGA}}; \code{\link{infoTCGA}};
-\code{\link{mergeTCGA}}; \code{\link{read.clinical}}
+  \code{\link{checkTCGA}}; \code{\link{infoTCGA}};
+  \code{\link{readTCGA}}
 }
 

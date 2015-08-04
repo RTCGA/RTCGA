@@ -2,24 +2,23 @@
 #' @title Information about datasets from TCGA project
 #'
 #' @description The \code{checkTCGA} function let's to check
-#' #' 
+#'  
 #' \itemize{
 #'      \item \code{DataSets}: TCGA datasets' names for current release date and cohort.
-#'      \item \code{Dates}: TCGA datasets' releases dates
-#'      \item \code{GenesNames}: TCGA genes' names and availability in \code{Merge_rnaseqv2__...} dataset
-#'      \item labelx
-#'      \item labely
+#'      \item \code{Dates}: TCGA datasets' releases dates.
 #'  }
 #'   
 #' 
 #' @details 
-#' If \code{what='DataSets'} enables to check TCGA datasets' names for current release date and cohort.
-#' If \code{what='Dates'} enables to check dates of TCGA datasets' releases.
-#' If \code{GenesNames}  
+#' \itemize{
+#'      \item If \code{what='DataSets'} enables to check TCGA datasets' names for current release date and cohort.
+#'      \item If \code{what='Dates'} enables to check dates of TCGA datasets' releases.
+#'      }
 #' @return 
-#' If \code{what='DataSets'} a vector of available datasets' names to pass to the \link{downloadTCGA} function.
-#' If \code{what='Dates'} a vector of available dates to pass to the \link{downloadTCGA} function.
-#' If \code{GenesNames}  
+#' \itemize{
+#'      \item If \code{what='DataSets'} a vector of available datasets' names to pass to the \link{downloadTCGA} function.
+#'      \item If \code{what='Dates'} a vector of available dates to pass to the \link{downloadTCGA} function.
+#'      }
 #' @param cancerType A character of length 1 containing abbreviation (Cohort code - \href{http://gdac.broadinstitute.org/}{http://gdac.broadinstitute.org/})
 #'  of types of cancers to check for.
 #' @param date A \code{NULL} or character specifying from which date informations should be checked.
