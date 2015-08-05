@@ -58,7 +58,7 @@ cancerTypes <- c('OV', 'BRCA')
 
 cancerTypes \%>\% sapply(function(element){
   grep(x = checkTCGA('DataSets', element, date),
-      pattern = pattern, value = TRUE) \%>\%
+      pattern = "humanmethylation450", value = TRUE) \%>\%
        as.vector()
        })
 
