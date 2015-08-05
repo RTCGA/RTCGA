@@ -5,7 +5,7 @@
 #'  
 #' \itemize{
 #'      \item \code{DataSets}: TCGA datasets' names for current release date and cohort.
-#'      \item \code{Dates}: TCGA datasets' releases dates.
+#'      \item \code{Dates}: TCGA datasets' dates of release.
 #'  }
 #'   
 #' 
@@ -19,6 +19,7 @@
 #'      \item If \code{what='DataSets'} a vector of available datasets' names to pass to the \link{downloadTCGA} function.
 #'      \item If \code{what='Dates'} a vector of available dates to pass to the \link{downloadTCGA} function.
 #'      }
+#' @param what One of \code{DataSets} or \code{Dates}.     
 #' @param cancerType A character of length 1 containing abbreviation (Cohort code - \href{http://gdac.broadinstitute.org/}{http://gdac.broadinstitute.org/})
 #'  of types of cancers to check for.
 #' @param date A \code{NULL} or character specifying from which date informations should be checked.
@@ -108,10 +109,12 @@ checkTCGA <- function( what, cancerType, date = NULL ){
     assert_that(is.null(date) || (is.character(cancerType) & (length(cancerType) == 1)))
     assert_that(is.null(date) || (is.character(date) & (length(date) == 1)))
     
-    if( what == "DataSets" )
-        availableDataSets(cancerType, date = date)
-    if( what == "Dates" )
-        availableDates()
+    if( what == "DataSets" ){
+        return(availableDataSets(cancerType, date = date))
+    }
+    if( what == "Dates" ){
+        return(availableDates())
+    }
 }
 
 

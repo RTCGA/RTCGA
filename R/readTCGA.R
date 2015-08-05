@@ -1,11 +1,20 @@
 ## RTCGA package for R
 #' @title Read TCGA data to the tidy format
 #'
-#' @description TODO \code{cancerType} might be \code{BRCA, OV} etc.
+#' @description \code{readTCGA} function allows to read unzipped files: 
+#' \itemize{
+#'      \item clinical data - \code{Merge_Clinical.Level_1} 
+#'      \item rnaseq data (genes' expressions) - \code{Mutation_Packager_Calls.Level}
+#'      \item genes' mutations data - \code{rnaseqv2__illuminahiseq_rnaseqv2}
+#'      }
+#' from TCGA project. Those files can be easily downloded with \link{downloadTCGA} function. See examples.
 #' 
 #' @param path If \code{dataType = "clinical"} a directory to a \code{cancerType.clin.merged.txt} file. 
+#' If \code{dataType = "mutations"} a directory to the unzziped folder \code{Mutation_Packager_Calls.Level} containing \code{.maf} files.
+#' If \code{dataType = "rnaseq"} a directory to the uzziped file \code{rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level}.
+#' See examples.
 #' 
-#' @param dataType One of \code{"clinical", "rnaseq", "mutations"}
+#' @param dataType One of \code{"clinical", "rnaseq", "mutations"} depending on which type of data users is trying to read in the tidy format.
 #' @param ... Further arguments passed to the \link{as.data.frame}.
 #' 
 #' @return 
@@ -17,7 +26,7 @@
 #' }
 #' 
 #' @details 
-#' All cohort names can be checked using: \code{ sub( names( infoTCGA() ), "-counts", "", x=.)}.
+#' All cohort names can be checked using: \code{ sub( x = names( infoTCGA() ), "-counts", "")}.
 #' 
 #' @examples 
 #' 
@@ -125,7 +134,7 @@
 readTCGA <- function( path, dataType, ... ){
     assertthat::assert_that(is.character(path) & length(path) == 1)
     assertthat::assert_that(is.character(dataType) & length(dataType) == 1)
-    assertthat::assert_that(path %in% c("clinical", "rnaseq", "mutations"))
+    assertthat::assert_that(dataType %in% c("clinical", "rnaseq", "mutations"))
     
     if( dataType == "clinical" ){
         return(read.clinical(path, ...))

@@ -1,6 +1,10 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 data/
-vignettes/
+ghPage/
 index*
 maraton*
+.gitignore
+.RData
+.Rhistory
+README.md

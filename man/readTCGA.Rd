@@ -7,9 +7,12 @@
 readTCGA(path, dataType, ...)
 }
 \arguments{
-\item{path}{If \code{dataType = "clinical"} a directory to a \code{cancerType.clin.merged.txt} file.}
+\item{path}{If \code{dataType = "clinical"} a directory to a \code{cancerType.clin.merged.txt} file.
+If \code{dataType = "mutations"} a directory to the unzziped folder \code{Mutation_Packager_Calls.Level} containing \code{.maf} files.
+If \code{dataType = "rnaseq"} a directory to the uzziped file \code{rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level}.
+See examples.}
 
-\item{dataType}{One of \code{"clinical", "rnaseq", "mutations"}}
+\item{dataType}{One of \code{"clinical", "rnaseq", "mutations"} depending on which type of data users is trying to read in the tidy format.}
 
 \item{...}{Further arguments passed to the \link{as.data.frame}.}
 }
@@ -22,10 +25,16 @@ An output:
 }
 }
 \description{
-TODO \code{cancerType} might be \code{BRCA, OV} etc.
+\code{readTCGA} function allows to read unzipped files:
+\itemize{
+     \item clinical data - \code{Merge_Clinical.Level_1}
+     \item rnaseq data (genes' expressions) - \code{Mutation_Packager_Calls.Level}
+     \item genes' mutations data - \code{rnaseqv2__illuminahiseq_rnaseqv2}
+     }
+from TCGA project. Those files can be easily downloded with \link{downloadTCGA} function. See examples.
 }
 \details{
-All cohort names can be checked using: \code{ sub( names( infoTCGA() ), "-counts", "", x=.)}.
+All cohort names can be checked using: \code{ sub( x = names( infoTCGA() ), "-counts", "")}.
 }
 \examples{
 \dontrun{

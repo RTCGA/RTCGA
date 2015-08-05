@@ -26,7 +26,7 @@ Pass a name of required dataset to the \code{dataSet} parameter. By default the 
 dataSet is downloaded (value \code{dataSet = "Merge_Clinical.Level_1"}) from the newest available date of the release.
 }
 \details{
-All cohort names can be checked using: \code{ sub( names( infoTCGA() ), "-counts", "", x=.)}.
+All cohort names can be checked using: \code{ sub( x = names( infoTCGA() ), "-counts", "" )}.
 }
 \examples{
 \dontrun{

@@ -17,7 +17,8 @@ RTCGA package offers download and integration of the variety and volume of TCGA 
 <h5> Installation of the RTCGA package: </h5>
 To get started, install the latest version of **RTCGA** from Bioconductor:
 ```{Ruby}
-# not there yet
+source("http://bioconductor.org/biocLite.R")
+biocLite("RTCGA")
 ```
 or use:
 ```{Ruby}
@@ -27,7 +28,7 @@ if (!require(devtools)) {
 }
 install_github("MarcinKosinski/RTCGA")
 ```
-Make sure you have [rtools](http://cran.r-project.org/bin/windows/Rtools/) installed on your computer.
+Make sure you have [rtools](http://cran.r-project.org/bin/windows/Rtools/) installed on your computer, if you are trying devtools on Windows.
 
 <h5> The list of available functions: </h5>
 ```{Ruby}

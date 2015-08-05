@@ -20,7 +20,7 @@
 #' 
 #' 
 #' @details 
-#' All cohort names can be checked using: \code{ sub( names( infoTCGA() ), "-counts", "", x=.)}.
+#' All cohort names can be checked using: \code{ sub( x = names( infoTCGA() ), "-counts", "" )}.
 #' 
 #' @examples
 #' 

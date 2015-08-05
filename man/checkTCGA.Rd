@@ -7,6 +7,8 @@
 checkTCGA(what, cancerType, date = NULL)
 }
 \arguments{
+\item{what}{One of \code{DataSets} or \code{Dates}.}
+
 \item{cancerType}{A character of length 1 containing abbreviation (Cohort code - \href{http://gdac.broadinstitute.org/}{http://gdac.broadinstitute.org/})
 of types of cancers to check for.}
 
@@ -26,7 +28,7 @@ The \code{checkTCGA} function let's to check
 
 \itemize{
      \item \code{DataSets}: TCGA datasets' names for current release date and cohort.
-     \item \code{Dates}: TCGA datasets' releases dates.
+     \item \code{Dates}: TCGA datasets' dates of release.
  }
 }
 \details{
