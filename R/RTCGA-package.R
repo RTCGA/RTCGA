@@ -12,6 +12,13 @@
 #' Marcin Kosinski [aut, cre] \email{ m.p.kosinski@@gmail.com } \cr
 #' Przemyslaw Biecek [aut] \email{ przemyslaw.biecek@@gmail.com }
 #' 
+#' @import data.table
+#' @import rvest
+#' 
+#' @importFrom stringi stri_extract_all_regex
+#' @importFrom assertthat assert_that
+#' @importFrom XML readHTMLTable
+#' 
 #' @family RTCGA
 #' @name RTCGA-package
 #' @docType package

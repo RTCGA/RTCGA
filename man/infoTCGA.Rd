@@ -12,6 +12,9 @@ A list with a tabular information from \href{http://gdac.broadinstitute.org/}{ht
 \description{
 Function restores codes and counts for each cohort from TCGA project.
 }
+\examples{
+infoTCGA()
+}
 \seealso{
 Other RTCGA: \code{\link{RTCGA-package}};
   \code{\link{checkTCGA}}; \code{\link{downloadTCGA}};

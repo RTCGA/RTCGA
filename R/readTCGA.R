@@ -30,7 +30,6 @@
 #' 
 #' @examples 
 #' 
-#' \dontrun{
 #' 
 #' 
 #' ##############
@@ -61,7 +60,7 @@
 #' assign( value = readTCGA( path, "clinical" ), 
 #'          x = paste0(element, ".clin.data"), envir = .GlobalEnv)
 #'          })
-#'          
+#' \dontrun{        
 #' ##############
 #' ##### rnaseq
 #' ##############
@@ -147,6 +146,7 @@ readTCGA <- function( path, dataType, ... ){
     }
     
 }
+
 read.clinical <- function(clinicalDir, ...) {
     
     comboClinical <- read.delim(clinicalDir)
@@ -156,7 +156,7 @@ read.clinical <- function(clinicalDir, ...) {
     comboClinical <- as.data.frame(t(comboClinical[, -1]), ...)
     names(comboClinical) <- colNames
     
-    comboClinical <- as.data.table(comboClinical)
+    comboClinical <- data.table::as.data.table(comboClinical)
     comboClinical <- comboClinical[, unique(names(comboClinical)), with = FALSE]
     comboClinical <- as.data.frame(comboClinical, ...)
     
@@ -216,6 +216,3 @@ read.mutations <- function(mutationsDir, ...){
     file.remove(tmp)
     return(mutations_file)
 }
-
-
-# comboClinical <- read.delim('D:/BioBigStat/TCGA/clinicalCombo.txt') 

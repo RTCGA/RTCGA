@@ -5,6 +5,10 @@
 #'  
 #' @return A list with a tabular information from \href{http://gdac.broadinstitute.org/}{http://gdac.broadinstitute.org/}.
 #' 
+#' @examples 
+#' 
+#' infoTCGA()
+#' 
 #' @family RTCGA
 #' @rdname infoTCGA
 #' @export

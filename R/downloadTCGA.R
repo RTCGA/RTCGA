@@ -22,17 +22,17 @@
 #' @details 
 #' All cohort names can be checked using: \code{ sub( x = names( infoTCGA() ), "-counts", "" )}.
 #' 
+#' @return No values. It only downloads files.
+#' 
 #' @examples
 #' 
-#' \dontrun{
 #' 
 #' dir.create( "hre")
 #' 
 #' downloadTCGA( cancerTypes = "BRCA", dataSet = "miR_gene_expression", 
 #' destDir = "hre/" )
 #'
-#' downloadTCGA( cancerTypes = c("BRCA", "OV"), destDir = "hre/" )
-#' 
+#' \dontrun{
 #' downloadTCGA( cancerTypes = c("BRCA", "OV"), destDir = "hre/",
 #'  date = tail( checkTCGA('Dates'), 2 )[1] )
 #' }
@@ -104,8 +104,8 @@ checkDirectory <- function(directory){
 
 parentURL <- function( lastReleaseDate, element ){
     paste0("http://gdac.broadinstitute.org/runs/", lastReleaseDate,
-           "/data/", element, "/", paste0(unlist(stri_extract_all(str = lastReleaseDate, # "stddata__2015_02_04"
-                                                                  regex = "[0-9]+")), collapse = ""))
+           "/data/", element, "/", paste0(unlist(stri_extract_all_regex(str = lastReleaseDate, # "stddata__2015_02_04"
+                                                                  pattern = "[0-9]+")), collapse = ""))
 }
 
 whichDateToUse <- function( date ){

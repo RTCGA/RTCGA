@@ -20,6 +20,9 @@ By default (\code{date = NULL}) the newest available date is used. All available
 \href{http://gdac.broadinstitute.org/runs/}{http://gdac.broadinstitute.org/runs/} or by using \link{checkTCGA}
 function. Required format \code{"YYYY-MM-DD"}.}
 }
+\value{
+No values. It only downloads files.
+}
 \description{
 Enables to download TCGA data from specified dates of releases of concrete Cohorts of cancer types.
 Pass a name of required dataset to the \code{dataSet} parameter. By default the Merged Clinical
@@ -29,15 +32,12 @@ dataSet is downloaded (value \code{dataSet = "Merge_Clinical.Level_1"}) from the
 All cohort names can be checked using: \code{ sub( x = names( infoTCGA() ), "-counts", "" )}.
 }
 \examples{
-\dontrun{
-
 dir.create( "hre")
 
 downloadTCGA( cancerTypes = "BRCA", dataSet = "miR_gene_expression",
 destDir = "hre/" )
 
-downloadTCGA( cancerTypes = c("BRCA", "OV"), destDir = "hre/" )
-
+\dontrun{
 downloadTCGA( cancerTypes = c("BRCA", "OV"), destDir = "hre/",
  date = tail( checkTCGA('Dates'), 2 )[1] )
 }

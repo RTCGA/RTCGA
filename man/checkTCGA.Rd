@@ -14,7 +14,7 @@ of types of cancers to check for.}
 
 \item{date}{A \code{NULL} or character specifying from which date informations should be checked.
 By default (\code{date = NULL}) the newest available date is used. All available dates can be checked on
-\href{http://gdac.broadinstitute.org/runs/}{http://gdac.broadinstitute.org/runs/} or by using \link{checkTCGA("Dates")}
+\href{http://gdac.broadinstitute.org/runs/}{http://gdac.broadinstitute.org/runs/} or by using \code{checkTCGA("Dates")}
 function. Required format \code{'YYYY-MM-DD'}.}
 }
 \value{
@@ -38,8 +38,6 @@ The \code{checkTCGA} function let's to check
      }
 }
 \examples{
-\dontrun{
-
 #############################
 
 # names for current release date and cohort
@@ -60,12 +58,12 @@ cancerTypes <- c('OV', 'BRCA')
 
 cancerTypes \%>\% sapply(function(element){
   grep(x = checkTCGA('DataSets', element, date),
-      pattern = pattern, value = TRUE)) \%>\%
+      pattern = pattern, value = TRUE) \%>\%
        as.vector()
        })
 
 #############################
-
+\dontrun{
 # TCGA genes' names and availability
 # in Merge_rnaseqv2__... dataset
 dir.create('data2')

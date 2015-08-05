@@ -37,9 +37,6 @@ from TCGA project. Those files can be easily downloded with \link{downloadTCGA} 
 All cohort names can be checked using: \code{ sub( x = names( infoTCGA() ), "-counts", "")}.
 }
 \examples{
-\dontrun{
-
-
 ##############
 ##### clinical
 ##############
@@ -68,7 +65,7 @@ path <- paste0( "hre/", folder, "/", element, ".clin.merged.txt")
 assign( value = readTCGA( path, "clinical" ),
          x = paste0(element, ".clin.data"), envir = .GlobalEnv)
          })
-
+\dontrun{
 ##############
 ##### rnaseq
 ##############

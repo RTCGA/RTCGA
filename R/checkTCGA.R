@@ -24,12 +24,12 @@
 #'  of types of cancers to check for.
 #' @param date A \code{NULL} or character specifying from which date informations should be checked.
 #' By default (\code{date = NULL}) the newest available date is used. All available dates can be checked on 
-#' \href{http://gdac.broadinstitute.org/runs/}{http://gdac.broadinstitute.org/runs/} or by using \link{checkTCGA("Dates")} 
+#' \href{http://gdac.broadinstitute.org/runs/}{http://gdac.broadinstitute.org/runs/} or by using \code{checkTCGA("Dates")} 
 #' function. Required format \code{'YYYY-MM-DD'}.
 #' 
 #' 
 #' @examples
-#' \dontrun{
+#' 
 #' 
 #' ############################# 
 #' 
@@ -51,12 +51,12 @@
 #' 
 #' cancerTypes %>% sapply(function(element){
 #'   grep(x = checkTCGA('DataSets', element, date), 
-#'       pattern = pattern, value = TRUE)) %>%
+#'       pattern = pattern, value = TRUE) %>%
 #'        as.vector()
 #'        })
 #'        
 #' #############################      
-#' 
+#' \dontrun{
 #' # TCGA genes' names and availability 
 #' # in Merge_rnaseqv2__... dataset 
 #' dir.create('data2')
@@ -102,6 +102,7 @@
 #' }
 #' 
 #' @family RTCGA
+#' @aliases checkTCGA
 #' @rdname checkTCGA
 #' @export
 checkTCGA <- function( what, cancerType, date = NULL ){
@@ -117,11 +118,11 @@ checkTCGA <- function( what, cancerType, date = NULL ){
     }
 }
 
-
+# Misc function
 availableDataSets <- function(cancerType, date = NULL) {
     
-    assert_that(is.character(cancerType) & (length(cancerType) == 1))
-    assert_that(is.null(date) || (is.character(date) & (length(date) == 1)))
+    assertthat::assert_that(is.character(cancerType) & (length(cancerType) == 1))
+    assertthat::assert_that(is.null(date) || (is.character(date) & (length(date) == 1)))
     
     # ensure which date was specified
     lastReleaseDate <- whichDateToUse(date = date)  #downloadTCGA.r
@@ -153,7 +154,7 @@ availableDataSets <- function(cancerType, date = NULL) {
 }
 
 
-
+# Misc function
 availableDates <- function() {
     
     if (!exists(x = ".availableDates2", envir = .RTCGAEnv)) {
