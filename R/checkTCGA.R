@@ -36,7 +36,7 @@
 #' # names for current release date and cohort
 #' checkTCGA('DataSets', 'BRCA' )
 #' checkTCGA('DataSets', 'OV', tail(checkTCGA('Dates'))[1] )
-#' checkTCGA('DataSets', 'OV', checkTCGA('Dates')[5] ) # error
+#' #checkTCGA('DataSets', 'OV', checkTCGA('Dates')[5] ) # error
 #' 
 #' # dates of TCGA datasets' releases.
 #' checkTCGA('Dates')
