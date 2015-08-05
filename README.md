@@ -11,7 +11,7 @@ RTCGA package offers download and integration of the variety and volume of TCGA 
 >
 > Also visit the [`RTCGA`](https://github.com/MarcinKosinski/RTCGA) package website. 
 >
-> For special tools for RTCGA.data family data management and processing visit [`RTCGA.tools`](https://github.com/mi2-warsaw/RTCGA.tools) package website.
+> Tools for RTCGA.data family management and processing - visit [`RTCGA.tools`](https://github.com/mi2-warsaw/RTCGA.tools) package website.
 >
 
 <h5> Installation of the RTCGA package: </h5>
