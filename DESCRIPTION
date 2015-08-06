@@ -1,6 +1,6 @@
 Package: RTCGA
 Title: The Caner Genome Atlas Data Integration
-Version: 0.99.3
+Version: 0.99.5
 Date: 2015-08-05
 Author: Marcin Kosinski <m.p.kosinski@gmail.com>, Przemyslaw Biecek <przemyslaw.biecek@gmail.com>
 Maintainer: Marcin Kosinski <m.p.kosinski@gmail.com>
@@ -9,7 +9,8 @@ BugReports: https://github.com/MarcinKosinski/RTCGA/issues
 License: GPL-2
 LazyLoad: yes
 LazyData: yes
-Depends:R (>= 3.2.0), rvest, data.table
+Depends:R (>= 3.2.0), rvest, data.table, knitr
 Imports: XML, assertthat, stringi
 Repository: Bioconductor
 biocViews: Software
+VignetteBuilder: knitr
