@@ -9,9 +9,13 @@
 #' 
 #' infoTCGA()
 #' 
+#' (cohorts <- infoTCGA() %>% 
+#' rownames() %>% 
+#'    sub("-counts", "", x=.))
+#' 
 #' @family RTCGA
 #' @rdname infoTCGA
 #' @export
 infoTCGA <- function() {
-    readHTMLTable("http://gdac.broadinstitute.org/")[-39]
+    do.call(rbind, readHTMLTable("http://gdac.broadinstitute.org/")[-39])
 } 

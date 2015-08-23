@@ -2,6 +2,7 @@
 % Please edit documentation in R/RTCGA-package.R
 \docType{package}
 \name{RTCGA-package}
+\alias{RTCGA}
 \alias{RTCGA-package}
 \title{The Caner Genome Atlas data integration}
 \description{
@@ -11,13 +12,18 @@ The Cancer Genome Atlas (TCGA) Data Portal provides a platform for researchers t
 For more detailed information visit \pkg{RTCGA} \code{wiki} on
 \href{https://github.com/MarcinKosinski/RTCGA/wiki}{Github}.
 }
+\examples{
+\dontrun{
+browseVignettes("RTCGA")
+}
+}
 \author{
 Marcin Kosinski [aut, cre] \email{ m.p.kosinski@gmail.com } \cr
 Przemyslaw Biecek [aut] \email{ przemyslaw.biecek@gmail.com }
 }
 \seealso{
 Other RTCGA: \code{\link{checkTCGA}};
-  \code{\link{downloadTCGA}}; \code{\link{infoTCGA}};
-  \code{\link{readTCGA}}
+  \code{\link{datasetsTCGA}}; \code{\link{downloadTCGA}};
+  \code{\link{infoTCGA}}; \code{\link{readTCGA}}
 }
 

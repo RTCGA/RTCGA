@@ -14,10 +14,15 @@ Function restores codes and counts for each cohort from TCGA project.
 }
 \examples{
 infoTCGA()
+
+(cohorts <- infoTCGA() \%>\%
+rownames() \%>\%
+   sub("-counts", "", x=.))
 }
 \seealso{
-Other RTCGA: \code{\link{RTCGA-package}};
-  \code{\link{checkTCGA}}; \code{\link{downloadTCGA}};
+Other RTCGA: \code{\link{RTCGA}},
+  \code{\link{RTCGA-package}}; \code{\link{checkTCGA}};
+  \code{\link{datasetsTCGA}}; \code{\link{downloadTCGA}};
   \code{\link{readTCGA}}
 }
 

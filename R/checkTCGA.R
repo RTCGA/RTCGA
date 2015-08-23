@@ -46,11 +46,11 @@
 #' # TCGA datasets' names availability for 
 #' # current release date and cancer type.
 #' 
-#' date<- '2015-06-01'
+#' releaseDate <- '2015-06-01'
 #' cancerTypes <- c('OV', 'BRCA')
 #' 
 #' cancerTypes %>% sapply(function(element){
-#'   grep(x = checkTCGA('DataSets', element, date), 
+#'   grep(x = checkTCGA('DataSets', element, releaseDate), 
 #'       pattern = "humanmethylation450", value = TRUE) %>%
 #'        as.vector()
 #'        })
@@ -64,23 +64,13 @@
 #' tryCatch({
 #'     downloadTCGA( cancerTypes = element, 
 #'                   dataSet = "rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level",
-#'                   destDir = "data2/", 
-#'                   date = date )},
+#'                   destDir = "data2", 
+#'                   date = releaseDate )},
 #'     error = function(cond){
 #'         cat("Error: Maybe there weren't rnaseq data for ", element, " cancer.\n")
 #'     }
 #' )
 #' })
-#' # untarring downloaded files
-#' list.files( "data2/") %>% 
-#' paste0( "data2/", .) %>%
-#'    grep( "tar.gz", x = ., value=TRUE) %>%
-#'    sapply( untar, exdir = "data2/" )
-#' # Removing no longer needed tar.gz files  
-#' list.files( "data2/") %>% 
-#' paste0( "data2/", .) %>%
-#'     grep( pattern = "tar.gz", x = ., value = TRUE) %>%
-#'     sapply( file.remove )   
 #' 
 #' # Paths to rna-seq data
 #' 

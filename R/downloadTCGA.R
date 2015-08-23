@@ -18,6 +18,9 @@
 #' \href{http://gdac.broadinstitute.org/runs/}{http://gdac.broadinstitute.org/runs/} or by using \link{checkTCGA} 
 #' function. Required format \code{"YYYY-MM-DD"}.
 #' 
+#' @param untarFile Logical - should the downloaded file be untarred. Default is \code{TRUE}.
+#' @param removeTar Logical - should the downloaded \code{.tar} file be removed after untarring.
+#' Default is \code{TRUE}.
 #' 
 #' @details 
 #' All cohort names can be checked using: \code{ sub( x = names( infoTCGA() ), "-counts", "" )}.
@@ -29,11 +32,11 @@
 #' 
 #' dir.create( "hre")
 #' 
-#' downloadTCGA( cancerTypes = "BRCA", dataSet = "miR_gene_expression", 
-#' destDir = "hre/" )
+#' downloadTCGA( cancerTypes = "ACC", dataSet = "miR_gene_expression", 
+#' destDir = "hre", date =  tail( checkTCGA('Dates'), 2 )[1] )
 #'
 #' \dontrun{
-#' downloadTCGA( cancerTypes = c("BRCA", "OV"), destDir = "hre/",
+#' downloadTCGA( cancerTypes = c("BRCA", "OV"), destDir = "hre",
 #'  date = tail( checkTCGA('Dates'), 2 )[1] )
 #' }
 #' 
@@ -43,15 +46,18 @@
 #' @rdname downloadTCGA
 #' @export
 downloadTCGA <- function( cancerTypes, dataSet = "Merge_Clinical.Level_1",
-                          destDir, date = NULL ){
+                          destDir, date = NULL, untarFile = TRUE, removeTar = TRUE ){
    
     assert_that( is.character( cancerTypes ) & ( length( cancerTypes ) > 0 )  )
     assert_that( is.character( dataSet ) & ( length( dataSet ) == 1 ) )
     assert_that( is.character( destDir ) )
     assert_that(  is.null( date )  || ( is.character( date ) & ( length( date ) == 1 ) ) )
+    assert_that( is.logical( untarFile ) & ( length( untarFile ) == 1 ) )
+    assert_that( is.logical( removeTar ) & ( length( removeTar ) == 1 ) )
     
     # check if there was "/" mark at the end of directory
-    destDir <- checkDirectory( destDir )
+    # destDir <- checkDirectory( destDir )
+    # no need since I am using file.path function
     
 #     # does the dir exist?
 #     if (!file.exists(destDir)) {
@@ -63,24 +69,33 @@ downloadTCGA <- function( cancerTypes, dataSet = "Merge_Clinical.Level_1",
    
    
    for ( element in  cancerTypes ){
+       
+       
+       tryCatch({
        # get index of page containing datasets fot this date of release and Cohort Code
        filesParentURL <- parentURL( lastReleaseDate, element ) 
        
-       tryCatch({
+       
          elementIndexes <- html(filesParentURL) %>% html_nodes("a") %>% html_attr("href") %>% 
          grep(pattern = dataSet, value = TRUE) %>%
          gsub(pattern="^[ \t]+", replacement="") %>%
          grep(pattern="gz$", value = TRUE)}, #! md5
          error = function(con){
-            stop( paste("Data from ", lastReleaseDate, " can not be downloaded. Use other date from availableDates().") ) 
+            stop( paste("Data from ", lastReleaseDate, " can not be downloaded. Use other date from checkTCGA('Dates').") ) 
          }
        )
        
        linksToData <- elementIndexes[1]
        
       #http://gdac.broadinstitute.org/runs/stddata__2015_02_04/data/BRCA/20150204/
-      file.create( paste0( destDir, linksToData ) )
-      download.file( url = paste0( filesParentURL, "/", linksToData ), destfile = paste0( destDir, linksToData ) )
+      file.create( file.path( destDir, linksToData ) )
+      download.file( url = paste0( filesParentURL, "/", linksToData ), destfile = file.path( destDir, linksToData ) )
+      if( untarFile ){
+          untar( file.path( destDir, linksToData ), exdir = destDir )
+      }
+      if( removeTar ){
+          file.remove( file.path( destDir, linksToData ) )
+      }
    }
     
 }

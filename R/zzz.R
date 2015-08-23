@@ -1,7 +1,7 @@
 .RTCGAEnv <- new.env()
 
 .onAttach <- function(...) {
-    packageStartupMessage("\n Welcome to the RTCGA package (ver 1.0).")
+    packageStartupMessage("Welcome to the RTCGA (version: ", utils::packageVersion("RTCGA"), ").")
     
     
     # assign( x = '.gdacContent', value = readLines(

@@ -41,21 +41,11 @@ All cohort names can be checked using: \code{ sub( x = names( infoTCGA() ), "-co
 ##### clinical
 ##############
 
-dir.create("hre/")
+dir.create("hre")
 
 # downloading clinical data
-downloadTCGA( cancerTypes = c("BRCA", "OV"), destDir = "hre/" )
+downloadTCGA( cancerTypes = c("BRCA", "OV"), destDir = "hre" )
 
-# untarring files
-list.files( "hre/") \%>\%
-paste0( "hre/", .) \%>\%
-   sapply( untar, exdir = "hre/" )
-
-# removing *.tar.gz files
-list.files( "hre/") \%>\%
-paste0( "hre/", .) \%>\%
-    grep( pattern = "tar.gz", x = ., value = TRUE) \%>\%
-    sapply( file.remove )
 
 # reading datasets
 sapply( c("BRCA", "OV"), function( element ){
@@ -70,35 +60,25 @@ assign( value = readTCGA( path, "clinical" ),
 ##### rnaseq
 ##############
 
-dir.create("data2/")
+dir.create("data2")
 
 # downloading rnaseq data
 downloadTCGA( cancerTypes = 'BRCA',
 dataSet = "rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level",
-destDir = "data2/" )
+destDir = "data2" )
 
-# untarring files
-list.files( "data2/") \%>\%
-    paste0( "data2/", .) \%>\%
-    sapply( untar, exdir = "data2/" )
-
-# removing *.tar.gz files
-list.files( "data2/") \%>\%
-    paste0( "data2/", .) \%>\%
-    grep( pattern = "tar.gz", x = ., value = TRUE) \%>\%
-    sapply( file.remove )
 # shortening paths and directories
 list.files( "data2/") \%>\%
-    paste0( "data2/", .) \%>\%
+    file.path( "data2", .) \%>\%
     file.rename( to = substr(.,start=1,stop=50))
 
 # reading data
 list.files( "data2/") \%>\%
-    paste0( "data2/", .) -> folder
+    file.path( "data2", .) -> folder
 
 folder \%>\%
     list.files \%>\%
-    paste0( folder, "/", .) \%>\%
+    file.path( folder, .) \%>\%
     grep( pattern = "illuminahiseq", x = ., value = TRUE) -> pathRNA
 readTCGA( path = pathRNA, dataType = "rnaseq" ) -> my_data
 
@@ -107,34 +87,25 @@ readTCGA( path = pathRNA, dataType = "rnaseq" ) -> my_data
 ##### mutations
 ##############
 
-dir.create("data3/")
+dir.create("data3")
 
 
 downloadTCGA( cancerTypes = 'OV',
               dataSet = "Mutation_Packager_Calls.Level",
-              destDir = "data3/" )
-# untarring files
-list.files( "data3/") \%>\%
-    paste0( "data3/", .) \%>\%
-    sapply( untar, exdir = "data3/" )
-
-# removing *.tar.gz files
-list.files( "data3/") \%>\%
-    paste0( "data3/", .) \%>\%
-    grep( pattern = "tar.gz", x = ., value = TRUE) \%>\%
-    sapply( file.remove )
+              destDir = "data3" )
 
 # reading data
 list.files( "data3/") \%>\%
-    paste0( "data3/", .) -> folder
+    file.path( "data3", .) -> folder
 
 readTCGA(folder, "mutations") -> mut_file
 
 }
 }
 \seealso{
-Other RTCGA: \code{\link{RTCGA-package}};
-  \code{\link{checkTCGA}}; \code{\link{downloadTCGA}};
+Other RTCGA: \code{\link{RTCGA}},
+  \code{\link{RTCGA-package}}; \code{\link{checkTCGA}};
+  \code{\link{datasetsTCGA}}; \code{\link{downloadTCGA}};
   \code{\link{infoTCGA}}
 }
 

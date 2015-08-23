@@ -5,7 +5,7 @@
 \title{Download TCGA data}
 \usage{
 downloadTCGA(cancerTypes, dataSet = "Merge_Clinical.Level_1", destDir,
-  date = NULL)
+  date = NULL, untarFile = TRUE, removeTar = TRUE)
 }
 \arguments{
 \item{cancerTypes}{A character vector containing abbreviations (Cohort code) of types of cancers to download from
@@ -19,6 +19,11 @@ downloadTCGA(cancerTypes, dataSet = "Merge_Clinical.Level_1", destDir,
 By default (\code{date = NULL}) the newest available date is used. All available dates can be checked on
 \href{http://gdac.broadinstitute.org/runs/}{http://gdac.broadinstitute.org/runs/} or by using \link{checkTCGA}
 function. Required format \code{"YYYY-MM-DD"}.}
+
+\item{untarFile}{Logical - should the downloaded file be untarred. Default is \code{TRUE}.}
+
+\item{removeTar}{Logical - should the downloaded \code{.tar} file be removed after untarring.
+Default is \code{TRUE}.}
 }
 \value{
 No values. It only downloads files.
@@ -34,17 +39,18 @@ All cohort names can be checked using: \code{ sub( x = names( infoTCGA() ), "-co
 \examples{
 dir.create( "hre")
 
-downloadTCGA( cancerTypes = "BRCA", dataSet = "miR_gene_expression",
-destDir = "hre/" )
+downloadTCGA( cancerTypes = "ACC", dataSet = "miR_gene_expression",
+destDir = "hre", date =  tail( checkTCGA('Dates'), 2 )[1] )
 
 \dontrun{
-downloadTCGA( cancerTypes = c("BRCA", "OV"), destDir = "hre/",
+downloadTCGA( cancerTypes = c("BRCA", "OV"), destDir = "hre",
  date = tail( checkTCGA('Dates'), 2 )[1] )
 }
 }
 \seealso{
-Other RTCGA: \code{\link{RTCGA-package}};
-  \code{\link{checkTCGA}}; \code{\link{infoTCGA}};
+Other RTCGA: \code{\link{RTCGA}},
+  \code{\link{RTCGA-package}}; \code{\link{checkTCGA}};
+  \code{\link{datasetsTCGA}}; \code{\link{infoTCGA}};
   \code{\link{readTCGA}}
 }
 
