@@ -24,7 +24,7 @@
 #'  of types of cancers to check for.
 #' @param date A \code{NULL} or character specifying from which date informations should be checked.
 #' By default (\code{date = NULL}) the newest available date is used. All available dates can be checked on 
-#' \href{http://gdac.broadinstitute.org/runs/}{http://gdac.broadinstitute.org/runs/} or by using \code{checkTCGA("Dates")} 
+#' \href{http://gdac.broadinstitute.org/runs/}{http://gdac.broadinstitute.org/runs/} or by using \code{checkTCGA('Dates')} 
 #' function. Required format \code{'YYYY-MM-DD'}.
 #' 
 #' 
@@ -51,7 +51,7 @@
 #' 
 #' cancerTypes %>% sapply(function(element){
 #'   grep(x = checkTCGA('DataSets', element, releaseDate), 
-#'       pattern = "humanmethylation450", value = TRUE) %>%
+#'       pattern = 'humanmethylation450', value = TRUE) %>%
 #'        as.vector()
 #'        })
 #'        
@@ -63,11 +63,11 @@
 #' sapply( cancerTypes, function(element){
 #' tryCatch({
 #'     downloadTCGA( cancerTypes = element, 
-#'                   dataSet = "rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level",
-#'                   destDir = "data2", 
+#'                   dataSet = 'rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level',
+#'                   destDir = 'data2', 
 #'                   date = releaseDate )},
 #'     error = function(cond){
-#'         cat("Error: Maybe there weren't rnaseq data for ", element, " cancer.\n")
+#'         cat('Error: Maybe there weren't rnaseq data for ', element, ' cancer.\n')
 #'     }
 #' )
 #' })
@@ -75,11 +75,11 @@
 #' # Paths to rna-seq data
 #' 
 #' sapply( cohorts, function( element ){
-#' folder <- grep( paste0( "(_",element,"\\.", "|","_",element,"-FFPE)", ".*rnaseqv2"), list.files("data2/"),value = TRUE)
-#' file <- grep( paste0(element, ".*rnaseqv2"), list.files( paste0( "data2/",folder ) ),
+#' folder <- grep( paste0( '(_',element,'\\.', '|','_',element,'-FFPE)', '.*rnaseqv2'), list.files('data2/'),value = TRUE)
+#' file <- grep( paste0(element, '.*rnaseqv2'), list.files( paste0( 'data2/',folder ) ),
 #'               value = TRUE)
-#' path <- paste0( "data2/", folder, "/", file )
-#' assign( value = path, x = paste0(element, ".rnaseq.path"), envir = .GlobalEnv)
+#' path <- paste0( 'data2/', folder, '/', file )
+#' assign( value = path, x = paste0(element, '.rnaseq.path'), envir = .GlobalEnv)
 #' })
 #' 
 #' rnaseqDir <- 'OV.rnaseq'
@@ -87,7 +87,7 @@
 #'                 
 #' fread(rnaseqDir, select = c(1),
 #'       data.table = FALSE,
-#'       colClasses = "character")[-1, 1]       
+#'       colClasses = 'character')[-1, 1]       
 #' 
 #' }
 #' 
@@ -95,15 +95,15 @@
 #' @aliases checkTCGA
 #' @rdname checkTCGA
 #' @export
-checkTCGA <- function( what, cancerType, date = NULL ){
-    assert_that(is.character(what) & length( what ) == 1 )
+checkTCGA <- function(what, cancerType, date = NULL) {
+    assert_that(is.character(what) & length(what) == 1)
     assert_that(is.null(date) || (is.character(cancerType) & (length(cancerType) == 1)))
     assert_that(is.null(date) || (is.character(date) & (length(date) == 1)))
     
-    if( what == "DataSets" ){
+    if (what == "DataSets") {
         return(availableDataSets(cancerType, date = date))
     }
-    if( what == "Dates" ){
+    if (what == "Dates") {
         return(availableDates())
     }
 }
@@ -122,11 +122,10 @@ availableDataSets <- function(cancerType, date = NULL) {
     
     # get content of index page
     elementIndex <- tryCatch(readLines(filesParentURL), error = function(e) stop(paste("Probably dataset from this date needs authentication. \n \tCouldn't check available datasets' names.", 
-                                                                                       "\n \tTry manually on", filesParentURL)))
+        "\n \tTry manually on", filesParentURL)))
     
     # stopped working suddenly after change of indexing of pages like that
-    # http://gdac.broadinstitute.org/runs/stddata__2015_04_02/data/BRCA/20150402/ looks
-    # bad, but works fine....  need to fix this mess
+    # http://gdac.broadinstitute.org/runs/stddata__2015_04_02/data/BRCA/20150402/ looks bad, but works fine....  need to fix this mess
     dataSetsName <- sapply(elementIndex, function(element) {
         gsub(".*gdac.broadinstitute.org(.*)\".*", "\\1", element)
     })
@@ -138,8 +137,7 @@ availableDataSets <- function(cancerType, date = NULL) {
     
     
     # cat available dataSets' names
-    gsub(paste0("_", cancerType), cancerType, unique(grep(x = x, pattern = paste0("_", 
-                                                                                  cancerType), value = TRUE)))
+    gsub(paste0("_", cancerType), cancerType, unique(grep(x = x, pattern = paste0("_", cancerType), value = TRUE)))
     
 }
 
@@ -149,16 +147,13 @@ availableDates <- function() {
     
     if (!exists(x = ".availableDates2", envir = .RTCGAEnv)) {
         # happens only once
-        readLines("http://gdac.broadinstitute.org/runs/") %>% assign(x = ".gdacContent", 
-                                                                     value = ., envir = .RTCGAEnv)
+        readLines("http://gdac.broadinstitute.org/runs/") %>% assign(x = ".gdacContent", value = ., envir = .RTCGAEnv)
         
-        get(".gdacContent", envir = .RTCGAEnv) %>% grep(pattern = "stddata__20", value = TRUE) %>% 
-            gsub(pattern = "(<[^>]+>)| |/", replacement = "") %>% substring(first = 10, 
-                                                                            last = 19) %>% assign(x = ".availableDates", value = ., envir = .RTCGAEnv)
+        get(".gdacContent", envir = .RTCGAEnv) %>% grep(pattern = "stddata__20", value = TRUE) %>% gsub(pattern = "(<[^>]+>)| |/", replacement = "") %>% 
+            substring(first = 10, last = 19) %>% assign(x = ".availableDates", value = ., envir = .RTCGAEnv)
         
-        get(".availableDates", envir = .RTCGAEnv) %>% gsub(pattern = "^[^0-9]{10}", 
-                                                           replacement = "") %>% gsub(pattern = "_", replacement = "-", fixed = TRUE) %>% 
-            assign(x = ".availableDates2", value = ., envir = .RTCGAEnv)
+        get(".availableDates", envir = .RTCGAEnv) %>% gsub(pattern = "^[^0-9]{10}", replacement = "") %>% gsub(pattern = "_", replacement = "-", 
+            fixed = TRUE) %>% assign(x = ".availableDates2", value = ., envir = .RTCGAEnv)
         ############################################ 
     }
     get(x = ".availableDates2", envir = .RTCGAEnv)

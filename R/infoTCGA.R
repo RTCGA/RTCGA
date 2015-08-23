@@ -11,7 +11,7 @@
 #' 
 #' (cohorts <- infoTCGA() %>% 
 #' rownames() %>% 
-#'    sub("-counts", "", x=.))
+#'    sub('-counts', '', x=.))
 #' 
 #' @family RTCGA
 #' @rdname infoTCGA

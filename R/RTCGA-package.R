@@ -22,13 +22,13 @@
 #' 
 #' @examples
 #' \dontrun{
-#' browseVignettes("RTCGA")
+#' browseVignettes('RTCGA')
 #' }
 #' @family RTCGA
 #' @name RTCGA-package
 #' @docType package
 #' @aliases RTCGA
-invisible(NULL) 
+invisible(NULL)
 
 #' Pipe operator
 #'
@@ -40,4 +40,4 @@ invisible(NULL)
 #' @export
 #' @importFrom magrittr %>%
 #' @usage lhs \%>\% rhs
-NULL
+NULL 
