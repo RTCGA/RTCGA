@@ -3,7 +3,7 @@ vignette: >
   %\VignetteIndexEntry{Integrating TCGA Data - RTCGA.data - The Family of R Packages with Data from The Cancer Genome Atlas Study}
   %\VignetteEngine{knitr::rmarkdown}
 title: "RTCGA.data - The Family of R Packages with Data from The Cancer Genome Atlas Study"
-author: "Marcin Kosinski, Przemyslaw Biecek"
+author: "Marcin Kosiński, Przemysław Biecek"
 date: "`r Sys.Date()`"
 output:
   html_document:
@@ -257,7 +257,7 @@ The biplot for 2 main components of the principal component analysis of genes' e
 
 [9] Cox D. R., (1972) \textit{Regression models and life-tables (with discussion)}, Journal of the Royal Statistical Society Series B 34:187-220.      
       
-[5]  Kaplan, E. L.; Meier, P. (1958). "Nonparametric estimation from incomplete observations". J. Amer. Statist. Assn. 53 (282): 457–481. JSTOR 2281868.
+[5]  Kaplan, E. L.; Meier, P. (1958). "Nonparametric estimation from incomplete observations". J. Amer. Statist. Assn. 53 (282): 457-481. JSTOR 2281868.
 
 
 ```
