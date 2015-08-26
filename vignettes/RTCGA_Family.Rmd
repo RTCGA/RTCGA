@@ -3,7 +3,7 @@ vignette: >
   %\VignetteIndexEntry{Integrating TCGA Data - RTCGA.data - The Family of R Packages with Data from The Cancer Genome Atlas Study}
   %\VignetteEngine{knitr::rmarkdown}
 title: "RTCGA.data - The Family of R Packages with Data from The Cancer Genome Atlas Study"
-author: "Marcin Kosinski, Przemysław Biecek"
+author: "Marcin Kosinski, Przemyslaw Biecek"
 date: "`r Sys.Date()`"
 output:
   html_document:
