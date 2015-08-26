@@ -1,4 +1,7 @@
 ---
+vignette: >
+  %\VignetteIndexEntry{Integrating TCGA Data - RTCGA.data - The Family of R Packages with Data from The Cancer Genome Atlas Study}
+  %\VignetteEngine{knitr::rmarkdown}
 title: "RTCGA.data - The Family of R Packages with Data from The Cancer Genome Atlas Study"
 author: "Marcin Kosiński, Przemysław Biecek"
 date: "`r Sys.Date()`"
@@ -12,9 +15,6 @@ output:
     toc_depth: 4
     keep_md: true
     number_sections: true
-vignette: >
-  %\VignetteIndexEntry{Integrating TCGA Data - RTCGA.data - The Family of R Packages with Data from The Cancer Genome Atlas Study}
-  %\VignetteEngine{knitr::rmarkdown}
 ---
 
 The following article presents RTCGA.data: a family of R packages with data from The Cancer Genome Atlas Project (TCGA) study. TCGA is a comprehensive and coordinated effort to accelerate our understanding of the molecular basis of cancer through the application of genome analysis technologies, including large-scale genome sequencing [1]. We converted selected datasets from this study into few separate packages that are hosted on one [GitHub repository](https://github.com/mi2-warsaw/RTCGA.data). These R packages make selected datasets easier to access and manage. Data sets in RTCGA.data packages are large and cover complex relations between clinical outcomes and genetic background. These packages will be useful for at least three audiences: biostatisticians that work with cancer data; researchers that are working on large scale algorithms, for them RTGCA data will be a perfect blasting site; teachers that are presenting data analysis method on real data problems.
