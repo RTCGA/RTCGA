@@ -12,6 +12,9 @@ output:
     toc_depth: 4
     keep_md: true
     number_sections: true
+vignette: >
+  %\VignetteIndexEntry{Integrating TCGA Data - RTCGA Tutorial}
+  %\VignetteEngine{knitr::rmarkdown}
 ---
 
 
