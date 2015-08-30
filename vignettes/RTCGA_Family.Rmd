@@ -70,7 +70,7 @@ A TCGA barcode is composed of a collection of identifiers. Each specifically ide
 More detailed information about datasets included in **RTCGA.data** family are shown in Table below.
 
 
-```{r, echo=FALSE, eval = FALSE, results='asis'}
+```{r, eval = FALSE, results='asis'}
 library(dplyr)
 library(XML)
 library(stringi)
@@ -92,11 +92,11 @@ show_dims_RTCGA <- function( package_name ){
       }) %>% t -> df
    
     df_dims <- data.frame( "Cohort" = 
-                                    stri_extract_all_regex(row.names(df),
-                                                pattern = paste0("[^\\.",package_name,"]")) %>%
-                                                lapply( stri_flatten) %>% 
-                                                unlist,
-                                package_name = paste0(df[,1]," x ",df[,2])
+        stri_extract_all_regex(row.names(df),
+                    pattern = paste0("[^\\.",package_name,"]")) %>%
+                    lapply( stri_flatten) %>% 
+                    unlist,
+    package_name = paste0(df[,1]," x ",df[,2])
     )
     names(df_dims)[2] <- package_name
     return(df_dims)
