@@ -15,6 +15,8 @@
 #' @importFrom rvest html
 #' @importFrom rvest html_nodes
 #' @importFrom rvest html_attr
+#' @importFrom rvest html_text
+#' @import knitr
 #' @importFrom data.table fread
 #' @importFrom stringi stri_extract_all_regex
 #' @importFrom assertthat assert_that

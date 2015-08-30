@@ -90,7 +90,6 @@
 #'       colClasses = 'character')[-1, 1]       
 #' 
 #' }
-#' @importFrom rvest html_text
 #' @family RTCGA
 #' @aliases checkTCGA
 #' @rdname checkTCGA
