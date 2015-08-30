@@ -17,7 +17,7 @@ infoTCGA()
 
 (cohorts <- infoTCGA() \%>\%
 rownames() \%>\%
-   sub("-counts", "", x=.))
+   sub('-counts', '', x=.))
 }
 \seealso{
 Other RTCGA: \code{\link{RTCGA}},

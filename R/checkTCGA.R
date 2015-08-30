@@ -90,7 +90,7 @@
 #'       colClasses = 'character')[-1, 1]       
 #' 
 #' }
-#' 
+#' @importFrom rvest html_text
 #' @family RTCGA
 #' @aliases checkTCGA
 #' @rdname checkTCGA
@@ -155,6 +155,13 @@ availableDates <- function() {
         get(".availableDates", envir = .RTCGAEnv) %>% gsub(pattern = "^[^0-9]{10}", replacement = "") %>% gsub(pattern = "_", replacement = "-", 
             fixed = TRUE) %>% assign(x = ".availableDates2", value = ., envir = .RTCGAEnv)
         ############################################ 
+        
+        html("http://gdac.broadinstitute.org/runs/stddata__latest/") %>% html_nodes("h3") %>% html_text() %>%
+            substring(first=1, last=10) %>% gsub(pattern = "_", replacement = "-", fixed = TRUE) %>% 
+            assign(x = ".lastWorkingDate", value = ., envir = .RTCGAEnv)
+        get(x = ".availableDates2", envir = .RTCGAEnv)[1:grep(get(x = ".lastWorkingDate", envir = .RTCGAEnv), 
+                                                              get(x = ".availableDates2", envir = .RTCGAEnv) )] %>%
+            assign(x=".availableDates3", value = ., envir = .RTCGAEnv)
     }
-    get(x = ".availableDates2", envir = .RTCGAEnv)
+    get(x=".availableDates3", envir = .RTCGAEnv)
 } 

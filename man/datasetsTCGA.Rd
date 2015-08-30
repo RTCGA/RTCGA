@@ -20,7 +20,7 @@ For more detailed information visit \pkg{RTCGA.data}
 \examples{
 # installation of packages containing snapshots
 # of TCGA project's datasets
-source("http://bioconductor.org/biocLite.R")
+source('http://bioconductor.org/biocLite.R')
 \dontrun{
 biocLite(RTCGA.clinical)
 biocLite(RTCGA.mutations)
@@ -28,7 +28,7 @@ biocLite(RTCGA.rnaseq)
 biocLite(RTCGA.cnv)
 
 # use cases and examples + more data info
-browseVignettes("RTCGA")
+browseVignettes('RTCGA')
 }
 }
 \author{

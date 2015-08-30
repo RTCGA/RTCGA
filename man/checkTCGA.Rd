@@ -14,7 +14,7 @@ of types of cancers to check for.}
 
 \item{date}{A \code{NULL} or character specifying from which date informations should be checked.
 By default (\code{date = NULL}) the newest available date is used. All available dates can be checked on
-\href{http://gdac.broadinstitute.org/runs/}{http://gdac.broadinstitute.org/runs/} or by using \code{checkTCGA("Dates")}
+\href{http://gdac.broadinstitute.org/runs/}{http://gdac.broadinstitute.org/runs/} or by using \code{checkTCGA('Dates')}
 function. Required format \code{'YYYY-MM-DD'}.}
 }
 \value{
@@ -58,7 +58,7 @@ cancerTypes <- c('OV', 'BRCA')
 
 cancerTypes \%>\% sapply(function(element){
   grep(x = checkTCGA('DataSets', element, releaseDate),
-      pattern = "humanmethylation450", value = TRUE) \%>\%
+      pattern = 'humanmethylation450', value = TRUE) \%>\%
        as.vector()
        })
 
@@ -70,11 +70,11 @@ dir.create('data2')
 sapply( cancerTypes, function(element){
 tryCatch({
     downloadTCGA( cancerTypes = element,
-                  dataSet = "rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level",
-                  destDir = "data2",
+                  dataSet = 'rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level',
+                  destDir = 'data2',
                   date = releaseDate )},
     error = function(cond){
-        cat("Error: Maybe there weren't rnaseq data for ", element, " cancer.\\n")
+        cat('Error: Maybe there weren't rnaseq data for ', element, ' cancer.\\n')
     }
 )
 })
@@ -82,11 +82,11 @@ tryCatch({
 # Paths to rna-seq data
 
 sapply( cohorts, function( element ){
-folder <- grep( paste0( "(_",element,"\\\\.", "|","_",element,"-FFPE)", ".*rnaseqv2"), list.files("data2/"),value = TRUE)
-file <- grep( paste0(element, ".*rnaseqv2"), list.files( paste0( "data2/",folder ) ),
+folder <- grep( paste0( '(_',element,'\\\\.', '|','_',element,'-FFPE)', '.*rnaseqv2'), list.files('data2/'),value = TRUE)
+file <- grep( paste0(element, '.*rnaseqv2'), list.files( paste0( 'data2/',folder ) ),
               value = TRUE)
-path <- paste0( "data2/", folder, "/", file )
-assign( value = path, x = paste0(element, ".rnaseq.path"), envir = .GlobalEnv)
+path <- paste0( 'data2/', folder, '/', file )
+assign( value = path, x = paste0(element, '.rnaseq.path'), envir = .GlobalEnv)
 })
 
 rnaseqDir <- 'OV.rnaseq'
@@ -94,7 +94,7 @@ rnaseqDir <- 'OV.rnaseq'
 
 fread(rnaseqDir, select = c(1),
       data.table = FALSE,
-      colClasses = "character")[-1, 1]
+      colClasses = 'character')[-1, 1]
 
 }
 }

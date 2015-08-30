@@ -7,21 +7,21 @@
 readTCGA(path, dataType, ...)
 }
 \arguments{
-\item{path}{If \code{dataType = "clinical"} a directory to a \code{cancerType.clin.merged.txt} file.
-If \code{dataType = "mutations"} a directory to the unzziped folder \code{Mutation_Packager_Calls.Level} containing \code{.maf} files.
-If \code{dataType = "rnaseq"} a directory to the uzziped file \code{rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level}.
+\item{path}{If \code{dataType = 'clinical'} a directory to a \code{cancerType.clin.merged.txt} file.
+If \code{dataType = 'mutations'} a directory to the unzziped folder \code{Mutation_Packager_Calls.Level} containing \code{.maf} files.
+If \code{dataType = 'rnaseq'} a directory to the uzziped file \code{rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level}.
 See examples.}
 
-\item{dataType}{One of \code{"clinical", "rnaseq", "mutations"} depending on which type of data users is trying to read in the tidy format.}
+\item{dataType}{One of \code{'clinical', 'rnaseq', 'mutations'} depending on which type of data users is trying to read in the tidy format.}
 
 \item{...}{Further arguments passed to the \link{as.data.frame}.}
 }
 \value{
 An output:
 \itemize{
-     \item If \code{dataType = "clinical"} a \code{data.frame} with clinical data.
-     \item If \code{dataType = "rnaseq"} a \code{data.frame} with rnaseq data.
-     \item If \code{dataType = "mutations"} a \code{data.frame} with mutations data.
+     \item If \code{dataType = 'clinical'} a \code{data.frame} with clinical data.
+     \item If \code{dataType = 'rnaseq'} a \code{data.frame} with rnaseq data.
+     \item If \code{dataType = 'mutations'} a \code{data.frame} with mutations data.
 }
 }
 \description{
@@ -34,71 +34,71 @@ An output:
 from TCGA project. Those files can be easily downloded with \link{downloadTCGA} function. See examples.
 }
 \details{
-All cohort names can be checked using: \code{ sub( x = names( infoTCGA() ), "-counts", "")}.
+All cohort names can be checked using: \code{ sub( x = names( infoTCGA() ), '-counts', '')}.
 }
 \examples{
 ##############
 ##### clinical
 ##############
 
-dir.create("hre")
+dir.create('hre')
 
 # downloading clinical data
-downloadTCGA( cancerTypes = c("BRCA", "OV"), destDir = "hre" )
+downloadTCGA( cancerTypes = c('BRCA', 'OV'), destDir = 'hre' )
 
 
 # reading datasets
-sapply( c("BRCA", "OV"), function( element ){
-folder <- grep( paste0( "(_",element,"\\\\.", "|","_",element,"-FFPE)", ".*Clinical"),
-      list.files("hre/"),value = TRUE)
-path <- paste0( "hre/", folder, "/", element, ".clin.merged.txt")
-assign( value = readTCGA( path, "clinical" ),
-         x = paste0(element, ".clin.data"), envir = .GlobalEnv)
+sapply( c('BRCA', 'OV'), function( element ){
+folder <- grep( paste0( '(_',element,'\\\\.', '|','_',element,'-FFPE)', '.*Clinical'),
+      list.files('hre/'),value = TRUE)
+path <- paste0( 'hre/', folder, '/', element, '.clin.merged.txt')
+assign( value = readTCGA( path, 'clinical' ),
+         x = paste0(element, '.clin.data'), envir = .GlobalEnv)
          })
 \dontrun{
 ##############
 ##### rnaseq
 ##############
 
-dir.create("data2")
+dir.create('data2')
 
 # downloading rnaseq data
 downloadTCGA( cancerTypes = 'BRCA',
-dataSet = "rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level",
-destDir = "data2" )
+dataSet = 'rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level',
+destDir = 'data2' )
 
 # shortening paths and directories
-list.files( "data2/") \%>\%
-    file.path( "data2", .) \%>\%
+list.files( 'data2/') \%>\%
+    file.path( 'data2', .) \%>\%
     file.rename( to = substr(.,start=1,stop=50))
 
 # reading data
-list.files( "data2/") \%>\%
-    file.path( "data2", .) -> folder
+list.files( 'data2/') \%>\%
+    file.path( 'data2', .) -> folder
 
 folder \%>\%
     list.files \%>\%
     file.path( folder, .) \%>\%
-    grep( pattern = "illuminahiseq", x = ., value = TRUE) -> pathRNA
-readTCGA( path = pathRNA, dataType = "rnaseq" ) -> my_data
+    grep( pattern = 'illuminahiseq', x = ., value = TRUE) -> pathRNA
+readTCGA( path = pathRNA, dataType = 'rnaseq' ) -> my_data
 
 
 ##############
 ##### mutations
 ##############
 
-dir.create("data3")
+dir.create('data3')
 
 
 downloadTCGA( cancerTypes = 'OV',
-              dataSet = "Mutation_Packager_Calls.Level",
-              destDir = "data3" )
+              dataSet = 'Mutation_Packager_Calls.Level',
+              destDir = 'data3' )
 
 # reading data
-list.files( "data3/") \%>\%
-    file.path( "data3", .) -> folder
+list.files( 'data3/') \%>\%
+    file.path( 'data3', .) -> folder
 
-readTCGA(folder, "mutations") -> mut_file
+readTCGA(folder, 'mutations') -> mut_file
 
 }
 }

@@ -14,7 +14,7 @@ For more detailed information visit \pkg{RTCGA} \code{wiki} on
 }
 \examples{
 \dontrun{
-browseVignettes("RTCGA")
+browseVignettes('RTCGA')
 }
 }
 \author{
