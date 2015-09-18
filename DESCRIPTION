@@ -1,6 +1,6 @@
 Package: RTCGA
-Title: The Caner Genome Atlas Data Integration
-Version: 0.99.9
+Title: The Cancer Genome Atlas Data Integration
+Version: 0.99.10
 Date: 2015-08-05
 Author: Marcin Kosinski <m.p.kosinski@gmail.com>, Przemyslaw Biecek
         <przemyslaw.biecek@gmail.com>
