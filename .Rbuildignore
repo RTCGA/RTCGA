@@ -10,3 +10,4 @@ maraton*
 README.md
 Rd2.pdf
 .Rd2pdf7288
+^\.travis\.yml$
