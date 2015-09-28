@@ -157,7 +157,7 @@ availableDates <- function() {
             fixed = TRUE) %>% assign(x = ".availableDates2", value = ., envir = .RTCGAEnv)
         ############################################ 
         
-        html("http://gdac.broadinstitute.org/runs/stddata__latest/") %>% html_nodes("h3") %>% html_text() %>%
+        xml2::read_html("http://gdac.broadinstitute.org/runs/stddata__latest/") %>% html_nodes("h3") %>% html_text() %>%
             substring(first=1, last=10) %>% gsub(pattern = "_", replacement = "-", fixed = TRUE) %>% 
             assign(x = ".lastWorkingDate", value = ., envir = .RTCGAEnv)
         get(x = ".availableDates2", envir = .RTCGAEnv)[1:grep(get(x = ".lastWorkingDate", envir = .RTCGAEnv), 

@@ -1,6 +1,6 @@
 Package: RTCGA
 Title: The Cancer Genome Atlas Data Integration
-Version: 0.99.11
+Version: 0.99.12
 Date: 2015-08-05
 Author: Marcin Kosinski <m.p.kosinski@gmail.com>, Przemyslaw Biecek
         <przemyslaw.biecek@gmail.com>
@@ -22,7 +22,7 @@ License: GPL-2
 LazyLoad: yes
 LazyData: yes
 Depends: R (>= 3.2.0), knitr
-Imports: XML, assertthat, stringi, rvest, data.table, magrittr
+Imports: XML, assertthat, stringi, rvest, data.table, magrittr, xml2
 Suggests: testthat, pander
 Repository: Bioconductor
 biocViews: Software
