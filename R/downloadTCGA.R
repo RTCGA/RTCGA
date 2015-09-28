@@ -28,13 +28,13 @@
 #' 
 #' @examples
 #' 
-#' 
+#' \dontrun{
 #' dir.create( 'hre')
 #' 
 #' downloadTCGA( cancerTypes = 'ACC', dataSet = 'miR_gene_expression', 
 #' destDir = 'hre', date =  tail( checkTCGA('Dates'), 2 )[1] )
 #'
-#' \dontrun{
+#'
 #' downloadTCGA( cancerTypes = c('BRCA', 'OV'), destDir = 'hre',
 #'  date = tail( checkTCGA('Dates'), 2 )[1] )
 #' }

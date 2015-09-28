@@ -30,7 +30,7 @@
 #' 
 #' @examples 
 #' 
-#' 
+#' \dontrun{ 
 #' 
 #' ##############
 #' ##### clinical
@@ -50,7 +50,7 @@
 #' assign( value = readTCGA( path, 'clinical' ), 
 #'          x = paste0(element, '.clin.data'), envir = .GlobalEnv)
 #'          })
-#' \dontrun{        
+#'      
 #' ##############
 #' ##### rnaseq
 #' ##############

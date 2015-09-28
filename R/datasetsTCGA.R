@@ -25,8 +25,9 @@
 #' 
 #' # installation of packages containing snapshots
 #' # of TCGA project's datasets
-#' source('http://bioconductor.org/biocLite.R')
+#'
 #' \dontrun{
+#' source('http://bioconductor.org/biocLite.R')
 #' biocLite(RTCGA.clinical)
 #' biocLite(RTCGA.mutations)
 #' biocLite(RTCGA.rnaseq)
