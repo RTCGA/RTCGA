@@ -28,13 +28,13 @@
 #' 
 #' @examples
 #' 
-#' 
+#' \dontrun{
 #' dir.create( 'hre')
 #' 
 #' downloadTCGA( cancerTypes = 'ACC', dataSet = 'miR_gene_expression', 
 #' destDir = 'hre', date =  tail( checkTCGA('Dates'), 2 )[1] )
 #'
-#' \dontrun{
+#'
 #' downloadTCGA( cancerTypes = c('BRCA', 'OV'), destDir = 'hre',
 #'  date = tail( checkTCGA('Dates'), 2 )[1] )
 #' }
@@ -70,7 +70,7 @@ downloadTCGA <- function(cancerTypes, dataSet = "Merge_Clinical.Level_1", destDi
             filesParentURL <- parentURL(lastReleaseDate, element)
             
             
-            elementIndexes <- html(filesParentURL) %>% html_nodes("a") %>% html_attr("href") %>% grep(pattern = dataSet, value = TRUE) %>% 
+            elementIndexes <- xml2::read_html(filesParentURL) %>% html_nodes("a") %>% html_attr("href") %>% grep(pattern = dataSet, value = TRUE) %>% 
                 gsub(pattern = "^[ \t]+", replacement = "") %>% grep(pattern = "gz$", value = TRUE)  #! md5
         }, error = function(con) {
             stop(paste("Data from ", lastReleaseDate, " can not be downloaded. Use other date from checkTCGA('Dates')."))

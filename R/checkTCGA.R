@@ -29,7 +29,7 @@
 #' 
 #' 
 #' @examples
-#' 
+#' \dontrun{
 #' 
 #' ############################# 
 #' 
@@ -56,14 +56,15 @@
 #'        })
 #'        
 #' #############################      
-#' \dontrun{
+#'
 #' # TCGA genes' names and availability 
 #' # in Merge_rnaseqv2__... dataset 
 #' dir.create('data2')
 #' sapply( cancerTypes, function(element){
 #' tryCatch({
 #'     downloadTCGA( cancerTypes = element, 
-#'                   dataSet = 'rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level',
+#'                   dataSet = paste0('rnaseqv2__illuminahiseq_rnaseqv2__unc',
+#'                   '_edu__Level_3__RSEM_genes_normalized__data.Level'),
 #'                   destDir = 'data2', 
 #'                   date = releaseDate )},
 #'     error = function(cond){
@@ -75,7 +76,8 @@
 #' # Paths to rna-seq data
 #' 
 #' sapply( cohorts, function( element ){
-#' folder <- grep( paste0( '(_',element,'\\.', '|','_',element,'-FFPE)', '.*rnaseqv2'), list.files('data2/'),value = TRUE)
+#' folder <- grep( paste0( '(_',element,'\\.', '|','_',element,'-FFPE)', '.*rnaseqv2'),
+#'                list.files('data2/'), value = TRUE)
 #' file <- grep( paste0(element, '.*rnaseqv2'), list.files( paste0( 'data2/',folder ) ),
 #'               value = TRUE)
 #' path <- paste0( 'data2/', folder, '/', file )
@@ -155,7 +157,7 @@ availableDates <- function() {
             fixed = TRUE) %>% assign(x = ".availableDates2", value = ., envir = .RTCGAEnv)
         ############################################ 
         
-        html("http://gdac.broadinstitute.org/runs/stddata__latest/") %>% html_nodes("h3") %>% html_text() %>%
+        xml2::read_html("http://gdac.broadinstitute.org/runs/stddata__latest/") %>% html_nodes("h3") %>% html_text() %>%
             substring(first=1, last=10) %>% gsub(pattern = "_", replacement = "-", fixed = TRUE) %>% 
             assign(x = ".lastWorkingDate", value = ., envir = .RTCGAEnv)
         get(x = ".availableDates2", envir = .RTCGAEnv)[1:grep(get(x = ".lastWorkingDate", envir = .RTCGAEnv), 

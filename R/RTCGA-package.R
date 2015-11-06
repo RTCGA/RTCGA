@@ -12,7 +12,7 @@
 #' Marcin Kosinski [aut, cre] \email{ m.p.kosinski@@gmail.com } \cr
 #' Przemyslaw Biecek [aut] \email{ przemyslaw.biecek@@gmail.com }
 #' 
-#' @importFrom rvest html
+#' @importFrom xml2 read_html
 #' @importFrom rvest html_nodes
 #' @importFrom rvest html_attr
 #' @importFrom rvest html_text
