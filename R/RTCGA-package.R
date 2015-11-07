@@ -6,7 +6,7 @@
 #'
 #' @details
 #' For more detailed information visit \pkg{RTCGA} \code{wiki} on 
-#' \href{https://github.com/MarcinKosinski/RTCGA/wiki}{Github}.
+#' \href{https://github.com/RTCGA/RTCGA/wiki}{Github}.
 #'
 #' @author
 #' Marcin Kosinski [aut, cre] \email{ m.p.kosinski@@gmail.com } \cr
