@@ -6,15 +6,17 @@
 #'      \item clinical data - \code{Merge_Clinical.Level_1} 
 #'      \item rnaseq data (genes' expressions) - \code{Mutation_Packager_Calls.Level}
 #'      \item genes' mutations data - \code{rnaseqv2__illuminahiseq_rnaseqv2}
+#'      \item Reverse phase protein array data - \code{protein_normalization__data.Level_3}
 #'      }
 #' from TCGA project. Those files can be easily downloded with \link{downloadTCGA} function. See examples.
 #' 
 #' @param path If \code{dataType = 'clinical'} a directory to a \code{cancerType.clin.merged.txt} file. 
 #' If \code{dataType = 'mutations'} a directory to the unzziped folder \code{Mutation_Packager_Calls.Level} containing \code{.maf} files.
 #' If \code{dataType = 'rnaseq'} a directory to the uzziped file \code{rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level}.
+#' If \code{dataType = 'rppa'} a directory to the unzipped file in folder \code{protein_normalization__data.Level_3}.
 #' See examples.
 #' 
-#' @param dataType One of \code{'clinical', 'rnaseq', 'mutations'} depending on which type of data users is trying to read in the tidy format.
+#' @param dataType One of \code{'clinical', 'rnaseq', 'mutations', 'rppa'} depending on which type of data users is trying to read in the tidy format.
 #' @param ... Further arguments passed to the \link{as.data.frame}.
 #' 
 #' @return 
@@ -23,6 +25,7 @@
 #'      \item If \code{dataType = 'clinical'} a \code{data.frame} with clinical data.
 #'      \item If \code{dataType = 'rnaseq'} a \code{data.frame} with rnaseq data.
 #'      \item If \code{dataType = 'mutations'} a \code{data.frame} with mutations data.
+#'      \item If \code{dataType = 'rppa'} a \code{data.frame} with rppa data.
 #' }
 #' 
 #' @details 
@@ -103,7 +106,7 @@
 readTCGA <- function(path, dataType, ...) {
     assertthat::assert_that(is.character(path) & length(path) == 1)
     assertthat::assert_that(is.character(dataType) & length(dataType) == 1)
-    assertthat::assert_that(dataType %in% c("clinical", "rnaseq", "mutations"))
+    assertthat::assert_that(dataType %in% c("clinical", "rnaseq", "mutations", "rppa"))
     
     if (dataType == "clinical") {
         return(read.clinical(path, ...))
@@ -113,6 +116,9 @@ readTCGA <- function(path, dataType, ...) {
     }
     if (dataType == "mutations") {
         return(read.mutations(path, ...))
+    }
+    if (dataType == "rppa") {
+        return(read.rnaseq(path, ...))
     }
     
 }
@@ -136,8 +142,10 @@ read.rnaseq <- function(rnaseqDir, ...) {
     rnaseqData <- fread(rnaseqDir, data.table = FALSE) %>% t()
     colnames(rnaseqData) <- rnaseqData[1, ]
     barcodes <- rownames(rnaseqData)
-    rnaseqData <- rnaseqData[-1, -1] %>% apply(2, function(x) as.numeric(as.character(x))) %>% as.data.frame(x = .) %>% cbind(bcr_patient_barcode = barcodes[-1], 
-        .)
+    rnaseqData <- rnaseqData[-1, -1] %>%
+        apply(2, function(x) as.numeric(as.character(x))) %>%
+        as.data.frame(x = .) %>%
+        cbind(bcr_patient_barcode = barcodes[-1], .)
     return(rnaseqData)
 }
 

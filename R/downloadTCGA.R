@@ -76,7 +76,24 @@ downloadTCGA <- function(cancerTypes, dataSet = "Merge_Clinical.Level_1", destDi
             stop(paste("Data from ", lastReleaseDate, " can not be downloaded. Use other date from checkTCGA('Dates')."))
         })
         
-        linksToData <- elementIndexes[1]
+        elementIndexesNO_FFPELength <- elementIndexes %>%
+            grep("FFPE", x = . ,
+                 value = TRUE,
+                 invert = TRUE) %>% 
+            length()
+        
+        linksToData <- ifelse( elementIndexesNO_FFPELength < 1,
+                               elementIndexes[1],
+                               elementIndexes %>%
+                                   grep("FFPE", x = . ,
+                                        value = TRUE,
+                                        invert = TRUE) %>% .[1])
+        
+        if (length(elementIndexes) > 1){
+            cat('There were more than one datasets matching the dataSet parameter. \nDownloaded only \n',
+                linksToData, "\n\nAll matches were \n\n", paste(elementIndexes, collapse = "\n"), sep="")
+        }
+                               
         
         # http://gdac.broadinstitute.org/runs/stddata__2015_02_04/data/BRCA/20150204/
         file.create(file.path(destDir, linksToData))
