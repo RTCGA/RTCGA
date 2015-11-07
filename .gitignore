@@ -4,12 +4,15 @@
 # History files
 .Rhistory
 .Rapp.history
+data2/
+data/
 
 # Example code in package build process
 *-Ex.R
 
 # RStudio files
 .Rproj.user/
+RTCGA.Rproj~
 
 # produced vignettes
 vignettes/*.html
