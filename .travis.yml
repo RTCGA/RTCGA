@@ -12,4 +12,5 @@ r_packages:
  - rvest
  - data.table
  - magrittr
+ - xml2
 sudo: required
