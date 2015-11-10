@@ -4,6 +4,7 @@
 - `datasetsTCGA` documentation has been extended with new datasets for `rppa`
 - `downloadTCGA` now gives a warning when more than one file matches `dataSet` parameter, and downloads the first matched dataset without `FFPE` in the name. If all matching datasets have `FFPE` in the name then the first of them is downloaded.
 - `checkTCGA` now downloads also sizes with datasets names when one specifies `what` parameter to `DatSets`.
+- Updated tests for `checkTCGA`
 
 # Version 1.0
 

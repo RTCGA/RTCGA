@@ -89,8 +89,13 @@ availableDataSets <- function(cancerType, date = NULL) {
 #     elementIndex <- tryCatch(readLines(filesParentURL), error = function(e) stop(paste("Probably dataset from this date needs authentication. \n \tCouldn't check available datasets' names.", 
 #         "\n \tTry manually on", filesParentURL)))
     readHTMLTable(filesParentURL)[[1]][-c(1:2), c(2,4)] -> check
-    return(check[!grepl('md5', check[,1]) , ])
-
+    check[!grepl('md5', check[,1]) , ] -> check
+    check[!grepl('aux', check[,1]) , ] -> check
+    check[!grepl('mage-tab', check[,1]) , ] -> check
+    check[, 1] <- gsub("gdac.broadinstitute.org_", "", check[, 1])
+    na.omit(check) -> check
+    rownames(check) <- 1:nrow(check)
+    return(check[, c(2,1)])
     
     # stopped working suddenly after change of indexing of pages like that
     # http://gdac.broadinstitute.org/runs/stddata__2015_04_02/data/BRCA/20150402/ looks bad, but works fine....  need to fix this mess
