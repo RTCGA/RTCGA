@@ -7,16 +7,18 @@
 #'      \item rnaseq data (genes' expressions) - \code{Mutation_Packager_Calls.Level}
 #'      \item genes' mutations data - \code{rnaseqv2__illuminahiseq_rnaseqv2}
 #'      \item Reverse phase protein array data - \code{protein_normalization__data.Level_3}
+#'      \item Merge transcriptome agilent data - \code{Merge_transcriptome__agilentg}
 #'      }
 #' from TCGA project. Those files can be easily downloded with \link{downloadTCGA} function. See examples.
 #' 
-#' @param path If \code{dataType = 'clinical'} a directory to a \code{cancerType.clin.merged.txt} file. 
-#' If \code{dataType = 'mutations'} a directory to the unzziped folder \code{Mutation_Packager_Calls.Level} containing \code{.maf} files.
-#' If \code{dataType = 'rnaseq'} a directory to the uzziped file \code{rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level}.
-#' If \code{dataType = 'rppa'} a directory to the unzipped file in folder \code{protein_normalization__data.Level_3}.
+#' @param path If \code{dataType = 'clinical'} a path to a \code{cancerType.clin.merged.txt} file. 
+#' If \code{dataType = 'mutations'} a path to the unzziped folder \code{Mutation_Packager_Calls.Level} containing \code{.maf} files.
+#' If \code{dataType = 'rnaseq'} a path to the uzziped file \code{rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level}.
+#' If \code{dataType = 'rppa'} a path to the unzipped file in folder \code{protein_normalization__data.Level_3}.
+#' If \code{dataType = 'mrna'} a path to the unzipped file \code{cancerType.transcriptome__agilentg4502a_07_3__unc_edu__Level_3__unc_lowess_normalization_gene_level__data.data.txt}
 #' See examples.
 #' 
-#' @param dataType One of \code{'clinical', 'rnaseq', 'mutations', 'rppa'} depending on which type of data users is trying to read in the tidy format.
+#' @param dataType One of \code{'clinical', 'rnaseq', 'mutations', 'rppa', 'mrna'} depending on which type of data users is trying to read in the tidy format.
 #' @param ... Further arguments passed to the \link{as.data.frame}.
 #' 
 #' @return 
@@ -26,6 +28,7 @@
 #'      \item If \code{dataType = 'rnaseq'} a \code{data.frame} with rnaseq data.
 #'      \item If \code{dataType = 'mutations'} a \code{data.frame} with mutations data.
 #'      \item If \code{dataType = 'rppa'} a \code{data.frame} with rppa data.
+#'      \item If \code{dataType = 'mrna'} a \code{data.frame} with mrna data.
 #' }
 #' 
 #' @details 
@@ -106,21 +109,17 @@
 readTCGA <- function(path, dataType, ...) {
     assertthat::assert_that(is.character(path) & length(path) == 1)
     assertthat::assert_that(is.character(dataType) & length(dataType) == 1)
-    assertthat::assert_that(dataType %in% c("clinical", "rnaseq", "mutations", "rppa"))
+    assertthat::assert_that(dataType %in% c("clinical", "rnaseq", "mutations", "rppa", "mrna"))
     
     if (dataType == "clinical") {
         return(read.clinical(path, ...))
     }
-    if (dataType == "rnaseq") {
+    if (dataType %in% c("rnaseq", "rppa", "mrna")) {
         return(read.rnaseq(path, ...))
     }
     if (dataType == "mutations") {
         return(read.mutations(path, ...))
     }
-    if (dataType == "rppa") {
-        return(read.rnaseq(path, ...))
-    }
-    
 }
 
 read.clinical <- function(clinicalDir, ...) {
