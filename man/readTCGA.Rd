@@ -32,8 +32,8 @@ An output:
 \code{readTCGA} function allows to read unzipped files: 
 \itemize{
      \item clinical data - \code{Merge_Clinical.Level_1} 
-     \item rnaseq data (genes' expressions) - \code{Mutation_Packager_Calls.Level}
-     \item genes' mutations data - \code{rnaseqv2__illuminahiseq_rnaseqv2}
+     \item rnaseq data (genes' expressions) - \code{rnaseqv2__illuminahiseq_rnaseqv2}
+     \item genes' mutations data - \code{Mutation_Packager_Calls.Level}
      \item Reverse phase protein array data - \code{protein_normalization__data.Level_3}
      \item Merge transcriptome agilent data - \code{Merge_transcriptome__agilentg}
      }

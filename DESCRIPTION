@@ -39,4 +39,4 @@ Repository: Bioconductor
 biocViews: Software
 VignetteBuilder: knitr
 NeedsCompilation: no
-RoxygenNote: 5.0.0
+RoxygenNote: 5.0.1
