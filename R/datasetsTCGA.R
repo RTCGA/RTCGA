@@ -2,13 +2,14 @@
 #' @title RTCGA.data - The Family of R Packages with Data from The Cancer Genome Atlas Study
 #'
 #' @description
-#' Snapshots of the clinical, mutations, cnvs and rnaseq datasets from the \code{2015-06-01}
-#' release date are included in the \code{RTCGA.data} family that contains 4 packages:
+#' Snapshots of the clinical, mutations, cnvs and rnaseq datasets from the \code{2015-08-21}
+#' release date are included in the \code{RTCGA.data} family (factory) that contains 5 packages:
 #' \itemize{
-#'  \item \pkg{RTCGA.rnaseq}
-#'  \item \pkg{RTCGA.clinical}
-#'  \item \pkg{RTCGA.mutations}
-#'  \item \pkg{RTCGA.cnv}
+#'  \item \pkg{RTCGA.rnaseq} \link[RTCGA.rnaseq]{rnaseq}
+#'  \item \pkg{RTCGA.clinical} \link[RTCGA.clinical]{clinical}
+#'  \item \pkg{RTCGA.mutations} \link[RTCGA.mutations]{mutations}
+#'  \item \pkg{RTCGA.cnv} \link[RTCGA.cnv]{cnv}
+#'  \item \pkg{RTCGA.rppa} \link[RTCGA.rppa]{rppa}
 #'  }
 #'
 #' @details
@@ -32,6 +33,7 @@
 #' biocLite(RTCGA.mutations)
 #' biocLite(RTCGA.rnaseq)
 #' biocLite(RTCGA.cnv)
+#' biocLite(RTCGA.rppa)
 #' 
 #' # use cases and examples + more data info
 #' browseVignettes('RTCGA')
