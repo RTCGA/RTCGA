@@ -10,11 +10,11 @@ readTCGA(path, dataType, ...)
 \item{path}{If \code{dataType = 'clinical'} a path to a \code{cancerType.clin.merged.txt} file. 
 If \code{dataType = 'mutations'} a path to the unzziped folder \code{Mutation_Packager_Calls.Level} containing \code{.maf} files.
 If \code{dataType = 'rnaseq'} a path to the uzziped file \code{rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level}.
-If \code{dataType = 'rppa'} a path to the unzipped file in folder \code{protein_normalization__data.Level_3}.
-If \code{dataType = 'mrna'} a path to the unzipped file \code{cancerType.transcriptome__agilentg4502a_07_3__unc_edu__Level_3__unc_lowess_normalization_gene_level__data.data.txt}
+If \code{dataType = 'RPPA'} a path to the unzipped file in folder \code{protein_normalization__data.Level_3}.
+If \code{dataType = 'mRNA'} a path to the unzipped file \code{cancerType.transcriptome__agilentg4502a_07_3__unc_edu__Level_3__unc_lowess_normalization_gene_level__data.data.txt}
 See examples.}
 
-\item{dataType}{One of \code{'clinical', 'rnaseq', 'mutations', 'rppa', 'mrna'} depending on which type of data users is trying to read in the tidy format.}
+\item{dataType}{One of \code{'clinical', 'rnaseq', 'mutations', 'RPPA', 'mRNA'} depending on which type of data users is trying to read in the tidy format.}
 
 \item{...}{Further arguments passed to the \link{as.data.frame}.}
 }
@@ -24,8 +24,8 @@ An output:
      \item If \code{dataType = 'clinical'} a \code{data.frame} with clinical data.
      \item If \code{dataType = 'rnaseq'} a \code{data.frame} with rnaseq data.
      \item If \code{dataType = 'mutations'} a \code{data.frame} with mutations data.
-     \item If \code{dataType = 'rppa'} a \code{data.frame} with rppa data.
-     \item If \code{dataType = 'mrna'} a \code{data.frame} with mrna data.
+     \item If \code{dataType = 'RPPA'} a \code{data.frame} with RPPA data.
+     \item If \code{dataType = 'mRNA'} a \code{data.frame} with mRNA data.
 }
 }
 \description{

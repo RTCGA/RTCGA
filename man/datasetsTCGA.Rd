@@ -11,8 +11,8 @@ release date are included in the \code{RTCGA.data} family (factory) that contain
  \item \pkg{RTCGA.clinical} \link[RTCGA.clinical]{clinical}
  \item \pkg{RTCGA.mutations} \link[RTCGA.mutations]{mutations}
  \item \pkg{RTCGA.cnv} \link[RTCGA.cnv]{cnv}
- \item \pkg{RTCGA.rppa} \link[RTCGA.rppa]{rppa}
- \item \pkg{RTCGA.mrna} \link[RTCGA.mrna]{mrna}
+ \item \pkg{RTCGA.RPPA} \link[RTCGA.RPPA]{RPPA}
+ \item \pkg{RTCGA.mRNA} \link[RTCGA.mRNA]{mRNA}
  }
 }
 \details{
@@ -31,8 +31,8 @@ biocLite(RTCGA.clinical)
 biocLite(RTCGA.mutations)
 biocLite(RTCGA.rnaseq)
 biocLite(RTCGA.cnv)
-biocLite(RTCGA.rppa)
-biocLite(RTCGA.mrna)
+biocLite(RTCGA.RPPA)
+biocLite(RTCGA.mRNA)
 
 # use cases and examples + more data info
 browseVignettes('RTCGA')
