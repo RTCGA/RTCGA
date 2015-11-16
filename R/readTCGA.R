@@ -166,7 +166,7 @@ read.mutations <- function(mutationsDir, ...) {
         maf_data[, n_col] <- barcodes[i]
         names(maf_data)[n_col] <- "bcr_patient_barcode"
         
-        write.table(x = maf_data, sep = "\t", file = tmp, append = TRUE, col.names = TRUE, quote = FALSE, row.names = FALSE)
+        write.table(x = maf_data, sep = "\t", file = tmp, append = TRUE, col.names = i==1, quote = FALSE, row.names = FALSE)
         
         
         setTxtProgressBar(pb, i)
