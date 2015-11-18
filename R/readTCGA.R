@@ -109,9 +109,10 @@
 readTCGA <- function(path, dataType, ...) {
     assertthat::assert_that(is.character(path) & length(path) == 1)
     assertthat::assert_that(is.character(dataType) & length(dataType) == 1)
-    assertthat::assert_that(dataType %in% c("clinical", "rnaseq", "mutations", "RPPA", "mRNA"))
+    assertthat::assert_that(dataType %in% c("clinical", "rnaseq", "mutations", "RPPA", "mRNA",
+                                            "miRNASeq"))
     
-    if (dataType == "clinical") {
+    if (dataType %in% c("clinical", "miRNASeq")) {
         return(read.clinical(path, ...))
     }
     if (dataType %in% c("rnaseq", "RPPA", "mRNA")) {
