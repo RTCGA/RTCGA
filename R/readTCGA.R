@@ -124,7 +124,7 @@ readTCGA <- function(path, dataType, ...) {
 
 read.clinical <- function(clinicalDir, ...) {
     
-    comboClinical <- read.delim(clinicalDir)
+    comboClinical <- fread(clinicalDir, data.table = FALSE)
     
     colNames <- comboClinical[, 1]
     
