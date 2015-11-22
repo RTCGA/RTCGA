@@ -4,15 +4,17 @@
 \alias{datasetsTCGA}
 \title{RTCGA.data - The Family of R Packages with Data from The Cancer Genome Atlas Study}
 \description{
-Snapshots of the clinical, mutations, cnvs, rnaseq, RPPA, mRNA datasets from the \code{2015-08-21}
-release date are included in the \code{RTCGA.data} family (factory) that contains 6 packages:
+Snapshots of the clinical, mutations, CNVs, rnaseq, RPPA, mRNA, miRNASeq and methylation datasets from the \code{2015-08-21}
+release date are included in the \code{RTCGA.data} family (factory) that contains 8 packages:
 \itemize{
  \item \pkg{RTCGA.rnaseq} \link[RTCGA.rnaseq]{rnaseq}
  \item \pkg{RTCGA.clinical} \link[RTCGA.clinical]{clinical}
  \item \pkg{RTCGA.mutations} \link[RTCGA.mutations]{mutations}
- \item \pkg{RTCGA.cnv} \link[RTCGA.cnv]{cnv}
+ \item \pkg{RTCGA.CNV} \link[RTCGA.cnv]{CNV}
  \item \pkg{RTCGA.RPPA} \link[RTCGA.RPPA]{RPPA}
  \item \pkg{RTCGA.mRNA} \link[RTCGA.mRNA]{mRNA}
+ \item \pkg{RTCGA.miRNASeq} \link[RTCGA.mRNA]{miRNASeq}
+ \item \pkg{RTCGA.methylation} \link[RTCGA.methylation]{methylation}
  }
 }
 \details{
@@ -30,9 +32,11 @@ source('http://bioconductor.org/biocLite.R')
 biocLite(RTCGA.clinical)
 biocLite(RTCGA.mutations)
 biocLite(RTCGA.rnaseq)
-biocLite(RTCGA.cnv)
+biocLite(RTCGA.CNV)
 biocLite(RTCGA.RPPA)
 biocLite(RTCGA.mRNA)
+biocLite(RTCGA.miRNASeq)
+biocLite(RTCGA.methylation)
 
 # use cases and examples + more data info
 browseVignettes('RTCGA')
@@ -41,7 +45,8 @@ browseVignettes('RTCGA')
 }
 \author{
 Marcin Kosinski [aut, cre] \email{ m.p.kosinski@gmail.com } \cr
-Przemyslaw Biecek [aut] \email{ przemyslaw.biecek@gmail.com }
+Przemyslaw Biecek [aut] \email{ przemyslaw.biecek@gmail.com } \cr
+Witold Chodor [aut] \email{ witoldchodor@gmail.com }
 }
 \seealso{
 Other RTCGA: \code{\link{RTCGA-package}},

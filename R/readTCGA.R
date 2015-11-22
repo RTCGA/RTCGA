@@ -6,8 +6,8 @@
 #'      \item clinical data - \code{Merge_Clinical.Level_1} 
 #'      \item rnaseq data (genes' expressions) - \code{rnaseqv2__illuminahiseq_rnaseqv2}
 #'      \item genes' mutations data - \code{Mutation_Packager_Calls.Level}
-#'      \item Reverse phase protein array data - \code{protein_normalization__data.Level_3}
-#'      \item Merge transcriptome agilent data - \code{Merge_transcriptome__agilentg}
+#'      \item Reverse phase protein array data (RPPA) - \code{protein_normalization__data.Level_3}
+#'      \item Merge transcriptome agilent data (mRNA) - \code{Merge_transcriptome__agilentg}
 #'      }
 #' from TCGA project. Those files can be easily downloded with \link{downloadTCGA} function. See examples.
 #' 
@@ -18,7 +18,7 @@
 #' If \code{dataType = 'mRNA'} a path to the unzipped file \code{cancerType.transcriptome__agilentg4502a_07_3__unc_edu__Level_3__unc_lowess_normalization_gene_level__data.data.txt}
 #' See examples.
 #' 
-#' @param dataType One of \code{'clinical', 'rnaseq', 'mutations', 'RPPA', 'mRNA'} depending on which type of data users is trying to read in the tidy format.
+#' @param dataType One of \code{'clinical', 'rnaseq', 'mutations', 'RPPA', 'mRNA', 'miRNASeq', 'methylation'} depending on which type of data user is trying to read in the tidy format.
 #' @param ... Further arguments passed to the \link{as.data.frame}.
 #' 
 #' @return 
@@ -29,6 +29,8 @@
 #'      \item If \code{dataType = 'mutations'} a \code{data.frame} with mutations data.
 #'      \item If \code{dataType = 'RPPA'} a \code{data.frame} with RPPA data.
 #'      \item If \code{dataType = 'mRNA'} a \code{data.frame} with mRNA data.
+#'      \item If \code{dataType = 'miRNASeq'} a \code{data.frame} with miRNASeq data.
+#'      \item If \code{dataType = 'methylation'} a \code{data.frame} with methylation data.
 #' }
 #' 
 #' @details 
@@ -110,9 +112,9 @@ readTCGA <- function(path, dataType, ...) {
     assertthat::assert_that(is.character(path) & length(path) == 1)
     assertthat::assert_that(is.character(dataType) & length(dataType) == 1)
     assertthat::assert_that(dataType %in% c("clinical", "rnaseq", "mutations", "RPPA", "mRNA",
-                                            "miRNASeq"))
+                                            "miRNASeq", "methylation"))
     
-    if (dataType %in% c("clinical", "miRNASeq")) {
+    if (dataType %in% c("clinical", "miRNASeq", "methylation")) {
         return(read.clinical(path, ...))
     }
     if (dataType %in% c("rnaseq", "RPPA", "mRNA")) {
@@ -131,9 +133,6 @@ read.clinical <- function(clinicalDir, ...) {
     
     comboClinical <- as.data.frame(t(comboClinical[, -1]), ...)
     names(comboClinical) <- colNames
-    
-    # comboClinical <- data.table::as.data.table(comboClinical) comboClinical <- comboClinical[, unique(names(comboClinical)), with =
-    # FALSE] comboClinical <- as.data.frame(comboClinical, ...)
     
     return(comboClinical)
 }

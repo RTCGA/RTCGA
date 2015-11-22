@@ -14,7 +14,7 @@ If \code{dataType = 'RPPA'} a path to the unzipped file in folder \code{protein_
 If \code{dataType = 'mRNA'} a path to the unzipped file \code{cancerType.transcriptome__agilentg4502a_07_3__unc_edu__Level_3__unc_lowess_normalization_gene_level__data.data.txt}
 See examples.}
 
-\item{dataType}{One of \code{'clinical', 'rnaseq', 'mutations', 'RPPA', 'mRNA'} depending on which type of data users is trying to read in the tidy format.}
+\item{dataType}{One of \code{'clinical', 'rnaseq', 'mutations', 'RPPA', 'mRNA', 'miRNASeq', 'methylation'} depending on which type of data user is trying to read in the tidy format.}
 
 \item{...}{Further arguments passed to the \link{as.data.frame}.}
 }
@@ -26,6 +26,8 @@ An output:
      \item If \code{dataType = 'mutations'} a \code{data.frame} with mutations data.
      \item If \code{dataType = 'RPPA'} a \code{data.frame} with RPPA data.
      \item If \code{dataType = 'mRNA'} a \code{data.frame} with mRNA data.
+     \item If \code{dataType = 'miRNASeq'} a \code{data.frame} with miRNASeq data.
+     \item If \code{dataType = 'methylation'} a \code{data.frame} with methylation data.
 }
 }
 \description{
@@ -34,8 +36,8 @@ An output:
      \item clinical data - \code{Merge_Clinical.Level_1} 
      \item rnaseq data (genes' expressions) - \code{rnaseqv2__illuminahiseq_rnaseqv2}
      \item genes' mutations data - \code{Mutation_Packager_Calls.Level}
-     \item Reverse phase protein array data - \code{protein_normalization__data.Level_3}
-     \item Merge transcriptome agilent data - \code{Merge_transcriptome__agilentg}
+     \item Reverse phase protein array data (RPPA) - \code{protein_normalization__data.Level_3}
+     \item Merge transcriptome agilent data (mRNA) - \code{Merge_transcriptome__agilentg}
      }
 from TCGA project. Those files can be easily downloded with \link{downloadTCGA} function. See examples.
 }
