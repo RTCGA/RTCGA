@@ -10,11 +10,11 @@ release date are included in the \code{RTCGA.data} family (factory) that contain
  \item \pkg{RTCGA.rnaseq} \link[RTCGA.rnaseq]{rnaseq}
  \item \pkg{RTCGA.clinical} \link[RTCGA.clinical]{clinical}
  \item \pkg{RTCGA.mutations} \link[RTCGA.mutations]{mutations}
- \item \pkg{RTCGA.CNV} \link[RTCGA.cnv]{CNV}
- \item \pkg{RTCGA.RPPA} \link[RTCGA.RPPA]{RPPA}
- \item \pkg{RTCGA.mRNA} \link[RTCGA.mRNA]{mRNA}
- \item \pkg{RTCGA.miRNASeq} \link[RTCGA.mRNA]{miRNASeq}
- \item \pkg{RTCGA.methylation} \link[RTCGA.methylation]{methylation}
+ \item \pkg{RTCGA.CNV} 
+ \item \pkg{RTCGA.RPPA} 
+ \item \pkg{RTCGA.mRNA} 
+ \item \pkg{RTCGA.miRNASeq} 
+ \item \pkg{RTCGA.methylation} 
  }
 }
 \details{
