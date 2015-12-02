@@ -21,6 +21,8 @@
 #' @param removeTar Logical - should the downloaded \code{.tar} file be removed after untarring.
 #' Default is \code{TRUE}.
 #' 
+#' @param allDataSets Logical - should download all datasets matching \code{dataSet} parameter or only the first one (without \code{FFPE} phrase if possible).
+#' 
 #' @details 
 #' All cohort names can be checked using: \code{ sub( x = names( infoTCGA() ), '-counts', '' )}.
 #' 
@@ -44,7 +46,8 @@
 #' @family RTCGA
 #' @rdname downloadTCGA
 #' @export
-downloadTCGA <- function(cancerTypes, dataSet = "Merge_Clinical.Level_1", destDir, date = NULL, untarFile = TRUE, removeTar = TRUE) {
+downloadTCGA <- function(cancerTypes, dataSet = "Merge_Clinical.Level_1", destDir,
+                         date = NULL, untarFile = TRUE, removeTar = TRUE, allDataSets = FALSE) {
     
     assert_that(is.character(cancerTypes) & (length(cancerTypes) > 0))
     assert_that(is.character(dataSet) & (length(dataSet) == 1))
@@ -52,6 +55,7 @@ downloadTCGA <- function(cancerTypes, dataSet = "Merge_Clinical.Level_1", destDi
     assert_that(is.null(date) || (is.character(date) & (length(date) == 1)))
     assert_that(is.logical(untarFile) & (length(untarFile) == 1))
     assert_that(is.logical(removeTar) & (length(removeTar) == 1))
+    assert_that(is.logical(allDataSets) & (length(allDataSets) == 1))
     
     # check if there was '/' mark at the end of directory destDir <- checkDirectory( destDir ) no need since I am using file.path
     # function
@@ -89,21 +93,24 @@ downloadTCGA <- function(cancerTypes, dataSet = "Merge_Clinical.Level_1", destDi
                                         value = TRUE,
                                         invert = TRUE) %>% .[1])
         
-        if (length(elementIndexes) > 1){
+        if (length(elementIndexes) > 1 & !allDataSets){
             cat('There were more than one datasets matching the dataSet parameter. \nDownloaded only \n',
                 linksToData, "\n\nAll matches were \n\n", paste(elementIndexes, collapse = "\n"), sep="")
         }
-                               
-        
+        if (allDataSets) {
+            linksToData <- elementIndexes
+        }                       
+        sapply(linksToData, function(linkToData){
         # http://gdac.broadinstitute.org/runs/stddata__2015_02_04/data/BRCA/20150204/
-        file.create(file.path(destDir, linksToData))
-        download.file(url = paste0(filesParentURL, "/", linksToData), destfile = file.path(destDir, linksToData))
-        if (untarFile) {
-            untar(file.path(destDir, linksToData), exdir = destDir)
-        }
-        if (removeTar) {
-            file.remove(file.path(destDir, linksToData))
-        }
+            file.create(file.path(destDir, linkToData))
+            download.file(url = paste0(filesParentURL, "/", linkToData), destfile = file.path(destDir, linkToData))
+            if (untarFile) {
+                untar(file.path(destDir, linkToData), exdir = destDir)
+            }
+            if (removeTar) {
+                file.remove(file.path(destDir, linkToData))
+            }
+        })
     }
     
 }
