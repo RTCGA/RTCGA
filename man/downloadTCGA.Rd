@@ -5,7 +5,7 @@
 \title{Download TCGA data}
 \usage{
 downloadTCGA(cancerTypes, dataSet = "Merge_Clinical.Level_1", destDir,
-  date = NULL, untarFile = TRUE, removeTar = TRUE)
+  date = NULL, untarFile = TRUE, removeTar = TRUE, allDataSets = FALSE)
 }
 \arguments{
 \item{cancerTypes}{A character vector containing abbreviations (Cohort code) of types of cancers to download from 
@@ -24,6 +24,8 @@ function. Required format \code{'YYYY-MM-DD'}.}
 
 \item{removeTar}{Logical - should the downloaded \code{.tar} file be removed after untarring.
 Default is \code{TRUE}.}
+
+\item{allDataSets}{Logical - should download all datasets matching \code{dataSet} parameter or only the first one (without \code{FFPE} phrase if possible).}
 }
 \value{
 No values. It only downloads files.
