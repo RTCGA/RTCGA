@@ -24,7 +24,7 @@ To get started, install the latest version of **RTCGA** from Bioconductor:
 source("http://bioconductor.org/biocLite.R")
 biocLite("RTCGA")
 ```
-or use:
+or use below code to downloaded the development version which is like to be more bug-free than the release version on Bioconductor:
 ```{Ruby}
 if (!require(devtools)) {
     install.packages("devtools")
