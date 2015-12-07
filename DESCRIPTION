@@ -36,7 +36,7 @@ Suggests:
     testthat,
     pander
 Repository: Bioconductor
-biocViews: Software
+biocViews: Software, DataImport, DataRepresentation, Preprocessing
 VignetteBuilder: knitr
 NeedsCompilation: no
 RoxygenNote: 5.0.1
