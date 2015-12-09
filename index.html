@@ -161,23 +161,8 @@ date &lt;-<span class="st"> </span><span class="kw">tail</span>( <span class="kw
               <span class="dt">dataSet =</span> <span class="st">&quot;Mutation_Packager_Calls.Level&quot;</span> )</code></pre>
 </div>
 </div>
-<div id="untarring-data" class="section level2">
-<h2><span class="header-section-number">3.2</span> Untarring data</h2>
-<p>Let us use the <code>untar()</code> function to untar all downloaded sets.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list.files</span>( <span class="st">&quot;data/&quot;</span>) %&gt;%<span class="st"> </span>
-<span class="st">   </span><span class="kw">paste0</span>( <span class="st">&quot;data/&quot;</span>, .) %&gt;%
-<span class="st">   </span><span class="kw">sapply</span>( untar, <span class="dt">exdir =</span> <span class="st">&quot;data/&quot;</span> )</code></pre>
-</div>
-<div id="removing-no-longer-needed-tar.gz-files" class="section level2">
-<h2><span class="header-section-number">3.3</span> Removing no longer needed <code>tar.gz</code> files</h2>
-<p>After datasets are untarred, the <code>tar.gz</code> files ar no longer needed and can be deleted.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list.files</span>( <span class="st">&quot;data/&quot;</span>) %&gt;%<span class="st"> </span>
-<span class="st">   </span><span class="kw">paste0</span>( <span class="st">&quot;data/&quot;</span>, .) %&gt;%
-<span class="st">   </span><span class="kw">grep</span>( <span class="dt">pattern =</span> <span class="st">&quot;tar.gz&quot;</span>, <span class="dt">x =</span> ., <span class="dt">value =</span> <span class="ot">TRUE</span>) %&gt;%
-<span class="st">   </span><span class="kw">sapply</span>( file.remove )</code></pre>
-</div>
 <div id="shortening-directories-of-downloaded-files" class="section level2">
-<h2><span class="header-section-number">3.4</span> Shortening directories of downloaded files</h2>
+<h2><span class="header-section-number">3.2</span> Shortening directories of downloaded files</h2>
 <p>Because the path to rnaseq data has more thatn 256 digits we need to shorten that directory so that R can <strong>notice</strong> the existance of this file.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list.files</span>( <span class="st">&quot;data/&quot;</span>) %&gt;%<span class="st"> </span>
 <span class="st">   </span><span class="kw">paste0</span>( <span class="st">&quot;data/&quot;</span>, .) %&gt;%
