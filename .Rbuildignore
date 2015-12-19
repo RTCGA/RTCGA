@@ -13,4 +13,6 @@ Rd2.pdf
 ^\.travis\.yml$
 update_remote.ssh
 data2/
+RTCGA.tools/
+RTCGA\.tools/
 
