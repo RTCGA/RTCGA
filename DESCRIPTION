@@ -1,7 +1,7 @@
 Package: RTCGA
 Title: The Cancer Genome Atlas Data Integration
-Version: 1.1.10
-Date: 2015-12-07
+Version: 1.2.0
+Date: 2015-12-19
 Author: Marcin Kosinski <m.p.kosinski@gmail.com>, Przemyslaw Biecek
     <przemyslaw.biecek@gmail.com>
 Maintainer: Marcin Kosinski <m.p.kosinski@gmail.com>
@@ -31,7 +31,8 @@ Imports:
     rvest,
     data.table,
     magrittr,
-    xml2
+    xml2,
+    devtools
 Suggests:
     testthat,
     pander

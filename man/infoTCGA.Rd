@@ -24,6 +24,7 @@ rownames() \%>\%
 \seealso{
 Other RTCGA: \code{\link{RTCGA-package}},
   \code{\link{checkTCGA}}, \code{\link{datasetsTCGA}},
-  \code{\link{downloadTCGA}}, \code{\link{readTCGA}}
+  \code{\link{downloadTCGA}}, \code{\link{installTCGA}},
+  \code{\link{readTCGA}}
 }
 

@@ -1,3 +1,8 @@
+# Version 1.2
+
+- Added new `installRTCGA` function that can install all packages from RTCGA family.
+
+
 # Version 1.1
 
 - New parameter `allDataSets` for `downloadTCGA` that allows to download all files matching string in the `dataSet` parameter.

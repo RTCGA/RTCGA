@@ -21,6 +21,7 @@
 #' @importFrom stringi stri_extract_all_regex
 #' @importFrom assertthat assert_that
 #' @importFrom XML readHTMLTable
+#' @importFrom devtools install_github
 #' 
 #' @examples
 #' \dontrun{
