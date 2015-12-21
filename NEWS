@@ -1,6 +1,7 @@
 # Version 1.2
 
 - Added new `installRTCGA` function that can install all packages from RTCGA family.
+- Added new `read.methylation` method to read methylation datasets
 
 
 # Version 1.1

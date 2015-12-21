@@ -117,8 +117,11 @@ readTCGA <- function(path, dataType, ...) {
     assertthat::assert_that(dataType %in% c("clinical", "rnaseq", "mutations", "RPPA", "mRNA",
                                             "miRNASeq", "methylation"))
     
-    if (dataType %in% c("clinical", "miRNASeq", "methylation")) {
+    if (dataType %in% c("clinical", "miRNASeq")) {
         return(read.clinical(path, ...))
+    }
+    if (dataType %in% c("methylation")) {
+        return(read.methylation(path, ...))
     }
     if (dataType %in% c("rnaseq", "RPPA", "mRNA")) {
         return(read.rnaseq(path, ...))
@@ -138,6 +141,20 @@ read.clinical <- function(clinicalDir, ...) {
     names(comboClinical) <- colNames
     
     return(comboClinical)
+}
+
+read.methylation <- function(methylationDir, ...){
+    methylationData <- fread(methylationDir, data.table = FALSE)
+    first_row <- methylationData[1,]
+    Beta_value_column <- which(first_row == "Beta_value")
+    methylationData <- methylationData[,c(1, 3, 4, 5, Beta_value_column)]
+    colNames <- methylationData[,1]
+    methylationData <- as.data.frame(t(methylationData[,-1]), ...)
+    names(methylationData) <- colNames
+    row.names(methylationData)[1:3] <- c("TCGA-05.1", "TCGA-05.2", "TCGA-05.3")
+    x <- row.names(methylationData)[4]
+    row.names(methylationData)[4] <- sub("\\.3$", "", x)
+    return(methylationData)
 }
 
 read.rnaseq <- function(rnaseqDir, ...) {
