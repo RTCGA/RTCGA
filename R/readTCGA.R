@@ -14,11 +14,19 @@
 #' from TCGA project. Those files can be easily downloded with \link{downloadTCGA} function. See examples.
 #' 
 #' @param path If \code{dataType = 'clinical'} a path to a \code{cancerType.clin.merged.txt} file. 
+#' 
 #' If \code{dataType = 'mutations'} a path to the unzziped folder \code{Mutation_Packager_Calls.Level} containing \code{.maf} files.
+#' 
 #' If \code{dataType = 'rnaseq'} a path to the uzziped file \code{rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level}.
+#' 
 #' If \code{dataType = 'RPPA'} a path to the unzipped file in folder \code{protein_normalization__data.Level_3}.
+#' 
 #' If \code{dataType = 'mRNA'} a path to the unzipped file \code{cancerType.transcriptome__agilentg4502a_07_3__unc_edu__Level_3__unc_lowess_normalization_gene_level__data.data.txt}
+#' 
 #' If \code{dataType = 'miRNASeq'} a path to unzipped files \code{cancerType.mirnaseq__illuminahiseq_mirnaseq__bcgsc_ca__Level_3__miR_gene_expression__data.data.txt} or \code{cancerType.mirnaseq__illuminaga_mirnaseq__bcgsc_ca__Level_3__miR_gene_expression__data.data.txt}
+#' 
+#' If \code{dataType = 'methylation'} a path to unzipped files \code{cancerType.methylation__humanmethylation27__jhu_usc_edu__Level_3__within_bioassay_data_set_function__data.data.txt}
+#' 
 #' See examples.
 #' 
 #' @param dataType One of \code{'clinical', 'rnaseq', 'mutations', 'RPPA', 'mRNA', 'miRNASeq', 'methylation'} depending on which type of data user is trying to read in the tidy format.
@@ -38,6 +46,11 @@
 #' 
 #' @details 
 #' All cohort names can be checked using: \code{ sub( x = names( infoTCGA() ), '-counts', '')}.
+#' 
+#' @author 
+#' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
+#' 
+#' Witold Chodor, \email{witoldchodor@@gmail.com}
 #' 
 #' @examples 
 #' 
