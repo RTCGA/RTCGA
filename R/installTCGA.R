@@ -30,7 +30,7 @@ installTCGA <- function(packages = c('RTCGA.clinical', 'RTCGA.mutations',
                                         'RTCGA.miRNASeq', 'RTCGA.PANCAN12',
                                         'RTCGA.methylation')) )
     sapply(packages, function(package){
-        devtools::install_github(file.path('RTCGA', package), build.vignettes = TRUE)
+        devtools::install_github(file.path('RTCGA', package), build_vignettes = TRUE)
     })
     
 }
