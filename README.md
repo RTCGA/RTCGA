@@ -58,7 +58,7 @@ if (!require(devtools)) {
     install.packages("devtools")
     require(devtools)
 }
-install_github("RTCGA/RTCGA", build_vignettes = TRUE)
+install_github("RTCGA/RTCGA", build.vignettes = TRUE)
 ```
 To check Use Cases run
 ```{R}
