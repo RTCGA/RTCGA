@@ -21,9 +21,12 @@ If \code{dataType = 'miRNASeq'} a path to unzipped files \code{cancerType.mirnas
 
 If \code{dataType = 'methylation'} a path to unzipped files \code{cancerType.methylation__humanmethylation27__jhu_usc_edu__Level_3__within_bioassay_data_set_function__data.data.txt}
 
+If \code{dataType = 'isoforms'} a path to unzipped files \code{cancerType.rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_isoforms_normalized__data.data.txt}
+
+
 See examples.}
 
-\item{dataType}{One of \code{'clinical', 'rnaseq', 'mutations', 'RPPA', 'mRNA', 'miRNASeq', 'methylation'} depending on which type of data user is trying to read in the tidy format.}
+\item{dataType}{One of \code{'clinical', 'rnaseq', 'mutations', 'RPPA', 'mRNA', 'miRNASeq', 'methylation', 'isoforms'} depending on which type of data user is trying to read in the tidy format.}
 
 \item{...}{Further arguments passed to the \link{as.data.frame}.}
 }
@@ -37,6 +40,7 @@ An output:
      \item If \code{dataType = 'mRNA'} a \code{data.frame} with mRNA data.
      \item If \code{dataType = 'miRNASeq'} a \code{data.frame} with miRNASeq data.
      \item If \code{dataType = 'methylation'} a \code{data.frame} with methylation data.
+     \item If \code{dataType = 'isoforms'} a \code{data.frame} with isoforms data.
 }
 }
 \description{
@@ -48,7 +52,8 @@ An output:
      \item Reverse phase protein array data (RPPA) - \code{protein_normalization__data.Level_3}
      \item Merge transcriptome agilent data (mRNA) - \code{Merge_transcriptome__agilentg4502a_07_3__unc_edu__Level_3__unc_lowess_normalization_gene_level__data.Level_3}
      \item miRNASeq data - \code{Merge_mirnaseq__illuminaga_mirnaseq__bcgsc_ca__Level_3__miR_gene_expression__data.Level_3} or \code{"Merge_mirnaseq__illuminahiseq_mirnaseq__bcgsc_ca__Level_3__miR_gene_expression__data.Level_3"}
-     \item methylation data - \code{Merge_methylation__humanmethylation27} 
+     \item methylation data - \code{Merge_methylation__humanmethylation27}
+     \item isoforms data - \code{Merge_rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_isoforms_normalized__data.Level_3} 
      }
 from TCGA project. Those files can be easily downloded with \link{downloadTCGA} function. See examples.
 }
