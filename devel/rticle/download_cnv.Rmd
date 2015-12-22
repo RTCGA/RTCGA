@@ -1,0 +1,170 @@
+---
+title: "CNV dla MDM2 - częstość dla różnych nowotworów"
+author: "Przemek Biecek"
+date: "2 June 2015"
+output: html_document
+---
+
+# Intro
+
+Pobieramy z `gdac` dane o mutacjach CNV. 
+Jest wiele (różna liczba dla różnych nowotworów) plików z cnv w nazwie, my pobieramy pliki z nazwą zawierającą 
+`Merge_snp__genome_wide_snp_6__broad_mit_edu__Level_3__segmented_scna_minus_germline_cnv_hg19__seg.Level_3`.
+
+W tych plikach informacja o CNV nie jest liczona dla genów tylko dla segmentów. Czasem te segmenty mają długość setek MB, czasem kilkuset B. Wybieram tylko segmenty, które dla guzów (01A) zawierają lokalizacje MDM2, czyli Chr 12: 69.2 – 69.24 Mb. 
+
+Poniższy rysunek pokazuje rozkład #CNV dla różnych nowotworów, czarna linia oznacza x2, czerwona x3 kopie. Nowotwory posortowane po trzecim kwartylu.
+
+
+```{r, eval=FALSE, echo=FALSE}
+library(RTCGA)
+(cohorts <- infoTCGA() %>% 
+  names() %>% 
+  sub("-counts", "", x=.))
+date <- tail( availableDates(), 2 )[1]
+
+for (i in cohorts[11:38]) {
+  downloadTCGA( cancerTypes = i, dataSet = paste0(i,".Merge_snp__genome_wide_snp_6__broad_mit_edu__Level_3__segmented_scna_minus_germline_cnv_hg19__seg.Level_3"), destDir = "data/", date = date )
+}
+list.files( "data/", pattern = "tar.gz") %>% 
+  paste0( "data/", .) %>%
+  sapply( untar, exdir = "data/" )
+list.files( "data/") %>% 
+  paste0( "data/", .) %>%
+  grep( pattern = "tar.gz", x = ., value = TRUE) %>%
+  sapply( file.remove )
+```
+
+```{r, eval=FALSE, echo=FALSE}
+res <- list()
+for (i in cohorts) {
+  cnvdir <- list.dirs() %>% 
+              grep(., pattern=paste0("_",i,".Merge_snp"), value=TRUE) %>%
+              grep(., pattern="20150601", value=TRUE)
+  if (length(cnvdir) > 0) {
+    cnv <- read.table(list.files(cnvdir, i, full.names = T),h=T) 
+    cnv12 <- cnv[cnv[,2]=="12",]
+    cnvMDM2 <- cnv12[cnv12[,3] <= 69240000 & cnv12[,4] >= 69200000,]
+    cnvMDM2_01A <- cnvMDM2[grepl(cnvMDM2[,1], pattern="-01A-"),]
+    res[[i]] <- cnvMDM2_01A[,c(1,6)]
+  }
+}
+save(res, file="MDM2_cnv_all_cancers_20150402.rda")
+#save(res, file="MDM2_cnv_all_cancers.rda")
+```
+
+Create datasets fot TCGA.cnv
+```{r, eval=FALSE}
+for (i in cohorts) {
+  cnvdir <- list.dirs() %>% 
+              grep(., pattern=paste0("_",i,".Merge_snp"), value=TRUE) %>%
+              grep(., pattern="20150601", value=TRUE)
+  if (length(cnvdir) > 0) {
+    cnv <- read.table(list.files(cnvdir, i, full.names = T),h=T) 
+    name = paste0(i, ".cnv")
+    assign(name, cnv)
+    save(list = name, file=paste0("data/cnv/", name, ".rda"), compression_level = 9, compress = "xz")
+  }
+}
+
+```
+
+
+```{r, warning=FALSE}
+library(knitr)
+# restore
+load("MDM2_cnv_all_cancers.rda")
+
+allCNVs <- do.call(rbind, lapply(names(res), function(n) {
+  if (nrow(res[[n]]) == 0) return(NULL)
+      data.frame(n, cnv=res[[n]][,2])
+}))
+
+library(ggplot2)
+allCNVs$n <- reorder(allCNVs$n, allCNVs$cnv, quantile, 0.8)
+ggplot(allCNVs, aes(x=n, y=2*2^cnv)) + geom_boxplot() + coord_flip() + scale_y_log10(limits=c(1,50)) +
+  ylab("#CNV for segment with MDM2") + xlab("") + geom_hline(yintercept=2) + geom_hline(yintercept=3, color="red3")
+```
+
+Obrazki obrazkami, zobaczmy ilu pacjentów w każdym nowotworze ma CNV <> 3. W pierwszych dwóch kolumnach mamy liczby pacjentów, w trzeciej kolumnie jest procent pacjentów z duplikacją MDM2. 
+```{r, warning=FALSE}
+tabi <- t(sapply(res, function(i) {
+  c(sum(i[,2] < 0.58), sum(i[,2] >= 0.58))
+}))
+tabi <- cbind(tabi, round(100*prop.table(tabi,1)[,2],1))
+colnames(tabi) <- c("MDM2 <= 3", "MDM2 > 3", "% MDM2 > 3")
+
+kable(tabi)
+```
+
+Najczęściej takie duplikacje występują u SARC i ACC. Przyjrzyjmy się SARC (sarcoma czyli mięsak).
+
+Zobaczmy histogram. 
+
+*Bardzo ciekawy*. Są dwie ,,górki'' czyli jest jakaś grupa pacjentów z bardzo licznymi duplikacjami segmentu, na którym występuje MDM2.
+
+```{r, warning=FALSE}
+ggplot(res[["SARC"]], aes(x=2*2^Segment_Mean)) + geom_histogram() + scale_x_log10() + xlab("CNV") + ggtitle("SARC")  + geom_vline(xintercept=2) + geom_vline(xintercept=3, color="red3")
+
+ggplot(res[["ACC"]], aes(x=2*2^Segment_Mean)) + geom_histogram() + scale_x_log10() + xlab("CNV") + ggtitle("ACC")  + geom_vline(xintercept=2) + geom_vline(xintercept=3, color="red3")
+
+ggplot(res[["GBM"]], aes(x=2*2^Segment_Mean)) + geom_histogram() + scale_x_log10() + xlab("CNV") + ggtitle("GBM")  + geom_vline(xintercept=2) + geom_vline(xintercept=3, color="red3")
+```
+
+Przyjrzyjmy się teraz jak te duplikacje mają się do mutacji w TP53.
+
+*Zła wiadomosć jest taka, że dla SARC nie ma danych MAF.* 
+
+Rozmawiałem z Maćkiem Wiznerowiczem i ma on skontkatować mnie z osobą z TCGA która odpowiada za mięsaka. Ale jeżeli tych danych nie ma teraz to raczej ich już też nie będzie. 
+
+Pozostaje przyjrzeć się pozostałym nowotworom.
+
+Niestety tam też nie jest różowo, nawet dla nowotworów, gdzie było dużo CNV > 3 (np. GBM), okazuje się, że oznaczenia MAF dla wariantów mutacji w TP53 są tylko dla około 50% pacjentów.
+Dlaego w poniższej tabelce dla GBM tylko dla 25 pacjentów jest CNV >3, ale w powyższej takich pacjentów było 48. Niestety dla 23 nie myło odpowiadających im plików MAF.
+
+```{r, eval=FALSE, echo=FALSE}
+resT <- list()
+resF <- list()
+for (i in cohorts) {
+  cnvdir <- grep(list.dirs() , pattern=paste0("_",i,".Mutation_Packager_Calls"), value=TRUE)
+  if (length(cnvdir) > 0) {
+    ll <- list.files(cnvdir, "maf", full.names = T)
+    if (length(ll) > 0) {
+      res2 <- list()
+      for (l in ll) {
+        tmp <- read.table(l, h=T, sep="\t",quote="`")
+        res2[[l]] <- sum(tmp$Hugo_Symbol == "TP53" & tmp$Variant_Classification == "Missense_Mutation")
+      }
+      res3 <- unlist(res2)
+      names(res3) <- sapply(strsplit(sapply(strsplit(names(res2), split="-..\\."), `[`, 1), split="/"), `[`, 4)
+      res5 <- res[[i]][,2]
+      names(res5) <- substr(res[[i]][,1], 1, 12)
+      all <- merge(data.frame(n = names(res3), maf=res3),
+            data.frame(n = names(res5), cnf=res5))
+      resT[[i]] <- table(cnv = all[,3] > 0.58, maf = all[,2] > 0)
+      resF[[i]] <- table(factor(paste(ifelse(all[,3] > 0.58, "CNV >=3", "CNV < 3"), ifelse(all[,2] > 0, "TP53 missense", "TP53 ok"))))
+    }
+    }
+}
+
+kol <- names(resF[['BRCA']])
+df <- data.frame(sapply(resF, `[`, kol[1]),
+           sapply(resF, `[`, kol[2]),
+           sapply(resF, `[`, kol[3]),
+           sapply(resF, `[`, kol[4]))
+colnames(df) <- kol
+rownames(df) <- names(resF)
+
+save(df, file="maf_cnv_all.rda")
+```
+
+```{r}
+load("maf_cnv_all.rda")
+df2 <- as.data.frame(as.table(as.matrix(df)))
+
+ggplot(na.omit(df2), aes(y=Freq, x=Var1, fill=Var2)) + geom_bar(stat='identity', position="fill") + coord_flip() + xlab("") + ylab("Percent") + theme(legend.position="top")
+
+df[is.na(df)] = 0
+kable(df)
+```
+
