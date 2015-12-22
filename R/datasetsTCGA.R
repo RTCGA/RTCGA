@@ -2,8 +2,8 @@
 #' @title RTCGA.data - The Family of R Packages with Data from The Cancer Genome Atlas Study
 #'
 #' @description
-#' Snapshots of the clinical, mutations, CNVs, rnaseq, RPPA, mRNA, miRNASeq and methylation datasets from the \code{2015-08-21}
-#' release date are included in the \code{RTCGA.data} family (factory) that contains 8 packages:
+#' Snapshots of the clinical, mutations, CNVs, rnaseq, RPPA, mRNA, miRNASeq and methylation datasets from the \code{2015-11-01}
+#' release date (check all dates of release with \code{checkTCGA('Dates')}) are included in the \code{RTCGA.data} family (factory) that contains 9 packages:
 #' \itemize{
 #'  \item \pkg{RTCGA.rnaseq} \link[RTCGA.rnaseq]{rnaseq}
 #'  \item \pkg{RTCGA.clinical} \link[RTCGA.clinical]{clinical}
@@ -13,11 +13,12 @@
 #'  \item \pkg{RTCGA.mRNA} 
 #'  \item \pkg{RTCGA.miRNASeq} 
 #'  \item \pkg{RTCGA.methylation} 
+#'  \item \pkg{RTCGA.PANCAN12} (not from TCGA) 
 #'  }
 #'
 #' @details
-#' For more detailed information visit \pkg{RTCGA.data}  
-#' \href{https://mi2-warsaw.github.io/RTCGA.data}{website}.
+#' For more detailed information visit \pkg{RTCGA.data}  website
+#' \href{https://rtcga.github.io/RTCGA}{https://rtcga.github.io/RTCGA}. One can install all data packages with \link{installTCGA}.
 #'
 #' @author
 #' Marcin Kosinski [aut, cre] \email{ m.p.kosinski@@gmail.com } \cr
@@ -32,6 +33,12 @@
 #' # of TCGA project's datasets
 #'
 #' \dontrun{
+#' 
+#' ## RTCGA GitHub development newest versions
+#' library(RTCGA)
+#' ?installTCGA
+#' 
+#' ## Bioconductor releases
 #' source('http://bioconductor.org/biocLite.R')
 #' biocLite(RTCGA.clinical)
 #' biocLite(RTCGA.mutations)

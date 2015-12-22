@@ -1,7 +1,7 @@
 ## RTCGA package for R
 #' @title Install packages from RTCGA family
 #'
-#' @description Function installs data packages from \href{https://github.com/RTCGA/}{https://github.com/RTCGA/}
+#' @description Function installs data packages from \href{https://github.com/RTCGA/}{https://github.com/RTCGA/}. Packages are listed \link{datasetsTCGA}.
 #' 
 #' @param packages A character specifing the names of the data packages to be installed. By default installs all packages.
 #' 

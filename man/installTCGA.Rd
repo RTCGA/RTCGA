@@ -12,7 +12,7 @@ installTCGA(packages = c("RTCGA.clinical", "RTCGA.mutations", "RTCGA.rnaseq",
 \item{packages}{A character specifing the names of the data packages to be installed. By default installs all packages.}
 }
 \description{
-Function installs data packages from \href{https://github.com/RTCGA/}{https://github.com/RTCGA/}
+Function installs data packages from \href{https://github.com/RTCGA/}{https://github.com/RTCGA/}. Packages are listed \link{datasetsTCGA}.
 }
 \examples{
 
