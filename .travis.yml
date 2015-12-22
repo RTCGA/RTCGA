@@ -13,4 +13,5 @@ r_packages:
  - data.table
  - magrittr
  - xml2
+ - devtools
 sudo: required

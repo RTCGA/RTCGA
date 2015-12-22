@@ -2,6 +2,7 @@
 
 export("%>%")
 export(checkTCGA)
+export(convertTCGA)
 export(downloadTCGA)
 export(infoTCGA)
 export(installTCGA)

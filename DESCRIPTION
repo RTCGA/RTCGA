@@ -35,7 +35,8 @@ Imports:
     devtools
 Suggests:
     testthat,
-    pander
+    pander,
+    Biobase
 Repository: Bioconductor
 biocViews: Software, DataImport, DataRepresentation, Preprocessing
 VignetteBuilder: knitr

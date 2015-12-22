@@ -5,6 +5,9 @@
 #' 
 #' @param packages A character specifing the names of the data packages to be installed. By default installs all packages.
 #' 
+#' @author 
+#' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
+#' 
 #' @examples 
 #' 
 #' \dontrun{

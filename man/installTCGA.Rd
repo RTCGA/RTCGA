@@ -22,10 +22,13 @@ installTCGA('RTCGA.clinical')
 }
 
 }
+\author{
+Marcin Kosinski, \email{m.p.kosinski@gmail.com}
+}
 \seealso{
 Other RTCGA: \code{\link{RTCGA-package}},
-  \code{\link{checkTCGA}}, \code{\link{datasetsTCGA}},
-  \code{\link{downloadTCGA}}, \code{\link{infoTCGA}},
-  \code{\link{readTCGA}}
+  \code{\link{checkTCGA}}, \code{\link{convertTCGA}},
+  \code{\link{datasetsTCGA}}, \code{\link{downloadTCGA}},
+  \code{\link{infoTCGA}}, \code{\link{readTCGA}}
 }
 
