@@ -167,7 +167,14 @@ read.methylation <- function(methylationDir, ...){
     row.names(methylationData)[1:3] <- c("TCGA-05.1", "TCGA-05.2", "TCGA-05.3")
     x <- row.names(methylationData)[4]
     row.names(methylationData)[4] <- sub("\\.3$", "", x)
-    return(methylationData)
+    methylationDataNumeric <- methylationData[-c(1:3), -1]
+    apply(methylationDataNumeric, MARGIN = 2, function(x){
+        as.numeric(as.character(x))
+    }) -> methylationDataNumeric
+     methylationDataCodes <- cbind(bcr_patient_barcode = row.names(methylationData)[-c(1:3)],
+                                          as.data.frame(methylationDataNumeric))
+    #attr(methylationDataCodes, "info") <- methylationData[c(1:3), -1]
+    return(methylationDataCodes) 
 }
 
 read.rnaseq <- function(rnaseqDir, ...) {
