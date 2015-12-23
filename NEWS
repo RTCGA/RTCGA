@@ -2,7 +2,13 @@
 
 - Added new `installTCGA` function that can install all packages from RTCGA family.
 - Added new `convertTCGA` function that converts `data.frame`s from RTCGA family to Bioconductor classes.
-
+- New examples in `readTCGA` function documentation concerning the following datasets:
+    - `methylation`
+    - `RPPA`
+    - `mRNA`
+    - `miRNASeq`
+    - `isoforms`
+    
 # Version 1.1
 
 - New parameter `allDataSets` for `downloadTCGA` that allows to download all files matching string in the `dataSet` parameter.
