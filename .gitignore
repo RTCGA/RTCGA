@@ -6,6 +6,8 @@
 .Rapp.history
 data2/
 data/
+readTCGA_examples_section.R
+readTCGA_examples_section2.R
 
 # Example code in package build process
 *-Ex.R
