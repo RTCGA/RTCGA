@@ -12,4 +12,10 @@ r_packages:
  - magrittr
  - xml2
  - devtools
+r_github_packages:
+ - RTCGA/RTCGA.rnaseq
+ - RTCGA/RTCGA.clinical
+ - RTCGA/RTCGA.mutations
+bioc_packages:
+ - Biobase
 sudo: required
