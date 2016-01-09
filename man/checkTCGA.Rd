@@ -38,20 +38,20 @@ The \code{checkTCGA} function let's to check
      }
 }
 \examples{
-\dontrun{
 
 ############################# 
 
 # names for current release date and cohort
 checkTCGA('DataSets', 'BRCA' )
-checkTCGA('DataSets', 'OV', tail(checkTCGA('Dates'))[1] )
+\dontrun{
+checkTCGA('DataSets', 'OV', tail(checkTCGA('Dates'))[3] )
 #checkTCGA('DataSets', 'OV', checkTCGA('Dates')[5] ) # error
-
+}
 # dates of TCGA datasets' releases.
 checkTCGA('Dates')
 
 ############################# 
-
+\dontrun{
 # TCGA datasets' names availability for 
 # current release date and cancer type.
 

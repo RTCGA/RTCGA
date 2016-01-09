@@ -1,9 +1,10 @@
 ## RTCGA package for R
 #' @title Convert data from RTCGA family to Bioconductor classes
 #'
-#' @description Function uses \pkg{Biobase} (\href{http://bioconductor.org/packages/release/bioc/html/Biobase.html}{http://bioconductor.org/packages/release/bioc/html/Biobase.html}) package to transform
-#' data from packages from RTCGA data family (\pkg{RTCGA.rnaseq}, \pkg{RTCGA.CNV}, \pkg{RTCGA.RPPA}, \pkg{RTCGA.PANCAN12},
-#' \pkg{miRNASeq}, \pkg{mRNA}, \pkg{RTCGA.clinical}, \pkg{RTCGA.mutations}, \pkg{RTCGA.methylation}) to Bioconductor classes.
+#' @description Functions use \pkg{Biobase} (\href{http://bioconductor.org/packages/release/bioc/html/Biobase.html}{http://bioconductor.org/packages/release/bioc/html/Biobase.html}) package to transform
+#' data from packages from RTCGA data family to Bioconductor classes (\pkg{RTCGA.rnaseq}, \pkg{RTCGA.RPPA}, \pkg{RTCGA.PANCAN12},
+#' \pkg{mRNA}, \pkg{RTCGA.methylation} to \link[Biobase]{ExpressionSet} and \pkg{RTCGA.CNV} to \link[GenomicRanges]{GRanges}). For \pkg{RTCGA.PANCAN12} there is sense to convert
+#' \code{expression.cb1, expression.cb2, cnv.cb}.
 #' 
 #' @details
 #' 
@@ -26,11 +27,14 @@
 #' too are packaged as GRanges. The aim is that streamlined data on the back-end will make for a
 #' more intuitive experience on the front-end.
 #' 
-#' @param dataType
+#' @param dataSet A data.frame to be converted to \link[Biobase]{ExpressionSet} or \link[GenomicRanges]{GRanges}.
+#' @param dataType One of \code{expression} or \code{CNV} (for \pkg{RTCGA.CNV} datasets).
 #' 
-#' @section Biobase:
+#' @return Functions return an \link[Biobase]{ExpressionSet} or a \link[GenomicRanges]{GRanges} for \pkg{RTCGA.CNV}
+#' 
+#' @section Biobase and GenomicRanges:
 #'
-#' This function use tools from the fantastic \pkg{Biobase}
+#' This function use tools from the fantastic \pkg{Biobase} (and \pkg{GenomicRanges} for CNV)
 #' package, so you'll need to make sure to have it installed.
 #' 
 #' @author 
@@ -38,21 +42,82 @@
 #' 
 #' @examples 
 #' 
-#' \dontrun{
+#'
+#' ########
+#' ########
+#' # Expression data
+#' ########
+#' ########
 #' library(RTCGA.rnaseq)
 #' library(Biobase)
-#' convertTCGA(BRCA.rnaseq, "rnaseq") -> BRCA.rnaseq_ExpressionSet
+#' convertTCGA(BRCA.rnaseq) -> BRCA.rnaseq_ExpressionSet
+#' \dontrun{
+#' library(RTCGA.PANCAN12)
+#' convertPANCAN12(expression.cb1) -> PANCAN12_ExpressionSet
+#' library(RTCGA.RPPA)
+#' convertTCGA(BRCA.RPPA) -> BRCA.RPPA_ExpressionSet
+#' library(RTCGA.methylation)
+#' convertTCGA(BRCA.methylation) -> BRCA.methylation_ExpressionSet
+#' library(RTCGA.mRNA)
+#' convertTCGA(BRCA.mRNA) -> BRCA.mRNA_ExpressionSet 
+#' ########
+#' ########
+#' # CNV
+#' ########
+#' ########
+#' library(RTCGA.CNV)
+#' library(GRanges)
+#' convertTCGA(BRCA.CNV, "CNV") -> BRCA.CNV_GRanges
+#' 
 #' }
 #' 
 #' @family RTCGA
 #' @rdname convertTCGA
 #' @export
-convertTCGA <- function(dataSet, dataType){
+convertTCGA <- function(dataSet, dataType = "expression"){
     assertthat::assert_that(is.data.frame(dataSet))
     assertthat::assert_that(is.character(dataType) & length(dataType) == 1)
-    assertthat::assert_that(dataType %in% c("clinical", "rnaseq", "mutations", "RPPA", "mRNA",
-                                            "miRNASeq", "methylation", "CNV", "PANCAN12"))
-    if (!requireNamespace("Biobase", quietly = TRUE)) {
-        stop("Biobase package required for convertTCGA function.")
+    assertthat::assert_that(dataType %in% c("expression", "CNV"))
+            
+    if (dataType == "CNV") {
+        # GRanges
+        if (!requireNamespace("GenomicRanges", quietly = TRUE)) {
+            stop("GenomicRanges package required for convertTCGA function for CNV data.")
+        }
+        GenomicRanges::GRanges(seqnames = 
+                               S4Vectors::Rle(paste0("chr",dataSet[,2]), # chromosome
+                               rep(1,nrow(dataSet)) # counts
+                               ),
+                ranges = IRanges::IRanges(start = dataSet$Start,
+                                 end = dataSet$End),
+                #strand = rep("*", nrow(dataType)), - no information in those data
+                Num_Probes = dataSet$Num_Probes,
+                Sample = dataSet$Sample,
+                Segment_Mean = dataSet$Segment_Mean
+                ) 
+    } else {
+        # ExpressionSet
+        if (!requireNamespace("Biobase", quietly = TRUE)) {
+            stop("Biobase package required for convertTCGA function for expression data.")
+        }
+        t(as.matrix(dataSet[,-1])) -> rnaseqMatrix
+        colnames(rnaseqMatrix) <- as.character(dataSet[,1])
+        Biobase::ExpressionSet(assayData = rnaseqMatrix)
     }
+    
+        
+}
+
+#' @rdname convertTCGA
+#' @export
+convertPANCAN12 <- function(dataSet){
+    assertthat::assert_that(is.data.frame(dataSet))
+    # ExpressionSet
+    if (!requireNamespace("Biobase", quietly = TRUE)) {
+        stop("Biobase package required for convertTCGA function for expression data.")
+    }                        
+    as.matrix(dataSet[,-1]) -> exprMatrix
+    colnames(exprMatrix) <- as.character(dataSet[,1])
+    Biobase::ExpressionSet(assayData = exprMatrix)
+        
 }

@@ -63,31 +63,33 @@ Parameter \code{path} specification:
 ##### clinical
 ##############
 
-dir.create('hre')
+dir.create('data')
 
 # downloading clinical data
-downloadTCGA( cancerTypes = c('BRCA', 'OV'), destDir = 'hre' )
+# dataset = "clinical" is default parameter so we may omit it
+downloadTCGA( cancerTypes = c('BRCA', 'OV'),
+              destDir = 'data' )
 
     
 # reading datasets    
 sapply( c('BRCA', 'OV'), function( element ){
-folder <- grep( paste0( '(_',element,'\\\\.', '|','_',element,'-FFPE)', '.*Clinical'),
-      list.files('hre/'),value = TRUE)
-path <- paste0( 'hre/', folder, '/', element, '.clin.merged.txt')
-assign( value = readTCGA( path, 'clinical' ), 
-         x = paste0(element, '.clin.data'), envir = .GlobalEnv)
-         })
+    folder <- grep( paste0( '(_',element,'\\\\.', '|','_',element,'-FFPE)', '.*Clinical'),
+                    list.files('data/'),value = TRUE)
+    path <- paste0( 'data/', folder, '/', element, '.clin.merged.txt')
+    assign( value = readTCGA( path, 'clinical' ), 
+            x = paste0(element, '.clin.data'), envir = .GlobalEnv)
+    })
      
-##############
+############
 ##### rnaseq
-##############
+############
 
 dir.create('data2')
 
 # downloading rnaseq data
 downloadTCGA( cancerTypes = 'BRCA', 
-dataSet = 'rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level',
-destDir = 'data2' )
+              dataSet = 'rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level',
+              destDir = 'data2' )
 
 # shortening paths and directories
 list.files( 'data2/') \%>\% 
@@ -105,10 +107,11 @@ folder \%>\%
 readTCGA( path = pathRNA, dataType = 'rnaseq' ) -> my_data
 
 
-##############
+###############
 ##### mutations
-##############
+###############
 
+# Example directory in which untarred data will be stored
 dir.create('data3')
 
 
@@ -121,6 +124,175 @@ list.files( 'data3/') \%>\%
     file.path( 'data3', .) -> folder
 
 readTCGA(folder, 'mutations') -> mut_file
+
+#################
+##### methylation
+#################
+
+# Example directory in which untarred data will be stored
+dir.create('data4')
+
+# Download KIRP methylation data and store it in data4 folder
+cancerType = "KIRP"
+downloadTCGA(cancerTypes = cancerType,
+             dataSet = "Merge_methylation__humanmethylation27",
+             destDir = "data4")
+
+# Shorten path of subdirectory with KIRP methylation data
+list.files(path = "data4", full.names = TRUE) \%>\%
+    file.rename(from = ., to = file.path("data4", paste0(cancerType, ".methylation")))
+
+# Remove manifest.txt file
+list.files(path = "data4", full.names = TRUE) \%>\%
+    list.files(path = ., full.names = TRUE) \%>\% 
+    grep("MANIFEST.txt", x = ., value = TRUE) \%>\%
+    file.remove()
+
+# Read KIRP methylation data
+path <- list.files(path = "data4", full.names = TRUE) \%>\%
+    list.files(path = ., full.names = TRUE)
+
+KIRP.methylation <- readTCGA(path, dataType = "methylation")
+
+
+##########
+##### RPPA
+##########
+
+# Directory in which untarred data will be stored
+dir.create('data5')
+
+# Download BRCA RPPA data and store it in data5 folder
+cancerType = "BRCA"
+downloadTCGA(cancerTypes = cancerType,
+             dataSet = "protein_normalization__data.Level_3",
+             destDir = "data5")
+
+# Shorten path of subdirectory with BRCA RPPA data
+list.files(path = "data5", full.names = TRUE) \%>\%
+    file.rename(from = ., to = file.path("data5", paste0(cancerType, ".RPPA")))
+
+# Remove manifest.txt file
+list.files(path = "data5", full.names = TRUE) \%>\%
+    list.files(path = ., full.names = TRUE) \%>\% 
+    grep("MANIFEST.txt", x = ., value = TRUE) \%>\%
+    file.remove()
+
+# Read BRCA RPPA data
+path <- list.files(path = "data5", full.names = TRUE) \%>\%
+    list.files(path = ., full.names = TRUE)
+
+BRCA.RPPA <- readTCGA(path, dataType = "RPPA")
+
+
+##########
+##### mRNA
+##########
+
+# Directory in which untarred data will be stored
+dir.create('data6')
+
+# Download UCEC mRNA data and store it in data6 folder
+cancerType = "UCEC"
+downloadTCGA(cancerTypes = cancerType,
+             dataSet = "Merge_transcriptome__agilentg4502a_07_3__unc_edu__Level_3__unc_lowess_normalization_gene_level__data.Level_3",
+             destDir = "data6")
+
+# Shorten path of subdirectory with UCEC mRNA data
+list.files(path = "data6", full.names = TRUE) \%>\%
+    file.rename(from = ., to = file.path("data6",paste0(cancerType, ".mRNA")))
+
+# Remove manifest.txt file
+list.files(path = "data6", full.names = TRUE) \%>\%
+    list.files(path = ., full.names = TRUE) \%>\% 
+    grep("MANIFEST.txt", x = ., value = TRUE) \%>\%
+    file.remove()
+
+# Read UCEC mRNA data
+path <- list.files(path = "data6", full.names = TRUE) \%>\%
+    list.files(path = ., full.names = TRUE)
+
+UCEC.mRNA <- readTCGA(path, dataType = "mRNA")
+
+##############
+##### miRNASeq
+##############
+
+# Directory in which untarred data will be stored
+dir.create('data7')
+
+# Download BRCA miRNASeq data and store it in data7 folder
+# Remember that miRNASeq data are produced by two machines:
+# Illumina Genome Analyzer and Illumina HiSeq 2000 machines
+cancerType <- "BRCA"
+downloadTCGA(cancerTypes = cancerType,
+             dataSet = "Merge_mirnaseq__illuminaga_mirnaseq__bcgsc_ca__Level_3__miR_gene_expression__data.Level_3",
+             destDir = "data7")
+
+downloadTCGA(cancerTypes = cancerType,
+             dataSet = "Merge_mirnaseq__illuminahiseq_mirnaseq__bcgsc_ca__Level_3__miR_gene_expression__data.Level_3",
+             destDir = "data7")
+
+# Shorten path of subdirectory with BRCA miRNASeq data
+list.files(path = "data7", full.names = TRUE) \%>\%
+    sapply(function(path){
+        if (grepl(pattern = "illuminaga", path)){
+            file.rename(from = grep(pattern = "illuminaga", path, value = TRUE),
+                        to = file.path("data7",paste0(cancerType, ".miRNASeq.illuminaga")))
+        } else if (grepl(pattern = "illuminahiseq", path)){
+            file.rename(from = grep(pattern = "illuminahiseq", path, value = TRUE),
+                        to = file.path("data7",paste0(cancerType, ".miRNASeq.illuminahiseq")))
+        }
+    })
+    
+# Remove manifest.txt file
+list.files(path = "data7", full.names = TRUE) \%>\%
+    list.files(path = ., full.names = TRUE) \%>\% 
+    grep("MANIFEST.txt", x = ., value = TRUE) \%>\%
+    file.remove()
+
+# Read BRCA miRNASeq data
+path <- list.files(path = "data7", full.names = TRUE) \%>\%
+    list.files(path = ., full.names = TRUE)
+path_illuminaga <- grep("illuminaga", path, fixed = TRUE, value = TRUE)
+path_illuminahiseq <- grep("illuminahiseq", path, fixed = TRUE, value = TRUE)
+
+BRCA.miRNASeq.illuminaga <- readTCGA(path_illuminaga, dataType = "miRNASeq")
+BRCA.miRNASeq.illuminahiseq <- readTCGA(path_illuminahiseq, dataType = "miRNASeq")
+
+BRCA.miRNASeq.illuminaga <- cbind(machine = "Illumina Genome Analyzer", BRCA.miRNASeq.illuminaga)
+BRCA.miRNASeq.illuminahiseq <- cbind(machine = "Illumina HiSeq 2000", BRCA.miRNASeq.illuminahiseq)
+
+BRCA.miRNASeq <- rbind(BRCA.miRNASeq.illuminaga, BRCA.miRNASeq.illuminahiseq)
+
+##############
+##### isoforms
+##############
+
+# Directory in which untarred data will be stored
+dir.create('data8')
+
+# Download ACC isoforms data and store it in data8 folder
+cancerType = "ACC"
+downloadTCGA(cancerTypes = cancerType,
+             dataSet = "Merge_rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_isoforms_normalized__data.Level_3",
+             destDir = "data8")
+
+# Shorten path of subdirectory with ACC isoforms data
+list.files(path = "data8", full.names = TRUE) \%>\%
+    file.rename(from = ., to = file.path("data8",paste0(cancerType, ".isoforms")))
+
+# Remove manifest.txt file
+list.files(path = "data8", full.names = TRUE) \%>\%
+    list.files(path = ., full.names = TRUE) \%>\% 
+    grep("MANIFEST.txt", x = ., value = TRUE) \%>\%
+    file.remove()
+
+# Read ACC isoforms data
+path <- list.files(path = "data8", full.names = TRUE) \%>\%
+    list.files(path = ., full.names = TRUE)
+
+ACC.isoforms <- readTCGA(path, dataType = "isoforms")
 
 }
 
