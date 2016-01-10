@@ -13,7 +13,7 @@ installTCGA(packages = c("RTCGA.clinical", "RTCGA.mutations", "RTCGA.rnaseq",
 
 \item{build_vignettes}{Should vignettes be build.}
 
-\item{...}{Further arguments passed to \link{install_devtools}.}
+\item{...}{Further arguments passed to \link[devtools]{install_github}.}
 }
 \description{
 Function installs data packages from \href{https://github.com/RTCGA/}{https://github.com/RTCGA/}. Packages are listed \link{datasetsTCGA}.
