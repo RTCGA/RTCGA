@@ -6,19 +6,23 @@
 \usage{
 installTCGA(packages = c("RTCGA.clinical", "RTCGA.mutations", "RTCGA.rnaseq",
   "RTCGA.RPPA", "RTCGA.mRNA", "RTCGA.CNV", "RTCGA.miRNASeq", "RTCGA.PANCAN12",
-  "RTCGA.methylation"))
+  "RTCGA.methylation"), build_vignettes = TRUE, ...)
 }
 \arguments{
 \item{packages}{A character specifing the names of the data packages to be installed. By default installs all packages.}
+
+\item{build_vignettes}{Should vignettes be build.}
+
+\item{...}{Further arguments passed to \link{install_devtools}.}
 }
 \description{
 Function installs data packages from \href{https://github.com/RTCGA/}{https://github.com/RTCGA/}. Packages are listed \link{datasetsTCGA}.
 }
 \examples{
-\dontrun{
-installTCGA('RTCGA.clinical')
 
+\dontrun{
 installTCGA()
+installTCGA('RTCGA.clinical')
 }
 
 }
