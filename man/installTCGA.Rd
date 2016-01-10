@@ -15,8 +15,9 @@ installTCGA(packages = c("RTCGA.clinical", "RTCGA.mutations", "RTCGA.rnaseq",
 Function installs data packages from \href{https://github.com/RTCGA/}{https://github.com/RTCGA/}. Packages are listed \link{datasetsTCGA}.
 }
 \examples{
-installTCGA('RTCGA.clinical')
 \dontrun{
+installTCGA('RTCGA.clinical')
+
 installTCGA()
 }
 

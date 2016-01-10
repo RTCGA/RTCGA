@@ -9,8 +9,9 @@
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
 #' 
 #' @examples 
-#' installTCGA('RTCGA.clinical')
 #' \dontrun{
+#' installTCGA('RTCGA.clinical')
+#'
 #' installTCGA()
 #' }
 #' 
