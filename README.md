@@ -7,6 +7,13 @@ Data packages submitted to Bioconductor
 - [RTCGA.mutations](http://bioconductor.org/packages/3.2/data/experiment/html/RTCGA.mutations.html)
 - [RTCGA.rnaseq](http://bioconductor.org/packages/3.2/data/experiment/html/RTCGA.rnaseq.html)
 - [RTCGA.clinical](http://bioconductor.org/packages/3.2/data/experiment/html/RTCGA.clinical.html)
+- [RTCGA.PANCAN12](http://bioconductor.org/packages/RTCGA.PANCAN12/)
+- [RTCGA.mRNA](http://bioconductor.org/packages/RTCGA.mRNA/)
+- [RTCGA.miRNASeq](http://bioconductor.org/packages/RTCGA.miRNASeq/)
+- [RTCGA.RPPA](http://bioconductor.org/packages/RTCGA.RPPA/)
+- [RTCGA.CNV](http://bioconductor.org/packages/RTCGA.CNV/)
+- [RTCGA.methylation](http://bioconductor.org/packages/RTCGA.methylation/)
+
 
 ### Installation of packages from the `RTCGA.data` family: 
 
@@ -15,13 +22,20 @@ Windows users:
 
 ```{R}
 # packages that are published to devel version of Bioconductor
-BiocInstaller::useDevel() # swiches to devel branchof Bioconductor
+BiocInstaller::useDevel() # swiches to devel branchof Bioconductor - don't use this line if you are interested in release versions
 source("https://bioconductor.org/biocLite.R") # downloads bioClite function
 biocLite("RTCGA.clinical") # installs a package
 biocLite("RTCGA.rnaseq")
 biocLite("RTCGA.mutations")
+biocLite("RTCGA.PANCAN12")
+biocLite("RTCGA.CNV")
+biocLite("RTCGA.RPPA")
+biocLite("RTCGA.mRNA")
+biocLite("RTCGA.miRNASeq")
+biocLite("RTCGA.methylation")
 
-# packages not yet published to Bioconductor
+
+# version of packages held at github.com/RTCGA - I try to keep them with the same state as devel versions of Bioconductor
 library(RTCGA)
 installTCGA("RTCGA.PANCAN12")
 installTCGA("RTCGA.CNV")
@@ -36,7 +50,7 @@ installTCGA("RTCGA.methylation")
 ```{R}
 help(dataType)
 # where dataType is one of: 'datasetsTCGA', 'clinical', 'rnaseq'
-# 'mutations', 'pancan12', 'CNV', 'RPPA', 'mRNA', 'miRNASeq'
+# 'mutations', 'pancan12', 'CNV', 'RPPA', 'mRNA', 'miRNASeq', 'methylation'
 ```
 
 # RTCGA
