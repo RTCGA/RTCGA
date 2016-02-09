@@ -61,66 +61,66 @@
 #' @rdname checkTCGA
 #' @export
 checkTCGA <- function(what, cancerType, date = NULL) {
-    assert_that(is.character(what) & length(what) == 1)
-    assert_that(is.null(date) || (is.character(cancerType) & (length(cancerType) == 1)))
-    assert_that(is.null(date) || (is.character(date) & (length(date) == 1)))
-    
-    if (what == "DataSets") {
-        return(availableDataSets(cancerType, date = date))
-    }
-    if (what == "Dates") {
-        return(availableDates())
-    }
+	assert_that(is.character(what) & length(what) == 1)
+	assert_that(is.null(date) || (is.character(cancerType) & (length(cancerType) == 1)))
+	assert_that(is.null(date) || (is.character(date) & (length(date) == 1)))
+	
+	if (what == "DataSets") {
+		return(availableDataSets(cancerType, date = date))
+	}
+	if (what == "Dates") {
+		return(availableDates())
+	}
 }
 
 # Misc function
 availableDataSets <- function(cancerType, date = NULL) {
-    
-    assertthat::assert_that(is.character(cancerType) & (length(cancerType) == 1))
-    assertthat::assert_that(is.null(date) || (is.character(date) & (length(date) == 1)))
-    
-    # ensure which date was specified
-    lastReleaseDate <- whichDateToUse(date = date)  #downloadTCGA.r
-    
-    # get index of page containing datasets fot this date of release and Cohort Code
-    filesParentURL <- parentURL(lastReleaseDate, element = cancerType)  #downloadTCGA.r
-    
-    # get content of index page
-    readHTMLTable(filesParentURL)[[1]][-c(1:2), c(2,4)] -> check
-    check[!grepl('md5', check[,1]) , ] -> check
-    check[!grepl('aux', check[,1]) , ] -> check
-    check[!grepl('mage-tab', check[,1]) , ] -> check
-    check[, 1] <- gsub("gdac.broadinstitute.org_", "", check[, 1])
-    na.omit(check) -> check
-    rownames(check) <- 1:nrow(check)
-    return(check[, c(2,1)])
-    
-
-    
+	
+	assertthat::assert_that(is.character(cancerType) & (length(cancerType) == 1))
+	assertthat::assert_that(is.null(date) || (is.character(date) & (length(date) == 1)))
+	
+	# ensure which date was specified
+	lastReleaseDate <- whichDateToUse(date = date)  #downloadTCGA.r
+	
+	# get index of page containing datasets fot this date of release and Cohort Code
+	filesParentURL <- parentURL(lastReleaseDate, element = cancerType)  #downloadTCGA.r
+	
+	# get content of index page
+	readHTMLTable(filesParentURL)[[1]][-c(1:2), c(2,4)] -> check
+	check[!grepl('md5', check[,1]) , ] -> check
+	check[!grepl('aux', check[,1]) , ] -> check
+	check[!grepl('mage-tab', check[,1]) , ] -> check
+	check[, 1] <- gsub("gdac.broadinstitute.org_", "", check[, 1])
+	na.omit(check) -> check
+	rownames(check) <- 1:nrow(check)
+	return(check[, c(2,1)])
+	
+	
+	
 }
 
 
 # Misc function
 availableDates <- function() {
-    
-    if (!exists(x = ".availableDates3", envir = .RTCGAEnv)) {
-        # happens only once
-        readLines("http://gdac.broadinstitute.org/runs/") %>% assign(x = ".gdacContent", value = ., envir = .RTCGAEnv)
-        
-        get(".gdacContent", envir = .RTCGAEnv) %>% grep(pattern = "stddata__20", value = TRUE) %>% gsub(pattern = "(<[^>]+>)| |/", replacement = "") %>% 
-            substring(first = 10, last = 19) %>% assign(x = ".availableDates", value = ., envir = .RTCGAEnv)
-        
-        get(".availableDates", envir = .RTCGAEnv) %>% gsub(pattern = "^[^0-9]{10}", replacement = "") %>% gsub(pattern = "_", replacement = "-", 
-            fixed = TRUE) %>% assign(x = ".availableDates2", value = ., envir = .RTCGAEnv)
-
-        ############################################ 
-        
-        xml2::read_html("http://gdac.broadinstitute.org/runs/stddata__latest/") %>% html_nodes("h3") %>% html_text() %>%
-            substring(first=1, last=10) %>% gsub(pattern = "_", replacement = "-", fixed = TRUE) %>% 
-            assign(x = ".lastWorkingDate", value = ., envir = .RTCGAEnv)
-        get(x = ".availableDates2", envir = .RTCGAEnv)[1:grep(get(x = ".lastWorkingDate", envir = .RTCGAEnv), 
-                                                              get(x = ".availableDates2", envir = .RTCGAEnv) )] %>%
-            assign(x=".availableDates3", value = ., envir = .RTCGAEnv)
-    }
-    get(x=".availableDates3", envir = .RTCGAEnv)
+	
+	if (!exists(x = ".availableDates3", envir = .RTCGAEnv)) {
+		# happens only once
+		readLines("http://gdac.broadinstitute.org/runs/") %>% assign(x = ".gdacContent", value = ., envir = .RTCGAEnv)
+		
+		get(".gdacContent", envir = .RTCGAEnv) %>% grep(pattern = "stddata__20", value = TRUE) %>% gsub(pattern = "(<[^>]+>)| |/", replacement = "") %>% 
+			substring(first = 10, last = 19) %>% assign(x = ".availableDates", value = ., envir = .RTCGAEnv)
+		
+		get(".availableDates", envir = .RTCGAEnv) %>% gsub(pattern = "^[^0-9]{10}", replacement = "") %>% gsub(pattern = "_", replacement = "-", 
+																																																					 fixed = TRUE) %>% assign(x = ".availableDates2", value = ., envir = .RTCGAEnv)
+		
+		############################################ 
+		
+		xml2::read_html("http://gdac.broadinstitute.org/runs/stddata__latest/") %>% html_nodes("h3") %>% html_text() %>%
+			substring(first=1, last=10) %>% gsub(pattern = "_", replacement = "-", fixed = TRUE) %>% 
+			assign(x = ".lastWorkingDate", value = ., envir = .RTCGAEnv)
+		get(x = ".availableDates2", envir = .RTCGAEnv)[1:grep(get(x = ".lastWorkingDate", envir = .RTCGAEnv), 
+																													get(x = ".availableDates2", envir = .RTCGAEnv) )] %>%
+			assign(x=".availableDates3", value = ., envir = .RTCGAEnv)
+	}
+	get(x=".availableDates3", envir = .RTCGAEnv)
 } 

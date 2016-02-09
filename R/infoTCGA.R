@@ -17,5 +17,5 @@
 #' @rdname infoTCGA
 #' @export
 infoTCGA <- function() {
-    do.call(rbind, readHTMLTable("http://gdac.broadinstitute.org/")[-39])
+	do.call(rbind, readHTMLTable("http://gdac.broadinstitute.org/")[-39])
 } 

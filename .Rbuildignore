@@ -7,13 +7,10 @@ maraton*
 .gitignore
 .RData
 .Rhistory
-README.md
 Rd2.pdf
 .Rd2pdf7288
 ^\.travis\.yml$
-update_remote.ssh
+update_remotes.sh
 data2/
 devel/
 devel
-readTCGA_examples_section.R
-readTCGA_examples_section2.R
