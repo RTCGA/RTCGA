@@ -17,6 +17,7 @@
 #' @importFrom rvest html_attr
 #' @importFrom rvest html_text
 #' @import knitr
+#' @import dplyr
 #' @importFrom data.table fread
 #' @importFrom stringi stri_extract_all_regex
 #' @importFrom assertthat assert_that
@@ -33,14 +34,3 @@
 #' @aliases RTCGA
 invisible(NULL)
 
-#' Pipe operator
-#'
-#' See \code{\link[magrittr]{\%>\%}} for more details.
-#'
-#' @name %>%
-#' @rdname pipe
-#' @keywords internal
-#' @export
-#' @importFrom magrittr %>%
-#' @usage lhs \%>\% rhs
-NULL 

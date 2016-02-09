@@ -8,7 +8,7 @@
 #' @examples 
 #' 
 #' infoTCGA()
-#' 
+#' library(magrittr)
 #' (cohorts <- infoTCGA() %>% 
 #' rownames() %>% 
 #'    sub('-counts', '', x=.))

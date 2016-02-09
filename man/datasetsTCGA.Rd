@@ -59,6 +59,7 @@ Witold Chodor [aut] \email{ witoldchodor@gmail.com }
 Other RTCGA: \code{\link{RTCGA-package}},
   \code{\link{checkTCGA}}, \code{\link{convertTCGA}},
   \code{\link{downloadTCGA}}, \code{\link{infoTCGA}},
-  \code{\link{installTCGA}}, \code{\link{readTCGA}}
+  \code{\link{installTCGA}}, \code{\link{readTCGA}},
+  \code{\link{survivalTCGA}}
 }
 

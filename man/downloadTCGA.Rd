@@ -58,6 +58,7 @@ downloadTCGA( cancerTypes = c('BRCA', 'OV'), destDir = 'hre',
 Other RTCGA: \code{\link{RTCGA-package}},
   \code{\link{checkTCGA}}, \code{\link{convertTCGA}},
   \code{\link{datasetsTCGA}}, \code{\link{infoTCGA}},
-  \code{\link{installTCGA}}, \code{\link{readTCGA}}
+  \code{\link{installTCGA}}, \code{\link{readTCGA}},
+  \code{\link{survivalTCGA}}
 }
 

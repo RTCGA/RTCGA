@@ -65,6 +65,7 @@ We will download data from the one of the newest release date.
 
 ```{r}
 library(RTCGA)
+library(magrittr)
 releaseDate <- tail( checkTCGA('Dates'), 2 )[1]
 # if server doesn't respond, just try
 # date <- "2015-06-01"

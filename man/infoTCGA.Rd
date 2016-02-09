@@ -15,7 +15,7 @@ Function restores codes and counts for each cohort from TCGA project.
 \examples{
 
 infoTCGA()
-
+library(magrittr)
 (cohorts <- infoTCGA() \%>\% 
 rownames() \%>\% 
    sub('-counts', '', x=.))
@@ -25,6 +25,7 @@ rownames() \%>\%
 Other RTCGA: \code{\link{RTCGA-package}},
   \code{\link{checkTCGA}}, \code{\link{convertTCGA}},
   \code{\link{datasetsTCGA}}, \code{\link{downloadTCGA}},
-  \code{\link{installTCGA}}, \code{\link{readTCGA}}
+  \code{\link{installTCGA}}, \code{\link{readTCGA}},
+  \code{\link{survivalTCGA}}
 }
 

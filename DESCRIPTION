@@ -22,17 +22,17 @@ License: GPL-2
 LazyLoad: yes
 LazyData: yes
 Depends:
-    R (>= 3.2.0),
-    knitr
+    R (>= 3.2.0)
 Imports:
     XML,
     assertthat,
     stringi,
     rvest,
     data.table,
-    magrittr,
     xml2,
-    devtools
+    devtools,
+    dplyr,
+    knitr
 Suggests:
     testthat,
     pander,
@@ -42,7 +42,8 @@ Suggests:
     S4Vectors,
     RTCGA.rnaseq,
     RTCGA.clinical,
-    RTCGA.mutations
+    RTCGA.mutations,
+    magrittr
 Repository: Bioconductor
 biocViews: Software, DataImport, DataRepresentation, Preprocessing
 VignetteBuilder: knitr

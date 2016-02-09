@@ -306,6 +306,7 @@ Witold Chodor, \email{witoldchodor@gmail.com}
 Other RTCGA: \code{\link{RTCGA-package}},
   \code{\link{checkTCGA}}, \code{\link{convertTCGA}},
   \code{\link{datasetsTCGA}}, \code{\link{downloadTCGA}},
-  \code{\link{infoTCGA}}, \code{\link{installTCGA}}
+  \code{\link{infoTCGA}}, \code{\link{installTCGA}},
+  \code{\link{survivalTCGA}}
 }
 

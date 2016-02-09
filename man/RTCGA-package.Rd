@@ -25,6 +25,7 @@ Przemyslaw Biecek [aut] \email{ przemyslaw.biecek@gmail.com }
 Other RTCGA: \code{\link{checkTCGA}},
   \code{\link{convertTCGA}}, \code{\link{datasetsTCGA}},
   \code{\link{downloadTCGA}}, \code{\link{infoTCGA}},
-  \code{\link{installTCGA}}, \code{\link{readTCGA}}
+  \code{\link{installTCGA}}, \code{\link{readTCGA}},
+  \code{\link{survivalTCGA}}
 }
 
