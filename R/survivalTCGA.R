@@ -100,6 +100,7 @@ survivalTCGA <- function(..., extract.cols = NULL, extract.names = FALSE) {
 						 									as.character() %>%
 						 									as.numeric() ) ) %>%
 			filter(!is.na(times)) %>%
+			filter(times > 0) %>%
 			select(one_of(c("times",
 											"patient.vital_status",
 											

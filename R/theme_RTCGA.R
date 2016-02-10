@@ -10,7 +10,7 @@
 #' 
 #'
 #' library(RTCGA.clinical)
-#' survivalTCGA(BRCA.clinical, OV.clinical) -> BRCAOV.survInfo
+#' survivalTCGA(BRCA.clinical, OV.clinical, extract.names = TRUE) -> BRCAOV.survInfo
 #' library(survminer)
 #' library(survival)
 #' ggsurvplot(survfit(Surv(times, patient.vital_status)~dataset,

@@ -19,7 +19,7 @@
 #' ## for all examples
 #' library(dplyr)
 #' library(tidyr)
-#' 
+#' library(ggplot2) 
 #' 
 #' ## RNASeq expressions
 #' library(RTCGA.rnaseq)
@@ -27,6 +27,7 @@
 #' 							 extract.cols = "VENTX|27287") %>%
 #' 	rename(cohort = dataset,
 #' 				 VENTX = `VENTX|27287`) %>%	
+#'  filter(substr(bcr_patient_barcode, 14, 15) == "01") %>% #cancer samples
 #' 	ggplot(aes(y = log1p(VENTX),
 #' 						 x = reorder(cohort, log1p(VENTX), median),
 #' 						 fill = cohort)) + 
@@ -77,7 +78,7 @@
 #'
 #' ## miRNASeq expressions 
 #' library(RTCGA.miRNASeq)
-#' miRNASeq has bcr_patienct_barcode in rownames...
+#' # miRNASeq has bcr_patienct_barcode in rownames...
 #' mutate(ACC.miRNASeq, bcr_patient_barcode = substr(rownames(ACC.miRNASeq), 1, 25)) -> ACC.miRNASeq.bcr
 #' mutate(CESC.miRNASeq, bcr_patient_barcode = substr(rownames(CESC.miRNASeq), 1, 25)) -> CESC.miRNASeq.bcr
 #' mutate(CHOL.miRNASeq, bcr_patient_barcode = substr(rownames(CHOL.miRNASeq), 1, 25)) -> CHOL.miRNASeq.bcr

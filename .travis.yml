@@ -17,12 +17,16 @@ r_packages:
  - dplyr
  - survival
  - ggplot2
+ - tidyr
 r_github_packages:
  - RTCGA/RTCGA.rnaseq
  - RTCGA/RTCGA.clinical
  - RTCGA/RTCGA.mutations
  - RTCGA/RTCGA.CNV
  - RTCGA/RTCGA.PANCAN12
+ - RTCGA/RTCGA.RPPA
+ - RTCGA/RTCGA.mRNA
+ - RTCGA/RTCGA.miRNASeq
 bioc_packages:
  - Biobase
  - GenomicRanges
