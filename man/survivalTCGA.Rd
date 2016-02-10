@@ -4,12 +4,14 @@
 \alias{survivalTCGA}
 \title{Extract Survival Information From RTCGA.clinical Datasets}
 \usage{
-survivalTCGA(..., extra.cols = NULL)
+survivalTCGA(..., extract.cols = NULL, extract.names = FALSE)
 }
 \arguments{
-\item{...}{A data.frame or data.frames containing from TCGA study containing clinical informations. See \link[RTCGA.clinical]{clinical}.}
+\item{...}{A data.frame or data.frames from TCGA study containing clinical informations. See \link[RTCGA.clinical]{clinical}.}
 
-\item{extra.cols}{A character specifing the names of extra columns to be extracted with survival information.}
+\item{extract.cols}{A character specifing the names of extra columns to be extracted with survival information.}
+
+\item{extract.names}{Logical, whether to extract names of passed data.frames in \code{...}.}
 }
 \value{
 A data.frame containing information about times and censoring for specific \code{bcr_patient_barcode}.
@@ -24,20 +26,37 @@ It is recommended to use datasets from \link[RTCGA.clinical]{clinical}.
 }
 \examples{
 
+## Extracting Survival Data
 library(RTCGA.clinical)
-survivalTCGA(BRCA.clinical, OV.clinical) -> BRCAOV.survInfo
+survivalTCGA(BRCA.clinical, OV.clinical, extract.cols = "admin.disease_code") -> BRCAOV.survInfo
 library(dplyr)
 survivalTCGA(HNSC.clinical, 
-   extra.cols = "patient.drugs.drug.therapy_types.therapy_type") \%>\%
+   extract.cols = c("patient.drugs.drug.therapy_types.therapy_type",
+   								 "admin.disease_code")) \%>\%
    filter(patient.drugs.drug.therapy_types.therapy_type ==
           "chemotherapy")-> HNSC.survInfo
+          
+## Kaplan-Meier Survival Curves
+library(survminer)
+library(survival)
+ggsurvplot(survfit(Surv(times, patient.vital_status)~admin.disease_code,
+									 data = BRCAOV.survInfo),
+				 risk.table = TRUE,
+					 ggtheme = theme_RTCGA(base_size = 16,
+					 											 base_family = "serif"),
+					 break.time.by = 800,
+					 palette = c("#FF9E29", "#86AA00"))
 
+}
+\author{
+Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 }
 \seealso{
 Other RTCGA: \code{\link{RTCGA-package}},
   \code{\link{checkTCGA}}, \code{\link{convertTCGA}},
   \code{\link{datasetsTCGA}}, \code{\link{downloadTCGA}},
-  \code{\link{infoTCGA}}, \code{\link{installTCGA}},
-  \code{\link{readTCGA}}
+  \code{\link{expressionTCGA}}, \code{\link{infoTCGA}},
+  \code{\link{installTCGA}}, \code{\link{readTCGA}},
+  \code{\link{theme_RTCGA}}
 }
 

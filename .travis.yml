@@ -13,6 +13,10 @@ r_packages:
  - xml2
  - devtools
  - rmarkdown
+ - survminer
+ - dplyr
+ - survival
+ - ggplot2
 r_github_packages:
  - RTCGA/RTCGA.rnaseq
  - RTCGA/RTCGA.clinical

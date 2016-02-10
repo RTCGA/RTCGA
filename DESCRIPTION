@@ -43,7 +43,10 @@ Suggests:
     RTCGA.rnaseq,
     RTCGA.clinical,
     RTCGA.mutations,
-    magrittr
+    magrittr,
+    survminer,
+    survival,
+    ggplot2
 Repository: Bioconductor
 biocViews: Software, DataImport, DataRepresentation, Preprocessing
 VignetteBuilder: knitr
