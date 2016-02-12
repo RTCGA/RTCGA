@@ -46,6 +46,7 @@ Suggests:
     RTCGA.RPPA,
     RTCGA.mRNA,
     RTCGA.miRNASeq,
+    RTCGA.methylation,
     magrittr,
     survminer,
     survival,
