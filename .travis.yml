@@ -27,6 +27,7 @@ r_github_packages:
  - RTCGA/RTCGA.RPPA
  - RTCGA/RTCGA.mRNA
  - RTCGA/RTCGA.miRNASeq
+ - RTCGA/RTCGA.methylation
 bioc_packages:
  - Biobase
  - GenomicRanges
