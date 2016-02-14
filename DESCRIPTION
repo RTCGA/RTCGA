@@ -32,7 +32,10 @@ Imports:
     xml2,
     devtools,
     dplyr,
-    knitr
+    knitr,
+    survival,
+    survminer,
+    ggplot2
 Suggests:
     testthat,
     pander,
@@ -48,9 +51,6 @@ Suggests:
     RTCGA.miRNASeq,
     RTCGA.methylation,
     magrittr,
-    survminer,
-    survival,
-    ggplot2,
     tidyr
 Repository: Bioconductor
 biocViews: Software, DataImport, DataRepresentation, Preprocessing

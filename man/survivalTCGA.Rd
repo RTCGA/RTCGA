@@ -7,11 +7,26 @@
 survivalTCGA(..., extract.cols = NULL, extract.names = FALSE)
 }
 \arguments{
-\item{...}{A data.frame or data.frames from TCGA study containing clinical informations. See \link[RTCGA.clinical]{clinical}.}
+\item{...}{A data.frame or data.frames from TCGA study containing clinical informations. See \link[RTCGA.clinical]{clinical}. 
+Or for plot method a further arguments passed to \link[survminer]{ggsurvival}.}
 
 \item{extract.cols}{A character specifing the names of extra columns to be extracted with survival information.}
 
 \item{extract.names}{Logical, whether to extract names of passed data.frames in \code{...}.}
+
+\item{x}{Object of class \code{survivalTCGA}.}
+
+\item{times}{The name of time variable.}
+
+\item{status}{The name of status variable.}
+
+\item{explanatory.names}{Names of explanatory variables to use in survival curves plot.}
+
+\item{title}{Title of the plot.}
+
+\item{risk.table}{Whether to show risk tables.}
+
+\item{conf.int}{Whether to show confidence intervals.}
 }
 \value{
 A data.frame containing information about times and censoring for specific \code{bcr_patient_barcode}.
@@ -30,22 +45,19 @@ It is recommended to use datasets from \link[RTCGA.clinical]{clinical}.
 library(RTCGA.clinical)
 survivalTCGA(BRCA.clinical, OV.clinical, extract.cols = "admin.disease_code") -> BRCAOV.survInfo
 library(dplyr)
-survivalTCGA(HNSC.clinical, 
-   extract.cols = c("patient.drugs.drug.therapy_types.therapy_type",
-   								 "admin.disease_code")) \%>\%
-   filter(patient.drugs.drug.therapy_types.therapy_type ==
-          "chemotherapy")-> HNSC.survInfo
-          
+
+BRCA.clinical \%>\%
+    filter(patient.drugs.drug.therapy_types.therapy_type \%in\%
+               c("chemotherapy", "hormone therapy")) \%>\%
+    rename(therapy = patient.drugs.drug.therapy_types.therapy_type) \%>\%
+    survivalTCGA(BRCA.clinical, 
+                 extract.cols = c("therapy"))  -> BRCA.survInfo.chemo
+
 ## Kaplan-Meier Survival Curves
-library(survminer)
-library(survival)
-ggsurvplot(survfit(Surv(times, patient.vital_status)~admin.disease_code,
-									 data = BRCAOV.survInfo),
-				 risk.table = TRUE,
-					 ggtheme = theme_RTCGA(base_size = 16,
-					 											 base_family = "serif"),
-					 break.time.by = 800,
-					 palette = c("#FF9E29", "#86AA00"))
+plot(BRCAOV.survInfo)
+
+
+plot(BRCA.survInfo.chemo)
 
 }
 \author{

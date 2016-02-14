@@ -12,8 +12,6 @@ r_packages:
  - magrittr
  - xml2
  - devtools
- - rmarkdown
- - survminer
  - dplyr
  - survival
  - ggplot2
@@ -28,6 +26,7 @@ r_github_packages:
  - RTCGA/RTCGA.mRNA
  - RTCGA/RTCGA.miRNASeq
  - RTCGA/RTCGA.methylation
+ - kassambara/survminer
 bioc_packages:
  - Biobase
  - GenomicRanges

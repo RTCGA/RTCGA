@@ -23,6 +23,10 @@
 #' @importFrom assertthat assert_that
 #' @importFrom XML readHTMLTable
 #' @importFrom devtools install_github
+#' @import survminer
+#' @importFrom survival Surv
+#' @importFrom survival survfit
+#' @import ggplot2
 #' 
 #' @examples
 #' \dontrun{
