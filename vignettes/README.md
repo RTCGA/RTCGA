@@ -1,0 +1,1 @@
+<iframe width="1000" height="800" src="http://mi2.mini.pw.edu.pl:8080/RTCGA/KRWK/shiny/" style="border: black; width: 1500px; height: 700px" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
