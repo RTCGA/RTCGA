@@ -125,5 +125,5 @@ plot.survivalTCGA <- function(x,
                ...) -> survplot
     survplot$table <- survplot$table + theme_RTCGA()
     survplot$plot <- survplot$plot + theme_RTCGA() + labs(title = title)
-    survplot + theme_RTCGA()
+    survplot
 }
