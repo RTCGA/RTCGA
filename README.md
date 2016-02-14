@@ -1,4 +1,4 @@
-![RTCGA logo](https://avatars3.githubusercontent.com/u/15612915?v=3&s=75)[![Travis-CI Build Status](https://travis-ci.org/RTCGA/RTCGA.svg?branch=master)](https://travis-ci.org/RTCGA/RTCGA)
+[![Travis-CI Build Status](https://travis-ci.org/RTCGA/RTCGA.svg?branch=master)](https://travis-ci.org/RTCGA/RTCGA)
 [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)                
 
 
@@ -93,3 +93,6 @@ browseVignettes("RTCGA")
 >
 
 This repository is synchronized with it's [Bioconductor's SVN devel mirror](https://hedgehog.fhcrc.org/bioconductor/trunk/madman/Rpacks/RTCGA).
+
+
+![RTCGA logo](https://avatars3.githubusercontent.com/u/15612915?v=3&s=300)
