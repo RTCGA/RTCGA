@@ -59,7 +59,7 @@ Other RTCGA: \code{\link{RTCGA-package}},
   \code{\link{checkTCGA}}, \code{\link{convertTCGA}},
   \code{\link{datasetsTCGA}}, \code{\link{expressionTCGA}},
   \code{\link{infoTCGA}}, \code{\link{installTCGA}},
-  \code{\link{readTCGA}}, \code{\link{survivalTCGA}},
-  \code{\link{theme_RTCGA}}
+  \code{\link{kmTCGA}}, \code{\link{readTCGA}},
+  \code{\link{survivalTCGA}}, \code{\link{theme_RTCGA}}
 }
 

@@ -35,7 +35,8 @@ Imports:
     knitr,
     survival,
     survminer,
-    ggplot2
+    ggplot2,
+    ggthemes
 Suggests:
     testthat,
     pander,

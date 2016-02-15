@@ -24,8 +24,10 @@
 #' @importFrom XML readHTMLTable
 #' @importFrom devtools install_github
 #' @import survminer
-#' @importFrom survival Surv
-#' @importFrom survival survfit
+#' @import survival
+#' @importFrom ggthemes theme_pander
+#' @importFrom ggthemes scale_colour_pander
+#' @importFrom ggthemes scale_fill_pander
 #' @import ggplot2
 #' 
 #' @examples

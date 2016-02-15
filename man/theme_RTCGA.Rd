@@ -4,30 +4,24 @@
 \alias{theme_RTCGA}
 \title{RTCGA Theme For ggplot2}
 \usage{
-theme_RTCGA(base_size = 11, base_family = "")
+theme_RTCGA(base_size = 11, base_family = "", ...)
 }
 \arguments{
 \item{base_size}{base font size}
 
 \item{base_family}{base font family}
+
+\item{...}{Further arguments passed to \link[ggthemes]{theme_pander}.}
 }
 \description{
-Additional theme for \link[ggplot2]{ggtheme}.
+Additional \pkg{RTCGA} theme for \link[ggplot2]{ggtheme}, based on \link[ggthemes]{theme_pander}.
 }
 \examples{
 
-
 library(RTCGA.clinical)
-survivalTCGA(BRCA.clinical, OV.clinical, extract.names = TRUE) -> BRCAOV.survInfo
-library(survminer)
-library(survival)
-ggsurvplot(survfit(Surv(times, patient.vital_status)~dataset,
-									 data = BRCAOV.survInfo),
-				 risk.table = TRUE,
-					 ggtheme = theme_RTCGA(base_size = 16,
-					 											 base_family = "serif"),
-					 break.time.by = 800,
-					 palette = c("#FF9E29", "#86AA00"))
+survivalTCGA(BRCA.clinical, OV.clinical, extract.cols = "admin.disease_code") -> BRCAOV.survInfo
+kmTCGA(BRCAOV.survInfo, explanatory.names = "admin.disease_code",
+			 xlim = c(0,4000))
 					 
 }
 \author{
@@ -38,7 +32,7 @@ Other RTCGA: \code{\link{RTCGA-package}},
   \code{\link{checkTCGA}}, \code{\link{convertTCGA}},
   \code{\link{datasetsTCGA}}, \code{\link{downloadTCGA}},
   \code{\link{expressionTCGA}}, \code{\link{infoTCGA}},
-  \code{\link{installTCGA}}, \code{\link{readTCGA}},
-  \code{\link{survivalTCGA}}
+  \code{\link{installTCGA}}, \code{\link{kmTCGA}},
+  \code{\link{readTCGA}}, \code{\link{survivalTCGA}}
 }
 

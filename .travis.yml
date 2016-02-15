@@ -17,6 +17,7 @@ r_packages:
  - ggplot2
  - tidyr
  - rmarkdown
+ - ggthemes
 r_github_packages:
  - RTCGA/RTCGA.rnaseq
  - RTCGA/RTCGA.clinical
