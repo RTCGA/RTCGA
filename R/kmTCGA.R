@@ -67,7 +67,7 @@ kmTCGA <- function(x,
 	# fit survival estimates
 	formu <- eval(as.formula(paste0("survival::Surv(", times, ",", status, ") ~ ",
 																	paste0(explanatory.names, collapse = " + "))))
-	fit <- survival::survfit(formu, data = x)
+	fit <- do.call(survival::survfit, list(formula = formu, data = data))
 				 
 	# create survival plot
 	ggsurvplot(fit,
