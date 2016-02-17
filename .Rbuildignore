@@ -14,3 +14,4 @@ update_remotes.sh
 data2/
 devel/
 devel
+^.*\.png$

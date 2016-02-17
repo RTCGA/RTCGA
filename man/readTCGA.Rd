@@ -33,10 +33,15 @@ An output:
      \item rnaseq data (genes' expressions) - \code{rnaseqv2__illuminahiseq_rnaseqv2}
      \item genes' mutations data - \code{Mutation_Packager_Calls.Level}
      \item Reverse phase protein array data (RPPA) - \code{protein_normalization__data.Level_3}
-     \item Merge transcriptome agilent data (mRNA) - \code{Merge_transcriptome__agilentg4502a_07_3__unc_edu__Level_3__unc_lowess_normalization_gene_level__data.Level_3}
-     \item miRNASeq data - \code{Merge_mirnaseq__illuminaga_mirnaseq__bcgsc_ca__Level_3__miR_gene_expression__data.Level_3} or \code{"Merge_mirnaseq__illuminahiseq_mirnaseq__bcgsc_ca__Level_3__miR_gene_expression__data.Level_3"}
-     \item methylation data - \code{Merge_methylation__humanmethylation27}
-     \item isoforms data - \code{Merge_rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_isoforms_normalized__data.Level_3} 
+     \item Merge transcriptome agilent data (mRNA) - 
+     \code{Merge_transcriptome__agilentg4502a_07_3__unc_edu__Level_3__unc_lowess_normalization_gene_level__data.Level_3}
+     \item miRNASeq data - 
+     \code{Merge_mirnaseq__illuminaga_mirnaseq__bcgsc_ca__Level_3__miR_gene_expression__data.Level_3} or 
+     \code{"Merge_mirnaseq__illuminahiseq_mirnaseq__bcgsc_ca__Level_3__miR_gene_expression__data.Level_3"}
+     \item methylation data - 
+     \code{Merge_methylation__humanmethylation27}
+     \item isoforms data - 
+     \code{Merge_rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_isoforms_normalized__data.Level_3} 
      }
 from TCGA project. Those files can be easily downloded with \link{downloadTCGA} function. See examples.
 }
@@ -88,7 +93,7 @@ dir.create('data2')
 
 # downloading rnaseq data
 downloadTCGA( cancerTypes = 'BRCA', 
-              dataSet = 'rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level',
+dataSet = 'rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level',
               destDir = 'data2' )
 
 # shortening paths and directories
@@ -195,7 +200,7 @@ dir.create('data6')
 # Download UCEC mRNA data and store it in data6 folder
 cancerType = "UCEC"
 downloadTCGA(cancerTypes = cancerType,
-             dataSet = "Merge_transcriptome__agilentg4502a_07_3__unc_edu__Level_3__unc_lowess_normalization_gene_level__data.Level_3",
+dataSet = "Merge_transcriptome__agilentg4502a_07_3__unc_edu__Level_3__unc_lowess_normalization_gene_level__data.Level_3",
              destDir = "data6")
 
 # Shorten path of subdirectory with UCEC mRNA data
@@ -226,11 +231,11 @@ dir.create('data7')
 # Illumina Genome Analyzer and Illumina HiSeq 2000 machines
 cancerType <- "BRCA"
 downloadTCGA(cancerTypes = cancerType,
-             dataSet = "Merge_mirnaseq__illuminaga_mirnaseq__bcgsc_ca__Level_3__miR_gene_expression__data.Level_3",
+dataSet = "Merge_mirnaseq__illuminaga_mirnaseq__bcgsc_ca__Level_3__miR_gene_expression__data.Level_3",
              destDir = "data7")
 
 downloadTCGA(cancerTypes = cancerType,
-             dataSet = "Merge_mirnaseq__illuminahiseq_mirnaseq__bcgsc_ca__Level_3__miR_gene_expression__data.Level_3",
+dataSet = "Merge_mirnaseq__illuminahiseq_mirnaseq__bcgsc_ca__Level_3__miR_gene_expression__data.Level_3",
              destDir = "data7")
 
 # Shorten path of subdirectory with BRCA miRNASeq data
@@ -275,7 +280,7 @@ dir.create('data8')
 # Download ACC isoforms data and store it in data8 folder
 cancerType = "ACC"
 downloadTCGA(cancerTypes = cancerType,
-             dataSet = "Merge_rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_isoforms_normalized__data.Level_3",
+dataSet = "Merge_rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_isoforms_normalized__data.Level_3",
              destDir = "data8")
 
 # Shorten path of subdirectory with ACC isoforms data

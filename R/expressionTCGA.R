@@ -98,10 +98,10 @@
 #' 
 #' 
 #' expressionTCGA(ACC.miRNASeq.bcr, CESC.miRNASeq.bcr, CHOL.miRNASeq.bcr, 
-#' 							 LAML.miRNASeq.bcr, PAAD.miRNASeq.bcr, THYM.miRNASeq.bcr,
-#' 							 LGG.miRNASeq.bcr, STAD.miRNASeq.bcr,
-#' 							 extract.cols = c("machine", "hsa-mir-101-1", "miRNA_ID")) %>%
-#' 	rename(cohort = dataset) %>%
+#'  					 LAML.miRNASeq.bcr, PAAD.miRNASeq.bcr, THYM.miRNASeq.bcr,
+#'  					 LGG.miRNASeq.bcr, STAD.miRNASeq.bcr,
+#'  					 extract.cols = c("machine", "hsa-mir-101-1", "miRNA_ID")) %>%
+#' 							 rename(cohort = dataset) %>%
 #' 	filter(miRNA_ID == "read_count") %>%
 #' 	select(-bcr_patient_barcode, -miRNA_ID) %>%
 #' 	gather(cohort, machine) -> data2plot
