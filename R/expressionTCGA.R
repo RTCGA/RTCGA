@@ -79,14 +79,22 @@
 #' ## miRNASeq expressions 
 #' library(RTCGA.miRNASeq)
 #' # miRNASeq has bcr_patienct_barcode in rownames...
-#' mutate(ACC.miRNASeq, bcr_patient_barcode = substr(rownames(ACC.miRNASeq), 1, 25)) -> ACC.miRNASeq.bcr
-#' mutate(CESC.miRNASeq, bcr_patient_barcode = substr(rownames(CESC.miRNASeq), 1, 25)) -> CESC.miRNASeq.bcr
-#' mutate(CHOL.miRNASeq, bcr_patient_barcode = substr(rownames(CHOL.miRNASeq), 1, 25)) -> CHOL.miRNASeq.bcr
-#' mutate(LAML.miRNASeq, bcr_patient_barcode = substr(rownames(LAML.miRNASeq), 1, 25)) -> LAML.miRNASeq.bcr
-#' mutate(PAAD.miRNASeq, bcr_patient_barcode = substr(rownames(PAAD.miRNASeq), 1, 25)) -> PAAD.miRNASeq.bcr
-#' mutate(THYM.miRNASeq, bcr_patient_barcode = substr(rownames(THYM.miRNASeq), 1, 25)) -> THYM.miRNASeq.bcr
-#' mutate(LGG.miRNASeq, bcr_patient_barcode = substr(rownames(LGG.miRNASeq), 1, 25)) -> LGG.miRNASeq.bcr
-#' mutate(STAD.miRNASeq, bcr_patient_barcode = substr(rownames(STAD.miRNASeq), 1, 25)) -> STAD.miRNASeq.bcr
+#' mutate(ACC.miRNASeq, 
+#'    bcr_patient_barcode = substr(rownames(ACC.miRNASeq), 1, 25)) -> ACC.miRNASeq.bcr
+#' mutate(CESC.miRNASeq, 
+#'    bcr_patient_barcode = substr(rownames(CESC.miRNASeq), 1, 25)) -> CESC.miRNASeq.bcr
+#' mutate(CHOL.miRNASeq, 
+#'    bcr_patient_barcode = substr(rownames(CHOL.miRNASeq), 1, 25)) -> CHOL.miRNASeq.bcr
+#' mutate(LAML.miRNASeq, 
+#'    bcr_patient_barcode = substr(rownames(LAML.miRNASeq), 1, 25)) -> LAML.miRNASeq.bcr
+#' mutate(PAAD.miRNASeq, 
+#'    bcr_patient_barcode = substr(rownames(PAAD.miRNASeq), 1, 25)) -> PAAD.miRNASeq.bcr
+#' mutate(THYM.miRNASeq, 
+#'    bcr_patient_barcode = substr(rownames(THYM.miRNASeq), 1, 25)) -> THYM.miRNASeq.bcr
+#' mutate(LGG.miRNASeq, 
+#'    bcr_patient_barcode = substr(rownames(LGG.miRNASeq), 1, 25)) -> LGG.miRNASeq.bcr
+#' mutate(STAD.miRNASeq, 
+#'    bcr_patient_barcode = substr(rownames(STAD.miRNASeq), 1, 25)) -> STAD.miRNASeq.bcr
 #' 
 #' 
 #' expressionTCGA(ACC.miRNASeq.bcr, CESC.miRNASeq.bcr, CHOL.miRNASeq.bcr, 

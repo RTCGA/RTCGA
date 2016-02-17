@@ -4,6 +4,11 @@
 
 # The family of R packages containing TCGA data
 
+
+![Workflow of RTCGA package](https://raw.githubusercontent.com/RTCGA/RTCGA/master/RTCGA_workflow_ver3.png)
+
+
+
 Data packages submitted to Bioconductor
 
 - [RTCGA.mutations](http://bioconductor.org/packages/3.2/data/experiment/html/RTCGA.mutations.html)
