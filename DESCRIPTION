@@ -18,6 +18,7 @@ Description: The Cancer Genome Atlas (TCGA) Data Portal provides a
     RTCGA package transforms TCGA data to tidy form which is
     convenient to use.
 BugReports: https://github.com/RTCGA/RTCGA/issues
+URL: https://rtcga.github.io/RTCGA
 License: GPL-2
 LazyLoad: yes
 LazyData: yes
@@ -36,7 +37,8 @@ Imports:
     survival,
     survminer,
     ggplot2,
-    ggthemes
+    ggthemes,
+    ggbiplot
 Suggests:
     testthat,
     pander,
@@ -51,8 +53,12 @@ Suggests:
     RTCGA.mRNA,
     RTCGA.miRNASeq,
     RTCGA.methylation,
+    RTCGA.CNV,
+    RTCGA.PANCAN12,
     magrittr,
     tidyr
+Remotes:
+    vqv/ggbiplot
 Repository: Bioconductor
 biocViews: Software, DataImport, DataRepresentation, Preprocessing
 VignetteBuilder: knitr

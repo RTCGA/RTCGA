@@ -77,8 +77,8 @@ kmTCGA <- function(x,
 						 main = main,
 						 ...) -> survplot
 	# customize with RTCGA theme
-  survplot$table <- survplot$table + theme_RTCGA()
-  survplot$plot <- survplot$plot + theme_RTCGA() 
+  survplot$table <- survplot$table + theme_RTCGA() + scale_fill_pander() +	scale_colour_pander()
+  survplot$plot <- survplot$plot + theme_RTCGA() + scale_fill_pander() +	scale_colour_pander()
 	# return							
 	if (return.survfit) {
 		return(list(survplot = survplot, survfit = fit))

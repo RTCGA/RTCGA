@@ -33,6 +33,7 @@ Other RTCGA: \code{\link{RTCGA-package}},
   \code{\link{datasetsTCGA}}, \code{\link{downloadTCGA}},
   \code{\link{expressionTCGA}}, \code{\link{infoTCGA}},
   \code{\link{installTCGA}}, \code{\link{kmTCGA}},
-  \code{\link{readTCGA}}, \code{\link{survivalTCGA}}
+  \code{\link{pcaTCGA}}, \code{\link{readTCGA}},
+  \code{\link{survivalTCGA}}
 }
 

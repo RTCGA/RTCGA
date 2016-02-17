@@ -29,6 +29,7 @@ r_github_packages:
  - RTCGA/RTCGA.miRNASeq
  - RTCGA/RTCGA.methylation
  - kassambara/survminer
+ - vqv/ggbiplot
 bioc_packages:
  - Biobase
  - GenomicRanges

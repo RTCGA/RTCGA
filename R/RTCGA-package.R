@@ -29,6 +29,7 @@
 #' @importFrom ggthemes scale_colour_pander
 #' @importFrom ggthemes scale_fill_pander
 #' @import ggplot2
+#' @importFrom ggbiplot ggbiplot
 #' 
 #' @examples
 #' \dontrun{
