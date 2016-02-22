@@ -1,6 +1,7 @@
 [![Travis-CI Build Status](https://travis-ci.org/RTCGA/RTCGA.svg?branch=master)](https://travis-ci.org/RTCGA/RTCGA)
 [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)                
-
+[![Pending Pull-Requests](http://githubbadges.herokuapp.com/RTCGA/RTCGA/pulls.svg?style=flat)](https://github.com/RTCGA/RTCGA/pulls)
+[![Github Issues](http://githubbadges.herokuapp.com/RTCGA/RTCGA/issues.svg)](https://github.com/RTCGA/RTCGA/issues)
 
 # The family of R packages containing TCGA data
 
