@@ -6,7 +6,7 @@
 \usage{
 pcaTCGA(x, group.names, title = "", return.pca = FALSE, scale = TRUE,
   center = TRUE, var.scale = 1, obs.scale = 1, ellipse = TRUE,
-  circle = TRUE, var.axes = FALSE, alpha = 0.2, ...)
+  circle = TRUE, var.axes = FALSE, alpha = 0.8, add.lines = TRUE, ...)
 }
 \arguments{
 \item{x}{A \code{data.frame} containing i.e. expressions information. See \link{expressionTCGA}.}
@@ -33,21 +33,30 @@ pcaTCGA(x, group.names, title = "", return.pca = FALSE, scale = TRUE,
 
 \item{alpha}{As in \link{ggbiplot}.}
 
+\item{add.lines}{Should axis lines be added to plot.}
+
 \item{...}{Further arguments passed to \link{prcomp}.}
+}
+\value{
+If \code{return.pca = TRUE} then a list containing a PCA plot (of class \code{ggplot}) and a \code{pca} model, the result of \link{prcomp} function.
+If not, then only PCA plot is returned.
 }
 \description{
 Plots Two Main Components of Principal Component Analysis
 }
 \examples{
 library(dplyr)
-
-#' ## RNASeq expressions
+## RNASeq expressions
 library(RTCGA.rnaseq)
 expressionTCGA(BRCA.rnaseq, OV.rnaseq, HNSC.rnaseq) \%>\%
 	rename(cohort = dataset) \%>\%	
 	filter(substr(bcr_patient_barcode, 14, 15) == "01") -> BRCA.OV.HNSC.rnaseq.cancer
 
 pcaTCGA(BRCA.OV.HNSC.rnaseq.cancer, "cohort")
+pcaTCGA(BRCA.OV.HNSC.rnaseq.cancer, "cohort", add.lines = FALSE)
+pcaTCGA(BRCA.OV.HNSC.rnaseq.cancer, "cohort", return.pca = TRUE) -> pca.rnaseq
+pca.rnaseq$plot
+pca.rnaseq$pca
 
 }
 \author{

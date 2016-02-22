@@ -32,13 +32,14 @@ Imports:
     data.table,
     xml2,
     devtools,
+    ggbiplot,
     dplyr,
+    purrr,
     knitr,
     survival,
     survminer,
     ggplot2,
-    ggthemes,
-    ggbiplot
+    ggthemes    
 Suggests:
     testthat,
     pander,

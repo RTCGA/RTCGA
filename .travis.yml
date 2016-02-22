@@ -18,6 +18,7 @@ r_packages:
  - tidyr
  - rmarkdown
  - ggthemes
+ - purrr
 r_github_packages:
  - RTCGA/RTCGA.rnaseq
  - RTCGA/RTCGA.clinical

@@ -28,8 +28,8 @@ theme_RTCGA <- function(base_size = 11, base_family = "", ...){
 					panel.grid.major = element_line(colour = "grey90", size = 0.2),
 					panel.grid.minor = element_line(colour = "grey98", size = 0.5),
 					legend.position = "top"), 
-		scale_colour_pander(),
-		scale_fill_pander())
+		scale_colour_tableau(),
+		scale_fill_tableau())
 	
 	
 }

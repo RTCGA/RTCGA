@@ -26,10 +26,11 @@
 #' @import survminer
 #' @import survival
 #' @importFrom ggthemes theme_pander
-#' @importFrom ggthemes scale_colour_pander
-#' @importFrom ggthemes scale_fill_pander
+#' @importFrom ggthemes scale_colour_tableau
+#' @importFrom ggthemes scale_fill_tableau
 #' @import ggplot2
 #' @importFrom ggbiplot ggbiplot
+#' @importFrom purrr map_if
 #' 
 #' @examples
 #' \dontrun{

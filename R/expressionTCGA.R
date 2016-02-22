@@ -127,17 +127,23 @@ expressionTCGA <- function(..., extract.cols = NULL, extract.names = TRUE) {
 	assert_that(is.null(extract.cols) | is.character(extract.cols))
 	assert_that(length(extract.names) == 1, is.logical(extract.names))
 	
+	
+	dots <- list(...)
+	lapply(dots, function(x){
+		x <- x %>% purrr::map_if(is.factor, as.character)
+	}) -> dots
+	
 	if (extract.names) {
 		mapply(rep, 
 					 sapply(substitute(list(...))[-1], deparse), 
 					 lapply(list(...), nrow)) %>%	unlist %>% as.character -> dataset
 		
 		if(is.null(extract.cols)) {
-			bind_rows(...) %>%
+			bind_rows(dots) %>%
 				mutate(dataset = dataset) %>%
 				select(everything())
 		} else {
-			bind_rows(...) %>%
+			bind_rows(dots) %>%
 				mutate(dataset = dataset) %>%
 				select(one_of(c("bcr_patient_barcode",
 												"dataset",
@@ -149,11 +155,11 @@ expressionTCGA <- function(..., extract.cols = NULL, extract.names = TRUE) {
 # 					 lapply(list(...), nrow)) %>%	unlist -> dataset
 		
 		if(is.null(extract.cols)) {
-			bind_rows(...) %>%
+			bind_rows(dots) %>%
 # 				mutate(dataset = dataset) %>%
 				select(everything())
 		} else {
-			bind_rows(...) %>%
+			bind_rows(dots) %>%
 		#		mutate(dataset = dataset) %>%
 				select(one_of(c("bcr_patient_barcode",
 												"dataset",
