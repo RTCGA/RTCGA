@@ -22,7 +22,7 @@ Data packages submitted to Bioconductor
 - [RTCGA.methylation](http://bioconductor.org/packages/RTCGA.methylation/)
 
 
-### Installation of packages from the `RTCGA.data` family: 
+### Installation of packages from the `RTCGA` family: 
 
 Windows users:
 > Make sure you have [rtools](http://cran.r-project.org/bin/windows/Rtools/) installed on your computer.
