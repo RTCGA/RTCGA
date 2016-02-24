@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+ <title>RTCGA</title>
+ <link href="https://rtcga.github.io//RTCGAR.xml" rel="self"/>
+ <link href="https://rtcga.github.io//RTCGA"/>
+ <updated>2016-02-24T01:14:26+01:00</updated>
+ <id>https://rtcga.github.io</id>
+ <author>
+   <name>Marcin Kosiński</name>
+   <email></email>
+ </author>
+
+ 
+
+</feed>
