@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Workflow and Installation &middot; RTCGA
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/RTCGA/public/css/poole.css">
+  <link rel="stylesheet" href="/RTCGA/public/css/syntax.css">
+  <link rel="stylesheet" href="/RTCGA/public/css/hyde.css">
+  <link rel="stylesheet" href="/RTCGA/public/css/custom.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/RTCGApublic/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/RTCGApublic/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+  
+  <!-- Mathjax -->
+  <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    
+    <!--Disqus comment counts-->
+    <script id="dsq-count-scr" src="//RTCGA.disqus.com/count.js" async></script>
+    
+</head>
+
+
+  <body class="theme-base-09">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/RTCGA">
+          RTCGA
+        </a>
+      </h1>
+      <p class="lead">Factory of R packages with TCGA data</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/RTCGA">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/RTCGA/Visualizations.html">Visualizations</a>
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item active" href="/RTCGA/Workflow.html">Workflow and Installation</a>
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/RTCGA/archive.html">Archives</a>
+          
+        
+      
+        
+      
+        
+          
+        
+      
+      <a class="sidebar-nav-item" href="https://github.com/RTCGA/RTCGA">GitHub project</a>
+    </nav>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">Workflow and Installation</h1>
+  <p><img src="https://raw.githubusercontent.com/RTCGA/RTCGA/master/RTCGA_workflow_ver3.png" alt="Workflow of RTCGA package" /></p>
+
+<p>Data packages submitted to Bioconductor</p>
+
+<ul>
+  <li><a href="http://bioconductor.org/packages/3.2/data/experiment/html/RTCGA.mutations.html">RTCGA.mutations</a></li>
+  <li><a href="http://bioconductor.org/packages/3.2/data/experiment/html/RTCGA.rnaseq.html">RTCGA.rnaseq</a></li>
+  <li><a href="http://bioconductor.org/packages/3.2/data/experiment/html/RTCGA.clinical.html">RTCGA.clinical</a></li>
+  <li><a href="http://bioconductor.org/packages/RTCGA.PANCAN12/">RTCGA.PANCAN12</a></li>
+  <li><a href="http://bioconductor.org/packages/RTCGA.mRNA/">RTCGA.mRNA</a></li>
+  <li><a href="http://bioconductor.org/packages/RTCGA.miRNASeq/">RTCGA.miRNASeq</a></li>
+  <li><a href="http://bioconductor.org/packages/RTCGA.RPPA/">RTCGA.RPPA</a></li>
+  <li><a href="http://bioconductor.org/packages/RTCGA.CNV/">RTCGA.CNV</a></li>
+  <li><a href="http://bioconductor.org/packages/RTCGA.methylation/">RTCGA.methylation</a></li>
+</ul>
+
+<h3 id="installation-of-packages-from-the-rtcga-family">Installation of packages from the <code class="highlighter-rouge">RTCGA</code> family:</h3>
+
+<p>Windows users:
+&gt; Make sure you have <a href="http://cran.r-project.org/bin/windows/Rtools/">rtools</a> installed on your computer.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1"># packages that are published to devel version of Bioconductor
+</span><span class="n">BiocInstaller</span><span class="o">::</span><span class="n">useDevel</span><span class="p">()</span> <span class="c1"># swiches to devel branchof Bioconductor - don't use this line if you are interested in release versions
+</span><span class="n">source</span><span class="p">(</span><span class="s2">"https://bioconductor.org/biocLite.R"</span><span class="p">)</span> <span class="c1"># downloads bioClite function
+</span><span class="n">biocLite</span><span class="p">(</span><span class="s2">"RTCGA.clinical"</span><span class="p">)</span> <span class="c1"># installs a package
+</span><span class="n">biocLite</span><span class="p">(</span><span class="s2">"RTCGA.rnaseq"</span><span class="p">)</span>
+<span class="n">biocLite</span><span class="p">(</span><span class="s2">"RTCGA.mutations"</span><span class="p">)</span>
+<span class="n">biocLite</span><span class="p">(</span><span class="s2">"RTCGA.PANCAN12"</span><span class="p">)</span>
+<span class="n">biocLite</span><span class="p">(</span><span class="s2">"RTCGA.CNV"</span><span class="p">)</span>
+<span class="n">biocLite</span><span class="p">(</span><span class="s2">"RTCGA.RPPA"</span><span class="p">)</span>
+<span class="n">biocLite</span><span class="p">(</span><span class="s2">"RTCGA.mRNA"</span><span class="p">)</span>
+<span class="n">biocLite</span><span class="p">(</span><span class="s2">"RTCGA.miRNASeq"</span><span class="p">)</span>
+<span class="n">biocLite</span><span class="p">(</span><span class="s2">"RTCGA.methylation"</span><span class="p">)</span>
+
+
+<span class="c1"># version of packages held at github.com/RTCGA - I try to keep them with the same state as devel versions of Bioconductor
+</span><span class="n">library</span><span class="p">(</span><span class="n">RTCGA</span><span class="p">)</span>
+<span class="n">installTCGA</span><span class="p">(</span><span class="s2">"RTCGA.PANCAN12"</span><span class="p">)</span>
+<span class="n">installTCGA</span><span class="p">(</span><span class="s2">"RTCGA.CNV"</span><span class="p">)</span>
+<span class="n">installTCGA</span><span class="p">(</span><span class="s2">"RTCGA.RPPA"</span><span class="p">)</span>
+<span class="n">installTCGA</span><span class="p">(</span><span class="s2">"RTCGA.mRNA"</span><span class="p">)</span>
+<span class="n">installTCGA</span><span class="p">(</span><span class="s2">"RTCGA.miRNASeq"</span><span class="p">)</span>
+<span class="n">installTCGA</span><span class="p">(</span><span class="s2">"RTCGA.methylation"</span><span class="p">)</span>
+<span class="err">#</span> <span class="n">or</span> <span class="k">for</span> <span class="n">all</span> <span class="n">just</span> <span class="n">type</span> <span class="n">installTCGA</span><span class="p">()</span></code></pre></figure>
+
+<h5> The list of available datasets: </h5>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">help</span><span class="p">(</span><span class="n">dataType</span><span class="p">)</span>
+<span class="c1"># where dataType is one of: 'datasetsTCGA', 'clinical', 'rnaseq'
+</span><span class="err">#</span> <span class="s1">'mutations'</span><span class="p">,</span> <span class="s1">'pancan12'</span><span class="p">,</span> <span class="s1">'CNV'</span><span class="p">,</span> <span class="s1">'RPPA'</span><span class="p">,</span> <span class="s1">'mRNA'</span><span class="p">,</span> <span class="s1">'miRNASeq'</span><span class="p">,</span> <span class="s1">'methylation'</span></code></pre></figure>
+
+<h1 id="rtcga">RTCGA</h1>
+
+<p>Packages from the <code class="highlighter-rouge">RTCGA.data</code> - family/factory are based on the <code class="highlighter-rouge">RTCGA</code> package</p>
+
+<h3 id="installation-of-the-rtcgahttpsgithubcomrtcgartcga-package">Installation of the <a href="https://github.com/RTCGA/RTCGA"><code class="highlighter-rouge">RTCGA</code></a> package:</h3>
+<p>To get started, install the latest version of <strong>RTCGA</strong> from Bioconductor:</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">BiocInstaller</span><span class="o">::</span><span class="n">useDevel</span><span class="p">()</span> <span class="c1"># swiches to devel branch of Bioconductor
+</span><span class="n">source</span><span class="p">(</span><span class="s2">"https://bioconductor.org/biocLite.R"</span><span class="p">)</span> <span class="c1"># downloads bioClite function
+</span><span class="n">biocLite</span><span class="p">(</span><span class="s2">"RTCGA"</span><span class="p">)</span> <span class="err">#</span> <span class="n">installs</span> <span class="n">a</span> <span class="n">package</span></code></pre></figure>
+
+<p>or use below code to download the development version which is like to be less bugged than the release version on Bioconductor:</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">require</span><span class="p">(</span><span class="n">devtools</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">install.packages</span><span class="p">(</span><span class="s2">"devtools"</span><span class="p">)</span>
+    <span class="n">require</span><span class="p">(</span><span class="n">devtools</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="n">install_github</span><span class="p">(</span><span class="s2">"RTCGA/RTCGA"</span><span class="p">,</span> <span class="n">build_vignettes</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">)</span></code></pre></figure>
+
+<p>To check Use Cases run</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">browseVignettes</span><span class="p">(</span><span class="s2">"RTCGA"</span><span class="p">)</span></code></pre></figure>
+
+<h4> Authors: </h4>
+
+<blockquote>
+
+  <p>Marcin Kosiński, m.p.kosinski@gmail.com</p>
+
+  <p>Przemysław Biecek, przemyslaw.biecek@gmail.com</p>
+
+  <p>Witold Chorod, witoldchodor@gmail.com</p>
+
+</blockquote>
+
+</div>
+
+
+<a href="https://twitter.com/share" class="twitter-share-button"{count}>Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<div class="fb-share-button" data-href="https://rtcga.github.io/RTCGA" data-layout="button_count"></div>
+
+
+
+
+<div id="disqus_thread"></div>
+
+<script>(function() {
+        var d = document, s = d.createElement('script');
+        s.src = '//RTCGA.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+    </div>
+
+  </body>
+</html>
