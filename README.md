@@ -94,7 +94,7 @@ browseVignettes("RTCGA")
 >
 > Przemysław Biecek, przemyslaw.biecek@gmail.com
 >
-> Witold Chorod, witoldchodor@gmail.com
+> Witold Chodor, witoldchodor@gmail.com
 >
 
 This repository is synchronized with it's [Bioconductor's SVN devel mirror](https://hedgehog.fhcrc.org/bioconductor/trunk/madman/Rpacks/RTCGA).
