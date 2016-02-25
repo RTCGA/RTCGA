@@ -57,7 +57,7 @@ BRCA.clinical \%>\%
 kmTCGA(BRCAOV.survInfo, explanatory.names = "admin.disease_code",  pval = TRUE)
 
 kmTCGA(BRCAOV.survInfo, explanatory.names = "admin.disease_code", main = "",
-       xlim = c(0,4000)h)
+       xlim = c(0,4000))
  
 kmTCGA(BRCA.survInfo.chemo, explanatory.names = "therapy", xlim = c(0, 3000), conf.int = FALSE)
 
