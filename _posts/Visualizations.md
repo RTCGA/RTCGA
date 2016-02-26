@@ -34,7 +34,14 @@ library(dplyr)
 # load RTCGA.rnaseq package to vizualize RNASeq
 library(RTCGA.rnaseq)
 # perfrom plot
-expressionTCGA(ACC.rnaseq, BLCA.rnaseq, BRCA.rnaseq, CESC.rnaseq, CHOL.rnaseq, COAD.rnaseq, COADREAD.rnaseq, DLBC.rnaseq, ESCA.rnaseq, BMLGG.rnaseq, GBM.rnaseq, HNSC.rnaseq, KICH.rnaseq, KIPAN.rnaseq, KIRC.rnaseq, KIRP.rnaseq, LAML.rnaseq, LGG.rnaseq, LIHC.rnaseq, LUAD.rnaseq, LUSC.rnaseq, OV.rnaseq, PAAD.rnaseq, PCPG.rnaseq, PRAD.rnaseq, READ.rnaseq, SARC.rnaseq, SKCM.rnaseq, STAD.rnaseq, STES.rnaseq, TGCT.rnaseq, THCA.rnaseq, THYM.rnaseq, UCEC.rnaseq, UCS.rnaseq, UVM.rnaseq, extract.cols = "MET|4233") %>%
+expressionTCGA(ACC.rnaseq, BLCA.rnaseq, BRCA.rnaseq, CESC.rnaseq, CHOL.rnaseq, 
+							 COAD.rnaseq, COADREAD.rnaseq, DLBC.rnaseq, ESCA.rnaseq,
+							 BMLGG.rnaseq, GBM.rnaseq, HNSC.rnaseq, KICH.rnaseq, KIPAN.rnaseq,
+							 KIRC.rnaseq, KIRP.rnaseq, LAML.rnaseq, LGG.rnaseq, LIHC.rnaseq,
+							 LUAD.rnaseq, LUSC.rnaseq, OV.rnaseq, PAAD.rnaseq, PCPG.rnaseq,
+							 PRAD.rnaseq, READ.rnaseq, SARC.rnaseq, SKCM.rnaseq, STAD.rnaseq,
+							 STES.rnaseq, TGCT.rnaseq, THCA.rnaseq, THYM.rnaseq, UCEC.rnaseq,
+							 UCS.rnaseq, UVM.rnaseq, extract.cols = "MET|4233") %>%
 	rename(cohort = dataset,
 				 MET = `MET|4233`) %>%
 	filter(substr(bcr_patient_barcode, 14, 15) == "01") %>% 

@@ -65,6 +65,24 @@
         
       
         
+          
+            <a class="sidebar-nav-item" href="/RTCGA/Applications.html">Web Applications</a>
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/RTCGA/Download.html">TCGA Data Download</a>
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/RTCGA/Packages.html">Data Packages</a>
+          
+        
+      
+        
       
         
           
@@ -73,21 +91,7 @@
         
       
         
-          
-            <a class="sidebar-nav-item" href="/RTCGA/Workflow.html">Workflow and Installation</a>
-          
-        
       
-        
-          
-            <a class="sidebar-nav-item" href="/RTCGA/archive.html">Archives</a>
-          
-        
-      
-        
-      
-        
-          
         
       
       <a class="sidebar-nav-item" href="https://github.com/RTCGA/RTCGA">GitHub project</a>
@@ -116,7 +120,14 @@
 <span class="c1"># load RTCGA.rnaseq package to vizualize RNASeq
 </span><span class="n">library</span><span class="p">(</span><span class="n">RTCGA.rnaseq</span><span class="p">)</span>
 <span class="c1"># perfrom plot
-</span><span class="n">expressionTCGA</span><span class="p">(</span><span class="n">ACC.rnaseq</span><span class="p">,</span> <span class="n">BLCA.rnaseq</span><span class="p">,</span> <span class="n">BRCA.rnaseq</span><span class="p">,</span> <span class="n">CESC.rnaseq</span><span class="p">,</span> <span class="n">CHOL.rnaseq</span><span class="p">,</span> <span class="n">COAD.rnaseq</span><span class="p">,</span> <span class="n">COADREAD.rnaseq</span><span class="p">,</span> <span class="n">DLBC.rnaseq</span><span class="p">,</span> <span class="n">ESCA.rnaseq</span><span class="p">,</span> <span class="n">BMLGG.rnaseq</span><span class="p">,</span> <span class="n">GBM.rnaseq</span><span class="p">,</span> <span class="n">HNSC.rnaseq</span><span class="p">,</span> <span class="n">KICH.rnaseq</span><span class="p">,</span> <span class="n">KIPAN.rnaseq</span><span class="p">,</span> <span class="n">KIRC.rnaseq</span><span class="p">,</span> <span class="n">KIRP.rnaseq</span><span class="p">,</span> <span class="n">LAML.rnaseq</span><span class="p">,</span> <span class="n">LGG.rnaseq</span><span class="p">,</span> <span class="n">LIHC.rnaseq</span><span class="p">,</span> <span class="n">LUAD.rnaseq</span><span class="p">,</span> <span class="n">LUSC.rnaseq</span><span class="p">,</span> <span class="n">OV.rnaseq</span><span class="p">,</span> <span class="n">PAAD.rnaseq</span><span class="p">,</span> <span class="n">PCPG.rnaseq</span><span class="p">,</span> <span class="n">PRAD.rnaseq</span><span class="p">,</span> <span class="n">READ.rnaseq</span><span class="p">,</span> <span class="n">SARC.rnaseq</span><span class="p">,</span> <span class="n">SKCM.rnaseq</span><span class="p">,</span> <span class="n">STAD.rnaseq</span><span class="p">,</span> <span class="n">STES.rnaseq</span><span class="p">,</span> <span class="n">TGCT.rnaseq</span><span class="p">,</span> <span class="n">THCA.rnaseq</span><span class="p">,</span> <span class="n">THYM.rnaseq</span><span class="p">,</span> <span class="n">UCEC.rnaseq</span><span class="p">,</span> <span class="n">UCS.rnaseq</span><span class="p">,</span> <span class="n">UVM.rnaseq</span><span class="p">,</span> <span class="n">extract.cols</span> <span class="o">=</span> <span class="s2">"MET|4233"</span><span class="p">)</span> <span class="o">%&gt;%</span>
+</span><span class="n">expressionTCGA</span><span class="p">(</span><span class="n">ACC.rnaseq</span><span class="p">,</span> <span class="n">BLCA.rnaseq</span><span class="p">,</span> <span class="n">BRCA.rnaseq</span><span class="p">,</span> <span class="n">CESC.rnaseq</span><span class="p">,</span> <span class="n">CHOL.rnaseq</span><span class="p">,</span>
+							 <span class="n">COAD.rnaseq</span><span class="p">,</span> <span class="n">COADREAD.rnaseq</span><span class="p">,</span> <span class="n">DLBC.rnaseq</span><span class="p">,</span> <span class="n">ESCA.rnaseq</span><span class="p">,</span>
+							 <span class="n">BMLGG.rnaseq</span><span class="p">,</span> <span class="n">GBM.rnaseq</span><span class="p">,</span> <span class="n">HNSC.rnaseq</span><span class="p">,</span> <span class="n">KICH.rnaseq</span><span class="p">,</span> <span class="n">KIPAN.rnaseq</span><span class="p">,</span>
+							 <span class="n">KIRC.rnaseq</span><span class="p">,</span> <span class="n">KIRP.rnaseq</span><span class="p">,</span> <span class="n">LAML.rnaseq</span><span class="p">,</span> <span class="n">LGG.rnaseq</span><span class="p">,</span> <span class="n">LIHC.rnaseq</span><span class="p">,</span>
+							 <span class="n">LUAD.rnaseq</span><span class="p">,</span> <span class="n">LUSC.rnaseq</span><span class="p">,</span> <span class="n">OV.rnaseq</span><span class="p">,</span> <span class="n">PAAD.rnaseq</span><span class="p">,</span> <span class="n">PCPG.rnaseq</span><span class="p">,</span>
+							 <span class="n">PRAD.rnaseq</span><span class="p">,</span> <span class="n">READ.rnaseq</span><span class="p">,</span> <span class="n">SARC.rnaseq</span><span class="p">,</span> <span class="n">SKCM.rnaseq</span><span class="p">,</span> <span class="n">STAD.rnaseq</span><span class="p">,</span>
+							 <span class="n">STES.rnaseq</span><span class="p">,</span> <span class="n">TGCT.rnaseq</span><span class="p">,</span> <span class="n">THCA.rnaseq</span><span class="p">,</span> <span class="n">THYM.rnaseq</span><span class="p">,</span> <span class="n">UCEC.rnaseq</span><span class="p">,</span>
+							 <span class="n">UCS.rnaseq</span><span class="p">,</span> <span class="n">UVM.rnaseq</span><span class="p">,</span> <span class="n">extract.cols</span> <span class="o">=</span> <span class="s2">"MET|4233"</span><span class="p">)</span> <span class="o">%&gt;%</span>
 	<span class="n">rename</span><span class="p">(</span><span class="n">cohort</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">,</span>
 				 <span class="n">MET</span> <span class="o">=</span> <span class="sb">`MET|4233`</span><span class="p">)</span> <span class="o">%&gt;%</span>
 	<span class="n">filter</span><span class="p">(</span><span class="n">substr</span><span class="p">(</span><span class="n">bcr_patient_barcode</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">15</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"01"</span><span class="p">)</span> <span class="o">%&gt;%</span> 

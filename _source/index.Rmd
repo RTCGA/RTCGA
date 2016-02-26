@@ -1,6 +1,6 @@
 ---
 layout:  page
-title: "Workflow and Installation"
+title: "Installation"
 comments:  true
 published:  true
 author: "Marcin Kosiński"

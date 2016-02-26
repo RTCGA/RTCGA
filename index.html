@@ -1,23 +1,82 @@
 ---
-layout: default
-title: News
+layout: page
 ---
 
-<div class="posts">
-  {% for post in site.posts limit:site.homepostlimit %}
-  <div class="post">
-    <h1 class="post-title">
-      <a href="{{ site.baseurl }}/{{ post.url }}">
-        {{ post.title }}
-      </a>
-    </h1>
-    {% if site.disqus %}
-<a href="{{ site.baseurl }}{{ post.url }}#disqus_thread"
-    class = "commentcount"></a>
-    {% endif %}
-    <span class="post-date">{{ post.date | date_to_string }}</span>
+<h2>Workflow of RTCGA package</h2>
+<img src="https://raw.githubusercontent.com/RTCGA/RTCGA/master/RTCGA_workflow_ver3.png" alt="RTCGA workflow"> 
 
-    {{ post.content }}
-  </div>
-  {% endfor %}
+<p>Data packages submitted to Bioconductor</p>
+<ul>
+<li><a href="http://bioconductor.org/packages/RTCGA.mutations">RTCGA.mutations</a></li>
+<li><a href="http://bioconductor.org/packages/RTCGA.rnaseq">RTCGA.rnaseq</a></li>
+<li><a href="http://bioconductor.org/packages/RTCGA.clinical">RTCGA.clinical</a></li>
+<li><a href="http://bioconductor.org/packages/RTCGA.PANCAN12/">RTCGA.PANCAN12</a></li>
+<li><a href="http://bioconductor.org/packages/RTCGA.mRNA/">RTCGA.mRNA</a></li>
+<li><a href="http://bioconductor.org/packages/RTCGA.miRNASeq/">RTCGA.miRNASeq</a></li>
+<li><a href="http://bioconductor.org/packages/RTCGA.RPPA/">RTCGA.RPPA</a></li>
+<li><a href="http://bioconductor.org/packages/RTCGA.CNV/">RTCGA.CNV</a></li>
+<li><a href="http://bioconductor.org/packages/RTCGA.methylation/">RTCGA.methylation</a></li>
+</ul>
+<div id="installation-of-packages-from-the-rtcga-family" class="section level3">
+<h3>Installation of packages from the <code>RTCGA</code> family:</h3>
+<p>Windows users: &gt; Make sure you have <a href="http://cran.r-project.org/bin/windows/Rtools/">rtools</a> installed on your computer.</p>
+<pre class="r"><code># packages that are published to devel version of Bioconductor
+BiocInstaller::useDevel() # swiches to devel branchof Bioconductor 
+# don't use above line if you are interested in release versions
+source(&quot;https://bioconductor.org/biocLite.R&quot;) # downloads bioClite function
+biocLite(&quot;RTCGA.clinical&quot;) # installs a package
+biocLite(&quot;RTCGA.rnaseq&quot;)
+biocLite(&quot;RTCGA.mutations&quot;)
+biocLite(&quot;RTCGA.PANCAN12&quot;)
+biocLite(&quot;RTCGA.CNV&quot;)
+biocLite(&quot;RTCGA.RPPA&quot;)
+biocLite(&quot;RTCGA.mRNA&quot;)
+biocLite(&quot;RTCGA.miRNASeq&quot;)
+biocLite(&quot;RTCGA.methylation&quot;)
+
+
+# version of packages held at github.com/RTCGA 
+library(RTCGA)
+installTCGA(&quot;RTCGA.name&quot;)
+# or for all just type installTCGA()</code></pre>
+<h5>
+The list of available datasets:
+</h5>
+<pre class="r"><code>help(dataType)
+# where dataType is one of: 'datasetsTCGA', 'clinical', 
+# 'rnaseq', 'mutations', 'pancan12', 'CNV',
+#  'RPPA', 'mRNA', 'miRNASeq', 'methylation' </code></pre>
 </div>
+<div id="rtcga" class="section level1">
+<h1>RTCGA</h1>
+<p>Packages from the <code>RTCGA.data</code> - family/factory are based on the <code>RTCGA</code> package</p>
+<div id="installation-of-the-rtcga-package" class="section level3">
+<h3>Installation of the <a href="https://github.com/RTCGA/RTCGA"><code>RTCGA</code></a> package:</h3>
+<p>To get started, install the latest version of <strong>RTCGA</strong> from Bioconductor:</p>
+<pre class="r"><code>BiocInstaller::useDevel() # swiches to devel branch of Bioconductor
+source(&quot;https://bioconductor.org/biocLite.R&quot;) # downloads bioClite function
+biocLite(&quot;RTCGA&quot;) # installs a package</code></pre>
+<p>or use below code to download the development version which is like to be less bugged than the release version on Bioconductor:</p>
+<pre class="r"><code>if (!require(devtools)) {
+    install.packages(&quot;devtools&quot;)
+    require(devtools)
+}
+install_github(&quot;RTCGA/RTCGA&quot;, build_vignettes = TRUE)</code></pre>
+<p>To check Use Cases run</p>
+<pre class="r"><code>browseVignettes(&quot;RTCGA&quot;)</code></pre>
+<h4>
+Authors:
+</h4>
+<blockquote>
+<p>Marcin Kosiński, <a href="mailto:m.p.kosinski@gmail.com">m.p.kosinski@gmail.com</a></p>
+<p>Przemysław Biecek, <a href="mailto:przemyslaw.biecek@gmail.com">przemyslaw.biecek@gmail.com</a></p>
+<p>Witold Chodor, <a href="mailto:witoldchodor@gmail.com">witoldchodor@gmail.com</a></p>
+</blockquote>
+</div>
+</div>
+
+
+
+
+</div>
+

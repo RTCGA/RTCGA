@@ -1,0 +1,23 @@
+---
+layout:  page
+title: "Data Packages"
+comments:  true
+published:  true
+author: "Marcin Kosiński"
+date: 2016-02-24 00:45:00
+categories: [RTCGA]
+output:
+  html_document:
+    mathjax:  default
+    fig_caption:  true
+---
+
+
+```{r include=FALSE}
+library(knitr)
+opts_chunk$set(comment="", message=FALSE, warning = FALSE, 
+               tidy.opts=list(keep.blank.line=TRUE, width.cutoff=150),
+							 options(width=150), eval = FALSE)
+```
+
+# TO BE DONE
