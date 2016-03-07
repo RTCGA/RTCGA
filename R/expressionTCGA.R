@@ -23,7 +23,7 @@
 #' 
 #' ## RNASeq expressions
 #' library(RTCGA.rnaseq)
-#' expressionTCGA(BRCA.rnaseq, OV.rnaseq, HNSC.rnaseq,
+#' expressionsTCGA(BRCA.rnaseq, OV.rnaseq, HNSC.rnaseq,
 #' 							 extract.cols = "VENTX|27287") %>%
 #' 	rename(cohort = dataset,
 #' 				 VENTX = `VENTX|27287`) %>%	
@@ -38,7 +38,7 @@
 #' ## mRNA expressions	
 #' library(tidyr)
 #' library(RTCGA.mRNA)
-#' expressionTCGA(BRCA.mRNA, COAD.mRNA, LUSC.mRNA, UCEC.mRNA,
+#' expressionsTCGA(BRCA.mRNA, COAD.mRNA, LUSC.mRNA, UCEC.mRNA,
 #' 							 extract.cols = c("ARHGAP24", "TRAV20")) %>%
 #' 	rename(cohort = dataset) %>%
 #' 	select(-bcr_patient_barcode) %>%
@@ -57,7 +57,7 @@
 #'
 #' ## RPPA expressions
 #' library(RTCGA.RPPA)
-#' expressionTCGA(ACC.RPPA, BLCA.RPPA, BRCA.RPPA,
+#' expressionsTCGA(ACC.RPPA, BLCA.RPPA, BRCA.RPPA,
 #' 							 extract.cols = c("4E-BP1_pS65", "4E-BP1")) %>%
 #' 	rename(cohort = dataset) %>%
 #' 	select(-bcr_patient_barcode) %>%
@@ -97,7 +97,7 @@
 #'    bcr_patient_barcode = substr(rownames(STAD.miRNASeq), 1, 25)) -> STAD.miRNASeq.bcr
 #' 
 #' 
-#' expressionTCGA(ACC.miRNASeq.bcr, CESC.miRNASeq.bcr, CHOL.miRNASeq.bcr, 
+#' expressionsTCGA(ACC.miRNASeq.bcr, CESC.miRNASeq.bcr, CHOL.miRNASeq.bcr, 
 #'  					 LAML.miRNASeq.bcr, PAAD.miRNASeq.bcr, THYM.miRNASeq.bcr,
 #'  					 LGG.miRNASeq.bcr, STAD.miRNASeq.bcr,
 #'  					 extract.cols = c("machine", "hsa-mir-101-1", "miRNA_ID")) %>%
@@ -123,7 +123,7 @@
 #' @family RTCGA
 #' @rdname expressionsTCGA
 #' @export
-expressionTCGA <- function(..., extract.cols = NULL, extract.names = TRUE) {
+expressionsTCGA <- function(..., extract.cols = NULL, extract.names = TRUE) {
 	assert_that(is.null(extract.cols) | is.character(extract.cols))
 	assert_that(length(extract.names) == 1, is.logical(extract.names))
 	

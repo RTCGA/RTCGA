@@ -3,7 +3,7 @@
 #'
 #' @description Plots Two Main Components of Principal Component Analysis
 #' 
-#' @param x A \code{data.frame} containing i.e. expressions information. See \link{expressionTCGA}.
+#' @param x A \code{data.frame} containing i.e. expressions information. See \link{expressionsTCGA}.
 #' @param group.names Names of group variable to use in labels of the plot.
 #' @param return.pca Should return pca object additionaly to pca plot?
 #' @param ... Further arguments passed to \link{prcomp}.
@@ -25,7 +25,7 @@
 #' library(dplyr)
 #' ## RNASeq expressions
 #' library(RTCGA.rnaseq)
-#' expressionTCGA(BRCA.rnaseq, OV.rnaseq, HNSC.rnaseq) %>%
+#' expressionsTCGA(BRCA.rnaseq, OV.rnaseq, HNSC.rnaseq) %>%
 #' 	rename(cohort = dataset) %>%	
 #' 	filter(substr(bcr_patient_barcode, 14, 15) == "01") -> BRCA.OV.HNSC.rnaseq.cancer
 #' 
@@ -58,7 +58,7 @@ pcaTCGA <- function(x,
 	assert_that(is.data.frame(x))
 	assert_that(group.names %in% names(x), length(group.names) == 1, length(group.names) == 1)
 
-	# HERE FIX
+
 	x[sapply(x,is.numeric)] -> x.numeric
 	x.numeric %>% colSums() -> pca.col.sums
 	which(pca.col.sums == 0) -> pca.col.sums.only0

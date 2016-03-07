@@ -16,3 +16,4 @@ devel/
 devel
 ^.*\.png$
 ISSUE_TEMPLATE.md
+RTCGA_workflow*
