@@ -22,6 +22,8 @@
 #' If not, then only PCA plot is returned.
 #' 
 #' @examples 
+#' 
+#' \dontrun{
 #' library(dplyr)
 #' ## RNASeq expressions
 #' library(RTCGA.rnaseq)
@@ -34,7 +36,7 @@
 #' pcaTCGA(BRCA.OV.HNSC.rnaseq.cancer, "cohort", return.pca = TRUE) -> pca.rnaseq
 #' pca.rnaseq$plot
 #' pca.rnaseq$pca
-#' 
+#' }
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
 #' 

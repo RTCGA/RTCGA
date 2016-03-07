@@ -45,6 +45,8 @@ If not, then only PCA plot is returned.
 Plots Two Main Components of Principal Component Analysis
 }
 \examples{
+
+\dontrun{
 library(dplyr)
 ## RNASeq expressions
 library(RTCGA.rnaseq)
@@ -57,7 +59,7 @@ pcaTCGA(BRCA.OV.HNSC.rnaseq.cancer, "cohort", add.lines = FALSE)
 pcaTCGA(BRCA.OV.HNSC.rnaseq.cancer, "cohort", return.pca = TRUE) -> pca.rnaseq
 pca.rnaseq$plot
 pca.rnaseq$pca
-
+}
 }
 \author{
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}

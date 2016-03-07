@@ -84,6 +84,12 @@ convertTCGA <- function(dataSet, dataType = "expression"){
 		if (!requireNamespace("GenomicRanges", quietly = TRUE)) {
 			stop("GenomicRanges package required for convertTCGA function for CNV data.")
 		}
+		if (!requireNamespace("S4Vectors", quietly = TRUE)) {
+			stop("S4Vectors package required for convertTCGA function for CNV data.")
+		}
+		if (!requireNamespace("IRanges", quietly = TRUE)) {
+			stop("IRanges package required for convertTCGA function for CNV data.")
+		}
 		GenomicRanges::GRanges(seqnames = 
 													 	S4Vectors::Rle(paste0("chr",dataSet[,2]), # chromosome
 													 								 rep(1,nrow(dataSet)) # counts
