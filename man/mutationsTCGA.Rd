@@ -43,7 +43,7 @@ BRCA_OV.clinical \%>\%
 						by = "bcr_patient_barcode") \%>\%
 	mutate(TP53 = ifelse(!is.na(Variant_Classification),
 											 "Mut",
-											 "WILD")) -> BRCA_OV.clinical_mutations
+											 "WILDorNOINFO")) -> BRCA_OV.clinical_mutations
 
 BRCA_OV.clinical_mutations \%>\%
 	select(times, patient.vital_status, disease, TP53) -> BRCA_OV.2plot
@@ -56,8 +56,9 @@ Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 }
 \seealso{
 Other RTCGA: \code{\link{RTCGA-package}},
-  \code{\link{checkTCGA}}, \code{\link{convertTCGA}},
-  \code{\link{datasetsTCGA}}, \code{\link{downloadTCGA}},
+  \code{\link{boxplotTCGA}}, \code{\link{checkTCGA}},
+  \code{\link{convertTCGA}}, \code{\link{datasetsTCGA}},
+  \code{\link{downloadTCGA}},
   \code{\link{expressionsTCGA}}, \code{\link{infoTCGA}},
   \code{\link{installTCGA}}, \code{\link{kmTCGA}},
   \code{\link{pcaTCGA}}, \code{\link{readTCGA}},

@@ -57,8 +57,8 @@ Witold Chodor [aut] \email{ witoldchodor@gmail.com }
 }
 \seealso{
 Other RTCGA: \code{\link{RTCGA-package}},
-  \code{\link{checkTCGA}}, \code{\link{convertTCGA}},
-  \code{\link{downloadTCGA}},
+  \code{\link{boxplotTCGA}}, \code{\link{checkTCGA}},
+  \code{\link{convertTCGA}}, \code{\link{downloadTCGA}},
   \code{\link{expressionsTCGA}}, \code{\link{infoTCGA}},
   \code{\link{installTCGA}}, \code{\link{kmTCGA}},
   \code{\link{mutationsTCGA}}, \code{\link{pcaTCGA}},

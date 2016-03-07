@@ -38,7 +38,7 @@
 #' 						by = "bcr_patient_barcode") %>%
 #' 	mutate(TP53 = ifelse(!is.na(Variant_Classification),
 #' 											 "Mut",
-#' 											 "WILD")) -> BRCA_OV.clinical_mutations
+#' 											 "WILDorNOINFO")) -> BRCA_OV.clinical_mutations
 #' 
 #' BRCA_OV.clinical_mutations %>%
 #' 	select(times, patient.vital_status, disease, TP53) -> BRCA_OV.2plot

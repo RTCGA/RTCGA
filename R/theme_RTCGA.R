@@ -24,12 +24,12 @@
 theme_RTCGA <- function(base_size = 11, base_family = "", ...){
 	
 	list(theme_pander(gm = TRUE, gM = TRUE, ...) %+replace%
-		theme(panel.grid = element_line(), 
-					panel.grid.major = element_line(colour = "grey90", size = 0.2),
-					panel.grid.minor = element_line(colour = "grey98", size = 0.5),
-					legend.position = "top"), 
-		scale_colour_tableau(),
-		scale_fill_tableau())
+			 	theme(panel.grid = element_line(), 
+			 				panel.grid.major = element_line(colour = "grey90", size = 0.2),
+			 				panel.grid.minor = element_line(colour = "grey98", size = 0.5),
+			 				legend.position = "top"), 
+			 scale_colour_tableau(),
+			 scale_fill_tableau())
 	
 	
 }
