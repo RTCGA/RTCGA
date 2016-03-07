@@ -15,43 +15,208 @@ output:
 
 
 
+
+{% highlight r %}
+library(RTCGA)
+library(ggplot2)
+{% endhighlight %}
+
+
+## Biplot of RNASeq - Plot of 2 main componens of Principal Components Analysis
+
+
+{% highlight r %}
+## RNASeq expressions
+library(RTCGA.rnaseq)
+library(dplyr)
+expressionsTCGA(BRCA.rnaseq, OV.rnaseq, HNSC.rnaseq) %>%
+ 	dplyr::rename(cohort = dataset) %>%	
+ 	filter(substr(bcr_patient_barcode, 14, 15) == "01") -> BRCA.OV.HNSC.rnaseq.cancer
+pcaTCGA(BRCA.OV.HNSC.rnaseq.cancer, "cohort") -> pca_plot
+plot(pca_plot)
+{% endhighlight %}
+
+![plot of chunk unnamed-chunk-3](/RTCGA/figure/source/Visualizations/unnamed-chunk-3-1.png)
+
+
+
 ## Boxplots of logarithm of MET gene RNASeq expression
 
 
 {% highlight r %}
-#install.packages('devtools')
-#devtools::install_github('RTCGA/RTCGA') # install RTCGA from github 
-library(RTCGA)
-#installTCGA('RTCGA.rnaseq') # install data package from github
-# you can install all RTCGA data with installTCGA()
-
-# load packages that are needed to munge data and visualize them
-library(ggplot2)
-library(dplyr)
-# if you don't have them then you should install them from CRAN
-# install.packages(c("ggplot2", "dplyr"))
-
-# load RTCGA.rnaseq package to vizualize RNASeq
 library(RTCGA.rnaseq)
 # perfrom plot
-expressionTCGA(ACC.rnaseq, BLCA.rnaseq, BRCA.rnaseq, CESC.rnaseq, CHOL.rnaseq,
-							 COAD.rnaseq, COADREAD.rnaseq, DLBC.rnaseq, ESCA.rnaseq,
-							 BMLGG.rnaseq, GBM.rnaseq, HNSC.rnaseq, KICH.rnaseq, KIPAN.rnaseq,
-							 KIRC.rnaseq, KIRP.rnaseq, LAML.rnaseq, LGG.rnaseq, LIHC.rnaseq,
-							 LUAD.rnaseq, LUSC.rnaseq, OV.rnaseq, PAAD.rnaseq, PCPG.rnaseq,
-							 PRAD.rnaseq, READ.rnaseq, SARC.rnaseq, SKCM.rnaseq, STAD.rnaseq,
-							 STES.rnaseq, TGCT.rnaseq, THCA.rnaseq, THYM.rnaseq, UCEC.rnaseq,
-							 UCS.rnaseq, UVM.rnaseq, extract.cols = "MET|4233") %>%
-	rename(cohort = dataset,
-				 MET = `MET|4233`) %>%
-	filter(substr(bcr_patient_barcode, 14, 15) == "01") %>% 
-	#cancer samples
-	ggplot(aes(y = log1p(MET),
-						 x = reorder(cohort, log1p(MET), median),
-						 fill = reorder(cohort, log1p(MET), median))) + 
-	geom_boxplot() +
-	theme_RTCGA() +
-	coord_flip()
+library(dplyr)
+expressionsTCGA(
+	ACC.rnaseq,
+	BLCA.rnaseq,
+	BRCA.rnaseq,
+	OV.rnaseq,
+	extract.cols = "MET|4233"
+	) %>%
+ 	dplyr::rename(
+ 	cohort = dataset,
+ 	MET = `MET|4233`
+ 	) %>%  
+ 	filter(
+ 	substr(bcr_patient_barcode, 14, 15) == "01" #cancer samples
+ 	) -> ACC_BLCA_BRCA_OV.rnaseq
+boxplotTCGA(
+	ACC_BLCA_BRCA_OV.rnaseq,
+	"reorder(cohort,log1p(MET), median)",
+	"log1p(MET)",
+	xlab = "Cohort Type",
+	ylab = "Logarithm of MET",
+	legend.title = "Cohorts",
+	legend = "bottom"
+	) -> boxplot1
+plot(boxplot1)
 {% endhighlight %}
 
-![](https://raw.githubusercontent.com/RTCGA/RTCGA/master/devel/graphs/rnaseq.png)
+![plot of chunk unnamed-chunk-4](/RTCGA/figure/source/Visualizations/unnamed-chunk-4-1.png)
+
+### Facet example
+
+
+{% highlight r %}
+library(RTCGA.mutations)
+library(dplyr)
+mutationsTCGA(
+	BRCA.mutations,
+	OV.mutations,
+	ACC.mutations,
+	BLCA.mutations
+	) %>% 
+	filter(Hugo_Symbol == 'TP53') %>%
+	filter(substr(bcr_patient_barcode, 14, 15) == "01") %>% # cancer tissue
+ 	mutate(bcr_patient_barcode = substr(bcr_patient_barcode, 1, 12)) ->
+	ACC_BLCA_BRCA_OV.mutations
+ 
+mutationsTCGA(BRCA.mutations, OV.mutations, ACC.mutations, BLCA.mutations) ->
+	ACC_BLCA_BRCA_OV.mutations_all
+ 
+ ACC_BLCA_BRCA_OV.rnaseq %>%
+ 	mutate(bcr_patient_barcode = substr(bcr_patient_barcode, 1, 15)) %>%
+ 	filter(
+ 		bcr_patient_barcode %in% 
+ 		substr(ACC_BLCA_BRCA_OV.mutations_all$bcr_patient_barcode, 1, 15)
+ 		) %>%
+ 	# took patients for which we had any mutation information
+ 	# so avoided patients without any information about mutations
+ 	mutate(bcr_patient_barcode = substr(bcr_patient_barcode, 1, 12)) %>%
+ 	# strin_length(ACC_BLCA_BRCA_OV.mutations$bcr_patient_barcode) == 12
+ 	left_join(
+ 		ACC_BLCA_BRCA_OV.mutations,
+ 		by = "bcr_patient_barcode"
+ 		) %>% #joined only with tumor patients
+ 	mutate(TP53 = ifelse(!is.na(Variant_Classification), "Mut", "WILD")) %>%
+ 	select(cohort, MET, TP53) -> ACC_BLCA_BRCA_OV.rnaseq_TP53mutations
+ 
+boxplotTCGA(
+	ACC_BLCA_BRCA_OV.rnaseq_TP53mutations,
+	"reorder(cohort,log1p(MET), median)",
+	"log1p(MET)",
+	xlab = "Cohort Type",
+	ylab = "Logarithm of MET",
+	legend.title = "Cohorts",
+	legend = "bottom",
+	facet.names = c("TP53")
+	) -> boxplo2
+plot(boxplo2)
+{% endhighlight %}
+
+![plot of chunk unnamed-chunk-5](/RTCGA/figure/source/Visualizations/unnamed-chunk-5-1.png)
+
+{% highlight r %}
+boxplotTCGA(
+	ACC_BLCA_BRCA_OV.rnaseq_TP53mutations,
+	"reorder(cohort,log1p(MET), median)",
+	"log1p(MET)",
+	xlab = "Cohort Type",
+	ylab = "Logarithm of MET",
+	legend.title = "Cohorts",
+	legend = "bottom",
+	fill = c("TP53")
+	) -> boxplot3
+plot(boxplot3)
+{% endhighlight %}
+
+![plot of chunk unnamed-chunk-5](/RTCGA/figure/source/Visualizations/unnamed-chunk-5-2.png)
+
+{% highlight r %}
+boxplotTCGA(
+	ACC_BLCA_BRCA_OV.rnaseq_TP53mutations,
+	"reorder(TP53,log1p(MET), median)",
+	"log1p(MET)",
+	xlab = "Cohort Type",
+	ylab = "Logarithm of MET",
+	legend.title = "Cohorts",
+	legend = "bottom",
+	fill = c("cohort")
+	) -> boxplot4
+plot(boxplot4)
+{% endhighlight %}
+
+![plot of chunk unnamed-chunk-5](/RTCGA/figure/source/Visualizations/unnamed-chunk-5-3.png)
+
+## Kaplan-Meier estimates of survival curves for cancer types and mutations in gene TP53
+
+
+{% highlight r %}
+library(RTCGA.mutations)
+library(dplyr)
+library(survminer)
+mutationsTCGA(BRCA.mutations, OV.mutations) %>%
+ 	filter(Hugo_Symbol == 'TP53') %>%
+ 	filter(substr(bcr_patient_barcode, 14, 15) == "01") %>% # cancer tissue
+ 	mutate(bcr_patient_barcode = substr(bcr_patient_barcode, 1, 12)) ->
+	BRCA_OV.mutations
+ 
+library(RTCGA.clinical)
+survivalTCGA(
+	BRCA.clinical,
+	OV.clinical,
+	extract.cols = "admin.disease_code"
+	) %>%
+ 	dplyr::rename(disease = admin.disease_code) -> BRCA_OV.clinical
+
+BRCA_OV.clinical %>%
+ 	left_join(
+ 		BRCA_OV.mutations,
+ 		by = "bcr_patient_barcode"
+ 		) %>%
+ 	mutate(TP53 = ifelse(!is.na(Variant_Classification), "Mut","WILDorNOINFO")) ->
+	BRCA_OV.clinical_mutations
+ 
+BRCA_OV.clinical_mutations %>%
+	select(times, patient.vital_status, disease, TP53) -> BRCA_OV.2plot
+
+kmTCGA(
+	BRCA_OV.2plot,
+	explanatory.names = c("TP53", "disease"),
+	break.time.by = 400,
+	xlim = c(0,2000)
+	) -> km_plot
+print(km_plot)
+{% endhighlight %}
+
+![plot of chunk unnamed-chunk-6](/RTCGA/figure/source/Visualizations/unnamed-chunk-6-1.png)
+
+### Kaplan-Meier estimates of survival curves for BRAF gene
+
+
+{% highlight r %}
+archivist::aread('MarcinKosinski/coxphSGD/1a06') %>% 
+	do.call(rbind, . ) %>%
+	kmTCGA(
+		explanatory.names = "BRAF",
+		break.time.by = 1000,
+		xlim = c(0, 5000)
+		) -> km_plot2
+print(km_plot2)
+{% endhighlight %}
+
+![plot of chunk unnamed-chunk-7](/RTCGA/figure/source/Visualizations/unnamed-chunk-7-1.png)
+
+
+
