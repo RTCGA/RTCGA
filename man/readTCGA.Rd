@@ -313,7 +313,7 @@ Other RTCGA: \code{\link{RTCGA-package}},
   \code{\link{datasetsTCGA}}, \code{\link{downloadTCGA}},
   \code{\link{expressionsTCGA}}, \code{\link{infoTCGA}},
   \code{\link{installTCGA}}, \code{\link{kmTCGA}},
-  \code{\link{pcaTCGA}}, \code{\link{survivalTCGA}},
-  \code{\link{theme_RTCGA}}
+  \code{\link{mutationsTCGA}}, \code{\link{pcaTCGA}},
+  \code{\link{survivalTCGA}}, \code{\link{theme_RTCGA}}
 }
 

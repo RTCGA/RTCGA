@@ -13,7 +13,8 @@
 #' 
 #' @note Input data.frames should contain column \code{bcr_patient_barcode} if \code{extract.cols} is specified. 
 #' 
-#' 
+#' @author 
+#' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
 #' @examples 
 #' 
 #' ## for all examples

@@ -17,6 +17,9 @@
 #' \code{patient.vital_status}, \code{patient.days_to_last_followup}, \code{patient.days_to_death}. 
 #' It is recommended to use datasets from \link[RTCGA.clinical]{clinical}.
 #' 
+#' @author 
+#' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
+#'
 #' @examples 
 #' 
 #' ## Extracting Survival Data

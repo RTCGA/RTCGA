@@ -5,6 +5,8 @@
 #'  
 #' @return A list with a tabular information from \href{http://gdac.broadinstitute.org/}{http://gdac.broadinstitute.org/}.
 #' 
+#' @author 
+#' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
 #' @examples 
 #' 
 #' infoTCGA()

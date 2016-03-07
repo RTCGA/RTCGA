@@ -20,7 +20,9 @@
 #' 
 #' @return If \code{return.pca = TRUE} then a list containing a PCA plot (of class \code{ggplot}) and a \code{pca} model, the result of \link{prcomp} function.
 #' If not, then only PCA plot is returned.
-#' 
+#' @author 
+#' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
+#'
 #' @examples 
 #' 
 #' \dontrun{

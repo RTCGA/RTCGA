@@ -27,6 +27,8 @@
 #' \href{http://gdac.broadinstitute.org/runs/}{http://gdac.broadinstitute.org/runs/} or by using \code{checkTCGA('Dates')} 
 #' function. Required format \code{'YYYY-MM-DD'}.
 #' 
+#' @author 
+#' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
 #' 
 #' @examples
 #' 

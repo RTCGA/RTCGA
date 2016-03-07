@@ -56,6 +56,8 @@ kmTCGA(BRCA.survInfo.chemo, explanatory.names = "therapy", xlim = c(0, 3000), co
 }
 \author{
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}
+
+Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 }
 \seealso{
 Other RTCGA: \code{\link{RTCGA-package}},
@@ -63,7 +65,7 @@ Other RTCGA: \code{\link{RTCGA-package}},
   \code{\link{datasetsTCGA}}, \code{\link{downloadTCGA}},
   \code{\link{expressionsTCGA}}, \code{\link{infoTCGA}},
   \code{\link{installTCGA}}, \code{\link{kmTCGA}},
-  \code{\link{pcaTCGA}}, \code{\link{readTCGA}},
-  \code{\link{theme_RTCGA}}
+  \code{\link{mutationsTCGA}}, \code{\link{pcaTCGA}},
+  \code{\link{readTCGA}}, \code{\link{theme_RTCGA}}
 }
 

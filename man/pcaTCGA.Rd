@@ -63,6 +63,8 @@ pca.rnaseq$pca
 }
 \author{
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}
+
+Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 }
 \seealso{
 Other RTCGA: \code{\link{RTCGA-package}},
@@ -70,7 +72,7 @@ Other RTCGA: \code{\link{RTCGA-package}},
   \code{\link{datasetsTCGA}}, \code{\link{downloadTCGA}},
   \code{\link{expressionsTCGA}}, \code{\link{infoTCGA}},
   \code{\link{installTCGA}}, \code{\link{kmTCGA}},
-  \code{\link{readTCGA}}, \code{\link{survivalTCGA}},
-  \code{\link{theme_RTCGA}}
+  \code{\link{mutationsTCGA}}, \code{\link{readTCGA}},
+  \code{\link{survivalTCGA}}, \code{\link{theme_RTCGA}}
 }
 
