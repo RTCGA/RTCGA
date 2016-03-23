@@ -28,6 +28,10 @@
 #' 
 #' @return No values. It only downloads files.
 #' 
+#' @seealso 
+#' 
+#' \pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA/Download.html}{http://rtcga.github.io/RTCGA/Download.html}.
+#' 
 #' @examples
 #' 
 #'

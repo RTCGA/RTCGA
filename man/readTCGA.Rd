@@ -308,13 +308,16 @@ Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 Witold Chodor, \email{witoldchodor@gmail.com}
 }
 \seealso{
+\pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA/Download.html}{http://rtcga.github.io/RTCGA/Download.html}.
+
 Other RTCGA: \code{\link{RTCGA-package}},
   \code{\link{boxplotTCGA}}, \code{\link{checkTCGA}},
   \code{\link{convertTCGA}}, \code{\link{datasetsTCGA}},
   \code{\link{downloadTCGA}},
-  \code{\link{expressionsTCGA}}, \code{\link{infoTCGA}},
-  \code{\link{installTCGA}}, \code{\link{kmTCGA}},
-  \code{\link{mutationsTCGA}}, \code{\link{pcaTCGA}},
-  \code{\link{survivalTCGA}}, \code{\link{theme_RTCGA}}
+  \code{\link{expressionsTCGA}}, \code{\link{heatmapTCGA}},
+  \code{\link{infoTCGA}}, \code{\link{installTCGA}},
+  \code{\link{kmTCGA}}, \code{\link{mutationsTCGA}},
+  \code{\link{pcaTCGA}}, \code{\link{survivalTCGA}},
+  \code{\link{theme_RTCGA}}
 }
 

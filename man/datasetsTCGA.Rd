@@ -56,13 +56,15 @@ Przemyslaw Biecek [aut] \email{ przemyslaw.biecek@gmail.com } \cr
 Witold Chodor [aut] \email{ witoldchodor@gmail.com }
 }
 \seealso{
+\pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA}{http://rtcga.github.io/RTCGA}.
+
 Other RTCGA: \code{\link{RTCGA-package}},
   \code{\link{boxplotTCGA}}, \code{\link{checkTCGA}},
   \code{\link{convertTCGA}}, \code{\link{downloadTCGA}},
-  \code{\link{expressionsTCGA}}, \code{\link{infoTCGA}},
-  \code{\link{installTCGA}}, \code{\link{kmTCGA}},
-  \code{\link{mutationsTCGA}}, \code{\link{pcaTCGA}},
-  \code{\link{readTCGA}}, \code{\link{survivalTCGA}},
-  \code{\link{theme_RTCGA}}
+  \code{\link{expressionsTCGA}}, \code{\link{heatmapTCGA}},
+  \code{\link{infoTCGA}}, \code{\link{installTCGA}},
+  \code{\link{kmTCGA}}, \code{\link{mutationsTCGA}},
+  \code{\link{pcaTCGA}}, \code{\link{readTCGA}},
+  \code{\link{survivalTCGA}}, \code{\link{theme_RTCGA}}
 }
 

@@ -7,6 +7,11 @@
 #' 
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
+#' 
+#' @seealso 
+#' 
+#' \pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA/Download.html}{http://rtcga.github.io/RTCGA/Download.html}.
+#' 
 #' @examples 
 #' 
 #' infoTCGA()

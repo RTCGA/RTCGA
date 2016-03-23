@@ -19,6 +19,8 @@ r_packages:
  - rmarkdown
  - ggthemes
  - purrr
+ - viridis
+ - scales
 r_github_packages:
  - RTCGA/RTCGA.rnaseq
  - RTCGA/RTCGA.clinical

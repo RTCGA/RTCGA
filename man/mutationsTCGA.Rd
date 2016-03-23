@@ -40,10 +40,9 @@ survivalTCGA(BRCA.clinical, OV.clinical, extract.cols = "admin.disease_code") \%
 
 BRCA_OV.clinical \%>\%
 	left_join(BRCA_OV.mutations,
-						by = "bcr_patient_barcode") \%>\%
-	mutate(TP53 = ifelse(!is.na(Variant_Classification),
-											 "Mut",
-											 "WILDorNOINFO")) -> BRCA_OV.clinical_mutations
+	by = "bcr_patient_barcode") \%>\%
+	mutate(TP53 = ifelse(!is.na(Variant_Classification), "Mut",
+ "WILDorNOINFO")) -> BRCA_OV.clinical_mutations
 
 BRCA_OV.clinical_mutations \%>\%
 	select(times, patient.vital_status, disease, TP53) -> BRCA_OV.2plot
@@ -55,13 +54,16 @@ kmTCGA(BRCA_OV.2plot, explanatory.names = c("TP53", "disease"),
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 }
 \seealso{
+\pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA/Visualizations.html}{http://rtcga.github.io/RTCGA/Visualizations.html}.
+
 Other RTCGA: \code{\link{RTCGA-package}},
   \code{\link{boxplotTCGA}}, \code{\link{checkTCGA}},
   \code{\link{convertTCGA}}, \code{\link{datasetsTCGA}},
   \code{\link{downloadTCGA}},
-  \code{\link{expressionsTCGA}}, \code{\link{infoTCGA}},
-  \code{\link{installTCGA}}, \code{\link{kmTCGA}},
-  \code{\link{pcaTCGA}}, \code{\link{readTCGA}},
-  \code{\link{survivalTCGA}}, \code{\link{theme_RTCGA}}
+  \code{\link{expressionsTCGA}}, \code{\link{heatmapTCGA}},
+  \code{\link{infoTCGA}}, \code{\link{installTCGA}},
+  \code{\link{kmTCGA}}, \code{\link{pcaTCGA}},
+  \code{\link{readTCGA}}, \code{\link{survivalTCGA}},
+  \code{\link{theme_RTCGA}}
 }
 

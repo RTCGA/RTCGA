@@ -15,6 +15,10 @@
 #' @param return.survfit Should return survfit object additionaly to survival plot?
 #' @param ... Further arguments passed to \link[survminer]{ggsurvplot}.
 #' 
+#' @seealso 
+#' 
+#' \pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA/Visualizations.html}{http://rtcga.github.io/RTCGA/Visualizations.html}.
+#' 
 #' @examples 
 #' 
 #' ## Extracting Survival Data

@@ -1,3 +1,9 @@
+# Version 1.1.15
+
+- New functions `heatmapTCGA`, `boxplotTCGA`, `kmTCGA`, `pcaTCGA`, `theme_RTCGA` for plotting [https://rtcga.github.io/RTCGA/Visualizations.html](https://rtcga.github.io/RTCGA/Visualizations.html)
+- New functions `mutationsTCGA`, `expressionsTCGA`, `survivalTCGA` for data manipulations.
+- New website [https://rtcga.github.io/RTCGA/](https://rtcga.github.io/RTCGA/)
+
 # Version 1.1
 
 - New parameter `allDataSets` for `downloadTCGA` that allows to download all files matching string in the `dataSet` parameter.

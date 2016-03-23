@@ -18,6 +18,9 @@
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
 #'
+#' @seealso 
+#' 
+#' \pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA/Visualizations.html}{http://rtcga.github.io/RTCGA/Visualizations.html}.
 #' 
 #' @examples 
 #' 
@@ -35,10 +38,9 @@
 #'
 #' BRCA_OV.clinical %>%
 #' 	left_join(BRCA_OV.mutations,
-#' 						by = "bcr_patient_barcode") %>%
-#' 	mutate(TP53 = ifelse(!is.na(Variant_Classification),
-#' 											 "Mut",
-#' 											 "WILDorNOINFO")) -> BRCA_OV.clinical_mutations
+#' 	by = "bcr_patient_barcode") %>%
+#' 	mutate(TP53 = ifelse(!is.na(Variant_Classification), "Mut",
+#'  "WILDorNOINFO")) -> BRCA_OV.clinical_mutations
 #' 
 #' BRCA_OV.clinical_mutations %>%
 #' 	select(times, patient.vital_status, disease, TP53) -> BRCA_OV.2plot

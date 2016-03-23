@@ -26,6 +26,10 @@
 #' Witold Chodor [aut] \email{ witoldchodor@@gmail.com }
 #' 
 #' 
+#' @seealso 
+#' 
+#' \pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA}{http://rtcga.github.io/RTCGA}.
+#' 
 #' @examples 
 #' 
 #' 

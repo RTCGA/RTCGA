@@ -12,6 +12,10 @@
 #' Marcin Kosinski [aut, cre] \email{ m.p.kosinski@@gmail.com } \cr
 #' Przemyslaw Biecek [aut] \email{ przemyslaw.biecek@@gmail.com }
 #' 
+#' @seealso 
+#' 
+#' \pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA}{http://rtcga.github.io/RTCGA}.
+#' 
 #' @importFrom xml2 read_html
 #' @importFrom rvest html_nodes
 #' @importFrom rvest html_attr
@@ -25,6 +29,8 @@
 #' @importFrom devtools install_github
 #' @import survminer
 #' @import survival
+#' @importFrom viridis scale_fill_viridis
+#' @importFrom scales comma
 #' @importFrom ggthemes theme_pander
 #' @importFrom ggthemes scale_colour_tableau
 #' @importFrom ggthemes scale_fill_tableau

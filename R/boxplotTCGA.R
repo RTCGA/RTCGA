@@ -4,7 +4,7 @@
 #' @description Function creates boxplots (\link{geom_boxplot}) for TCGA Datasets.
 #'  
 #' @param data A data.frame from TCGA study containing variables to be plotted. 
-#' @param ... Further arguments passed to \link{geom_boxplot}
+#' @param ... Further arguments passed to \link{geom_boxplot}.
 #' @param coord.flip Whether to flip coordinates.
 #' @param facet.names A character of length maximum 2 containing names of variables to produce facets. See examples.
 #' @param x A character name of variable containing groups.
@@ -20,28 +20,31 @@
 #' 
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
-#'
+#' @seealso 
 #' 
+#' \pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA/Visualizations.html}{http://rtcga.github.io/RTCGA/Visualizations.html}.
 #' @examples 
 #' library(RTCGA.rnaseq)
 #' # perfrom plot
 #' library(dplyr)
 #' expressionsTCGA(ACC.rnaseq, BLCA.rnaseq, BRCA.rnaseq, OV.rnaseq,
-#' 								extract.cols = "MET|4233") %>%
+#' 	extract.cols = "MET|4233") %>%
 #' 	rename(cohort = dataset,
-#' 				 MET = `MET|4233`) %>%  
-#' 	filter(substr(bcr_patient_barcode, 14, 15) == "01") -> #cancer samples
-#' 	ACC_BLCA_BRCA_OV.rnaseq
+#' 	MET = `MET|4233`) %>%  
+#' 	#cancer samples
+#' 	filter(substr(bcr_patient_barcode, 14, 15) == "01") -> ACC_BLCA_BRCA_OV.rnaseq
+#' 	
 #' 
 #' boxplotTCGA(ACC_BLCA_BRCA_OV.rnaseq, "cohort", "MET")
 #' boxplotTCGA(ACC_BLCA_BRCA_OV.rnaseq, "cohort", "log1p(MET)")
 #' boxplotTCGA(ACC_BLCA_BRCA_OV.rnaseq, "reorder(cohort,log1p(MET), median)", "log1p(MET)")
 #' boxplotTCGA(ACC_BLCA_BRCA_OV.rnaseq, "reorder(cohort,log1p(MET), max)", "log1p(MET)")
-#' boxplotTCGA(ACC_BLCA_BRCA_OV.rnaseq, "reorder(cohort,log1p(MET), median)", "log1p(MET)", xlab = "Cohort Type", ylab = "Logarithm of MET")
+#' boxplotTCGA(ACC_BLCA_BRCA_OV.rnaseq, "reorder(cohort,log1p(MET), median)", "log1p(MET)",
+#' xlab = "Cohort Type", ylab = "Logarithm of MET")
 #' boxplotTCGA(ACC_BLCA_BRCA_OV.rnaseq, "reorder(cohort,log1p(MET), median)", "log1p(MET)", 
-#' 						xlab = "Cohort Type", ylab = "Logarithm of MET", legend.title = "Cohorts")
+#' xlab = "Cohort Type", ylab = "Logarithm of MET", legend.title = "Cohorts")
 #' boxplotTCGA(ACC_BLCA_BRCA_OV.rnaseq, "reorder(cohort,log1p(MET), median)", "log1p(MET)", 
-#' 						xlab = "Cohort Type", ylab = "Logarithm of MET", legend.title = "Cohorts", legend = "bottom")
+#' xlab = "Cohort Type", ylab = "Logarithm of MET", legend.title = "Cohorts", legend = "bottom")
 #' 
 #' ## facet example
 #' library(RTCGA.mutations)
@@ -56,23 +59,23 @@
 #' ACC_BLCA_BRCA_OV.rnaseq %>%
 #' 	mutate(bcr_patient_barcode = substr(bcr_patient_barcode, 1, 15)) %>%
 #' 	filter(bcr_patient_barcode %in% 
-#' 				 	substr(ACC_BLCA_BRCA_OV.mutations_all$bcr_patient_barcode, 1, 15)) %>%
+#' 	substr(ACC_BLCA_BRCA_OV.mutations_all$bcr_patient_barcode, 1, 15)) %>%
 #' 	# took patients for which we had any mutation information
 #' 	# so avoided patients without any information about mutations
 #' 	mutate(bcr_patient_barcode = substr(bcr_patient_barcode, 1, 12)) %>%
 #' 	# strin_length(ACC_BLCA_BRCA_OV.mutations$bcr_patient_barcode) == 12
 #' 	left_join(ACC_BLCA_BRCA_OV.mutations,
-#' 						by = "bcr_patient_barcode") %>% #joined only with tumor patients
+#' 	by = "bcr_patient_barcode") %>% #joined only with tumor patients
 #' 	mutate(TP53 = ifelse(!is.na(Variant_Classification), "Mut", "WILD")) %>%
 #' 	select(cohort, MET, TP53) -> ACC_BLCA_BRCA_OV.rnaseq_TP53mutations
 #' 
 #' boxplotTCGA(ACC_BLCA_BRCA_OV.rnaseq_TP53mutations, "reorder(cohort,log1p(MET), median)", "log1p(MET)", 
-#' 						xlab = "Cohort Type", ylab = "Logarithm of MET", legend.title = "Cohorts", legend = "bottom",
-#' 						facet.names = c("TP53"))
+#' xlab = "Cohort Type", ylab = "Logarithm of MET", legend.title = "Cohorts", legend = "bottom",
+#' facet.names = c("TP53"))
 #' 
 #' boxplotTCGA(ACC_BLCA_BRCA_OV.rnaseq_TP53mutations, "reorder(cohort,log1p(MET), median)", "log1p(MET)", 
-#' 						xlab = "Cohort Type", ylab = "Logarithm of MET", legend.title = "Cohorts", legend = "bottom",
-#' 						fill = c("TP53"))
+#' xlab = "Cohort Type", ylab = "Logarithm of MET", legend.title = "Cohorts", legend = "bottom",
+#' fill = c("TP53"))
 #' 
 #' 
 #' @family RTCGA

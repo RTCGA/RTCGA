@@ -65,7 +65,7 @@ data2plot \%>\%
 ## RPPA expressions
 library(RTCGA.RPPA)
 expressionsTCGA(ACC.RPPA, BLCA.RPPA, BRCA.RPPA,
-							 extract.cols = c("4E-BP1_pS65", "4E-BP1")) \%>\%
+		extract.cols = c("4E-BP1_pS65", "4E-BP1")) \%>\%
 	rename(cohort = dataset) \%>\%
 	select(-bcr_patient_barcode) \%>\%
 	gather(cohort) -> data2plot
@@ -107,7 +107,7 @@ mutate(STAD.miRNASeq,
 expressionsTCGA(ACC.miRNASeq.bcr, CESC.miRNASeq.bcr, CHOL.miRNASeq.bcr, 
  					 LAML.miRNASeq.bcr, PAAD.miRNASeq.bcr, THYM.miRNASeq.bcr,
  					 LGG.miRNASeq.bcr, STAD.miRNASeq.bcr,
- 					 extract.cols = c("machine", "hsa-mir-101-1", "miRNA_ID")) \%>\%
+ extract.cols = c("machine", "hsa-mir-101-1", "miRNA_ID")) \%>\%
 							 rename(cohort = dataset) \%>\%
 	filter(miRNA_ID == "read_count") \%>\%
 	select(-bcr_patient_barcode, -miRNA_ID) \%>\%
@@ -132,13 +132,15 @@ theme_RTCGA(base_size = 13) +
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 }
 \seealso{
+\pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA/Visualizations.html}{http://rtcga.github.io/RTCGA/Visualizations.html}.
+
 Other RTCGA: \code{\link{RTCGA-package}},
   \code{\link{boxplotTCGA}}, \code{\link{checkTCGA}},
   \code{\link{convertTCGA}}, \code{\link{datasetsTCGA}},
-  \code{\link{downloadTCGA}}, \code{\link{infoTCGA}},
-  \code{\link{installTCGA}}, \code{\link{kmTCGA}},
-  \code{\link{mutationsTCGA}}, \code{\link{pcaTCGA}},
-  \code{\link{readTCGA}}, \code{\link{survivalTCGA}},
-  \code{\link{theme_RTCGA}}
+  \code{\link{downloadTCGA}}, \code{\link{heatmapTCGA}},
+  \code{\link{infoTCGA}}, \code{\link{installTCGA}},
+  \code{\link{kmTCGA}}, \code{\link{mutationsTCGA}},
+  \code{\link{pcaTCGA}}, \code{\link{readTCGA}},
+  \code{\link{survivalTCGA}}, \code{\link{theme_RTCGA}}
 }
 

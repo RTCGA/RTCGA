@@ -57,6 +57,10 @@
 #' 
 #' Witold Chodor, \email{witoldchodor@@gmail.com}
 #' 
+#' @seealso 
+#' 
+#' \pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA/Download.html}{http://rtcga.github.io/RTCGA/Download.html}.
+#' 
 #' @examples 
 #' 
 #' \dontrun{ 
