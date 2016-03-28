@@ -11,6 +11,7 @@ output:
     mathjax:  default
     fig_caption:  true
     toc: true
+    fig_width: 12
 ---
 
 * `pcaTCGA()`
@@ -61,7 +62,6 @@ plot(pca_plot)
 ## Boxplots of logarithm of MET gene RNASeq expression
 
 ```{r}
-
 library(RTCGA.rnaseq)
 # perfrom plot
 # library(dplyr) if did not load at start
@@ -75,9 +75,9 @@ expressionsTCGA(
  	dplyr::rename(
  	cohort = dataset,
  	MET = `MET|4233`
- 	) %>%  
+ 	) %>%  #cancer samples
  	filter(
- 	substr(bcr_patient_barcode, 14, 15) == "01" #cancer samples
+ 	substr(bcr_patient_barcode, 14, 15) == "01" 
  	) -> ACC_BLCA_BRCA_OV.rnaseq
 boxplotTCGA(
 	ACC_BLCA_BRCA_OV.rnaseq,
@@ -103,29 +103,40 @@ mutationsTCGA(
 	BLCA.mutations
 	) %>% 
 	filter(Hugo_Symbol == 'TP53') %>%
-	filter(substr(bcr_patient_barcode, 14, 15) == "01") %>% # cancer tissue
- 	mutate(bcr_patient_barcode = substr(bcr_patient_barcode, 1, 12)) ->
+	filter(substr(bcr_patient_barcode, 14, 15) == 
+	"01") %>% # cancer tissue
+ 	mutate(bcr_patient_barcode = 
+ 	substr(bcr_patient_barcode, 1, 12)) ->
 	ACC_BLCA_BRCA_OV.mutations
  
-mutationsTCGA(BRCA.mutations, OV.mutations, ACC.mutations, BLCA.mutations) ->
-	ACC_BLCA_BRCA_OV.mutations_all
+mutationsTCGA(
+	BRCA.mutations,
+	OV.mutations,
+	ACC.mutations,
+	BLCA.mutations
+) -> ACC_BLCA_BRCA_OV.mutations_all
  
  ACC_BLCA_BRCA_OV.rnaseq %>%
- 	mutate(bcr_patient_barcode = substr(bcr_patient_barcode, 1, 15)) %>%
+ 	mutate(bcr_patient_barcode = 
+ 	substr(bcr_patient_barcode, 1, 15)) %>%
  	filter(
- 		bcr_patient_barcode %in% 
- 		substr(ACC_BLCA_BRCA_OV.mutations_all$bcr_patient_barcode, 1, 15)
- 		) %>%
- 	# took patients for which we had any mutation information
- 	# so avoided patients without any information about mutations
- 	mutate(bcr_patient_barcode = substr(bcr_patient_barcode, 1, 12)) %>%
- 	# strin_length(ACC_BLCA_BRCA_OV.mutations$bcr_patient_barcode) == 12
+ 	bcr_patient_barcode %in% 
+ 	substr(ACC_BLCA_BRCA_OV.mutations_all$bcr_patient_barcode, 1, 15)
+ 	) %>%
+ # took patients for which we had any mutation information
+ # so avoided patients without any information about mutations
+ 	mutate(bcr_patient_barcode = 
+ 	substr(bcr_patient_barcode, 1, 12)) %>%
+ # strin_length(ACC_BLCA_BRCA_OV.mutations$bcr_patient_barcode) == 12
  	left_join(
  		ACC_BLCA_BRCA_OV.mutations,
  		by = "bcr_patient_barcode"
  		) %>% #joined only with tumor patients
- 	mutate(TP53 = ifelse(!is.na(Variant_Classification), "Mut", "WILD")) %>%
- 	select(cohort, MET, TP53) -> ACC_BLCA_BRCA_OV.rnaseq_TP53mutations
+ 	mutate(TP53 = 
+ 	ifelse(!is.na(Variant_Classification), "Mut", "WILD")
+ 	) %>%
+ 	select(cohort, MET, TP53) -> 
+ 	ACC_BLCA_BRCA_OV.rnaseq_TP53mutations
  
 boxplotTCGA(
 	ACC_BLCA_BRCA_OV.rnaseq_TP53mutations,
@@ -172,8 +183,10 @@ library(RTCGA.mutations)
 library(survminer)
 mutationsTCGA(BRCA.mutations, OV.mutations) %>%
  	filter(Hugo_Symbol == 'TP53') %>%
- 	filter(substr(bcr_patient_barcode, 14, 15) == "01") %>% # cancer tissue
- 	mutate(bcr_patient_barcode = substr(bcr_patient_barcode, 1, 12)) ->
+ 	filter(substr(bcr_patient_barcode, 14, 15) ==
+ 	"01") %>% # cancer tissue
+ 	mutate(bcr_patient_barcode =
+ 	substr(bcr_patient_barcode, 1, 12)) ->
 	BRCA_OV.mutations
  
 library(RTCGA.clinical)
@@ -182,18 +195,20 @@ survivalTCGA(
 	OV.clinical,
 	extract.cols = "admin.disease_code"
 	) %>%
- 	dplyr::rename(disease = admin.disease_code) -> BRCA_OV.clinical
+ 	dplyr::rename(disease = admin.disease_code) ->
+	BRCA_OV.clinical
 
 BRCA_OV.clinical %>%
  	left_join(
  		BRCA_OV.mutations,
  		by = "bcr_patient_barcode"
  		) %>%
- 	mutate(TP53 = ifelse(!is.na(Variant_Classification), "Mut","WILDorNOINFO")) ->
+ 	mutate(TP53 =
+ 	ifelse(!is.na(Variant_Classification), "Mut","WILDorNOINFO")) ->
 	BRCA_OV.clinical_mutations
  
 BRCA_OV.clinical_mutations %>%
-	select(times, patient.vital_status, disease, TP53) -> BRCA_OV.2plot
+select(times, patient.vital_status, disease, TP53) -> BRCA_OV.2plot
 
 kmTCGA(
 	BRCA_OV.2plot,
@@ -239,7 +254,8 @@ expressionsTCGA(
 	dplyr::rename(cohort = dataset,
 	MET = `MET|4233`) %>%
 	#cancer samples
-	filter(substr(bcr_patient_barcode, 14, 15) == "01") %>%
+	filter(substr(bcr_patient_barcode, 14, 15) ==
+	"01") %>%
 	mutate(MET = cut(MET,
 	 round(quantile(MET, probs = seq(0,1,0.25)), -2),
 	 include.lowest = TRUE,
@@ -270,8 +286,10 @@ mutationsTCGA(
 	BLCA.mutations
 	) %>%
 	filter(Hugo_Symbol == 'TP53') %>%
-	filter(substr(bcr_patient_barcode, 14, 15) == "01") %>% # cancer tissue
-	mutate(bcr_patient_barcode = substr(bcr_patient_barcode, 1, 12)) ->
+	filter(substr(bcr_patient_barcode, 14, 15) ==
+	"01") %>% # cancer tissue
+	mutate(bcr_patient_barcode =
+	substr(bcr_patient_barcode, 1, 12)) ->
 	ACC_BLCA_BRCA_OV.mutations
 
 mutationsTCGA(
@@ -282,16 +300,20 @@ mutationsTCGA(
 	) -> ACC_BLCA_BRCA_OV.mutations_all
 
 ACC_BLCA_BRCA_OV.rnaseq %>%
-	mutate(bcr_patient_barcode = substr(bcr_patient_barcode, 1, 15)) %>%
+	mutate(bcr_patient_barcode =
+	substr(bcr_patient_barcode, 1, 15)) %>%
 	filter(bcr_patient_barcode %in%
-	substr(ACC_BLCA_BRCA_OV.mutations_all$bcr_patient_barcode, 1, 15)) %>% 
-	# took patients for which we had any mutation information
-	# so avoided patients without any information about mutations
-	mutate(bcr_patient_barcode = substr(bcr_patient_barcode, 1, 12)) %>%
-	# strin_length(ACC_BLCA_BRCA_OV.mutations$bcr_patient_barcode) == 12
+substr(ACC_BLCA_BRCA_OV.mutations_all$bcr_patient_barcode, 1, 15)) %>% 
+# took patients for which we had any mutation information
+# so avoided patients without any information about mutations
+	mutate(bcr_patient_barcode =
+	substr(bcr_patient_barcode, 1, 12)) %>%
+# strin_length(ACC_BLCA_BRCA_OV.mutations$bcr_patient_barcode) == 12
 	left_join(ACC_BLCA_BRCA_OV.mutations,
 	by = "bcr_patient_barcode") %>% #joined only with tumor patients
-	mutate(TP53 = ifelse(!is.na(Variant_Classification), "Mut", "WILD")) %>%
+	mutate(TP53 = 
+	ifelse(!is.na(Variant_Classification), "Mut", "WILD")
+	) %>%
 	select(-bcr_patient_barcode, -Variant_Classification,
 	-dataset, -Hugo_Symbol) %>% 
 	group_by(cohort, MET, TP53) %>% 
