@@ -113,7 +113,7 @@ heatmapTCGA <- function(data, x, y, fill,
 		#theme_RTCGA() +
 		scale_fill_viridis(name=legend.title, label=comma) +
 		coord_equal() +
-		labs(x=NULL, y=NULL, title=title) +
+		labs(title=title) +
 		theme(axis.ticks=element_blank(),
 					axis.text=element_text(size=7),
 					legend.title=element_text(size=8),

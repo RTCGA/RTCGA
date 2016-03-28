@@ -21,17 +21,17 @@ pcaTCGA(x, group.names, title = "", return.pca = FALSE, scale = TRUE,
 
 \item{center}{As in \link{prcomp}.}
 
-\item{var.scale}{As in \link{ggbiplot}.}
+\item{var.scale}{As in \code{ggbiplot}.}
 
-\item{obs.scale}{As in \link{ggbiplot}.}
+\item{obs.scale}{As in \code{ggbiplot}.}
 
-\item{ellipse}{As in \link{ggbiplot}.}
+\item{ellipse}{As in \code{ggbiplot}.}
 
-\item{circle}{As in \link{ggbiplot}.}
+\item{circle}{As in \code{ggbiplot}.}
 
-\item{var.axes}{As in \link{ggbiplot}.}
+\item{var.axes}{As in \code{ggbiplot}.}
 
-\item{alpha}{As in \link{ggbiplot}.}
+\item{alpha}{As in \code{ggbiplot}.}
 
 \item{add.lines}{Should axis lines be added to plot.}
 
@@ -44,6 +44,14 @@ If not, then only PCA plot is returned.
 \description{
 Plots Two Main Components of Principal Component Analysis
 }
+\section{ggbiplot}{
+
+
+This function is based on \href{https://github.com/vqv/ggbiplot}{https://github.com/vqv/ggbiplot} 
+which had to be copied to \pkg{RTCGA} because \code{Bioconductor} does not support 
+remote dependencies from \code{GitHub}.
+}
+
 \section{Issues}{
 
 
