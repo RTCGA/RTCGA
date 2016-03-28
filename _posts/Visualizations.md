@@ -10,17 +10,26 @@ output:
   html_document:
     mathjax:  default
     fig_caption:  true
+    toc: true
 ---
+
+* `pcaTCGA()`
+* `boxplotTCGA()`
+* `kmTCGA()`
+* `heatmapTCGA()`
+{:toc}
 
 
 
 
 
 {% highlight r %}
+library(dplyr)
 library(RTCGA)
 library(ggplot2)
 {% endhighlight %}
 
+# `pcaTCGA()`
 
 ## Biplot of RNASeq - Plot of 2 main componens of Principal Components Analysis
 
@@ -28,7 +37,7 @@ library(ggplot2)
 {% highlight r %}
 ## RNASeq expressions
 library(RTCGA.rnaseq)
-library(dplyr)
+# library(dplyr) if did not load at start
 expressionsTCGA(BRCA.rnaseq, OV.rnaseq, HNSC.rnaseq) %>%
  	dplyr::rename(cohort = dataset) %>%	
  	filter(substr(bcr_patient_barcode, 14, 15) == "01") -> BRCA.OV.HNSC.rnaseq.cancer
@@ -38,7 +47,7 @@ plot(pca_plot)
 
 ![plot of chunk unnamed-chunk-3](/RTCGA/figure/source/Visualizations/unnamed-chunk-3-1.png)
 
-
+# `boxplotTCGA()`
 
 ## Boxplots of logarithm of MET gene RNASeq expression
 
@@ -46,7 +55,7 @@ plot(pca_plot)
 {% highlight r %}
 library(RTCGA.rnaseq)
 # perfrom plot
-library(dplyr)
+# library(dplyr) if did not load at start
 expressionsTCGA(
 	ACC.rnaseq,
 	BLCA.rnaseq,
@@ -80,7 +89,7 @@ plot(boxplot1)
 
 {% highlight r %}
 library(RTCGA.mutations)
-library(dplyr)
+# library(dplyr) if did not load at start
 mutationsTCGA(
 	BRCA.mutations,
 	OV.mutations,
@@ -159,12 +168,14 @@ plot(boxplot4)
 
 ![plot of chunk unnamed-chunk-5](/RTCGA/figure/source/Visualizations/unnamed-chunk-5-3.png)
 
-## Kaplan-Meier estimates of survival curves for cancer types and mutations in gene TP53
+# `kmTCGA()`
+
+## Kaplan-Meier estimates of survival curves for BRCA and OV cancer types and mutations in gene TP53
 
 
 {% highlight r %}
 library(RTCGA.mutations)
-library(dplyr)
+# library(dplyr) if did not load at start
 library(survminer)
 mutationsTCGA(BRCA.mutations, OV.mutations) %>%
  	filter(Hugo_Symbol == 'TP53') %>%
@@ -202,7 +213,7 @@ print(km_plot)
 
 ![plot of chunk unnamed-chunk-6](/RTCGA/figure/source/Visualizations/unnamed-chunk-6-1.png)
 
-### Kaplan-Meier estimates of survival curves for BRAF gene
+## Kaplan-Meier estimates of survival curves for BRAF gene
 
 
 {% highlight r %}
@@ -218,5 +229,127 @@ print(km_plot2)
 
 ![plot of chunk unnamed-chunk-7](/RTCGA/figure/source/Visualizations/unnamed-chunk-7-1.png)
 
+# `heatmapTCGA()`
 
+## Heatmap of medians of ZNF500 gene divided on cohort type and MET gene quantiles
+
+
+
+{% highlight r %}
+library(RTCGA.rnaseq)
+# perfrom plot
+# library(dplyr) if did not load at start
+expressionsTCGA(
+	ACC.rnaseq,
+	BLCA.rnaseq,
+	BRCA.rnaseq,
+	OV.rnaseq,
+	extract.cols = 
+		c("MET|4233",
+		"ZNF500|26048",
+		"ZNF501|115560")
+	) %>%
+	dplyr::rename(cohort = dataset,
+	MET = `MET|4233`) %>%
+	#cancer samples
+	filter(substr(bcr_patient_barcode, 14, 15) == "01") %>%
+	mutate(MET = cut(MET,
+	 round(quantile(MET, probs = seq(0,1,0.25)), -2),
+	 include.lowest = TRUE,
+	 dig.lab = 5)) -> ACC_BLCA_BRCA_OV.rnaseq
+
+ACC_BLCA_BRCA_OV.rnaseq %>%
+	select(-bcr_patient_barcode) %>%
+	group_by(cohort, MET) %>%
+	summarise_each(funs(median)) %>%
+	mutate(ZNF500 = round(`ZNF500|26048`),
+	ZNF501 = round(`ZNF501|115560`)) ->
+	ACC_BLCA_BRCA_OV.rnaseq.medians
+heatmapTCGA(ACC_BLCA_BRCA_OV.rnaseq.medians,
+	"cohort", "MET", "ZNF500",
+	title = "Heatmap of ZNF500 expression")
+{% endhighlight %}
+
+![plot of chunk unnamed-chunk-8](/RTCGA/figure/source/Visualizations/unnamed-chunk-8-1.png)
+
+### Facet examples with mutations datasets
+
+
+{% highlight r %}
+## facet example
+library(RTCGA.mutations)
+# library(dplyr) if did not load at start
+mutationsTCGA(
+	BRCA.mutations,
+	OV.mutations,
+	ACC.mutations,
+	BLCA.mutations
+	) %>%
+	filter(Hugo_Symbol == 'TP53') %>%
+	filter(substr(bcr_patient_barcode, 14, 15) == "01") %>% # cancer tissue
+	mutate(bcr_patient_barcode = substr(bcr_patient_barcode, 1, 12)) ->
+	ACC_BLCA_BRCA_OV.mutations
+
+mutationsTCGA(
+	BRCA.mutations,
+	OV.mutations,
+	ACC.mutations,
+	BLCA.mutations
+	) -> ACC_BLCA_BRCA_OV.mutations_all
+
+ACC_BLCA_BRCA_OV.rnaseq %>%
+	mutate(bcr_patient_barcode = substr(bcr_patient_barcode, 1, 15)) %>%
+	filter(bcr_patient_barcode %in%
+	substr(ACC_BLCA_BRCA_OV.mutations_all$bcr_patient_barcode, 1, 15)) %>% 
+	# took patients for which we had any mutation information
+	# so avoided patients without any information about mutations
+	mutate(bcr_patient_barcode = substr(bcr_patient_barcode, 1, 12)) %>%
+	# strin_length(ACC_BLCA_BRCA_OV.mutations$bcr_patient_barcode) == 12
+	left_join(ACC_BLCA_BRCA_OV.mutations,
+	by = "bcr_patient_barcode") %>% #joined only with tumor patients
+	mutate(TP53 = ifelse(!is.na(Variant_Classification), "Mut", "WILD")) %>%
+	select(-bcr_patient_barcode, -Variant_Classification,
+	-dataset, -Hugo_Symbol) %>% 
+	group_by(cohort, MET, TP53) %>% 
+	summarise_each(funs(median)) %>% 
+	mutate(ZNF501 = round(`ZNF501|115560`)) ->
+	ACC_BLCA_BRCA_OV.rnaseq_TP53mutations_ZNF501medians
+
+heatmapTCGA(
+	ACC_BLCA_BRCA_OV.rnaseq_TP53mutations_ZNF501medians,
+	"cohort",
+	"MET",
+	fill = "ZNF501",
+	facet.names = "TP53",
+	title = "Heatmap of ZNF501 expression"
+)
+{% endhighlight %}
+
+![plot of chunk unnamed-chunk-9](/RTCGA/figure/source/Visualizations/unnamed-chunk-9-1.png)
+
+{% highlight r %}
+heatmapTCGA(
+	ACC_BLCA_BRCA_OV.rnaseq_TP53mutations_ZNF501medians,
+	"TP53",
+	"MET",
+	fill = "ZNF501",
+	facet.names = "cohort",
+	title = "Heatmap of ZNF501 expression"
+)
+{% endhighlight %}
+
+![plot of chunk unnamed-chunk-9](/RTCGA/figure/source/Visualizations/unnamed-chunk-9-2.png)
+
+{% highlight r %}
+heatmapTCGA(
+	ACC_BLCA_BRCA_OV.rnaseq_TP53mutations_ZNF501medians,
+	"TP53",
+	"cohort",
+	fill = "ZNF501",
+	facet.names = "MET",
+	title = "Heatmap of ZNF501 expression"
+)
+{% endhighlight %}
+
+![plot of chunk unnamed-chunk-9](/RTCGA/figure/source/Visualizations/unnamed-chunk-9-3.png)
 

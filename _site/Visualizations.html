@@ -113,16 +113,44 @@
     <div class="content container">
       <div class="page">
   <h1 class="page-title">Visualizations</h1>
-  
-<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="n">RTCGA</span><span class="p">)</span>
+  <ul id="markdown-toc">
+  <li><a href="#pcatcga" id="markdown-toc-pcatcga"><code class="highlighter-rouge">pcaTCGA()</code></a>    <ul>
+      <li><a href="#biplot-of-rnaseq---plot-of-2-main-componens-of-principal-components-analysis" id="markdown-toc-biplot-of-rnaseq---plot-of-2-main-componens-of-principal-components-analysis">Biplot of RNASeq - Plot of 2 main componens of Principal Components Analysis</a></li>
+    </ul>
+  </li>
+  <li><a href="#boxplottcga" id="markdown-toc-boxplottcga"><code class="highlighter-rouge">boxplotTCGA()</code></a>    <ul>
+      <li><a href="#boxplots-of-logarithm-of-met-gene-rnaseq-expression" id="markdown-toc-boxplots-of-logarithm-of-met-gene-rnaseq-expression">Boxplots of logarithm of MET gene RNASeq expression</a>        <ul>
+          <li><a href="#facet-example" id="markdown-toc-facet-example">Facet example</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#kmtcga" id="markdown-toc-kmtcga"><code class="highlighter-rouge">kmTCGA()</code></a>    <ul>
+      <li><a href="#kaplan-meier-estimates-of-survival-curves-for-brca-and-ov-cancer-types-and-mutations-in-gene-tp53" id="markdown-toc-kaplan-meier-estimates-of-survival-curves-for-brca-and-ov-cancer-types-and-mutations-in-gene-tp53">Kaplan-Meier estimates of survival curves for BRCA and OV cancer types and mutations in gene TP53</a></li>
+      <li><a href="#kaplan-meier-estimates-of-survival-curves-for-braf-gene" id="markdown-toc-kaplan-meier-estimates-of-survival-curves-for-braf-gene">Kaplan-Meier estimates of survival curves for BRAF gene</a></li>
+    </ul>
+  </li>
+  <li><a href="#heatmaptcga" id="markdown-toc-heatmaptcga"><code class="highlighter-rouge">heatmapTCGA()</code></a>    <ul>
+      <li><a href="#heatmap-of-medians-of-znf500-gene-divided-on-cohort-type-and-met-gene-quantiles" id="markdown-toc-heatmap-of-medians-of-znf500-gene-divided-on-cohort-type-and-met-gene-quantiles">Heatmap of medians of ZNF500 gene divided on cohort type and MET gene quantiles</a>        <ul>
+          <li><a href="#facet-examples-with-mutations-datasets" id="markdown-toc-facet-examples-with-mutations-datasets">Facet examples with mutations datasets</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
+<span class="n">library</span><span class="p">(</span><span class="n">RTCGA</span><span class="p">)</span>
 <span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span></code></pre></figure>
+
+<h1 id="pcatcga"><code class="highlighter-rouge">pcaTCGA()</code></h1>
 
 <h2 id="biplot-of-rnaseq---plot-of-2-main-componens-of-principal-components-analysis">Biplot of RNASeq - Plot of 2 main componens of Principal Components Analysis</h2>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1">## RNASeq expressions
 </span><span class="n">library</span><span class="p">(</span><span class="n">RTCGA.rnaseq</span><span class="p">)</span>
-<span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
-<span class="n">expressionsTCGA</span><span class="p">(</span><span class="n">BRCA.rnaseq</span><span class="p">,</span> <span class="n">OV.rnaseq</span><span class="p">,</span> <span class="n">HNSC.rnaseq</span><span class="p">)</span> <span class="o">%&gt;%</span>
+<span class="c1"># library(dplyr) if did not load at start
+</span><span class="n">expressionsTCGA</span><span class="p">(</span><span class="n">BRCA.rnaseq</span><span class="p">,</span> <span class="n">OV.rnaseq</span><span class="p">,</span> <span class="n">HNSC.rnaseq</span><span class="p">)</span> <span class="o">%&gt;%</span>
  	<span class="n">dplyr</span><span class="o">::</span><span class="n">rename</span><span class="p">(</span><span class="n">cohort</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">)</span> <span class="o">%&gt;%</span>	
  	<span class="n">filter</span><span class="p">(</span><span class="n">substr</span><span class="p">(</span><span class="n">bcr_patient_barcode</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">15</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"01"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BRCA.OV.HNSC.rnaseq.cancer</span>
 <span class="n">pcaTCGA</span><span class="p">(</span><span class="n">BRCA.OV.HNSC.rnaseq.cancer</span><span class="p">,</span> <span class="s2">"cohort"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pca_plot</span>
@@ -130,12 +158,14 @@
 
 <p><img src="/RTCGA/figure/source/Visualizations/unnamed-chunk-3-1.png" alt="plot of chunk unnamed-chunk-3" /></p>
 
+<h1 id="boxplottcga"><code class="highlighter-rouge">boxplotTCGA()</code></h1>
+
 <h2 id="boxplots-of-logarithm-of-met-gene-rnaseq-expression">Boxplots of logarithm of MET gene RNASeq expression</h2>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="n">RTCGA.rnaseq</span><span class="p">)</span>
 <span class="c1"># perfrom plot
-</span><span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
-<span class="n">expressionsTCGA</span><span class="p">(</span>
+# library(dplyr) if did not load at start
+</span><span class="n">expressionsTCGA</span><span class="p">(</span>
 	<span class="n">ACC.rnaseq</span><span class="p">,</span>
 	<span class="n">BLCA.rnaseq</span><span class="p">,</span>
 	<span class="n">BRCA.rnaseq</span><span class="p">,</span>
@@ -165,8 +195,8 @@
 <h3 id="facet-example">Facet example</h3>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="n">RTCGA.mutations</span><span class="p">)</span>
-<span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
-<span class="n">mutationsTCGA</span><span class="p">(</span>
+<span class="c1"># library(dplyr) if did not load at start
+</span><span class="n">mutationsTCGA</span><span class="p">(</span>
 	<span class="n">BRCA.mutations</span><span class="p">,</span>
 	<span class="n">OV.mutations</span><span class="p">,</span>
 	<span class="n">ACC.mutations</span><span class="p">,</span>
@@ -239,11 +269,13 @@
 
 <p><img src="/RTCGA/figure/source/Visualizations/unnamed-chunk-5-3.png" alt="plot of chunk unnamed-chunk-5" /></p>
 
-<h2 id="kaplan-meier-estimates-of-survival-curves-for-cancer-types-and-mutations-in-gene-tp53">Kaplan-Meier estimates of survival curves for cancer types and mutations in gene TP53</h2>
+<h1 id="kmtcga"><code class="highlighter-rouge">kmTCGA()</code></h1>
+
+<h2 id="kaplan-meier-estimates-of-survival-curves-for-brca-and-ov-cancer-types-and-mutations-in-gene-tp53">Kaplan-Meier estimates of survival curves for BRCA and OV cancer types and mutations in gene TP53</h2>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="n">RTCGA.mutations</span><span class="p">)</span>
-<span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
-<span class="n">library</span><span class="p">(</span><span class="n">survminer</span><span class="p">)</span>
+<span class="c1"># library(dplyr) if did not load at start
+</span><span class="n">library</span><span class="p">(</span><span class="n">survminer</span><span class="p">)</span>
 <span class="n">mutationsTCGA</span><span class="p">(</span><span class="n">BRCA.mutations</span><span class="p">,</span> <span class="n">OV.mutations</span><span class="p">)</span> <span class="o">%&gt;%</span>
  	<span class="n">filter</span><span class="p">(</span><span class="n">Hugo_Symbol</span> <span class="o">==</span> <span class="s1">'TP53'</span><span class="p">)</span> <span class="o">%&gt;%</span>
  	<span class="n">filter</span><span class="p">(</span><span class="n">substr</span><span class="p">(</span><span class="n">bcr_patient_barcode</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">15</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"01"</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="c1"># cancer tissue
@@ -279,7 +311,7 @@
 
 <p><img src="/RTCGA/figure/source/Visualizations/unnamed-chunk-6-1.png" alt="plot of chunk unnamed-chunk-6" /></p>
 
-<h3 id="kaplan-meier-estimates-of-survival-curves-for-braf-gene">Kaplan-Meier estimates of survival curves for BRAF gene</h3>
+<h2 id="kaplan-meier-estimates-of-survival-curves-for-braf-gene">Kaplan-Meier estimates of survival curves for BRAF gene</h2>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">archivist</span><span class="o">::</span><span class="n">aread</span><span class="p">(</span><span class="s1">'MarcinKosinski/coxphSGD/1a06'</span><span class="p">)</span> <span class="o">%&gt;%</span> 
 	<span class="n">do.call</span><span class="p">(</span><span class="n">rbind</span><span class="p">,</span> <span class="err">.</span> <span class="p">)</span> <span class="o">%&gt;%</span>
@@ -291,6 +323,119 @@
 <span class="n">print</span><span class="p">(</span><span class="n">km_plot2</span><span class="p">)</span></code></pre></figure>
 
 <p><img src="/RTCGA/figure/source/Visualizations/unnamed-chunk-7-1.png" alt="plot of chunk unnamed-chunk-7" /></p>
+
+<h1 id="heatmaptcga"><code class="highlighter-rouge">heatmapTCGA()</code></h1>
+
+<h2 id="heatmap-of-medians-of-znf500-gene-divided-on-cohort-type-and-met-gene-quantiles">Heatmap of medians of ZNF500 gene divided on cohort type and MET gene quantiles</h2>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="n">RTCGA.rnaseq</span><span class="p">)</span>
+<span class="c1"># perfrom plot
+# library(dplyr) if did not load at start
+</span><span class="n">expressionsTCGA</span><span class="p">(</span>
+	<span class="n">ACC.rnaseq</span><span class="p">,</span>
+	<span class="n">BLCA.rnaseq</span><span class="p">,</span>
+	<span class="n">BRCA.rnaseq</span><span class="p">,</span>
+	<span class="n">OV.rnaseq</span><span class="p">,</span>
+	<span class="n">extract.cols</span> <span class="o">=</span> 
+		<span class="n">c</span><span class="p">(</span><span class="s2">"MET|4233"</span><span class="p">,</span>
+		<span class="s2">"ZNF500|26048"</span><span class="p">,</span>
+		<span class="s2">"ZNF501|115560"</span><span class="p">)</span>
+	<span class="p">)</span> <span class="o">%&gt;%</span>
+	<span class="n">dplyr</span><span class="o">::</span><span class="n">rename</span><span class="p">(</span><span class="n">cohort</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">,</span>
+	<span class="n">MET</span> <span class="o">=</span> <span class="sb">`MET|4233`</span><span class="p">)</span> <span class="o">%&gt;%</span>
+	<span class="c1">#cancer samples
+</span>	<span class="n">filter</span><span class="p">(</span><span class="n">substr</span><span class="p">(</span><span class="n">bcr_patient_barcode</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">15</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"01"</span><span class="p">)</span> <span class="o">%&gt;%</span>
+	<span class="n">mutate</span><span class="p">(</span><span class="n">MET</span> <span class="o">=</span> <span class="n">cut</span><span class="p">(</span><span class="n">MET</span><span class="p">,</span>
+	 <span class="n">round</span><span class="p">(</span><span class="n">quantile</span><span class="p">(</span><span class="n">MET</span><span class="p">,</span> <span class="n">probs</span> <span class="o">=</span> <span class="n">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0.25</span><span class="p">)),</span> <span class="m">-2</span><span class="p">),</span>
+	 <span class="n">include.lowest</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">,</span>
+	 <span class="n">dig.lab</span> <span class="o">=</span> <span class="m">5</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="n">ACC_BLCA_BRCA_OV.rnaseq</span>
+
+<span class="n">ACC_BLCA_BRCA_OV.rnaseq</span> <span class="o">%&gt;%</span>
+	<span class="n">select</span><span class="p">(</span><span class="o">-</span><span class="n">bcr_patient_barcode</span><span class="p">)</span> <span class="o">%&gt;%</span>
+	<span class="n">group_by</span><span class="p">(</span><span class="n">cohort</span><span class="p">,</span> <span class="n">MET</span><span class="p">)</span> <span class="o">%&gt;%</span>
+	<span class="n">summarise_each</span><span class="p">(</span><span class="n">funs</span><span class="p">(</span><span class="n">median</span><span class="p">))</span> <span class="o">%&gt;%</span>
+	<span class="n">mutate</span><span class="p">(</span><span class="n">ZNF500</span> <span class="o">=</span> <span class="n">round</span><span class="p">(</span><span class="sb">`ZNF500|26048`</span><span class="p">),</span>
+	<span class="n">ZNF501</span> <span class="o">=</span> <span class="n">round</span><span class="p">(</span><span class="sb">`ZNF501|115560`</span><span class="p">))</span> <span class="o">-&gt;</span>
+	<span class="n">ACC_BLCA_BRCA_OV.rnaseq.medians</span>
+<span class="n">heatmapTCGA</span><span class="p">(</span><span class="n">ACC_BLCA_BRCA_OV.rnaseq.medians</span><span class="p">,</span>
+	<span class="s2">"cohort"</span><span class="p">,</span> <span class="s2">"MET"</span><span class="p">,</span> <span class="s2">"ZNF500"</span><span class="p">,</span>
+	<span class="n">title</span> <span class="o">=</span> <span class="s2">"Heatmap of ZNF500 expression"</span><span class="p">)</span></code></pre></figure>
+
+<p><img src="/RTCGA/figure/source/Visualizations/unnamed-chunk-8-1.png" alt="plot of chunk unnamed-chunk-8" /></p>
+
+<h3 id="facet-examples-with-mutations-datasets">Facet examples with mutations datasets</h3>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1">## facet example
+</span><span class="n">library</span><span class="p">(</span><span class="n">RTCGA.mutations</span><span class="p">)</span>
+<span class="c1"># library(dplyr) if did not load at start
+</span><span class="n">mutationsTCGA</span><span class="p">(</span>
+	<span class="n">BRCA.mutations</span><span class="p">,</span>
+	<span class="n">OV.mutations</span><span class="p">,</span>
+	<span class="n">ACC.mutations</span><span class="p">,</span>
+	<span class="n">BLCA.mutations</span>
+	<span class="p">)</span> <span class="o">%&gt;%</span>
+	<span class="n">filter</span><span class="p">(</span><span class="n">Hugo_Symbol</span> <span class="o">==</span> <span class="s1">'TP53'</span><span class="p">)</span> <span class="o">%&gt;%</span>
+	<span class="n">filter</span><span class="p">(</span><span class="n">substr</span><span class="p">(</span><span class="n">bcr_patient_barcode</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">15</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"01"</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="c1"># cancer tissue
+</span>	<span class="n">mutate</span><span class="p">(</span><span class="n">bcr_patient_barcode</span> <span class="o">=</span> <span class="n">substr</span><span class="p">(</span><span class="n">bcr_patient_barcode</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">12</span><span class="p">))</span> <span class="o">-&gt;</span>
+	<span class="n">ACC_BLCA_BRCA_OV.mutations</span>
+
+<span class="n">mutationsTCGA</span><span class="p">(</span>
+	<span class="n">BRCA.mutations</span><span class="p">,</span>
+	<span class="n">OV.mutations</span><span class="p">,</span>
+	<span class="n">ACC.mutations</span><span class="p">,</span>
+	<span class="n">BLCA.mutations</span>
+	<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ACC_BLCA_BRCA_OV.mutations_all</span>
+
+<span class="n">ACC_BLCA_BRCA_OV.rnaseq</span> <span class="o">%&gt;%</span>
+	<span class="n">mutate</span><span class="p">(</span><span class="n">bcr_patient_barcode</span> <span class="o">=</span> <span class="n">substr</span><span class="p">(</span><span class="n">bcr_patient_barcode</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">15</span><span class="p">))</span> <span class="o">%&gt;%</span>
+	<span class="n">filter</span><span class="p">(</span><span class="n">bcr_patient_barcode</span> <span class="o">%</span><span class="k">in</span><span class="o">%</span>
+	<span class="n">substr</span><span class="p">(</span><span class="n">ACC_BLCA_BRCA_OV.mutations_all</span><span class="o">$</span><span class="n">bcr_patient_barcode</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">15</span><span class="p">))</span> <span class="o">%&gt;%</span> 
+	<span class="c1"># took patients for which we had any mutation information
+</span>	<span class="c1"># so avoided patients without any information about mutations
+</span>	<span class="n">mutate</span><span class="p">(</span><span class="n">bcr_patient_barcode</span> <span class="o">=</span> <span class="n">substr</span><span class="p">(</span><span class="n">bcr_patient_barcode</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">12</span><span class="p">))</span> <span class="o">%&gt;%</span>
+	<span class="c1"># strin_length(ACC_BLCA_BRCA_OV.mutations$bcr_patient_barcode) == 12
+</span>	<span class="n">left_join</span><span class="p">(</span><span class="n">ACC_BLCA_BRCA_OV.mutations</span><span class="p">,</span>
+	<span class="n">by</span> <span class="o">=</span> <span class="s2">"bcr_patient_barcode"</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="c1">#joined only with tumor patients
+</span>	<span class="n">mutate</span><span class="p">(</span><span class="n">TP53</span> <span class="o">=</span> <span class="n">ifelse</span><span class="p">(</span><span class="o">!</span><span class="n">is.na</span><span class="p">(</span><span class="n">Variant_Classification</span><span class="p">),</span> <span class="s2">"Mut"</span><span class="p">,</span> <span class="s2">"WILD"</span><span class="p">))</span> <span class="o">%&gt;%</span>
+	<span class="n">select</span><span class="p">(</span><span class="o">-</span><span class="n">bcr_patient_barcode</span><span class="p">,</span> <span class="o">-</span><span class="n">Variant_Classification</span><span class="p">,</span>
+	<span class="o">-</span><span class="n">dataset</span><span class="p">,</span> <span class="o">-</span><span class="n">Hugo_Symbol</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+	<span class="n">group_by</span><span class="p">(</span><span class="n">cohort</span><span class="p">,</span> <span class="n">MET</span><span class="p">,</span> <span class="n">TP53</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+	<span class="n">summarise_each</span><span class="p">(</span><span class="n">funs</span><span class="p">(</span><span class="n">median</span><span class="p">))</span> <span class="o">%&gt;%</span> 
+	<span class="n">mutate</span><span class="p">(</span><span class="n">ZNF501</span> <span class="o">=</span> <span class="n">round</span><span class="p">(</span><span class="sb">`ZNF501|115560`</span><span class="p">))</span> <span class="o">-&gt;</span>
+	<span class="n">ACC_BLCA_BRCA_OV.rnaseq_TP53mutations_ZNF501medians</span>
+
+<span class="n">heatmapTCGA</span><span class="p">(</span>
+	<span class="n">ACC_BLCA_BRCA_OV.rnaseq_TP53mutations_ZNF501medians</span><span class="p">,</span>
+	<span class="s2">"cohort"</span><span class="p">,</span>
+	<span class="s2">"MET"</span><span class="p">,</span>
+	<span class="n">fill</span> <span class="o">=</span> <span class="s2">"ZNF501"</span><span class="p">,</span>
+	<span class="n">facet.names</span> <span class="o">=</span> <span class="s2">"TP53"</span><span class="p">,</span>
+	<span class="n">title</span> <span class="o">=</span> <span class="s2">"Heatmap of ZNF501 expression"</span>
+<span class="p">)</span></code></pre></figure>
+
+<p><img src="/RTCGA/figure/source/Visualizations/unnamed-chunk-9-1.png" alt="plot of chunk unnamed-chunk-9" /></p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">heatmapTCGA</span><span class="p">(</span>
+	<span class="n">ACC_BLCA_BRCA_OV.rnaseq_TP53mutations_ZNF501medians</span><span class="p">,</span>
+	<span class="s2">"TP53"</span><span class="p">,</span>
+	<span class="s2">"MET"</span><span class="p">,</span>
+	<span class="n">fill</span> <span class="o">=</span> <span class="s2">"ZNF501"</span><span class="p">,</span>
+	<span class="n">facet.names</span> <span class="o">=</span> <span class="s2">"cohort"</span><span class="p">,</span>
+	<span class="n">title</span> <span class="o">=</span> <span class="s2">"Heatmap of ZNF501 expression"</span>
+<span class="p">)</span></code></pre></figure>
+
+<p><img src="/RTCGA/figure/source/Visualizations/unnamed-chunk-9-2.png" alt="plot of chunk unnamed-chunk-9" /></p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">heatmapTCGA</span><span class="p">(</span>
+	<span class="n">ACC_BLCA_BRCA_OV.rnaseq_TP53mutations_ZNF501medians</span><span class="p">,</span>
+	<span class="s2">"TP53"</span><span class="p">,</span>
+	<span class="s2">"cohort"</span><span class="p">,</span>
+	<span class="n">fill</span> <span class="o">=</span> <span class="s2">"ZNF501"</span><span class="p">,</span>
+	<span class="n">facet.names</span> <span class="o">=</span> <span class="s2">"MET"</span><span class="p">,</span>
+	<span class="n">title</span> <span class="o">=</span> <span class="s2">"Heatmap of ZNF501 expression"</span>
+<span class="p">)</span></code></pre></figure>
+
+<p><img src="/RTCGA/figure/source/Visualizations/unnamed-chunk-9-3.png" alt="plot of chunk unnamed-chunk-9" /></p>
 
 
   
