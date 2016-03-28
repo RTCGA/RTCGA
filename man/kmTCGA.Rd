@@ -35,6 +35,13 @@ kmTCGA(x, times = "times", status = "patient.vital_status",
 \description{
 Plots Kaplan-Meier estimates of survival curves for survival data.
 }
+\section{Issues}{
+
+
+If you have any problems, issues or think that something is missing or is not
+clear please post an issue on 
+\href{https://github.com/RTCGA/RTCGA/issues}{https://github.com/RTCGA/RTCGA/issues}.
+}
 \examples{
 
 ## Extracting Survival Data

@@ -9,17 +9,30 @@
 #' @param ... Further arguments passed to \link{prcomp}.
 #' @param center As in \link{prcomp}.
 #' @param scale As in \link{prcomp}.
-#' @param var.scale As in \link{ggbiplot}.
-#' @param obs.scale As in \link{ggbiplot}.
-#' @param ellipse As in \link{ggbiplot}.
-#' @param circle As in \link{ggbiplot}.
-#' @param var.axes As in \link{ggbiplot}.
-#' @param alpha As in \link{ggbiplot}.
+#' @param var.scale As in \code{ggbiplot}.
+#' @param obs.scale As in \code{ggbiplot}.
+#' @param ellipse As in \code{ggbiplot}.
+#' @param circle As in \code{ggbiplot}.
+#' @param var.axes As in \code{ggbiplot}.
+#' @param alpha As in \code{ggbiplot}.
 #' @param title The title of a plot.
 #' @param add.lines Should axis lines be added to plot.
 #' 
 #' @return If \code{return.pca = TRUE} then a list containing a PCA plot (of class \code{ggplot}) and a \code{pca} model, the result of \link{prcomp} function.
 #' If not, then only PCA plot is returned.
+#' 
+#' @section ggbiplot:
+#' 
+#' This function is based on \href{https://github.com/vqv/ggbiplot}{https://github.com/vqv/ggbiplot} 
+#' which had to be copied to \pkg{RTCGA} because \code{Bioconductor} does not support 
+#' remote dependencies from \code{GitHub}.
+#' 
+#' @section Issues:
+#' 
+#' If you have any problems, issues or think that something is missing or is not
+#' clear please post an issue on 
+#' \href{https://github.com/RTCGA/RTCGA/issues}{https://github.com/RTCGA/RTCGA/issues}.
+#' 
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
 #'
@@ -43,8 +56,6 @@
 #' pca.rnaseq$plot
 #' pca.rnaseq$pca
 #' }
-#' @author 
-#' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
 #' 
 #' @family RTCGA
 #' @rdname pcaTCGA

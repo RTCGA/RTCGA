@@ -35,6 +35,13 @@ to remove the legend use legend = "none".}
 \description{
 Function creates boxplots (\link{geom_boxplot}) for TCGA Datasets.
 }
+\section{Issues}{
+
+
+If you have any problems, issues or think that something is missing or is not
+clear please post an issue on 
+\href{https://github.com/RTCGA/RTCGA/issues}{https://github.com/RTCGA/RTCGA/issues}.
+}
 \examples{
 library(RTCGA.rnaseq)
 # perfrom plot

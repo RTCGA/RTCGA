@@ -12,6 +12,13 @@ A list with a tabular information from \href{http://gdac.broadinstitute.org/}{ht
 \description{
 Function restores codes and counts for each cohort from TCGA project.
 }
+\section{Issues}{
+
+
+If you have any problems, issues or think that something is missing or is not
+clear please post an issue on 
+\href{https://github.com/RTCGA/RTCGA/issues}{https://github.com/RTCGA/RTCGA/issues}.
+}
 \examples{
 
 infoTCGA()

@@ -12,6 +12,13 @@ The Cancer Genome Atlas (TCGA) Data Portal provides a platform for researchers t
 For more detailed information visit \pkg{RTCGA} \code{wiki} on 
 \href{https://github.com/RTCGA/RTCGA/wiki}{Github}.
 }
+\section{Issues}{
+
+
+If you have any problems, issues or think that something is missing or is not
+clear please post an issue on 
+\href{https://github.com/RTCGA/RTCGA/issues}{https://github.com/RTCGA/RTCGA/issues}.
+}
 \examples{
 \dontrun{
 browseVignettes('RTCGA')
@@ -19,7 +26,8 @@ browseVignettes('RTCGA')
 }
 \author{
 Marcin Kosinski [aut, cre] \email{ m.p.kosinski@gmail.com } \cr
-Przemyslaw Biecek [aut] \email{ przemyslaw.biecek@gmail.com }
+Przemyslaw Biecek [aut] \email{ przemyslaw.biecek@gmail.com } \cr
+Witold Chodor [ctb] \email{witoldchodor@gmail.com}
 }
 \seealso{
 \pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA}{http://rtcga.github.io/RTCGA}.

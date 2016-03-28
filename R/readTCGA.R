@@ -52,6 +52,13 @@
 #' \item If \code{dataType = 'isoforms'} a path to unzipped files \code{cancerType.rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_isoforms_normalized__data.data.txt}.
 #' }
 #' 
+#' 
+#' @section Issues:
+#' 
+#' If you have any problems, issues or think that something is missing or is not
+#' clear please post an issue on 
+#' \href{https://github.com/RTCGA/RTCGA/issues}{https://github.com/RTCGA/RTCGA/issues}.
+#' 
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
 #' 

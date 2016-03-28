@@ -40,6 +40,13 @@ Function creates heatmaps (\link{geom_tile}) for TCGA Datasets.
  both in regular form and also when converted to black-and-white. 
  They are also designed to be perceived by readers with the most common form of color blindness.
 }
+\section{Issues}{
+
+
+If you have any problems, issues or think that something is missing or is not
+clear please post an issue on 
+\href{https://github.com/RTCGA/RTCGA/issues}{https://github.com/RTCGA/RTCGA/issues}.
+}
 \examples{
  
  

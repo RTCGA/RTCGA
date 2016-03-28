@@ -13,6 +13,12 @@
 #' 
 #' @note Input data.frames should contain column \code{bcr_patient_barcode} if \code{extract.cols} is specified. 
 #' 
+#' @section Issues:
+#' 
+#' If you have any problems, issues or think that something is missing or is not
+#' clear please post an issue on 
+#' \href{https://github.com/RTCGA/RTCGA/issues}{https://github.com/RTCGA/RTCGA/issues}.
+#' 
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
 #' 

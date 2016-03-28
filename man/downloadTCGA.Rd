@@ -38,6 +38,13 @@ dataSet is downloaded (value \code{dataSet = 'Merge_Clinical.Level_1'}) from the
 \details{
 All cohort names can be checked using: \code{ sub( x = names( infoTCGA() ), '-counts', '' )}.
 }
+\section{Issues}{
+
+
+If you have any problems, issues or think that something is missing or is not
+clear please post an issue on 
+\href{https://github.com/RTCGA/RTCGA/issues}{https://github.com/RTCGA/RTCGA/issues}.
+}
 \examples{
 
 
@@ -53,6 +60,9 @@ downloadTCGA( cancerTypes = c('BRCA', 'OV'), destDir = 'hre',
 
 
 
+}
+\author{
+Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 }
 \seealso{
 \pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA/Download.html}{http://rtcga.github.io/RTCGA/Download.html}.

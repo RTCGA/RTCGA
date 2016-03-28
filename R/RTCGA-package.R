@@ -8,9 +8,16 @@
 #' For more detailed information visit \pkg{RTCGA} \code{wiki} on 
 #' \href{https://github.com/RTCGA/RTCGA/wiki}{Github}.
 #'
+#' @section Issues:
+#' 
+#' If you have any problems, issues or think that something is missing or is not
+#' clear please post an issue on 
+#' \href{https://github.com/RTCGA/RTCGA/issues}{https://github.com/RTCGA/RTCGA/issues}.
+#'
 #' @author
 #' Marcin Kosinski [aut, cre] \email{ m.p.kosinski@@gmail.com } \cr
-#' Przemyslaw Biecek [aut] \email{ przemyslaw.biecek@@gmail.com }
+#' Przemyslaw Biecek [aut] \email{ przemyslaw.biecek@@gmail.com } \cr
+#' Witold Chodor [ctb] \email{witoldchodor@@gmail.com}
 #' 
 #' @seealso 
 #' 
@@ -35,7 +42,6 @@
 #' @importFrom ggthemes scale_colour_tableau
 #' @importFrom ggthemes scale_fill_tableau
 #' @import ggplot2
-#' @importFrom ggbiplot ggbiplot
 #' @importFrom purrr map_if
 #' 
 #' @examples

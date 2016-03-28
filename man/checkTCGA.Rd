@@ -37,6 +37,13 @@ The \code{checkTCGA} function let's to check
      \item If \code{what='Dates'} enables to check dates of TCGA datasets' releases.
      }
 }
+\section{Issues}{
+
+
+If you have any problems, issues or think that something is missing or is not
+clear please post an issue on 
+\href{https://github.com/RTCGA/RTCGA/issues}{https://github.com/RTCGA/RTCGA/issues}.
+}
 \examples{
 
 ############################# 

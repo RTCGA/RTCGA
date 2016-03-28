@@ -22,6 +22,13 @@ release date (check all dates of release with \code{checkTCGA('Dates')}) are inc
 For more detailed information visit \pkg{RTCGA.data}  website
 \href{https://rtcga.github.io/RTCGA}{https://rtcga.github.io/RTCGA}. One can install all data packages with \link{installTCGA}.
 }
+\section{Issues}{
+
+
+If you have any problems, issues or think that something is missing or is not
+clear please post an issue on 
+\href{https://github.com/RTCGA/RTCGA/issues}{https://github.com/RTCGA/RTCGA/issues}.
+}
 \examples{
 
 

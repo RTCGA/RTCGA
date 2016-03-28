@@ -49,6 +49,12 @@
 #'  
 #' kmTCGA(BRCA.survInfo.chemo, explanatory.names = "therapy", xlim = c(0, 3000), conf.int = FALSE)
 #' 
+#' @section Issues:
+#' 
+#' If you have any problems, issues or think that something is missing or is not
+#' clear please post an issue on 
+#' \href{https://github.com/RTCGA/RTCGA/issues}{https://github.com/RTCGA/RTCGA/issues}.
+#' 
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
 #' 

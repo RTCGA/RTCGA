@@ -16,6 +16,13 @@ theme_RTCGA(base_size = 11, base_family = "", ...)
 \description{
 Additional \pkg{RTCGA} theme for \link[ggplot2]{ggtheme}, based on \link[ggthemes]{theme_pander}.
 }
+\section{Issues}{
+
+
+If you have any problems, issues or think that something is missing or is not
+clear please post an issue on 
+\href{https://github.com/RTCGA/RTCGA/issues}{https://github.com/RTCGA/RTCGA/issues}.
+}
 \examples{
 
 library(RTCGA.clinical)

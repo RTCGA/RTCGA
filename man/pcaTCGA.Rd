@@ -44,6 +44,13 @@ If not, then only PCA plot is returned.
 \description{
 Plots Two Main Components of Principal Component Analysis
 }
+\section{Issues}{
+
+
+If you have any problems, issues or think that something is missing or is not
+clear please post an issue on 
+\href{https://github.com/RTCGA/RTCGA/issues}{https://github.com/RTCGA/RTCGA/issues}.
+}
 \examples{
 
 \dontrun{
@@ -60,10 +67,9 @@ pcaTCGA(BRCA.OV.HNSC.rnaseq.cancer, "cohort", return.pca = TRUE) -> pca.rnaseq
 pca.rnaseq$plot
 pca.rnaseq$pca
 }
+
 }
 \author{
-Marcin Kosinski, \email{m.p.kosinski@gmail.com}
-
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 }
 \seealso{

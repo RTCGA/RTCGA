@@ -32,7 +32,6 @@ Imports:
     data.table,
     xml2,
     devtools,
-    ggbiplot,
     dplyr,
     purrr,
     knitr,
@@ -60,8 +59,6 @@ Suggests:
     RTCGA.PANCAN12,
     magrittr,
     tidyr
-Remotes:
-    vqv/ggbiplot
 Repository: Bioconductor
 biocViews: Software, DataImport, DataRepresentation, Preprocessing
 VignetteBuilder: knitr

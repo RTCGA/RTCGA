@@ -7,6 +7,12 @@
 #' @param build_vignettes Should vignettes be build.
 #' @param ... Further arguments passed to \link[devtools]{install_github}.
 #' 
+#' @section Issues:
+#' 
+#' If you have any problems, issues or think that something is missing or is not
+#' clear please post an issue on 
+#' \href{https://github.com/RTCGA/RTCGA/issues}{https://github.com/RTCGA/RTCGA/issues}.
+#' 
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
 #' 
