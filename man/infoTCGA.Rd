@@ -26,6 +26,9 @@ library(magrittr)
 (cohorts <- infoTCGA() \%>\% 
 rownames() \%>\% 
    sub('-counts', '', x=.))
+   
+# in knitr chunk -> results='asis'   
+knitr::kable(infoTCGA())
 
 }
 \author{
