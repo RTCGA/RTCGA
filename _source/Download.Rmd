@@ -12,12 +12,35 @@ output:
     fig_caption:  true
 ---
 
+{:toc}
 
 ```{r include=FALSE}
 library(knitr)
 opts_chunk$set(comment="", message=FALSE, warning = FALSE, 
                tidy.opts=list(keep.blank.line=TRUE, width.cutoff=150),
-							 options(width=150), eval = FALSE)
+							 options(width=150), eval = TRUE)
 ```
 
-# TO BE DONE
+```{r}
+library(RTCGA)
+```
+
+# Cohorts Names and Number of Cases
+
+The Cancer Genome Atlas provides data via [`Broad GDAC Firehose`](http://gdac.broadinstitute.org/). The number of cases in the most popular datasets can be checked with the following code that is based on the [`Broad GDAC Firehose`](http://gdac.broadinstitute.org/).
+
+```{r, results='asis'}
+cat(knitr::kable(infoTCGA()), sep = "\n")
+```
+
+
+Furthermore `infoTCGA()` enables to extract possible cohorts names from TCGA Study. **Cohorts' names stand for abbreviations of real names of cancer types**
+
+```{r}
+library(magrittr)
+(cohorts <- infoTCGA() %>% 
+rownames() %>% 
+   sub('-counts', '', x=.))
+```
+
+
