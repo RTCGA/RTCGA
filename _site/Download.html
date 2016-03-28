@@ -113,7 +113,782 @@
     <div class="content container">
       <div class="page">
   <h1 class="page-title">TCGA Data Download</h1>
-  <h1 id="to-be-done">TO BE DONE</h1>
+  
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="n">RTCGA</span><span class="p">)</span></code></pre></figure>
+
+<h1 id="available-datasets">Available Datasets</h1>
+
+<p>Before you read this section, please make sure you are aware of that we have prepared some datasets for you in below packages</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">package</th>
+      <th style="text-align: left">installation</th>
+      <th style="text-align: left">help</th>
+      <th style="text-align: left">vignettes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">RTCGA.rnaseq</td>
+      <td style="text-align: left"><code class="highlighter-rouge">biocLite('RTCGA.rnaseq')</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">?rnaseq</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">browseVignettes('RTCGA.rnaseq')</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">RTCGA.clinical</td>
+      <td style="text-align: left"><code class="highlighter-rouge">biocLite('RTCGA.clinical')</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">?clinical</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">browseVignettes('RTCGA.clinical')</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">RTCGA.mutations</td>
+      <td style="text-align: left"><code class="highlighter-rouge">biocLite('RTCGA.mutations')</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">?mutations</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">browseVignettes('RTCGA.mutations')</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">RTCGA.mRNA</td>
+      <td style="text-align: left"><code class="highlighter-rouge">biocLite('RTCGA.mRNA')</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">?mRNA</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">browseVignettes('RTCGA.mRNA')</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">RTCGA.miRNASeq</td>
+      <td style="text-align: left"><code class="highlighter-rouge">biocLite('RTCGA.miRNASeq')</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">?miRNASeq</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">browseVignettes('RTCGA.miRNASeq')</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">RTCGA.PANCAN12</td>
+      <td style="text-align: left"><code class="highlighter-rouge">biocLite('RTCGA.PANCAN12')</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">?pancan12</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">browseVignettes('RTCGA.PANCAN12')</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">RTCGA.RPPA</td>
+      <td style="text-align: left"><code class="highlighter-rouge">biocLite('RTCGA.RPPA')</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">?RPPA</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">browseVignettes('RTCGA.RPPA')</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">RTCGA.CNV</td>
+      <td style="text-align: left"><code class="highlighter-rouge">biocLite('RTCGA.CNV')</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">?CNV</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">browseVignettes('RTCGA.CNV')</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">RTCGA.methylation</td>
+      <td style="text-align: left"><code class="highlighter-rouge">biocLite('RTCGA.methylation')</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">?methylation</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">browseVignettes('RTCGA.methylation')</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="cohorts-names-and-number-of-cases">Cohorts Names and Number of Cases</h1>
+
+<p>The Cancer Genome Atlas provides data via <a href="http://gdac.broadinstitute.org/"><code class="highlighter-rouge">Broad GDAC Firehose</code></a>. The number of cases in the most popular datasets can be checked with the following code that is based on the <a href="http://gdac.broadinstitute.org/"><code class="highlighter-rouge">Broad GDAC Firehose</code></a>.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">knitr</span><span class="o">::</span><span class="n">kable</span><span class="p">(</span><span class="n">infoTCGA</span><span class="p">())</span></code></pre></figure>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left"> </th>
+      <th style="text-align: left">Cohort</th>
+      <th style="text-align: left">BCR</th>
+      <th style="text-align: left">Clinical</th>
+      <th style="text-align: left">CN</th>
+      <th style="text-align: left">LowP</th>
+      <th style="text-align: left">Methylation</th>
+      <th style="text-align: left">mRNA</th>
+      <th style="text-align: left">mRNASeq</th>
+      <th style="text-align: left">miR</th>
+      <th style="text-align: left">miRSeq</th>
+      <th style="text-align: left">RPPA</th>
+      <th style="text-align: left">MAF</th>
+      <th style="text-align: left">rawMAF</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">ACC-counts</td>
+      <td style="text-align: left">ACC</td>
+      <td style="text-align: left">92</td>
+      <td style="text-align: left">92</td>
+      <td style="text-align: left">90</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">80</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">79</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">80</td>
+      <td style="text-align: left">46</td>
+      <td style="text-align: left">90</td>
+      <td style="text-align: left">0</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">BLCA-counts</td>
+      <td style="text-align: left">BLCA</td>
+      <td style="text-align: left">412</td>
+      <td style="text-align: left">412</td>
+      <td style="text-align: left">410</td>
+      <td style="text-align: left">112</td>
+      <td style="text-align: left">412</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">408</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">409</td>
+      <td style="text-align: left">344</td>
+      <td style="text-align: left">130</td>
+      <td style="text-align: left">395</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">BRCA-counts</td>
+      <td style="text-align: left">BRCA</td>
+      <td style="text-align: left">1098</td>
+      <td style="text-align: left">1097</td>
+      <td style="text-align: left">1089</td>
+      <td style="text-align: left">19</td>
+      <td style="text-align: left">1097</td>
+      <td style="text-align: left">526</td>
+      <td style="text-align: left">1093</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">1078</td>
+      <td style="text-align: left">887</td>
+      <td style="text-align: left">977</td>
+      <td style="text-align: left">0</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">CESC-counts</td>
+      <td style="text-align: left">CESC</td>
+      <td style="text-align: left">307</td>
+      <td style="text-align: left">307</td>
+      <td style="text-align: left">295</td>
+      <td style="text-align: left">50</td>
+      <td style="text-align: left">307</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">304</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">307</td>
+      <td style="text-align: left">173</td>
+      <td style="text-align: left">194</td>
+      <td style="text-align: left">0</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">CHOL-counts</td>
+      <td style="text-align: left">CHOL</td>
+      <td style="text-align: left">51</td>
+      <td style="text-align: left">45</td>
+      <td style="text-align: left">36</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">36</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">36</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">36</td>
+      <td style="text-align: left">30</td>
+      <td style="text-align: left">35</td>
+      <td style="text-align: left">0</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">COAD-counts</td>
+      <td style="text-align: left">COAD</td>
+      <td style="text-align: left">460</td>
+      <td style="text-align: left">458</td>
+      <td style="text-align: left">451</td>
+      <td style="text-align: left">69</td>
+      <td style="text-align: left">457</td>
+      <td style="text-align: left">153</td>
+      <td style="text-align: left">457</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">406</td>
+      <td style="text-align: left">360</td>
+      <td style="text-align: left">154</td>
+      <td style="text-align: left">367</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">COADREAD-counts</td>
+      <td style="text-align: left">COADREAD</td>
+      <td style="text-align: left">631</td>
+      <td style="text-align: left">629</td>
+      <td style="text-align: left">616</td>
+      <td style="text-align: left">104</td>
+      <td style="text-align: left">622</td>
+      <td style="text-align: left">222</td>
+      <td style="text-align: left">623</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">549</td>
+      <td style="text-align: left">491</td>
+      <td style="text-align: left">223</td>
+      <td style="text-align: left">489</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">DLBC-counts</td>
+      <td style="text-align: left">DLBC</td>
+      <td style="text-align: left">58</td>
+      <td style="text-align: left">48</td>
+      <td style="text-align: left">48</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">48</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">48</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">47</td>
+      <td style="text-align: left">33</td>
+      <td style="text-align: left">48</td>
+      <td style="text-align: left">0</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">ESCA-counts</td>
+      <td style="text-align: left">ESCA</td>
+      <td style="text-align: left">185</td>
+      <td style="text-align: left">185</td>
+      <td style="text-align: left">184</td>
+      <td style="text-align: left">51</td>
+      <td style="text-align: left">185</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">184</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">184</td>
+      <td style="text-align: left">126</td>
+      <td style="text-align: left">185</td>
+      <td style="text-align: left">0</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">FPPP-counts</td>
+      <td style="text-align: left">FPPP</td>
+      <td style="text-align: left">38</td>
+      <td style="text-align: left">38</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">23</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">0</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">GBM-counts</td>
+      <td style="text-align: left">GBM</td>
+      <td style="text-align: left">613</td>
+      <td style="text-align: left">595</td>
+      <td style="text-align: left">577</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">420</td>
+      <td style="text-align: left">540</td>
+      <td style="text-align: left">160</td>
+      <td style="text-align: left">565</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">238</td>
+      <td style="text-align: left">290</td>
+      <td style="text-align: left">290</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">GBMLGG-counts</td>
+      <td style="text-align: left">GBMLGG</td>
+      <td style="text-align: left">1129</td>
+      <td style="text-align: left">1110</td>
+      <td style="text-align: left">1090</td>
+      <td style="text-align: left">52</td>
+      <td style="text-align: left">936</td>
+      <td style="text-align: left">567</td>
+      <td style="text-align: left">676</td>
+      <td style="text-align: left">565</td>
+      <td style="text-align: left">512</td>
+      <td style="text-align: left">668</td>
+      <td style="text-align: left">576</td>
+      <td style="text-align: left">806</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">HNSC-counts</td>
+      <td style="text-align: left">HNSC</td>
+      <td style="text-align: left">528</td>
+      <td style="text-align: left">528</td>
+      <td style="text-align: left">522</td>
+      <td style="text-align: left">108</td>
+      <td style="text-align: left">528</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">520</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">523</td>
+      <td style="text-align: left">212</td>
+      <td style="text-align: left">279</td>
+      <td style="text-align: left">510</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">KICH-counts</td>
+      <td style="text-align: left">KICH</td>
+      <td style="text-align: left">113</td>
+      <td style="text-align: left">113</td>
+      <td style="text-align: left">66</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">66</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">66</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">66</td>
+      <td style="text-align: left">63</td>
+      <td style="text-align: left">66</td>
+      <td style="text-align: left">66</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">KIPAN-counts</td>
+      <td style="text-align: left">KIPAN</td>
+      <td style="text-align: left">973</td>
+      <td style="text-align: left">941</td>
+      <td style="text-align: left">883</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">892</td>
+      <td style="text-align: left">88</td>
+      <td style="text-align: left">889</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">873</td>
+      <td style="text-align: left">756</td>
+      <td style="text-align: left">644</td>
+      <td style="text-align: left">799</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">KIRC-counts</td>
+      <td style="text-align: left">KIRC</td>
+      <td style="text-align: left">537</td>
+      <td style="text-align: left">537</td>
+      <td style="text-align: left">528</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">535</td>
+      <td style="text-align: left">72</td>
+      <td style="text-align: left">533</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">516</td>
+      <td style="text-align: left">478</td>
+      <td style="text-align: left">417</td>
+      <td style="text-align: left">451</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">KIRP-counts</td>
+      <td style="text-align: left">KIRP</td>
+      <td style="text-align: left">323</td>
+      <td style="text-align: left">291</td>
+      <td style="text-align: left">289</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">291</td>
+      <td style="text-align: left">16</td>
+      <td style="text-align: left">290</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">291</td>
+      <td style="text-align: left">215</td>
+      <td style="text-align: left">161</td>
+      <td style="text-align: left">282</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">LAML-counts</td>
+      <td style="text-align: left">LAML</td>
+      <td style="text-align: left">200</td>
+      <td style="text-align: left">200</td>
+      <td style="text-align: left">197</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">194</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">179</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">188</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">197</td>
+      <td style="text-align: left">0</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">LGG-counts</td>
+      <td style="text-align: left">LGG</td>
+      <td style="text-align: left">516</td>
+      <td style="text-align: left">515</td>
+      <td style="text-align: left">513</td>
+      <td style="text-align: left">52</td>
+      <td style="text-align: left">516</td>
+      <td style="text-align: left">27</td>
+      <td style="text-align: left">516</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">512</td>
+      <td style="text-align: left">430</td>
+      <td style="text-align: left">286</td>
+      <td style="text-align: left">516</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">LIHC-counts</td>
+      <td style="text-align: left">LIHC</td>
+      <td style="text-align: left">377</td>
+      <td style="text-align: left">377</td>
+      <td style="text-align: left">370</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">377</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">371</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">372</td>
+      <td style="text-align: left">63</td>
+      <td style="text-align: left">198</td>
+      <td style="text-align: left">373</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">LUAD-counts</td>
+      <td style="text-align: left">LUAD</td>
+      <td style="text-align: left">585</td>
+      <td style="text-align: left">522</td>
+      <td style="text-align: left">516</td>
+      <td style="text-align: left">120</td>
+      <td style="text-align: left">578</td>
+      <td style="text-align: left">32</td>
+      <td style="text-align: left">515</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">513</td>
+      <td style="text-align: left">365</td>
+      <td style="text-align: left">230</td>
+      <td style="text-align: left">542</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">LUSC-counts</td>
+      <td style="text-align: left">LUSC</td>
+      <td style="text-align: left">504</td>
+      <td style="text-align: left">504</td>
+      <td style="text-align: left">501</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">503</td>
+      <td style="text-align: left">154</td>
+      <td style="text-align: left">501</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">478</td>
+      <td style="text-align: left">328</td>
+      <td style="text-align: left">178</td>
+      <td style="text-align: left">0</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">MESO-counts</td>
+      <td style="text-align: left">MESO</td>
+      <td style="text-align: left">87</td>
+      <td style="text-align: left">87</td>
+      <td style="text-align: left">87</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">87</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">87</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">87</td>
+      <td style="text-align: left">63</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">0</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">OV-counts</td>
+      <td style="text-align: left">OV</td>
+      <td style="text-align: left">602</td>
+      <td style="text-align: left">591</td>
+      <td style="text-align: left">586</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">594</td>
+      <td style="text-align: left">574</td>
+      <td style="text-align: left">304</td>
+      <td style="text-align: left">570</td>
+      <td style="text-align: left">453</td>
+      <td style="text-align: left">426</td>
+      <td style="text-align: left">316</td>
+      <td style="text-align: left">469</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">PAAD-counts</td>
+      <td style="text-align: left">PAAD</td>
+      <td style="text-align: left">185</td>
+      <td style="text-align: left">185</td>
+      <td style="text-align: left">184</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">184</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">178</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">178</td>
+      <td style="text-align: left">123</td>
+      <td style="text-align: left">150</td>
+      <td style="text-align: left">184</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">PCPG-counts</td>
+      <td style="text-align: left">PCPG</td>
+      <td style="text-align: left">179</td>
+      <td style="text-align: left">179</td>
+      <td style="text-align: left">175</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">179</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">179</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">179</td>
+      <td style="text-align: left">80</td>
+      <td style="text-align: left">179</td>
+      <td style="text-align: left">0</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">PRAD-counts</td>
+      <td style="text-align: left">PRAD</td>
+      <td style="text-align: left">499</td>
+      <td style="text-align: left">499</td>
+      <td style="text-align: left">492</td>
+      <td style="text-align: left">115</td>
+      <td style="text-align: left">498</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">497</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">494</td>
+      <td style="text-align: left">352</td>
+      <td style="text-align: left">332</td>
+      <td style="text-align: left">498</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">READ-counts</td>
+      <td style="text-align: left">READ</td>
+      <td style="text-align: left">171</td>
+      <td style="text-align: left">171</td>
+      <td style="text-align: left">165</td>
+      <td style="text-align: left">35</td>
+      <td style="text-align: left">165</td>
+      <td style="text-align: left">69</td>
+      <td style="text-align: left">166</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">143</td>
+      <td style="text-align: left">131</td>
+      <td style="text-align: left">69</td>
+      <td style="text-align: left">122</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SARC-counts</td>
+      <td style="text-align: left">SARC</td>
+      <td style="text-align: left">261</td>
+      <td style="text-align: left">261</td>
+      <td style="text-align: left">257</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">261</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">259</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">259</td>
+      <td style="text-align: left">223</td>
+      <td style="text-align: left">247</td>
+      <td style="text-align: left">0</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SKCM-counts</td>
+      <td style="text-align: left">SKCM</td>
+      <td style="text-align: left">470</td>
+      <td style="text-align: left">470</td>
+      <td style="text-align: left">469</td>
+      <td style="text-align: left">118</td>
+      <td style="text-align: left">470</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">469</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">448</td>
+      <td style="text-align: left">353</td>
+      <td style="text-align: left">343</td>
+      <td style="text-align: left">366</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">STAD-counts</td>
+      <td style="text-align: left">STAD</td>
+      <td style="text-align: left">443</td>
+      <td style="text-align: left">443</td>
+      <td style="text-align: left">442</td>
+      <td style="text-align: left">107</td>
+      <td style="text-align: left">443</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">415</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">436</td>
+      <td style="text-align: left">357</td>
+      <td style="text-align: left">289</td>
+      <td style="text-align: left">395</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">STES-counts</td>
+      <td style="text-align: left">STES</td>
+      <td style="text-align: left">628</td>
+      <td style="text-align: left">628</td>
+      <td style="text-align: left">626</td>
+      <td style="text-align: left">158</td>
+      <td style="text-align: left">628</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">599</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">620</td>
+      <td style="text-align: left">483</td>
+      <td style="text-align: left">474</td>
+      <td style="text-align: left">395</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">TGCT-counts</td>
+      <td style="text-align: left">TGCT</td>
+      <td style="text-align: left">150</td>
+      <td style="text-align: left">134</td>
+      <td style="text-align: left">150</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">150</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">150</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">150</td>
+      <td style="text-align: left">118</td>
+      <td style="text-align: left">149</td>
+      <td style="text-align: left">0</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">THCA-counts</td>
+      <td style="text-align: left">THCA</td>
+      <td style="text-align: left">503</td>
+      <td style="text-align: left">503</td>
+      <td style="text-align: left">499</td>
+      <td style="text-align: left">98</td>
+      <td style="text-align: left">503</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">501</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">502</td>
+      <td style="text-align: left">222</td>
+      <td style="text-align: left">402</td>
+      <td style="text-align: left">496</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">THYM-counts</td>
+      <td style="text-align: left">THYM</td>
+      <td style="text-align: left">124</td>
+      <td style="text-align: left">124</td>
+      <td style="text-align: left">123</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">124</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">120</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">124</td>
+      <td style="text-align: left">90</td>
+      <td style="text-align: left">123</td>
+      <td style="text-align: left">0</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">UCEC-counts</td>
+      <td style="text-align: left">UCEC</td>
+      <td style="text-align: left">560</td>
+      <td style="text-align: left">548</td>
+      <td style="text-align: left">540</td>
+      <td style="text-align: left">106</td>
+      <td style="text-align: left">547</td>
+      <td style="text-align: left">54</td>
+      <td style="text-align: left">545</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">538</td>
+      <td style="text-align: left">440</td>
+      <td style="text-align: left">248</td>
+      <td style="text-align: left">0</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">UCS-counts</td>
+      <td style="text-align: left">UCS</td>
+      <td style="text-align: left">57</td>
+      <td style="text-align: left">57</td>
+      <td style="text-align: left">56</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">57</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">57</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">56</td>
+      <td style="text-align: left">48</td>
+      <td style="text-align: left">57</td>
+      <td style="text-align: left">0</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">UVM-counts</td>
+      <td style="text-align: left">UVM</td>
+      <td style="text-align: left">80</td>
+      <td style="text-align: left">80</td>
+      <td style="text-align: left">80</td>
+      <td style="text-align: left">51</td>
+      <td style="text-align: left">80</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">80</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">80</td>
+      <td style="text-align: left">12</td>
+      <td style="text-align: left">80</td>
+      <td style="text-align: left">0</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Furthermore <code class="highlighter-rouge">infoTCGA()</code> enables to extract possible cohorts names from TCGA Study.</p>
+
+<p><strong>Cohorts’ names stand for abbreviations of real names of cancer types.</strong></p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="n">magrittr</span><span class="p">)</span>
+<span class="p">(</span><span class="n">cohorts</span> <span class="o">&lt;-</span> <span class="n">infoTCGA</span><span class="p">()</span> <span class="o">%&gt;%</span> 
+<span class="n">rownames</span><span class="p">()</span> <span class="o">%&gt;%</span> 
+   <span class="n">sub</span><span class="p">(</span><span class="s1">'-counts'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="err">.</span><span class="p">))</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text"> [1] "ACC"      "BLCA"     "BRCA"     "CESC"     "CHOL"     "COAD"     "COADREAD" "DLBC"     "ESCA"     "FPPP"    
+[11] "GBM"      "GBMLGG"   "HNSC"     "KICH"     "KIPAN"    "KIRC"     "KIRP"     "LAML"     "LGG"      "LIHC"    
+[21] "LUAD"     "LUSC"     "MESO"     "OV"       "PAAD"     "PCPG"     "PRAD"     "READ"     "SARC"     "SKCM"    
+[31] "STAD"     "STES"     "TGCT"     "THCA"     "THYM"     "UCEC"     "UCS"      "UVM"     </code></pre></figure>
+
+<h1 id="datasets-dates-of-release">Datasets dates of release</h1>
+
+<p>The Cancer Genome Atlas provides datasets in many dates of release. You can check them with the following command.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">checkTCGA</span><span class="p">(</span><span class="s1">'Dates'</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text"> [1] "2011-10-26" "2011-11-15" "2011-11-28" "2011-12-06" "2011-12-30" "2012-01-10" "2012-01-24" "2012-02-17"
+ [9] "2012-03-06" "2012-03-21" "2012-04-12" "2012-04-25" "2012-05-15" "2012-05-25" "2012-06-06" "2012-06-23"
+[17] "2012-07-07" "2012-07-25" "2012-08-04" "2012-08-25" "2012-09-13" "2012-10-04" "2012-10-18" "2012-10-20"
+[25] "2012-10-24" "2012-11-02" "2012-11-14" "2012-12-06" "2012-12-21" "2013-01-16" "2013-02-03" "2013-02-22"
+[33] "2013-03-09" "2013-03-26" "2013-04-06" "2013-04-21" "2013-05-08" "2013-05-23" "2013-06-06" "2013-06-23"
+[41] "2013-07-15" "2013-08-09" "2013-09-23" "2013-10-10" "2013-11-14" "2013-12-10" "2014-01-15" "2014-02-15"
+[49] "2014-03-16" "2014-04-16" "2014-05-18" "2014-06-14" "2014-07-15" "2014-09-02" "2014-10-17" "2014-12-06"
+[57] "2015-02-02" "2015-02-04" "2015-04-02" "2015-06-01" "2015-08-21" "2015-11-01" "2016-01-28"</code></pre></figure>
+
+<h1 id="datasets-names-for-a-specific-cohort-type">Datasets names for a specific cohort type</h1>
+
+<p>The Cancer Genome Atlas provides various datasets for different cohort types. For example you can check all names of datasets provided for <code class="highlighter-rouge">BRCA</code> with (second dimension stand for dataset size).</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">checkTCGA</span><span class="p">(</span>
+	<span class="s1">'DataSets'</span><span class="p">,</span>
+	<span class="n">cancerType</span> <span class="o">=</span> <span class="s1">'BRCA'</span><span class="p">,</span>
+	<span class="n">date</span> <span class="o">=</span> <span class="s1">'2016-01-28'</span>
+<span class="p">)</span> <span class="o">%&gt;%</span> <span class="n">dim</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">[1] 43  2</code></pre></figure>
+
+<p>This lists only <code class="highlighter-rouge">.zip</code> files.</p>
+
+<h1 id="data-download">Data Download</h1>
+
+<p>If you know which cohort type you are interested in and which dataset name you are looking for and which release date suits you, you can download a dataset provided by TCGA Study with the following command.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">dir.create</span><span class="p">(</span><span class="s2">"download_folder"</span><span class="p">)</span>
+<span class="n">downloadTCGA</span><span class="p">(</span>
+	<span class="n">cancerTypes</span> <span class="o">=</span> <span class="s2">"BRCA"</span><span class="p">,</span>
+	<span class="n">dataSet</span> <span class="o">=</span> <span class="s2">"Merge_Clinical.Level_1"</span><span class="p">,</span>
+	<span class="n">destDir</span> <span class="o">=</span> <span class="s2">"download_folder"</span>
+<span class="p">)</span></code></pre></figure>
+
+<p>You can specify <code class="highlighter-rouge">cancerTypes</code> as a vector of characters if you would like to download the same dataset type for many cohorts. 
+Moreover you can just specify an abbreviation ora fragment of dataset name. 
+You can also specify <code class="highlighter-rouge">date</code> argument if you would like to download datasets from previous (not the newest) releases.
+All downloaded datasets are untarred and their <code class="highlighter-rouge">.tar</code> files are deleted after untarring. You can also change this behaviour with <code class="highlighter-rouge">untarFile</code> and <code class="highlighter-rouge">removeTar</code> arguments. Sometimes more than one dataset fits the character provieded in <code class="highlighter-rouge">dataSet</code> argument, then the first without <code class="highlighter-rouge">FPPP</code> string is downloaded if possible. If you are interested in all datasets then you can change <code class="highlighter-rouge">allDataSets</code> (by default <code class="highlighter-rouge">FALSE</code>) parameter to <code class="highlighter-rouge">TRUE</code>.</p>
+
+<h1 id="read-specific-datasets">Read Specific Datasets</h1>
+
+<p>For specific datasets it is possible to read downloaded file into the tidy format. Fore more information check</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="o">?</span><span class="n">readTCGA</span></code></pre></figure>
+
 
   
   <a href="https://twitter.com/share" class="twitter-share-button"{count}>Tweet</a>

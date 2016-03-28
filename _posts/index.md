@@ -39,19 +39,26 @@ Windows users:
 
 {% highlight r %}
 # packages that are published to devel version of Bioconductor
-BiocInstaller::useDevel() # swiches to devel branchof Bioconductor - don't use this line if you are interested in release versions
+BiocInstaller::useDevel() 
+# swiches to devel branchof Bioconductor 
+# don't use this line if you are interested in release vers
 source("https://bioconductor.org/biocLite.R") # downloads bioClite function
-biocLite("RTCGA.clinical") # installs a package
-biocLite("RTCGA.rnaseq")
-biocLite("RTCGA.mutations")
-biocLite("RTCGA.PANCAN12")
-biocLite("RTCGA.CNV")
-biocLite("RTCGA.RPPA")
-biocLite("RTCGA.mRNA")
-biocLite("RTCGA.miRNASeq")
-biocLite("RTCGA.methylation")
+{% endhighlight %}
+
+|package           |installation                    |help           |vignettes                              |
+|:-----------------|:-------------------------------|:--------------|:--------------------------------------|
+|RTCGA.rnaseq      |`biocLite('RTCGA.rnaseq')`      |`?rnaseq`      |`browseVignettes('RTCGA.rnaseq')`      |
+|RTCGA.clinical    |`biocLite('RTCGA.clinical')`    |`?clinical`    |`browseVignettes('RTCGA.clinical')`    |
+|RTCGA.mutations   |`biocLite('RTCGA.mutations')`   |`?mutations`   |`browseVignettes('RTCGA.mutations')`   |
+|RTCGA.mRNA        |`biocLite('RTCGA.mRNA')`        |`?mRNA`        |`browseVignettes('RTCGA.mRNA')`        |
+|RTCGA.miRNASeq    |`biocLite('RTCGA.miRNASeq')`    |`?miRNASeq`    |`browseVignettes('RTCGA.miRNASeq')`    |
+|RTCGA.PANCAN12    |`biocLite('RTCGA.PANCAN12')`    |`?pancan12`    |`browseVignettes('RTCGA.PANCAN12')`    |
+|RTCGA.RPPA        |`biocLite('RTCGA.RPPA')`        |`?RPPA`        |`browseVignettes('RTCGA.RPPA')`        |
+|RTCGA.CNV         |`biocLite('RTCGA.CNV')`         |`?CNV`         |`browseVignettes('RTCGA.CNV')`         |
+|RTCGA.methylation |`biocLite('RTCGA.methylation')` |`?methylation` |`browseVignettes('RTCGA.methylation')` |
 
 
+{% highlight r %}
 # version of packages held at github.com/RTCGA - I try to keep them with the same state as devel versions of Bioconductor
 library(RTCGA)
 installTCGA("RTCGA.PANCAN12")
@@ -61,14 +68,6 @@ installTCGA("RTCGA.mRNA")
 installTCGA("RTCGA.miRNASeq")
 installTCGA("RTCGA.methylation")
 # or for all just type installTCGA()
-{% endhighlight %}
-
-<h5> The list of available datasets: </h5>
-
-{% highlight r %}
-help(dataType)
-# where dataType is one of: 'datasetsTCGA', 'clinical', 'rnaseq'
-# 'mutations', 'pancan12', 'CNV', 'RPPA', 'mRNA', 'miRNASeq', 'methylation'
 {% endhighlight %}
 
 # RTCGA
@@ -82,7 +81,8 @@ To get started, install the latest version of **RTCGA** from Bioconductor:
 
 {% highlight r %}
 BiocInstaller::useDevel() # swiches to devel branch of Bioconductor
-source("https://bioconductor.org/biocLite.R") # downloads bioClite function
+source("https://bioconductor.org/biocLite.R") 
+# downloads bioClite function
 biocLite("RTCGA") # installs a package
 {% endhighlight %}
 or use below code to download the development version which is like to be less bugged than the release version on Bioconductor:
