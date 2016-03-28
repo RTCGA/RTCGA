@@ -6,7 +6,8 @@
 \usage{
 kmTCGA(x, times = "times", status = "patient.vital_status",
   explanatory.names = "1", main = "Survival Curves", risk.table = TRUE,
-  conf.int = TRUE, return.survfit = FALSE, pval = FALSE, ...)
+  risk.table.y.text = FALSE, conf.int = TRUE, return.survfit = FALSE,
+  pval = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{data.frame} containing survival information. See \link{survivalTCGA}.}
@@ -20,6 +21,8 @@ kmTCGA(x, times = "times", status = "patient.vital_status",
 \item{main}{Title of the plot.}
 
 \item{risk.table}{Whether to show risk tables.}
+
+\item{risk.table.y.text}{Whether to show long strata names in legend of the risk table.}
 
 \item{conf.int}{Whether to show confidence intervals.}
 

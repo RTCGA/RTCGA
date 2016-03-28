@@ -14,6 +14,7 @@
 #' @param pval Whether to add p-value of the log-rank test to the plot?
 #' @param return.survfit Should return survfit object additionaly to survival plot?
 #' @param ... Further arguments passed to \link[survminer]{ggsurvplot}.
+#' @param risk.table.y.text Whether to show long strata names in legend of the risk table.
 #' 
 #' @seealso 
 #' 
@@ -60,6 +61,7 @@ kmTCGA <- function(x,
 									explanatory.names = "1",
 									main = "Survival Curves",
 									risk.table = TRUE,
+									risk.table.y.text = FALSE,
 									conf.int = TRUE,
 									return.survfit = FALSE, 
 									pval = FALSE,
@@ -77,10 +79,11 @@ kmTCGA <- function(x,
 	ggsurvplot(fit,
 						 risk.table = risk.table, 
 						 risk.table.y.text.col = TRUE,
-						 legend = "none",
+						 legend = "top",
 						 conf.int = conf.int, 
 						 pval = pval,
 						 main = main,
+						 risk.table.y.text = FALSE,
 						 ggtheme = theme_RTCGA(),
 						 ...) -> survplot
 	# customize with RTCGA theme
