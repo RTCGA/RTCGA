@@ -35,4 +35,5 @@
 infoTCGA <- function() {
 	do.call(rbind, readHTMLTable("http://gdac.broadinstitute.org/")[-39]) -> x
 	names(x) <- gsub(names(x), pattern = "\n", replacement = "", fixed = TRUE)
+	x
 } 
