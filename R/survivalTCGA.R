@@ -91,7 +91,7 @@ survivalTCGA <- function(..., extract.cols = NULL, extract.names = FALSE) {
 					 )) %>%
 		mutate(bcr_patient_barcode = toupper(as.character(patient.bcr_patient_barcode))) %>%
 		mutate(patient.vital_status = ifelse(patient.vital_status %>%
-									as.character() =="dead",1,0),
+									as.character() %in% c("dead", "deceased"),1,0),
 			  times = ifelse( !is.na(patient.days_to_last_followup),
 		 								patient.days_to_last_followup %>%
 		 									as.character() %>%
