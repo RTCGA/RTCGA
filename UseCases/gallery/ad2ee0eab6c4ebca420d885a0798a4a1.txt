@@ -1,0 +1,2 @@
+[1] data v   
+<0 rows> (or 0-length row.names)

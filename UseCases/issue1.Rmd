@@ -7,16 +7,28 @@ output:
     toc: TRUE
 ---
 
+# Goals
+
+Here we are presenting some non-standard analyses of RTCGA data.
+
+1. Starting with BRCA cohort, we check how the number of cases is increasing through consecutive releases.
+
+2. We are checking how p-values for simple log-rank model are changing through consecutive releases
+
+3. We are showing that (due to number of genes) some of them have expression confounded with significant clinical outcomes.
+
+
+# 1. Download clinical datasets
+
 ```{r, warning=FALSE, message=FALSE}
 library(RTCGA)
 library(survival)
 dates <- checkTCGA("Dates")
 
 library(archivist)
-setLocalRepo("~/GitHub/RTCGA.data/")
+setLocalRepo("~/GitHub/RTCGA/UseCases/")
 ```
 
-# 1. Download clinical datasets
 
 ```{r, warning=FALSE, message=FALSE, eval=FALSE}
 for (i in seq_along(dates)) {
@@ -48,8 +60,8 @@ expression$names <- substr(expression$names, 1, 12)
 ## 2.2 Load all clinical data
 
 ```{r, warning=FALSE, message=FALSE}
-files <- list.files(path = "clinical/", pattern="clin.mer", recursive = TRUE)
-files <- paste0("clinical/",files)
+files <- list.files(path = "~/_BiGTCGA_/clinical/", pattern="clin.mer", recursive = TRUE)
+files <- paste0("~/_BiGTCGA_/clinical/",files)
 
 # Here gather some useful statistics
 n <- c()
@@ -132,7 +144,7 @@ saveToRepo(n)
 library(lubridate)
 library(ggplot2)
 
-dates <- substr(names, 62, 69)
+dates <- substr(names, 74, 81)
 drd <- na.omit(data.frame(data=ymd(dates), v = n))
 
 saveToRepo(drd)
@@ -151,7 +163,7 @@ saveToRepo(.Last.value)
 ```{r, warning=FALSE, message=FALSE}
 pvalues <- pvalues[1:length(names),]
 plotPValues <- function(i) {
-  drd <- data.frame(data = ymd(substr(names, 62, 69)), 
+  drd <- data.frame(data = ymd(substr(names, 74, 81)), 
                     v = pvalues[,i], 
                     p = 1-pchisq(pvalues[,i],1))
   drd <- drd[drd$v > 0,]
@@ -167,5 +179,25 @@ plotPValues <- function(i) {
 
 plotPValues( 135 )
 plotPValues( 47 )
+```
+
+## 5. Low p-value, small group
+
+```{r}
+library(survminer)
+
+all <- readClin(files[20])
+j <- 15789
+all[,j] <- as.numeric(as.character(all[,j]))
+
+vv <- cut(all[,j], c(-100,0,100), labels = c("low expression", "high expression"))
+ndf <- data.frame(time = pmax(all$time, 1), event = all$dv %in% c("dead", "deceased"), 
+                  var = vv)
+ndf <- na.omit(ndf)
+fit <- survfit(Surv(time, event) ~ var, data = ndf)
+ggsurvplot(fit, pval=F, main = paste("Gene:", colnames(all)[j]))
+
+survdiff(Surv(time, event) ~ var, data = ndf)
+
 ```
 
