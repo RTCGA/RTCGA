@@ -12,6 +12,7 @@ Rd2.pdf
 ^\.travis\.yml$
 update_remotes.sh
 data2/
+UseCases/
 devel/
 devel
 ^.*\.png$
