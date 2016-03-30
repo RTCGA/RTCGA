@@ -31,13 +31,15 @@ By default is the name from the newest release date \code{tail(checkTCGA('Dates'
 }
 \value{
 A data.frame containing information about times and censoring for specific \code{bcr_patient_barcode}.
+The name passed in \code{barcode.name} is changed to \code{bcr_patient_barcode}.
 }
 \description{
 Extracts survival information from clicnial datasets from TCGA project.
 }
 \note{
 Input data.frames should contain columns \code{patient.bcr_patient_barcode}, 
-\code{patient.vital_status}, \code{patient.days_to_last_followup}, \code{patient.days_to_death}. 
+\code{patient.vital_status}, \code{patient.days_to_last_followup}, \code{patient.days_to_death} or theyir previous
+equivalents. 
 It is recommended to use datasets from \link[RTCGA.clinical]{clinical}.
 }
 \section{Issues}{

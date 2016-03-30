@@ -22,10 +22,12 @@
 #' By default is the name from the newest release date \code{tail(checkTCGA('Dates'),1)}.
 #'    
 #' @return A data.frame containing information about times and censoring for specific \code{bcr_patient_barcode}.
+#' The name passed in \code{barcode.name} is changed to \code{bcr_patient_barcode}.
 #' 
 #' 
 #' @note Input data.frames should contain columns \code{patient.bcr_patient_barcode}, 
-#' \code{patient.vital_status}, \code{patient.days_to_last_followup}, \code{patient.days_to_death}. 
+#' \code{patient.vital_status}, \code{patient.days_to_last_followup}, \code{patient.days_to_death} or theyir previous
+#' equivalents. 
 #' It is recommended to use datasets from \link[RTCGA.clinical]{clinical}.
 #' 
 #' @section Issues:
@@ -108,7 +110,7 @@ survivalTCGA <- function(..., extract.cols = NULL, extract.names = FALSE,
 			)
 		) %>%
 		mutate_(.dots = setNames(paste0("toupper(as.character(",barcode.name,"))"),
-														 barcode.name)) %>%
+														 'bcr_patient_barcode')) %>%
 		#mutate(bcr_patient_barcode = toupper(as.character(patient.bcr_patient_barcode))) %>%
 		mutate_(.dots = setNames(paste0("ifelse(as.character(", event.name, ") %in% c('dead', 'deceased'),1,0)"),
 														 event.name)) %>%
@@ -127,10 +129,10 @@ survivalTCGA <- function(..., extract.cols = NULL, extract.names = FALSE,
 		#  									as.numeric() ) ) %>%
 		filter(!is.na(times)) %>%
 		select(one_of(c("times",
-	 					event.name,
+	 					'bcr_patient_barcode',
 	 					dataset_or_not,
-	 					barcode.name,
-	 					 extract.cols))) %>%
+	 					event.name,
+	 					extract.cols))) %>%
 	    mutate(times = as.numeric(times)) %>%
 	    as.data.frame() #-> survData
 # 	class(survData) <- c("survivalTCGA", class(survData))
