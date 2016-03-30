@@ -9,6 +9,17 @@
 #' 
 #' @param extract.names Logical, whether to extract names of passed data.frames in \code{...}.
 #' 
+#' @param barcode.name A character with the name of \code{bcr_patient_barcode} which differs between TCGA releases. 
+#' By default is the name from the newest release date \code{tail(checkTCGA('Dates'),1)}.
+#' 
+#' @param event.name A character with the name of \code{patient.vital_status} which differs between TCGA releases. 
+#' By default is the name from the newest release date \code{tail(checkTCGA('Dates'),1)}.
+#' 
+#' @param days.to.followup.name A character with the name of \code{patient.days_to_last_followup} which differs between TCGA releases. 
+#' By default is the name from the newest release date \code{tail(checkTCGA('Dates'),1)}.
+#' 
+#' @param days.to.death.name A character with the name of \code{patient.days_to_death} which differs between TCGA releases. 
+#' By default is the name from the newest release date \code{tail(checkTCGA('Dates'),1)}.
 #'    
 #' @return A data.frame containing information about times and censoring for specific \code{bcr_patient_barcode}.
 #' 
@@ -65,7 +76,12 @@
 #' @family RTCGA
 #' @rdname survivalTCGA
 #' @export
-survivalTCGA <- function(..., extract.cols = NULL, extract.names = FALSE) {
+survivalTCGA <- function(..., extract.cols = NULL, extract.names = FALSE, 
+												 barcode.name = "patient.bcr_patient_barcode",
+												 event.name = "patient.vital_status",
+												 days.to.followup.name = "patient.days_to_last_followup",
+												 days.to.death.name = "patient.days_to_death"
+												 ) {
 	assert_that(is.null(extract.cols) | is.character(extract.cols))
 	assert_that(length(extract.names) == 1, is.logical(extract.names))
 	
@@ -82,28 +98,38 @@ survivalTCGA <- function(..., extract.cols = NULL, extract.names = FALSE) {
 
 	bind_rows(...) %>%
 		mutate(dataset = dataset) %>%
-		select(one_of(c(extract.cols,
-					 "patient.bcr_patient_barcode",
-					 "patient.vital_status",
-					 "patient.days_to_last_followup",
-					 "patient.days_to_death",
-					 dataset_or_not)
-					 )) %>%
-		mutate(bcr_patient_barcode = toupper(as.character(patient.bcr_patient_barcode))) %>%
-		mutate(patient.vital_status = ifelse(patient.vital_status %>%
-									as.character() %in% c("dead", "deceased"),1,0),
-			  times = ifelse( !is.na(patient.days_to_last_followup),
-		 								patient.days_to_last_followup %>%
-		 									as.character() %>%
-		 									as.numeric(),
-		 								patient.days_to_death %>%
-		 									as.character() %>%
-		 									as.numeric() ) ) %>%
+		select(one_of(
+			c(extract.cols,
+				barcode.name,
+				event.name,
+				days.to.followup.name,
+				days.to.death.name,
+				dataset_or_not)
+			)
+		) %>%
+		mutate_(.dots = setNames(paste0("toupper(as.character(",barcode.name,"))"),
+														 barcode.name)) %>%
+		#mutate(bcr_patient_barcode = toupper(as.character(patient.bcr_patient_barcode))) %>%
+		mutate_(.dots = setNames(paste0("ifelse(as.character(", event.name, ") %in% c('dead', 'deceased'),1,0)"),
+														 event.name)) %>%
+		mutate_(.dots = setNames('ifelse(!is.na(', days.to.followup.name, '),',
+														 'as.numeric(as.character(',days.to.followup.name, '))',
+														 'as.numeric(as.character(',days.to.death.name,')))',
+														 'times')) %>%
+		# mutate(patient.vital_status = ifelse(patient.vital_status %>%
+		# 							as.character() %in% c("dead", "deceased"),1,0),
+		# 	  times = ifelse( !is.na(patient.days_to_last_followup),
+		#  								patient.days_to_last_followup %>%
+		#  									as.character() %>%
+		#  									as.numeric(),
+		#  								patient.days_to_death %>%
+		#  									as.character() %>%
+		#  									as.numeric() ) ) %>%
 		filter(!is.na(times)) %>%
 		select(one_of(c("times",
-	 					"patient.vital_status",
+	 					event.name,
 	 					dataset_or_not,
-	 					"bcr_patient_barcode",
+	 					barcode.name,
 	 					 extract.cols))) %>%
 	    mutate(times = as.numeric(times)) %>%
 	    as.data.frame() #-> survData
