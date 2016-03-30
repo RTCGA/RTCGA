@@ -112,9 +112,9 @@ survivalTCGA <- function(..., extract.cols = NULL, extract.names = FALSE,
 		#mutate(bcr_patient_barcode = toupper(as.character(patient.bcr_patient_barcode))) %>%
 		mutate_(.dots = setNames(paste0("ifelse(as.character(", event.name, ") %in% c('dead', 'deceased'),1,0)"),
 														 event.name)) %>%
-		mutate_(.dots = setNames('ifelse(!is.na(', days.to.followup.name, '),',
+		mutate_(.dots = setNames(paste0('ifelse(!is.na(', days.to.followup.name, '),',
 														 'as.numeric(as.character(',days.to.followup.name, ')),',
-														 'as.numeric(as.character(',days.to.death.name,')))',
+														 'as.numeric(as.character(',days.to.death.name,')))'),
 														 'times')) %>%
 		# mutate(patient.vital_status = ifelse(patient.vital_status %>%
 		# 							as.character() %in% c("dead", "deceased"),1,0),
