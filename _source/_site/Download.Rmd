@@ -1,0 +1,123 @@
+{:toc}
+
+```{r include=FALSE}
+library(knitr)
+opts_chunk$set(comment="", message=FALSE, warning = FALSE, 
+               tidy.opts=list(keep.blank.line=TRUE, width.cutoff=150),
+							 options(width=120), eval = TRUE)
+```
+
+```{r}
+library(RTCGA)
+```
+
+# Available Datasets
+
+Before you read this section, please make sure you are aware of that we have prepared some datasets for you in below packages
+
+```{r, echo = FALSE, results = 'asis'}
+pckg.names <- c("RTCGA.rnaseq", "RTCGA.clinical", "RTCGA.mutations",
+								"RTCGA.mRNA", "RTCGA.miRNASeq", "RTCGA.PANCAN12",
+								"RTCGA.RPPA", "RTCGA.CNV", "RTCGA.methylation")
+
+pckg.install <- c("`biocLite(\'RTCGA.rnaseq')`",
+								 "`biocLite(\'RTCGA.clinical\')`",
+								 "`biocLite(\'RTCGA.mutations\')`",
+								 "`biocLite(\'RTCGA.mRNA\')`",
+								 "`biocLite(\'RTCGA.miRNASeq\')`",
+								 "`biocLite(\'RTCGA.PANCAN12\')`",
+								 "`biocLite(\'RTCGA.RPPA\')`",
+								 "`biocLite(\'RTCGA.CNV\')`",
+								 "`biocLite(\'RTCGA.methylation\')`")
+pckg.help <- c("`?rnaseq`", "`?clinical`", "`?mutations`",
+							 "`?mRNA`", "`?miRNASeq`", "`?pancan12`",
+							 "`?RPPA`", "`?CNV`", "`?methylation`")
+pckg.vigg <- c("`browseVignettes(\'RTCGA.rnaseq\')`",
+								 "`browseVignettes(\'RTCGA.clinical\')`",
+								 "`browseVignettes(\'RTCGA.mutations\')`",
+								 "`browseVignettes(\'RTCGA.mRNA\')`",
+								 "`browseVignettes(\'RTCGA.miRNASeq\')`",
+								 "`browseVignettes(\'RTCGA.PANCAN12\')`",
+								 "`browseVignettes(\'RTCGA.RPPA\')`",
+								 "`browseVignettes(\'RTCGA.CNV\')`",
+								 "`browseVignettes(\'RTCGA.methylation\')`")
+
+info_frame <- data.frame(package = pckg.names,
+												 installation = pckg.install,
+												 help = pckg.help, 
+												 vignettes = pckg.vigg)	
+knitr::kable(info_frame)
+
+```
+
+
+
+# Cohorts Names and Number of Cases
+
+The Cancer Genome Atlas provides data via [`Broad GDAC Firehose`](http://gdac.broadinstitute.org/). The number of cases in the most popular datasets can be checked with the following code that is based on the [`Broad GDAC Firehose`](http://gdac.broadinstitute.org/).
+
+```{r, results='asis'}
+knitr::kable(infoTCGA())
+```
+
+
+Furthermore `infoTCGA()` enables to extract possible cohorts names from TCGA Study. 
+
+**Cohorts' names stand for abbreviations of real names of cancer types.**
+
+```{r}
+library(magrittr)
+(cohorts <- infoTCGA() %>% 
+rownames() %>% 
+   sub('-counts', '', x=.))
+```
+
+# Datasets dates of release
+
+The Cancer Genome Atlas provides datasets in many dates of release. You can check them with the following command.
+
+```{r}
+checkTCGA('Dates')
+```
+
+# Datasets names for a specific cohort type
+
+The Cancer Genome Atlas provides various datasets for different cohort types. For example you can check all names of datasets provided for `BRCA` with (second dimension stand for dataset size).
+
+```{r}
+checkTCGA(
+	'DataSets',
+	cancerType = 'BRCA',
+	date = '2016-01-28'
+) %>% dim
+```
+
+This lists only `.zip` files.
+
+# Data Download
+
+If you know which cohort type you are interested in and which dataset name you are looking for and which release date suits you, you can download a dataset provided by TCGA Study with the following command.
+
+
+```{r, eval = FALSE}
+dir.create("download_folder")
+downloadTCGA(
+	cancerTypes = "BRCA",
+	dataSet = "Merge_Clinical.Level_1",
+	destDir = "download_folder"
+)
+```
+
+You can specify `cancerTypes` as a vector of characters if you would like to download the same dataset type for many cohorts. 
+Moreover you can just specify an abbreviation ora fragment of dataset name. 
+You can also specify `date` argument if you would like to download datasets from previous (not the newest) releases.
+All downloaded datasets are untarred and their `.tar` files are deleted after untarring. You can also change this behaviour with `untarFile` and `removeTar` arguments. Sometimes more than one dataset fits the character provieded in `dataSet` argument, then the first without `FPPP` string is downloaded if possible. If you are interested in all datasets then you can change `allDataSets` (by default `FALSE`) parameter to `TRUE`.
+
+
+# Read Specific Datasets
+
+For specific datasets it is possible to read downloaded file into the tidy format. Fore more information check
+```{r, eval = FALSE}
+?readTCGA
+```
+

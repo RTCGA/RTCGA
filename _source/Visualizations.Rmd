@@ -25,6 +25,7 @@ output:
 library(knitr)
 opts_chunk$set(
 	comment = "",
+	fig.width = 12, 
 	message = FALSE,
 	warning = FALSE,
 	tidy.opts = list(
