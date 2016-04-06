@@ -71,7 +71,9 @@ knitr::kable(info_frame)
 The Cancer Genome Atlas provides data via [`Broad GDAC Firehose`](http://gdac.broadinstitute.org/). The number of cases in the most popular datasets can be checked with the following code that is based on the [`Broad GDAC Firehose`](http://gdac.broadinstitute.org/).
 
 ```{r, results='asis'}
-knitr::kable(infoTCGA())
+knitr::kable(infoTCGA()) %>%
+	dplyr::select(Cohort, BCR, Clinical, Methylation, mRNASeq) %>%
+	head() # and so on
 ```
 
 

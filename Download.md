@@ -46,51 +46,16 @@ The Cancer Genome Atlas provides data via [`Broad GDAC Firehose`](http://gdac.br
 
 
 {% highlight r %}
-knitr::kable(infoTCGA())
+knitr::kable(infoTCGA()) %>%
+	dplyr::select(Cohort, BCR, Clinical, Methylation, mRNASeq) %>%
+	head() # and so on
 {% endhighlight %}
 
 
 
-|                |Cohort   |BCR  |Clinical |CN   |LowP |Methylation |mRNA |mRNASeq |miR |miRSeq |RPPA |MAF |rawMAF |
-|:---------------|:--------|:----|:--------|:----|:----|:-----------|:----|:-------|:---|:------|:----|:---|:------|
-|ACC-counts      |ACC      |92   |92       |90   |0    |80          |0    |79      |0   |80     |46   |90  |0      |
-|BLCA-counts     |BLCA     |412  |412      |410  |112  |412         |0    |408     |0   |409    |344  |130 |395    |
-|BRCA-counts     |BRCA     |1098 |1097     |1089 |19   |1097        |526  |1093    |0   |1078   |887  |977 |0      |
-|CESC-counts     |CESC     |307  |307      |295  |50   |307         |0    |304     |0   |307    |173  |194 |0      |
-|CHOL-counts     |CHOL     |51   |45       |36   |0    |36          |0    |36      |0   |36     |30   |35  |0      |
-|COAD-counts     |COAD     |460  |458      |451  |69   |457         |153  |457     |0   |406    |360  |154 |367    |
-|COADREAD-counts |COADREAD |631  |629      |616  |104  |622         |222  |623     |0   |549    |491  |223 |489    |
-|DLBC-counts     |DLBC     |58   |48       |48   |0    |48          |0    |48      |0   |47     |33   |48  |0      |
-|ESCA-counts     |ESCA     |185  |185      |184  |51   |185         |0    |184     |0   |184    |126  |185 |0      |
-|FPPP-counts     |FPPP     |38   |38       |0    |0    |0           |0    |0       |0   |23     |0    |0   |0      |
-|GBM-counts      |GBM      |613  |595      |577  |0    |420         |540  |160     |565 |0      |238  |290 |290    |
-|GBMLGG-counts   |GBMLGG   |1129 |1110     |1090 |52   |936         |567  |676     |565 |512    |668  |576 |806    |
-|HNSC-counts     |HNSC     |528  |528      |522  |108  |528         |0    |520     |0   |523    |212  |279 |510    |
-|KICH-counts     |KICH     |113  |113      |66   |0    |66          |0    |66      |0   |66     |63   |66  |66     |
-|KIPAN-counts    |KIPAN    |973  |941      |883  |0    |892         |88   |889     |0   |873    |756  |644 |799    |
-|KIRC-counts     |KIRC     |537  |537      |528  |0    |535         |72   |533     |0   |516    |478  |417 |451    |
-|KIRP-counts     |KIRP     |323  |291      |289  |0    |291         |16   |290     |0   |291    |215  |161 |282    |
-|LAML-counts     |LAML     |200  |200      |197  |0    |194         |0    |179     |0   |188    |0    |197 |0      |
-|LGG-counts      |LGG      |516  |515      |513  |52   |516         |27   |516     |0   |512    |430  |286 |516    |
-|LIHC-counts     |LIHC     |377  |377      |370  |0    |377         |0    |371     |0   |372    |63   |198 |373    |
-|LUAD-counts     |LUAD     |585  |522      |516  |120  |578         |32   |515     |0   |513    |365  |230 |542    |
-|LUSC-counts     |LUSC     |504  |504      |501  |0    |503         |154  |501     |0   |478    |328  |178 |0      |
-|MESO-counts     |MESO     |87   |87       |87   |0    |87          |0    |87      |0   |87     |63   |0   |0      |
-|OV-counts       |OV       |602  |591      |586  |0    |594         |574  |304     |570 |453    |426  |316 |469    |
-|PAAD-counts     |PAAD     |185  |185      |184  |0    |184         |0    |178     |0   |178    |123  |150 |184    |
-|PCPG-counts     |PCPG     |179  |179      |175  |0    |179         |0    |179     |0   |179    |80   |179 |0      |
-|PRAD-counts     |PRAD     |499  |499      |492  |115  |498         |0    |497     |0   |494    |352  |332 |498    |
-|READ-counts     |READ     |171  |171      |165  |35   |165         |69   |166     |0   |143    |131  |69  |122    |
-|SARC-counts     |SARC     |261  |261      |257  |0    |261         |0    |259     |0   |259    |223  |247 |0      |
-|SKCM-counts     |SKCM     |470  |470      |469  |118  |470         |0    |469     |0   |448    |353  |343 |366    |
-|STAD-counts     |STAD     |443  |443      |442  |107  |443         |0    |415     |0   |436    |357  |289 |395    |
-|STES-counts     |STES     |628  |628      |626  |158  |628         |0    |599     |0   |620    |483  |474 |395    |
-|TGCT-counts     |TGCT     |150  |134      |150  |0    |150         |0    |150     |0   |150    |118  |149 |0      |
-|THCA-counts     |THCA     |503  |503      |499  |98   |503         |0    |501     |0   |502    |222  |402 |496    |
-|THYM-counts     |THYM     |124  |124      |123  |0    |124         |0    |120     |0   |124    |90   |123 |0      |
-|UCEC-counts     |UCEC     |560  |548      |540  |106  |547         |54   |545     |0   |538    |440  |248 |0      |
-|UCS-counts      |UCS      |57   |57       |56   |0    |57          |0    |57      |0   |56     |48   |57  |0      |
-|UVM-counts      |UVM      |80   |80       |80   |51   |80          |0    |80      |0   |80     |12   |80  |0      |
+{% highlight text %}
+Error in eval(expr, envir, enclos): could not find function "%>%"
+{% endhighlight %}
 
 
 Furthermore `infoTCGA()` enables to extract possible cohorts names from TCGA Study. 
