@@ -136,7 +136,7 @@
 
 <h1 id="available-datasets">Available Datasets</h1>
 
-<p>Before you read this section, please make sure you are aware of that we have prepared some datasets for you in below packages</p>
+<p>Before you read this section, please make sure you are aware of that we have prepared some datasets for you in below packages. <code class="highlighter-rouge">browseVignettes</code> is a function.</p>
 
 <table>
   <thead>
@@ -144,7 +144,7 @@
       <th style="text-align: left">package</th>
       <th style="text-align: left">installation</th>
       <th style="text-align: left">help</th>
-      <th style="text-align: left">vignettes</th>
+      <th style="text-align: left">browseVignettes</th>
     </tr>
   </thead>
   <tbody>
@@ -152,55 +152,55 @@
       <td style="text-align: left">RTCGA.rnaseq</td>
       <td style="text-align: left"><code class="highlighter-rouge">biocLite('RTCGA.rnaseq')</code></td>
       <td style="text-align: left"><code class="highlighter-rouge">?rnaseq</code></td>
-      <td style="text-align: left"><code class="highlighter-rouge">browseVignettes('RTCGA.rnaseq')</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">'RTCGA.rnaseq'</code></td>
     </tr>
     <tr>
       <td style="text-align: left">RTCGA.clinical</td>
       <td style="text-align: left"><code class="highlighter-rouge">biocLite('RTCGA.clinical')</code></td>
       <td style="text-align: left"><code class="highlighter-rouge">?clinical</code></td>
-      <td style="text-align: left"><code class="highlighter-rouge">browseVignettes('RTCGA.clinical')</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">'RTCGA.clinical'</code></td>
     </tr>
     <tr>
       <td style="text-align: left">RTCGA.mutations</td>
       <td style="text-align: left"><code class="highlighter-rouge">biocLite('RTCGA.mutations')</code></td>
       <td style="text-align: left"><code class="highlighter-rouge">?mutations</code></td>
-      <td style="text-align: left"><code class="highlighter-rouge">browseVignettes('RTCGA.mutations')</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">'RTCGA.mutations'</code></td>
     </tr>
     <tr>
       <td style="text-align: left">RTCGA.mRNA</td>
       <td style="text-align: left"><code class="highlighter-rouge">biocLite('RTCGA.mRNA')</code></td>
       <td style="text-align: left"><code class="highlighter-rouge">?mRNA</code></td>
-      <td style="text-align: left"><code class="highlighter-rouge">browseVignettes('RTCGA.mRNA')</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">'RTCGA.mRNA'</code></td>
     </tr>
     <tr>
       <td style="text-align: left">RTCGA.miRNASeq</td>
       <td style="text-align: left"><code class="highlighter-rouge">biocLite('RTCGA.miRNASeq')</code></td>
       <td style="text-align: left"><code class="highlighter-rouge">?miRNASeq</code></td>
-      <td style="text-align: left"><code class="highlighter-rouge">browseVignettes('RTCGA.miRNASeq')</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">'RTCGA.miRNASeq'</code></td>
     </tr>
     <tr>
       <td style="text-align: left">RTCGA.PANCAN12</td>
       <td style="text-align: left"><code class="highlighter-rouge">biocLite('RTCGA.PANCAN12')</code></td>
       <td style="text-align: left"><code class="highlighter-rouge">?pancan12</code></td>
-      <td style="text-align: left"><code class="highlighter-rouge">browseVignettes('RTCGA.PANCAN12')</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">'RTCGA.PANCAN12'</code></td>
     </tr>
     <tr>
       <td style="text-align: left">RTCGA.RPPA</td>
       <td style="text-align: left"><code class="highlighter-rouge">biocLite('RTCGA.RPPA')</code></td>
       <td style="text-align: left"><code class="highlighter-rouge">?RPPA</code></td>
-      <td style="text-align: left"><code class="highlighter-rouge">browseVignettes('RTCGA.RPPA')</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">'RTCGA.RPPA'</code></td>
     </tr>
     <tr>
       <td style="text-align: left">RTCGA.CNV</td>
       <td style="text-align: left"><code class="highlighter-rouge">biocLite('RTCGA.CNV')</code></td>
       <td style="text-align: left"><code class="highlighter-rouge">?CNV</code></td>
-      <td style="text-align: left"><code class="highlighter-rouge">browseVignettes('RTCGA.CNV')</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">'RTCGA.CNV'</code></td>
     </tr>
     <tr>
       <td style="text-align: left">RTCGA.methylation</td>
       <td style="text-align: left"><code class="highlighter-rouge">biocLite('RTCGA.methylation')</code></td>
       <td style="text-align: left"><code class="highlighter-rouge">?methylation</code></td>
-      <td style="text-align: left"><code class="highlighter-rouge">browseVignettes('RTCGA.methylation')</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">'RTCGA.methylation'</code></td>
     </tr>
   </tbody>
 </table>
@@ -209,18 +209,81 @@
 
 <p>The Cancer Genome Atlas provides data via <a href="http://gdac.broadinstitute.org/"><code class="highlighter-rouge">Broad GDAC Firehose</code></a>. The number of cases in the most popular datasets can be checked with the following code that is based on the <a href="http://gdac.broadinstitute.org/"><code class="highlighter-rouge">Broad GDAC Firehose</code></a>.</p>
 
-<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">knitr</span><span class="o">::</span><span class="n">kable</span><span class="p">(</span><span class="n">infoTCGA</span><span class="p">())</span> <span class="o">%&gt;%</span>
-	<span class="n">dplyr</span><span class="o">::</span><span class="n">select</span><span class="p">(</span><span class="n">Cohort</span><span class="p">,</span> <span class="n">BCR</span><span class="p">,</span> <span class="n">Clinical</span><span class="p">,</span> <span class="n">Methylation</span><span class="p">,</span> <span class="n">mRNASeq</span><span class="p">)</span> <span class="o">%&gt;%</span>
-	<span class="n">head</span><span class="p">()</span> <span class="err">#</span> <span class="n">and</span> <span class="n">so</span> <span class="n">on</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="n">magrittr</span><span class="p">)</span>
+<span class="n">infoTCGA</span><span class="p">()</span> <span class="o">%&gt;%</span>
+ <span class="c1"># select less variables so that tables fits webpage
+</span> <span class="n">dplyr</span><span class="o">::</span><span class="n">select</span><span class="p">(</span><span class="n">Cohort</span><span class="p">,</span> <span class="n">BCR</span><span class="p">,</span> <span class="n">Clinical</span><span class="p">,</span> <span class="n">Methylation</span><span class="p">,</span> <span class="n">mRNASeq</span><span class="p">)</span> <span class="o">%&gt;%</span>
+ <span class="n">head</span><span class="p">()</span> <span class="o">%&gt;%</span> <span class="c1"># without that you can see all cohorts
+</span> <span class="n">knitr</span><span class="o">::</span><span class="n">kable</span><span class="p">()</span></code></pre></figure>
 
-<figure class="highlight"><pre><code class="language-text" data-lang="text">Error in eval(expr, envir, enclos): could not find function "%&gt;%"</code></pre></figure>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left"> </th>
+      <th style="text-align: left">Cohort</th>
+      <th style="text-align: left">BCR</th>
+      <th style="text-align: left">Clinical</th>
+      <th style="text-align: left">Methylation</th>
+      <th style="text-align: left">mRNASeq</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">ACC-counts</td>
+      <td style="text-align: left">ACC</td>
+      <td style="text-align: left">92</td>
+      <td style="text-align: left">92</td>
+      <td style="text-align: left">80</td>
+      <td style="text-align: left">79</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">BLCA-counts</td>
+      <td style="text-align: left">BLCA</td>
+      <td style="text-align: left">412</td>
+      <td style="text-align: left">412</td>
+      <td style="text-align: left">412</td>
+      <td style="text-align: left">408</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">BRCA-counts</td>
+      <td style="text-align: left">BRCA</td>
+      <td style="text-align: left">1098</td>
+      <td style="text-align: left">1097</td>
+      <td style="text-align: left">1097</td>
+      <td style="text-align: left">1093</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">CESC-counts</td>
+      <td style="text-align: left">CESC</td>
+      <td style="text-align: left">307</td>
+      <td style="text-align: left">307</td>
+      <td style="text-align: left">307</td>
+      <td style="text-align: left">304</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">CHOL-counts</td>
+      <td style="text-align: left">CHOL</td>
+      <td style="text-align: left">51</td>
+      <td style="text-align: left">45</td>
+      <td style="text-align: left">36</td>
+      <td style="text-align: left">36</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">COAD-counts</td>
+      <td style="text-align: left">COAD</td>
+      <td style="text-align: left">460</td>
+      <td style="text-align: left">458</td>
+      <td style="text-align: left">457</td>
+      <td style="text-align: left">457</td>
+    </tr>
+  </tbody>
+</table>
 
 <p>Furthermore <code class="highlighter-rouge">infoTCGA()</code> enables to extract possible cohorts names from TCGA Study.</p>
 
 <p><strong>Cohorts’ names stand for abbreviations of real names of cancer types.</strong></p>
 
-<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="n">magrittr</span><span class="p">)</span>
-<span class="p">(</span><span class="n">cohorts</span> <span class="o">&lt;-</span> <span class="n">infoTCGA</span><span class="p">()</span> <span class="o">%&gt;%</span> 
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="p">(</span><span class="n">cohorts</span> <span class="o">&lt;-</span> <span class="n">infoTCGA</span><span class="p">()</span> <span class="o">%&gt;%</span> 
 <span class="n">rownames</span><span class="p">()</span> <span class="o">%&gt;%</span> 
    <span class="n">sub</span><span class="p">(</span><span class="s1">'-counts'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="err">.</span><span class="p">))</span></code></pre></figure>
 

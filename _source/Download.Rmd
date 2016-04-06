@@ -27,7 +27,7 @@ library(RTCGA)
 
 # Available Datasets
 
-Before you read this section, please make sure you are aware of that we have prepared some datasets for you in below packages
+Before you read this section, please make sure you are aware of that we have prepared some datasets for you in below packages. `browseVignettes` is a function.
 
 ```{r, echo = FALSE, results = 'asis'}
 pckg.names <- c("RTCGA.rnaseq", "RTCGA.clinical", "RTCGA.mutations",
@@ -46,20 +46,20 @@ pckg.install <- c("`biocLite(\'RTCGA.rnaseq')`",
 pckg.help <- c("`?rnaseq`", "`?clinical`", "`?mutations`",
 							 "`?mRNA`", "`?miRNASeq`", "`?pancan12`",
 							 "`?RPPA`", "`?CNV`", "`?methylation`")
-pckg.vigg <- c("`browseVignettes(\'RTCGA.rnaseq\')`",
-								 "`browseVignettes(\'RTCGA.clinical\')`",
-								 "`browseVignettes(\'RTCGA.mutations\')`",
-								 "`browseVignettes(\'RTCGA.mRNA\')`",
-								 "`browseVignettes(\'RTCGA.miRNASeq\')`",
-								 "`browseVignettes(\'RTCGA.PANCAN12\')`",
-								 "`browseVignettes(\'RTCGA.RPPA\')`",
-								 "`browseVignettes(\'RTCGA.CNV\')`",
-								 "`browseVignettes(\'RTCGA.methylation\')`")
+pckg.vigg <- c("`\'RTCGA.rnaseq\'`",
+								 "`\'RTCGA.clinical\'`",
+								 "`\'RTCGA.mutations\'`",
+								 "`\'RTCGA.mRNA\'`",
+								 "`\'RTCGA.miRNASeq\'`",
+								 "`\'RTCGA.PANCAN12\'`",
+								 "`\'RTCGA.RPPA\'`",
+								 "`\'RTCGA.CNV\'`",
+								 "`\'RTCGA.methylation\'`")
 
 info_frame <- data.frame(package = pckg.names,
 												 installation = pckg.install,
 												 help = pckg.help, 
-												 vignettes = pckg.vigg)	
+												 `browseVignettes` = pckg.vigg)	
 knitr::kable(info_frame)
 
 ```
@@ -71,9 +71,12 @@ knitr::kable(info_frame)
 The Cancer Genome Atlas provides data via [`Broad GDAC Firehose`](http://gdac.broadinstitute.org/). The number of cases in the most popular datasets can be checked with the following code that is based on the [`Broad GDAC Firehose`](http://gdac.broadinstitute.org/).
 
 ```{r, results='asis'}
-knitr::kable(infoTCGA()) %>%
-	dplyr::select(Cohort, BCR, Clinical, Methylation, mRNASeq) %>%
-	head() # and so on
+library(magrittr)
+infoTCGA() %>%
+ # select less variables so that tables fits webpage
+ dplyr::select(Cohort, BCR, Clinical, Methylation, mRNASeq) %>%
+ head() %>% # without that you can see all cohorts
+ knitr::kable()
 ```
 
 
@@ -82,7 +85,7 @@ Furthermore `infoTCGA()` enables to extract possible cohorts names from TCGA Stu
 **Cohorts' names stand for abbreviations of real names of cancer types.**
 
 ```{r}
-library(magrittr)
+
 (cohorts <- infoTCGA() %>% 
 rownames() %>% 
    sub('-counts', '', x=.))

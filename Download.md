@@ -23,20 +23,20 @@ library(RTCGA)
 
 # Available Datasets
 
-Before you read this section, please make sure you are aware of that we have prepared some datasets for you in below packages
+Before you read this section, please make sure you are aware of that we have prepared some datasets for you in below packages. `browseVignettes` is a function.
 
 
-|package           |installation                    |help           |vignettes                              |
-|:-----------------|:-------------------------------|:--------------|:--------------------------------------|
-|RTCGA.rnaseq      |`biocLite('RTCGA.rnaseq')`      |`?rnaseq`      |`browseVignettes('RTCGA.rnaseq')`      |
-|RTCGA.clinical    |`biocLite('RTCGA.clinical')`    |`?clinical`    |`browseVignettes('RTCGA.clinical')`    |
-|RTCGA.mutations   |`biocLite('RTCGA.mutations')`   |`?mutations`   |`browseVignettes('RTCGA.mutations')`   |
-|RTCGA.mRNA        |`biocLite('RTCGA.mRNA')`        |`?mRNA`        |`browseVignettes('RTCGA.mRNA')`        |
-|RTCGA.miRNASeq    |`biocLite('RTCGA.miRNASeq')`    |`?miRNASeq`    |`browseVignettes('RTCGA.miRNASeq')`    |
-|RTCGA.PANCAN12    |`biocLite('RTCGA.PANCAN12')`    |`?pancan12`    |`browseVignettes('RTCGA.PANCAN12')`    |
-|RTCGA.RPPA        |`biocLite('RTCGA.RPPA')`        |`?RPPA`        |`browseVignettes('RTCGA.RPPA')`        |
-|RTCGA.CNV         |`biocLite('RTCGA.CNV')`         |`?CNV`         |`browseVignettes('RTCGA.CNV')`         |
-|RTCGA.methylation |`biocLite('RTCGA.methylation')` |`?methylation` |`browseVignettes('RTCGA.methylation')` |
+|package           |installation                    |help           |browseVignettes       |
+|:-----------------|:-------------------------------|:--------------|:---------------------|
+|RTCGA.rnaseq      |`biocLite('RTCGA.rnaseq')`      |`?rnaseq`      |`'RTCGA.rnaseq'`      |
+|RTCGA.clinical    |`biocLite('RTCGA.clinical')`    |`?clinical`    |`'RTCGA.clinical'`    |
+|RTCGA.mutations   |`biocLite('RTCGA.mutations')`   |`?mutations`   |`'RTCGA.mutations'`   |
+|RTCGA.mRNA        |`biocLite('RTCGA.mRNA')`        |`?mRNA`        |`'RTCGA.mRNA'`        |
+|RTCGA.miRNASeq    |`biocLite('RTCGA.miRNASeq')`    |`?miRNASeq`    |`'RTCGA.miRNASeq'`    |
+|RTCGA.PANCAN12    |`biocLite('RTCGA.PANCAN12')`    |`?pancan12`    |`'RTCGA.PANCAN12'`    |
+|RTCGA.RPPA        |`biocLite('RTCGA.RPPA')`        |`?RPPA`        |`'RTCGA.RPPA'`        |
+|RTCGA.CNV         |`biocLite('RTCGA.CNV')`         |`?CNV`         |`'RTCGA.CNV'`         |
+|RTCGA.methylation |`biocLite('RTCGA.methylation')` |`?methylation` |`'RTCGA.methylation'` |
 
 
 
@@ -46,16 +46,24 @@ The Cancer Genome Atlas provides data via [`Broad GDAC Firehose`](http://gdac.br
 
 
 {% highlight r %}
-knitr::kable(infoTCGA()) %>%
-	dplyr::select(Cohort, BCR, Clinical, Methylation, mRNASeq) %>%
-	head() # and so on
+library(magrittr)
+infoTCGA() %>%
+ # select less variables so that tables fits webpage
+ dplyr::select(Cohort, BCR, Clinical, Methylation, mRNASeq) %>%
+ head() %>% # without that you can see all cohorts
+ knitr::kable()
 {% endhighlight %}
 
 
 
-{% highlight text %}
-Error in eval(expr, envir, enclos): could not find function "%>%"
-{% endhighlight %}
+|            |Cohort |BCR  |Clinical |Methylation |mRNASeq |
+|:-----------|:------|:----|:--------|:-----------|:-------|
+|ACC-counts  |ACC    |92   |92       |80          |79      |
+|BLCA-counts |BLCA   |412  |412      |412         |408     |
+|BRCA-counts |BRCA   |1098 |1097     |1097        |1093    |
+|CESC-counts |CESC   |307  |307      |307         |304     |
+|CHOL-counts |CHOL   |51   |45       |36          |36      |
+|COAD-counts |COAD   |460  |458      |457         |457     |
 
 
 Furthermore `infoTCGA()` enables to extract possible cohorts names from TCGA Study. 
@@ -64,7 +72,6 @@ Furthermore `infoTCGA()` enables to extract possible cohorts names from TCGA Stu
 
 
 {% highlight r %}
-library(magrittr)
 (cohorts <- infoTCGA() %>% 
 rownames() %>% 
    sub('-counts', '', x=.))

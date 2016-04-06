@@ -45,17 +45,17 @@ BiocInstaller::useDevel()
 source("https://bioconductor.org/biocLite.R") # downloads bioClite function
 {% endhighlight %}
 
-|package           |installation                    |help           |vignettes                              |
-|:-----------------|:-------------------------------|:--------------|:--------------------------------------|
-|RTCGA.rnaseq      |`biocLite('RTCGA.rnaseq')`      |`?rnaseq`      |`browseVignettes('RTCGA.rnaseq')`      |
-|RTCGA.clinical    |`biocLite('RTCGA.clinical')`    |`?clinical`    |`browseVignettes('RTCGA.clinical')`    |
-|RTCGA.mutations   |`biocLite('RTCGA.mutations')`   |`?mutations`   |`browseVignettes('RTCGA.mutations')`   |
-|RTCGA.mRNA        |`biocLite('RTCGA.mRNA')`        |`?mRNA`        |`browseVignettes('RTCGA.mRNA')`        |
-|RTCGA.miRNASeq    |`biocLite('RTCGA.miRNASeq')`    |`?miRNASeq`    |`browseVignettes('RTCGA.miRNASeq')`    |
-|RTCGA.PANCAN12    |`biocLite('RTCGA.PANCAN12')`    |`?pancan12`    |`browseVignettes('RTCGA.PANCAN12')`    |
-|RTCGA.RPPA        |`biocLite('RTCGA.RPPA')`        |`?RPPA`        |`browseVignettes('RTCGA.RPPA')`        |
-|RTCGA.CNV         |`biocLite('RTCGA.CNV')`         |`?CNV`         |`browseVignettes('RTCGA.CNV')`         |
-|RTCGA.methylation |`biocLite('RTCGA.methylation')` |`?methylation` |`browseVignettes('RTCGA.methylation')` |
+|package           |installation                    |help           |browseVignettes       |
+|:-----------------|:-------------------------------|:--------------|:---------------------|
+|RTCGA.rnaseq      |`biocLite('RTCGA.rnaseq')`      |`?rnaseq`      |`'RTCGA.rnaseq'`      |
+|RTCGA.clinical    |`biocLite('RTCGA.clinical')`    |`?clinical`    |`'RTCGA.clinical'`    |
+|RTCGA.mutations   |`biocLite('RTCGA.mutations')`   |`?mutations`   |`'RTCGA.mutations'`   |
+|RTCGA.mRNA        |`biocLite('RTCGA.mRNA')`        |`?mRNA`        |`'RTCGA.mRNA'`        |
+|RTCGA.miRNASeq    |`biocLite('RTCGA.miRNASeq')`    |`?miRNASeq`    |`'RTCGA.miRNASeq'`    |
+|RTCGA.PANCAN12    |`biocLite('RTCGA.PANCAN12')`    |`?pancan12`    |`'RTCGA.PANCAN12'`    |
+|RTCGA.RPPA        |`biocLite('RTCGA.RPPA')`        |`?RPPA`        |`'RTCGA.RPPA'`        |
+|RTCGA.CNV         |`biocLite('RTCGA.CNV')`         |`?CNV`         |`'RTCGA.CNV'`         |
+|RTCGA.methylation |`biocLite('RTCGA.methylation')` |`?methylation` |`'RTCGA.methylation'` |
 
 
 {% highlight r %}
