@@ -1,6 +1,7 @@
 # Version 1.1.17
 
-- It is possible to pass `matrix` to `pcaTCGA`.
+- `pcaTCGA`
+	- Works properly when all columns are non-constant.
 
 # Version 1.1.15-1.1.16
 

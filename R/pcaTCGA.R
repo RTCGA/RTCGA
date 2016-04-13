@@ -74,16 +74,18 @@ pcaTCGA <- function(x,
 										alpha = 0.8,
 										add.lines = TRUE,
 									  ...) {
-	assert_that(is.data.frame(x) | is.matrix(x))
+	assert_that(is.data.frame(x))
 	assert_that(group.names %in% colnames(x), length(group.names) == 1)
 
 
 	x[sapply(x,is.numeric)] -> x.numeric
 	x.numeric %>% colSums() -> pca.col.sums
 	which(pca.col.sums == 0) -> pca.col.sums.only0
-	x.numeric[, -pca.col.sums.only0] -> x.numeric.nonconstant
+	if (length(pca.col.sums.only0) > 0){
+		x.numeric[, -pca.col.sums.only0] -> x.numeric
+	}
 	# pca
-	x.numeric.nonconstant %>%
+	x.numeric %>%
 		prcomp( scale = scale, center = center, ... ) -> PCA
 	
 	#rownames(PCA$rotation) <- 1:nrow(PCA$rotation) # no idea why this is neccessary anymore
