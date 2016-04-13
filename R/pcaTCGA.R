@@ -75,7 +75,7 @@ pcaTCGA <- function(x,
 										add.lines = TRUE,
 									  ...) {
 	assert_that(is.data.frame(x) | is.matrix(x))
-	assert_that(group.names %in% names(x), length(group.names) == 1, length(group.names) == 1)
+	assert_that(group.names %in% colnames(x), length(group.names) == 1)
 
 
 	x[sapply(x,is.numeric)] -> x.numeric
