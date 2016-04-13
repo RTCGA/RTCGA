@@ -1,4 +1,8 @@
-# Version 1.1.15
+# Version 1.1.17
+
+- It is possible to pass `matrix` to `pcaTCGA`.
+
+# Version 1.1.15-1.1.16
 
 - New functions `heatmapTCGA`, `boxplotTCGA`, `kmTCGA`, `pcaTCGA`, `theme_RTCGA` for plotting [https://rtcga.github.io/RTCGA/Visualizations.html](https://rtcga.github.io/RTCGA/Visualizations.html)
 - New functions `mutationsTCGA`, `expressionsTCGA`, `survivalTCGA` for data manipulations.

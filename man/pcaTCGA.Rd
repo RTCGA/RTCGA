@@ -9,7 +9,7 @@ pcaTCGA(x, group.names, title = "", return.pca = FALSE, scale = TRUE,
   circle = TRUE, var.axes = FALSE, alpha = 0.8, add.lines = TRUE, ...)
 }
 \arguments{
-\item{x}{A \code{data.frame} containing i.e. expressions information. See \link{expressionsTCGA}.}
+\item{x}{A \code{data.frame} or \code{matrix} containing i.e. expressions information. See \link{expressionsTCGA}.}
 
 \item{group.names}{Names of group variable to use in labels of the plot.}
 

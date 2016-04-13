@@ -3,7 +3,7 @@
 #'
 #' @description Plots Two Main Components of Principal Component Analysis
 #' 
-#' @param x A \code{data.frame} containing i.e. expressions information. See \link{expressionsTCGA}.
+#' @param x A \code{data.frame} or \code{matrix} containing i.e. expressions information. See \link{expressionsTCGA}.
 #' @param group.names Names of group variable to use in labels of the plot.
 #' @param return.pca Should return pca object additionaly to pca plot?
 #' @param ... Further arguments passed to \link{prcomp}.
@@ -74,7 +74,7 @@ pcaTCGA <- function(x,
 										alpha = 0.8,
 										add.lines = TRUE,
 									  ...) {
-	assert_that(is.data.frame(x))
+	assert_that(is.data.frame(x) | is.matrix(x))
 	assert_that(group.names %in% names(x), length(group.names) == 1, length(group.names) == 1)
 
 
