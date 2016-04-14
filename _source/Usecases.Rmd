@@ -185,6 +185,7 @@ read_and_joinTCGA <- function(file){
 		'patient.daystolastfollowup')
 	
 names(clin)[this.col] <- 'stageevent'
+names(clin)[patient.vital_status] <- 'patient.vital_status'
 	
 	clin %>%
 		filter(stageevent != "tx") %>% 
@@ -194,7 +195,7 @@ names(clin)[this.col] <- 'stageevent'
 			extract.cols = "stageevent",
 			extract.names = FALSE,
 			barcode.name = names(clin)[bcr_patient_barcode],
-			event.name = names(clin)[patient.vital_status],
+			event.name = 'patient.vital_status',
 			days.to.followup.name =	names(clin)[followup],
 			days.to.death.name = names(clin)[days_to_death]
 			) %>% 
@@ -202,7 +203,7 @@ names(clin)[this.col] <- 'stageevent'
 		left_join(
 			BRCA.rnaseq.fil,
 			by = "bcr_patient_barcode"
-		)
+		) 
 }
 
 
@@ -221,11 +222,15 @@ for (i in seq_along(files)) {
       		c(-100,median(all[,selected[j]+4], na.rm = TRUE),10^9))
       
       if (min(table(selectedCat)) >= 20) {
-        ndf <- data.frame(time = all$times,
-        									event = all$patient.vital_status ==1,
-        									var = selectedCat)
-        pvalues[i,j] <- survdiff(Surv(time, event)~var,
-        								data=ndf)$chisq
+        ndf <- data.frame(
+        	time = all$times,
+        	event = all$patient.vital_status ==1,
+        	var = selectedCat
+        )
+        pvalues[i,j] <- 
+        	survdiff(
+        	 Surv(time, event)~var,
+        	 data=ndf)$chisq
       }
     }
 
@@ -271,9 +276,12 @@ archive(drd, alink = TRUE)
 ```{r, warning=FALSE, message=FALSE}
 pvalues <- pvalues[1:length(names),]
 plotPValues <- function(i) {
-  drd <- data.frame(data = ymd(substr(names, 62, 69)), 
-                    v = pvalues[,i], 
-                    p = 1-pchisq(pvalues[,i],1))
+  drd <- data.frame(
+  	data = ymd(substr(names, 62, 69)),
+  	v = pvalues[,i],
+  	p = 1-pchisq(pvalues[,i],1)
+  )
+  
   drd <- drd[drd$v > 0,]
   drd <- drd[-1,]
   
@@ -306,7 +314,7 @@ vv <- cut(
 )
 ndf <- data.frame(
 	time = pmax(all$times, 1),
-	event = all$patient.vitalstatus ==1,
+	event = all$patient.vital_status ==1,
 	var = vv
 )
 ndf <- na.omit(ndf)

@@ -202,6 +202,7 @@ blockquote p:last-child {
 
 img {
   display: block;
+  max-width: 100%;
   margin: 0 0 1rem;
   border-radius: 5px;
 }
@@ -209,7 +210,7 @@ img {
 /* Tables */
 table {
   margin-bottom: 1rem;
-  width: 100%;
+  width: 90%;
   border: 1px solid #e5e5e5;
   border-collapse: collapse;
 }

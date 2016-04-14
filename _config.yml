@@ -31,6 +31,8 @@ shortname:        RTCGA
 # Social Media
 twitter:          true # add a twitter button to each post
 facebook:         true # add a facebook share button to each post
+googleplus:				true
+linkedin:					true
 
 author:
   name:           'Marcin Kosiński'

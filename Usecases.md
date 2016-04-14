@@ -104,9 +104,7 @@ for(i in releaseDates) {
 library(RTCGA.rnaseq)
 library(dplyr)
 BRCA.rnaseq.fil <- BRCA.rnaseq %>%
-	filter(
-	 substr(bcr_patient_barcode, 14, 15) == "01"
-	) %>%
+	filter(substr(bcr_patient_barcode, 14, 15) == "01") %>%
 	mutate(bcr_patient_barcode = 
 	substr(bcr_patient_barcode, 1, 12))
 {% endhighlight %}
@@ -128,26 +126,24 @@ n <- c();names <- c()
 # Collect p-values for these genes
 selected <- c(
  23L, 228L, 259L, 309L, 593L, 664L, 665L, 675L, 676L, 717L, 
- 847L, 904L, 1148L, 1287L, 1306L, 1369L, 1429L, 1602L, 
- 1718L, 1818L, 1856L, 1985L, 2004L, 2034L, 2169L, 2176L, 
- 2248L, 2389L, 2478L, 2514L, 2550L, 2551L, 2555L, 2682L, 
- 2944L, 3008L, 3153L, 3189L, 3411L, 3640L, 3803L, 3817L, 
- 3857L, 3960L, 4139L, 4157L, 4192L, 4338L, 4588L, 4814L, 
- 5179L, 5270L, 5694L, 5744L, 5764L, 6028L, 6033L, 6544L, 
- 6593L, 6680L, 6797L, 6798L, 6831L, 6844L, 6847L, 6855L, 
- 6878L, 7009L, 7067L, 7082L, 7261L, 7299L, 7430L, 7529L,
- 7857L, 7971L, 7982L, 8015L, 8265L, 8284L, 8316L, 8694L, 
- 8706L, 8832L, 9400L, 9585L, 9593L, 9706L, 9734L, 9778L, 
- 9858L, 9872L, 9879L, 10206L, 10235L, 10295L, 10511L, 
- 10634L, 10938L, 10963L, 11162L, 11174L, 11197L, 11244L, 
- 11257L, 11262L, 11346L, 11554L, 11600L, 11713L, 11793L, 
- 11876L, 11879L, 11890L, 11893L, 11915L, 11916L, 11917L, 
- 11947L, 11968L, 11971L, 11979L, 11994L, 12007L, 12190L, 
- 12257L, 12391L, 12403L, 12575L, 12912L, 13032L, 13105L, 
- 13451L, 13486L, 13531L, 13598L, 13617L, 13815L, 14053L, 
- 14129L, 14211L, 14289L, 14291L, 14313L, 14389L, 14423L, 
- 14544L, 14703L, 14725L, 14760L, 14910L, 14963L, 15101L, 
- 15315L, 15363L, 15392L, 15507L, 15696L, 15762L
+ 847L, 904L, 1148L, 1287L, 1306L, 1369L, 1429L, 1602L, 1718L, 
+ 1818L, 1856L, 1985L, 2004L, 2034L, 2169L, 2176L, 2248L, 2389L, 
+ 2478L, 2514L, 2550L, 2551L, 2555L, 2682L, 2944L, 3008L, 3153L, 
+ 3189L, 3411L, 3640L, 3803L, 3817L, 3857L, 3960L, 4139L, 4157L, 
+ 4192L, 4338L, 4588L, 4814L, 5179L, 5270L, 5694L, 5744L, 5764L, 
+ 6028L, 6033L, 6544L, 6593L, 6680L, 6797L, 6798L, 6831L, 6844L, 
+ 6847L, 6855L, 6878L, 7009L, 7067L, 7082L, 7261L, 7299L, 7430L, 
+ 7529L, 7857L, 7971L, 7982L, 8015L, 8265L, 8284L, 8316L, 8694L, 
+ 8706L, 8832L, 9400L, 9585L, 9593L, 9706L, 9734L, 9778L, 9858L, 
+ 9872L, 9879L, 10206L, 10235L, 10295L, 10511L, 10634L, 10938L, 
+ 10963L, 11162L, 11174L, 11197L, 11244L, 11257L, 11262L, 11346L, 
+ 11554L, 11600L, 11713L, 11793L, 11876L, 11879L, 11890L, 11893L, 
+ 11915L, 11916L, 11917L, 11947L, 11968L, 11971L, 11979L, 11994L, 
+ 12007L, 12190L, 12257L, 12391L, 12403L, 12575L, 12912L, 13032L, 
+ 13105L, 13451L, 13486L, 13531L, 13598L, 13617L, 13815L, 14053L, 
+ 14129L, 14211L, 14289L, 14291L, 14313L, 14389L, 14423L, 14544L, 
+ 14703L, 14725L, 14760L, 14910L, 14963L, 15101L, 15315L, 15363L, 
+ 15392L, 15507L, 15696L, 15762L
 )
 
 
@@ -177,8 +173,9 @@ read_and_joinTCGA <- function(file){
 		'patient.daystolastfollowup')
 	
 names(clin)[this.col] <- 'stageevent'
+names(clin)[patient.vital_status] <- 'patient.vital_status'
 	
-clin %>%
+	clin %>%
 	filter(stageevent != "tx") %>% 
 	mutate(stageevent = 
 	 substr(stageevent, 1, 2)) %>% 
@@ -186,15 +183,15 @@ clin %>%
 	 extract.cols = "stageevent",
 	 extract.names = FALSE,
 	 barcode.name = names(clin)[bcr_patient_barcode],
-	 event.name = names(clin)[patient.vital_status],
-	 days.to.followup.name = names(clin)[followup],
+	 event.name = 'patient.vital_status',
+	 days.to.followup.name =	names(clin)[followup],
 	 days.to.death.name = names(clin)[days_to_death]
 	) %>% 
 	unique %>% 
 	left_join(
-	 BRCA.rnaseq.fil,
-	 by = "bcr_patient_barcode"
-	)
+		BRCA.rnaseq.fil,
+		by = "bcr_patient_barcode"
+	) 
 }
 {% endhighlight %}
 
@@ -209,16 +206,18 @@ for (i in seq_along(files)) {
     all <- read_and_joinTCGA(files[i])
     for (j in seq_along(selected)) {
       selectedCat <- cut(all[,selected[j]+4],
-    c(-100,median(all[,selected[j]+4], na.rm = TRUE),10^9))
+      c(-100,median(all[,selected[j]+4], na.rm = TRUE),10^9))
       
       if (min(table(selectedCat)) >= 20) {
         ndf <- data.frame(
-         time = all$times,
-         event = all$patient.vital_status ==1,
-         var = selectedCat
-         )
-        pvalues[i,j] <- survdiff(Surv(time, event)~var,
-        								data=ndf)$chisq
+        	time = all$times,
+        	event = all$patient.vital_status ==1,
+        	var = selectedCat
+        )
+        pvalues[i,j] <- 
+        	survdiff(
+        	 Surv(time, event)~var,
+        	 data=ndf)$chisq
       }
     }
 
@@ -233,7 +232,7 @@ for (i in seq_along(files)) {
 archive(names, alink = TRUE)
 {% endhighlight %}
 
-[`archivist::aread('MarcinKosinski/RTCGA_UseCases/1ff351d548291ef6b01fb7893bb1e1cb')`](https://raw.githubusercontent.com/MarcinKosinski/RTCGA_UseCases/master/gallery/1ff351d548291ef6b01fb7893bb1e1cb.rda)
+[`archivist::aread('MarcinKosinski/RTCGA_UseCases/374e1c871a6bd2158a05d23691165e10')`](https://raw.githubusercontent.com/MarcinKosinski/RTCGA_UseCases/master/gallery/374e1c871a6bd2158a05d23691165e10.rda)
 
 {% highlight r %}
 archive(files, alink = TRUE)
@@ -245,13 +244,13 @@ archive(files, alink = TRUE)
 archive(pvalues, alink = TRUE)
 {% endhighlight %}
 
-[`archivist::aread('MarcinKosinski/RTCGA_UseCases/34ddeef11918dc8c6b5b14abb32f7ae5')`](https://raw.githubusercontent.com/MarcinKosinski/RTCGA_UseCases/master/gallery/34ddeef11918dc8c6b5b14abb32f7ae5.rda)
+[`archivist::aread('MarcinKosinski/RTCGA_UseCases/fce8d759c55e9c8e22be7f00bbb65474')`](https://raw.githubusercontent.com/MarcinKosinski/RTCGA_UseCases/master/gallery/fce8d759c55e9c8e22be7f00bbb65474.rda)
 
 {% highlight r %}
 archive(n, alink = TRUE)
 {% endhighlight %}
 
-[`archivist::aread('MarcinKosinski/RTCGA_UseCases/1a812714f37531a004ebf9867f44df06')`](https://raw.githubusercontent.com/MarcinKosinski/RTCGA_UseCases/master/gallery/1a812714f37531a004ebf9867f44df06.rda)
+[`archivist::aread('MarcinKosinski/RTCGA_UseCases/2af646398735bf53164391220c6ed6f7')`](https://raw.githubusercontent.com/MarcinKosinski/RTCGA_UseCases/master/gallery/2af646398735bf53164391220c6ed6f7.rda)
 
 # Number of observations in BRCA / next releases
 
@@ -285,7 +284,7 @@ archive(.Last.value, alink = TRUE)
 archive(drd, alink = TRUE)
 {% endhighlight %}
 
-[`archivist::aread('MarcinKosinski/RTCGA_UseCases/05251dc90afa90d9c2ca7af20e9194f2')`](https://raw.githubusercontent.com/MarcinKosinski/RTCGA_UseCases/master/gallery/05251dc90afa90d9c2ca7af20e9194f2.rda)
+[`archivist::aread('MarcinKosinski/RTCGA_UseCases/eb3ebcb10010d05f33498efa26686834')`](https://raw.githubusercontent.com/MarcinKosinski/RTCGA_UseCases/master/gallery/eb3ebcb10010d05f33498efa26686834.rda)
 
 # p-values for selected genes
 
@@ -293,9 +292,12 @@ archive(drd, alink = TRUE)
 {% highlight r %}
 pvalues <- pvalues[1:length(names),]
 plotPValues <- function(i) {
-  drd <- data.frame(data = ymd(substr(names, 62, 69)), 
-                    v = pvalues[,i], 
-                    p = 1-pchisq(pvalues[,i],1))
+  drd <- data.frame(
+  	data = ymd(substr(names, 62, 69)),
+  	v = pvalues[,i],
+  	p = 1-pchisq(pvalues[,i],1)
+  )
+  
   drd <- drd[drd$v > 0,]
   drd <- drd[-1,]
   
@@ -303,11 +305,8 @@ plotPValues <- function(i) {
     geom_point(size=3) +
     xlab("Date of the release") + 
     ylab("p-value (survival model)\n for data from this release") +
-    geom_text(
-     data=drd[c(which.max(drd$p),
-     which.min(drd$p)),],
-     color="red", nudge_y = .025
-    ) + 
+    geom_text(data=drd[c(which.max(drd$p), which.min(drd$p)),],
+    color="red", nudge_y = .025) + 
     ggtitle(paste0("Gene: ", colnames(all)[selected[i]])) +
   	theme_RTCGA()
 }
@@ -338,7 +337,7 @@ vv <- cut(
 )
 ndf <- data.frame(
 	time = pmax(all$times, 1),
-	event = all$patient.vitalstatus ==1,
+	event = all$patient.vital_status ==1,
 	var = vv
 )
 ndf <- na.omit(ndf)
