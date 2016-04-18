@@ -5,12 +5,13 @@ layout: default
 <div class="page">
   <h1 class="page-title">{{ page.title }}</h1>
   {{ content }}
-  {% if site.twitter %}
-  {% include twitter_button.html %}
-  {% endif %}
-  
+
   {% if site.facebook %}
   {% include facebook_button.html %}
+  {% endif %}
+
+  {% if site.twitter %}
+  {% include twitter_button.html %}
   {% endif %}
 
   {% if site.linkedin %}
