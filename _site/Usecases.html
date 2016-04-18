@@ -180,6 +180,11 @@
 
 <figure class="highlight"><pre><code class="language-text" data-lang="text">[1] "MarcinKosinski"</code></pre></figure>
 
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1"># every object of class ggplot will be archived
+# during print
+</span><span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
+<span class="n">addHooksToPrint</span><span class="p">(</span><span class="n">class</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="s2">"ggplot"</span><span class="p">,</span> <span class="s2">"ggsurvplot"</span><span class="p">))</span></code></pre></figure>
+
 <h1 id="download-clinical-datasets">Download clinical datasets</h1>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">releaseDates</span> <span class="o">&lt;-</span> <span class="n">checkTCGA</span><span class="p">(</span><span class="s2">"Dates"</span><span class="p">)</span>
@@ -188,11 +193,11 @@
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="n">releaseDates</span><span class="p">)</span> <span class="p">{</span>
   <span class="n">try</span><span class="p">({</span>
     <span class="n">downloadTCGA</span><span class="p">(</span>
-    	<span class="s2">"BRCA"</span><span class="p">,</span>
-    	<span class="n">dataSet</span> <span class="o">=</span> <span class="s2">"Merge_Clinical.Level_1"</span><span class="p">,</span>
-    	<span class="n">date</span> <span class="o">=</span> <span class="n">i</span><span class="p">,</span>
-    	<span class="n">destDir</span> <span class="o">=</span> <span class="s2">"UseCases"</span>
-    	<span class="p">)</span> 
+      <span class="s2">"BRCA"</span><span class="p">,</span>
+      <span class="n">dataSet</span> <span class="o">=</span> <span class="s2">"Merge_Clinical.Level_1"</span><span class="p">,</span>
+      <span class="n">date</span> <span class="o">=</span> <span class="n">i</span><span class="p">,</span>
+      <span class="n">destDir</span> <span class="o">=</span> <span class="s2">"UseCases"</span>
+      <span class="p">)</span> 
     <span class="n">cat</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="s2">"\n"</span><span class="p">)</span>
   <span class="p">},</span> <span class="n">silent</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">)</span>
 <span class="p">}</span></code></pre></figure>
@@ -204,16 +209,16 @@
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="n">RTCGA.rnaseq</span><span class="p">)</span>
 <span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
 <span class="n">BRCA.rnaseq.fil</span> <span class="o">&lt;-</span> <span class="n">BRCA.rnaseq</span> <span class="o">%&gt;%</span>
-	<span class="n">filter</span><span class="p">(</span><span class="n">substr</span><span class="p">(</span><span class="n">bcr_patient_barcode</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">15</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"01"</span><span class="p">)</span> <span class="o">%&gt;%</span>
-	<span class="n">mutate</span><span class="p">(</span><span class="n">bcr_patient_barcode</span> <span class="o">=</span> 
-	<span class="n">substr</span><span class="p">(</span><span class="n">bcr_patient_barcode</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">12</span><span class="p">))</span></code></pre></figure>
+  <span class="n">filter</span><span class="p">(</span><span class="n">substr</span><span class="p">(</span><span class="n">bcr_patient_barcode</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">15</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"01"</span><span class="p">)</span> <span class="o">%&gt;%</span>
+  <span class="n">mutate</span><span class="p">(</span><span class="n">bcr_patient_barcode</span> <span class="o">=</span> 
+  <span class="n">substr</span><span class="p">(</span><span class="n">bcr_patient_barcode</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">12</span><span class="p">))</span></code></pre></figure>
 
 <h2 id="load-all-clinical-data">Load all clinical data</h2>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">files</span> <span class="o">&lt;-</span> <span class="n">list.files</span><span class="p">(</span>
-	<span class="n">path</span> <span class="o">=</span> <span class="s2">"UseCases"</span><span class="p">,</span>
-	<span class="n">pattern</span><span class="o">=</span><span class="s2">"BRCA.clin.mer"</span><span class="p">,</span>
-	<span class="n">recursive</span> <span class="o">=</span> <span class="n">TRUE</span>
+  <span class="n">path</span> <span class="o">=</span> <span class="s2">"UseCases"</span><span class="p">,</span>
+  <span class="n">pattern</span><span class="o">=</span><span class="s2">"BRCA.clin.mer"</span><span class="p">,</span>
+  <span class="n">recursive</span> <span class="o">=</span> <span class="n">TRUE</span>
 <span class="p">)</span>
 <span class="n">files</span> <span class="o">&lt;-</span> <span class="n">file.path</span><span class="p">(</span><span class="s2">"UseCases"</span><span class="p">,</span><span class="n">files</span><span class="p">)</span>
 
@@ -245,50 +250,50 @@
 
 
 <span class="n">read_and_joinTCGA</span> <span class="o">&lt;-</span> <span class="k">function</span><span class="p">(</span><span class="n">file</span><span class="p">){</span>
-	<span class="n">readTCGA</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">dataType</span> <span class="o">=</span> <span class="s2">"clinical"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">clin</span>
-	<span class="n">names_clin</span> <span class="o">&lt;-</span> <span class="n">gsub</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">names</span><span class="p">(</span><span class="n">clin</span><span class="p">),</span><span class="s2">"_"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
+  <span class="n">readTCGA</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">dataType</span> <span class="o">=</span> <span class="s2">"clinical"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">clin</span>
+  <span class="n">names_clin</span> <span class="o">&lt;-</span> <span class="n">gsub</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">names</span><span class="p">(</span><span class="n">clin</span><span class="p">),</span><span class="s2">"_"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
 
 <span class="c1"># there are differences in col.names between releases
-</span>	<span class="n">which</span><span class="p">(</span><span class="n">names_clin</span> <span class="o">==</span> 
-	<span class="s1">'patient.stageevent.tnmcategories.pathologiccategories.pathologict'</span><span class="p">)</span> <span class="o">-&gt;</span>
-		<span class="n">this.col</span>
-	
-	<span class="n">bcr_patient_barcode</span> <span class="o">&lt;-</span> 
-		<span class="n">grep</span><span class="p">(</span><span class="s1">'bcrpatientbarcode'</span><span class="p">,</span>
-		<span class="n">names_clin</span><span class="p">)</span>
-	
-	<span class="n">days_to_death</span> <span class="o">&lt;-</span> 
-		<span class="n">which</span><span class="p">(</span><span class="n">names_clin</span> <span class="o">==</span> 
-		<span class="s1">'patient.daystodeath'</span><span class="p">)</span>
-	
-	<span class="n">patient.vital_status</span> <span class="o">&lt;-</span> 
-		<span class="n">which</span><span class="p">(</span><span class="n">names_clin</span> <span class="o">==</span> 
-		<span class="s1">'patient.vitalstatus'</span><span class="p">)</span>
-	
-	<span class="n">followup</span> <span class="o">&lt;-</span> 
-		<span class="n">which</span><span class="p">(</span><span class="n">names_clin</span> <span class="o">==</span> 
-		<span class="s1">'patient.daystolastfollowup'</span><span class="p">)</span>
-	
+</span>  <span class="n">which</span><span class="p">(</span><span class="n">names_clin</span> <span class="o">==</span> 
+  <span class="s1">'patient.stageevent.tnmcategories.pathologiccategories.pathologict'</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="n">this.col</span>
+  
+  <span class="n">bcr_patient_barcode</span> <span class="o">&lt;-</span> 
+    <span class="n">grep</span><span class="p">(</span><span class="s1">'bcrpatientbarcode'</span><span class="p">,</span>
+    <span class="n">names_clin</span><span class="p">)</span>
+  
+  <span class="n">days_to_death</span> <span class="o">&lt;-</span> 
+    <span class="n">which</span><span class="p">(</span><span class="n">names_clin</span> <span class="o">==</span> 
+    <span class="s1">'patient.daystodeath'</span><span class="p">)</span>
+  
+  <span class="n">patient.vital_status</span> <span class="o">&lt;-</span> 
+    <span class="n">which</span><span class="p">(</span><span class="n">names_clin</span> <span class="o">==</span> 
+    <span class="s1">'patient.vitalstatus'</span><span class="p">)</span>
+  
+  <span class="n">followup</span> <span class="o">&lt;-</span> 
+    <span class="n">which</span><span class="p">(</span><span class="n">names_clin</span> <span class="o">==</span> 
+    <span class="s1">'patient.daystolastfollowup'</span><span class="p">)</span>
+  
 <span class="n">names</span><span class="p">(</span><span class="n">clin</span><span class="p">)[</span><span class="n">this.col</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="s1">'stageevent'</span>
 <span class="n">names</span><span class="p">(</span><span class="n">clin</span><span class="p">)[</span><span class="n">patient.vital_status</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="s1">'patient.vital_status'</span>
-	
-	<span class="n">clin</span> <span class="o">%&gt;%</span>
-	<span class="n">filter</span><span class="p">(</span><span class="n">stageevent</span> <span class="o">!=</span> <span class="s2">"tx"</span><span class="p">)</span> <span class="o">%&gt;%</span> 
-	<span class="n">mutate</span><span class="p">(</span><span class="n">stageevent</span> <span class="o">=</span> 
-	 <span class="n">substr</span><span class="p">(</span><span class="n">stageevent</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">))</span> <span class="o">%&gt;%</span> 
-	<span class="n">survivalTCGA</span><span class="p">(</span>
-	 <span class="n">extract.cols</span> <span class="o">=</span> <span class="s2">"stageevent"</span><span class="p">,</span>
-	 <span class="n">extract.names</span> <span class="o">=</span> <span class="n">FALSE</span><span class="p">,</span>
-	 <span class="n">barcode.name</span> <span class="o">=</span> <span class="n">names</span><span class="p">(</span><span class="n">clin</span><span class="p">)[</span><span class="n">bcr_patient_barcode</span><span class="p">],</span>
-	 <span class="n">event.name</span> <span class="o">=</span> <span class="s1">'patient.vital_status'</span><span class="p">,</span>
-	 <span class="n">days.to.followup.name</span> <span class="o">=</span> <span class="n">names</span><span class="p">(</span><span class="n">clin</span><span class="p">)[</span><span class="n">followup</span><span class="p">],</span>
-	 <span class="n">days.to.death.name</span> <span class="o">=</span> <span class="n">names</span><span class="p">(</span><span class="n">clin</span><span class="p">)[</span><span class="n">days_to_death</span><span class="p">]</span>
-	<span class="p">)</span> <span class="o">%&gt;%</span> 
-	<span class="n">unique</span> <span class="o">%&gt;%</span> 
-	<span class="n">left_join</span><span class="p">(</span>
-		<span class="n">BRCA.rnaseq.fil</span><span class="p">,</span>
-		<span class="n">by</span> <span class="o">=</span> <span class="s2">"bcr_patient_barcode"</span>
-	<span class="p">)</span> 
+  
+  <span class="n">clin</span> <span class="o">%&gt;%</span>
+    <span class="n">filter</span><span class="p">(</span><span class="n">stageevent</span> <span class="o">!=</span> <span class="s2">"tx"</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+    <span class="n">mutate</span><span class="p">(</span><span class="n">stageevent</span> <span class="o">=</span> 
+     <span class="n">substr</span><span class="p">(</span><span class="n">stageevent</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">))</span> <span class="o">%&gt;%</span> 
+    <span class="n">survivalTCGA</span><span class="p">(</span>
+      <span class="n">extract.cols</span> <span class="o">=</span> <span class="s2">"stageevent"</span><span class="p">,</span>
+      <span class="n">extract.names</span> <span class="o">=</span> <span class="n">FALSE</span><span class="p">,</span>
+      <span class="n">barcode.name</span> <span class="o">=</span> <span class="n">names</span><span class="p">(</span><span class="n">clin</span><span class="p">)[</span><span class="n">bcr_patient_barcode</span><span class="p">],</span>
+      <span class="n">event.name</span> <span class="o">=</span> <span class="s1">'patient.vital_status'</span><span class="p">,</span>
+      <span class="n">days.to.followup.name</span> <span class="o">=</span>  <span class="n">names</span><span class="p">(</span><span class="n">clin</span><span class="p">)[</span><span class="n">followup</span><span class="p">],</span>
+      <span class="n">days.to.death.name</span> <span class="o">=</span> <span class="n">names</span><span class="p">(</span><span class="n">clin</span><span class="p">)[</span><span class="n">days_to_death</span><span class="p">]</span>
+      <span class="p">)</span> <span class="o">%&gt;%</span> 
+    <span class="n">unique</span> <span class="o">%&gt;%</span> 
+    <span class="n">left_join</span><span class="p">(</span>
+      <span class="n">BRCA.rnaseq.fil</span><span class="p">,</span>
+      <span class="n">by</span> <span class="o">=</span> <span class="s2">"bcr_patient_barcode"</span>
+    <span class="p">)</span> 
 <span class="p">}</span></code></pre></figure>
 
 <h2 id="calculate-p-values-for-selected-genes">Calculate p-values for selected genes</h2>
@@ -300,18 +305,18 @@
     <span class="n">all</span> <span class="o">&lt;-</span> <span class="n">read_and_joinTCGA</span><span class="p">(</span><span class="n">files</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
     <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="k">in</span> <span class="n">seq_along</span><span class="p">(</span><span class="n">selected</span><span class="p">))</span> <span class="p">{</span>
       <span class="n">selectedCat</span> <span class="o">&lt;-</span> <span class="n">cut</span><span class="p">(</span><span class="n">all</span><span class="p">[,</span><span class="n">selected</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="m">+4</span><span class="p">],</span>
-      <span class="n">c</span><span class="p">(</span><span class="m">-100</span><span class="p">,</span><span class="n">median</span><span class="p">(</span><span class="n">all</span><span class="p">[,</span><span class="n">selected</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="m">+4</span><span class="p">],</span> <span class="n">na.rm</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">),</span><span class="m">10</span><span class="o">^</span><span class="m">9</span><span class="p">))</span>
+    <span class="n">c</span><span class="p">(</span><span class="m">-100</span><span class="p">,</span><span class="n">median</span><span class="p">(</span><span class="n">all</span><span class="p">[,</span><span class="n">selected</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="m">+4</span><span class="p">],</span> <span class="n">na.rm</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">),</span><span class="m">10</span><span class="o">^</span><span class="m">9</span><span class="p">))</span>
       
       <span class="k">if</span> <span class="p">(</span><span class="n">min</span><span class="p">(</span><span class="n">table</span><span class="p">(</span><span class="n">selectedCat</span><span class="p">))</span> <span class="o">&gt;=</span> <span class="m">20</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">ndf</span> <span class="o">&lt;-</span> <span class="n">data.frame</span><span class="p">(</span>
-        	<span class="n">time</span> <span class="o">=</span> <span class="n">all</span><span class="o">$</span><span class="n">times</span><span class="p">,</span>
-        	<span class="n">event</span> <span class="o">=</span> <span class="n">all</span><span class="o">$</span><span class="n">patient.vital_status</span> <span class="o">==</span><span class="m">1</span><span class="p">,</span>
-        	<span class="n">var</span> <span class="o">=</span> <span class="n">selectedCat</span>
+          <span class="n">time</span> <span class="o">=</span> <span class="n">all</span><span class="o">$</span><span class="n">times</span><span class="p">,</span>
+          <span class="n">event</span> <span class="o">=</span> <span class="n">all</span><span class="o">$</span><span class="n">patient.vital_status</span> <span class="o">==</span><span class="m">1</span><span class="p">,</span>
+          <span class="n">var</span> <span class="o">=</span> <span class="n">selectedCat</span>
         <span class="p">)</span>
         <span class="n">pvalues</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;-</span> 
-        	<span class="n">survdiff</span><span class="p">(</span>
-        	 <span class="n">Surv</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span><span class="o">~</span><span class="n">var</span><span class="p">,</span>
-        	 <span class="n">data</span><span class="o">=</span><span class="n">ndf</span><span class="p">)</span><span class="o">$</span><span class="n">chisq</span>
+          <span class="n">survdiff</span><span class="p">(</span>
+           <span class="n">Surv</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span><span class="o">~</span><span class="n">var</span><span class="p">,</span>
+           <span class="n">data</span><span class="o">=</span><span class="n">ndf</span><span class="p">)</span><span class="o">$</span><span class="n">chisq</span>
       <span class="p">}</span>
     <span class="p">}</span>
 
@@ -339,12 +344,8 @@
 <h1 id="number-of-observations-in-brca--next-releases">Number of observations in BRCA / next releases</h1>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="n">lubridate</span><span class="p">)</span>
-<span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
-
 <span class="n">dates</span> <span class="o">&lt;-</span> <span class="n">substr</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="m">62</span><span class="p">,</span> <span class="m">69</span><span class="p">)</span>
 <span class="n">drd</span> <span class="o">&lt;-</span> <span class="n">na.omit</span><span class="p">(</span><span class="n">data.frame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">ymd</span><span class="p">(</span><span class="n">dates</span><span class="p">),</span> <span class="n">v</span> <span class="o">=</span> <span class="n">n</span><span class="p">))</span>
-
-
 
 <span class="n">ggplot</span><span class="p">(</span><span class="n">drd</span><span class="p">[</span><span class="m">-1</span><span class="p">,],</span> <span class="n">aes</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">v</span><span class="p">))</span> <span class="o">+</span> 
   <span class="n">geom_point</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="m">3</span><span class="p">)</span> <span class="o">+</span>
@@ -352,11 +353,8 @@
   <span class="n">ylab</span><span class="p">(</span><span class="s2">"# of patients"</span><span class="p">)</span> <span class="o">+</span>
   <span class="n">ggtitle</span><span class="p">(</span><span class="s2">"BRCA"</span><span class="p">)</span></code></pre></figure>
 
-<p><img src="/RTCGA/figure/source/Usecases/unnamed-chunk-11-1.png" alt="plot of chunk unnamed-chunk-11" /></p>
-
-<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">archive</span><span class="p">(</span><span class="n">.Last.value</span><span class="p">,</span> <span class="n">alink</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">)</span></code></pre></figure>
-
-<p><a href="https://raw.githubusercontent.com/MarcinKosinski/RTCGA_UseCases/master/gallery/f9e884084b84794d762a535f3facec85.rda"><code class="highlighter-rouge">archivist::aread('MarcinKosinski/RTCGA_UseCases/f9e884084b84794d762a535f3facec85')</code></a></p>
+<p>Load: <a href="https://raw.githubusercontent.com/MarcinKosinski/RTCGA_UseCases/master/gallery/9713383c4369434449da350e0a08a61a.rda"><code class="highlighter-rouge">archivist::aread('MarcinKosinski/RTCGA_UseCases/9713383c4369434449da350e0a08a61a')</code></a>
+<img src="/RTCGA/figure/source/Usecases/unnamed-chunk-11-1.png" alt="plot of chunk unnamed-chunk-11" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">archive</span><span class="p">(</span><span class="n">drd</span><span class="p">,</span> <span class="n">alink</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">)</span></code></pre></figure>
 
@@ -367,9 +365,9 @@
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">pvalues</span> <span class="o">&lt;-</span> <span class="n">pvalues</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="n">length</span><span class="p">(</span><span class="n">names</span><span class="p">),]</span>
 <span class="n">plotPValues</span> <span class="o">&lt;-</span> <span class="k">function</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
   <span class="n">drd</span> <span class="o">&lt;-</span> <span class="n">data.frame</span><span class="p">(</span>
-  	<span class="n">data</span> <span class="o">=</span> <span class="n">ymd</span><span class="p">(</span><span class="n">substr</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="m">62</span><span class="p">,</span> <span class="m">69</span><span class="p">)),</span>
-  	<span class="n">v</span> <span class="o">=</span> <span class="n">pvalues</span><span class="p">[,</span><span class="n">i</span><span class="p">],</span>
-  	<span class="n">p</span> <span class="o">=</span> <span class="m">1</span><span class="o">-</span><span class="n">pchisq</span><span class="p">(</span><span class="n">pvalues</span><span class="p">[,</span><span class="n">i</span><span class="p">],</span><span class="m">1</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">ymd</span><span class="p">(</span><span class="n">substr</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="m">62</span><span class="p">,</span> <span class="m">69</span><span class="p">)),</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">pvalues</span><span class="p">[,</span><span class="n">i</span><span class="p">],</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="m">1</span><span class="o">-</span><span class="n">pchisq</span><span class="p">(</span><span class="n">pvalues</span><span class="p">[,</span><span class="n">i</span><span class="p">],</span><span class="m">1</span><span class="p">)</span>
   <span class="p">)</span>
   
   <span class="n">drd</span> <span class="o">&lt;-</span> <span class="n">drd</span><span class="p">[</span><span class="n">drd</span><span class="o">$</span><span class="n">v</span> <span class="o">&gt;</span> <span class="m">0</span><span class="p">,]</span>
@@ -382,16 +380,18 @@
     <span class="n">geom_text</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">drd</span><span class="p">[</span><span class="n">c</span><span class="p">(</span><span class="n">which.max</span><span class="p">(</span><span class="n">drd</span><span class="o">$</span><span class="n">p</span><span class="p">),</span> <span class="n">which.min</span><span class="p">(</span><span class="n">drd</span><span class="o">$</span><span class="n">p</span><span class="p">)),],</span>
     <span class="n">color</span><span class="o">=</span><span class="s2">"red"</span><span class="p">,</span> <span class="n">nudge_y</span> <span class="o">=</span> <span class="m">.025</span><span class="p">)</span> <span class="o">+</span> 
     <span class="n">ggtitle</span><span class="p">(</span><span class="n">paste0</span><span class="p">(</span><span class="s2">"Gene: "</span><span class="p">,</span> <span class="n">colnames</span><span class="p">(</span><span class="n">all</span><span class="p">)[</span><span class="n">selected</span><span class="p">[</span><span class="n">i</span><span class="p">]]))</span> <span class="o">+</span>
-  	<span class="n">theme_RTCGA</span><span class="p">()</span>
+    <span class="n">theme_RTCGA</span><span class="p">()</span>
 <span class="p">}</span>
 
 <span class="n">plotPValues</span><span class="p">(</span> <span class="m">135</span> <span class="p">)</span></code></pre></figure>
 
-<p><img src="/RTCGA/figure/source/Usecases/unnamed-chunk-13-1.png" alt="plot of chunk unnamed-chunk-13" /></p>
+<p>Load: <a href="https://raw.githubusercontent.com/MarcinKosinski/RTCGA_UseCases/master/gallery/f71605df250842d472d4891dee6ac91d.rda"><code class="highlighter-rouge">archivist::aread('MarcinKosinski/RTCGA_UseCases/f71605df250842d472d4891dee6ac91d')</code></a>
+<img src="/RTCGA/figure/source/Usecases/unnamed-chunk-13-1.png" alt="plot of chunk unnamed-chunk-13" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">plotPValues</span><span class="p">(</span> <span class="m">47</span> <span class="p">)</span></code></pre></figure>
 
-<p><img src="/RTCGA/figure/source/Usecases/unnamed-chunk-13-2.png" alt="plot of chunk unnamed-chunk-13" /></p>
+<p>Load: <a href="https://raw.githubusercontent.com/MarcinKosinski/RTCGA_UseCases/master/gallery/fb297480eb54c5deec3c838ce05e1134.rda"><code class="highlighter-rouge">archivist::aread('MarcinKosinski/RTCGA_UseCases/fb297480eb54c5deec3c838ce05e1134')</code></a>
+<img src="/RTCGA/figure/source/Usecases/unnamed-chunk-13-2.png" alt="plot of chunk unnamed-chunk-13" /></p>
 
 <h1 id="low-p-value-small-group">Low p-value, small group</h1>
 
@@ -400,26 +400,29 @@
 <span class="c1">#all[,j] &lt;- as.numeric(as.character(all[,j]))
 </span>
 <span class="n">vv</span> <span class="o">&lt;-</span> <span class="n">cut</span><span class="p">(</span>
-	<span class="n">all</span><span class="p">[,</span><span class="n">j</span><span class="p">],</span>
-	<span class="n">c</span><span class="p">(</span><span class="m">-100</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">100</span><span class="p">),</span>
-	<span class="n">labels</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="s2">"low expression"</span><span class="p">,</span> <span class="s2">"high expression"</span><span class="p">)</span>
+  <span class="n">all</span><span class="p">[,</span><span class="n">j</span><span class="p">],</span>
+  <span class="n">c</span><span class="p">(</span><span class="m">-100</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">100</span><span class="p">),</span>
+  <span class="n">labels</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="s2">"low expression"</span><span class="p">,</span> <span class="s2">"high expression"</span><span class="p">)</span>
 <span class="p">)</span>
 <span class="n">ndf</span> <span class="o">&lt;-</span> <span class="n">data.frame</span><span class="p">(</span>
-	<span class="n">time</span> <span class="o">=</span> <span class="n">pmax</span><span class="p">(</span><span class="n">all</span><span class="o">$</span><span class="n">times</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span>
-	<span class="n">event</span> <span class="o">=</span> <span class="n">all</span><span class="o">$</span><span class="n">patient.vital_status</span> <span class="o">==</span><span class="m">1</span><span class="p">,</span>
-	<span class="n">var</span> <span class="o">=</span> <span class="n">vv</span>
+  <span class="n">time</span> <span class="o">=</span> <span class="n">pmax</span><span class="p">(</span><span class="n">all</span><span class="o">$</span><span class="n">times</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span>
+  <span class="n">event</span> <span class="o">=</span> <span class="n">all</span><span class="o">$</span><span class="n">patient.vital_status</span> <span class="o">==</span><span class="m">1</span><span class="p">,</span>
+  <span class="n">var</span> <span class="o">=</span> <span class="n">vv</span>
 <span class="p">)</span>
 <span class="n">ndf</span> <span class="o">&lt;-</span> <span class="n">na.omit</span><span class="p">(</span><span class="n">ndf</span><span class="p">)</span>
 
 <span class="n">kmTCGA</span><span class="p">(</span>
-	<span class="n">ndf</span><span class="p">,</span>
-	<span class="n">times</span> <span class="o">=</span> <span class="s2">"time"</span><span class="p">,</span>
-	<span class="n">status</span> <span class="o">=</span> <span class="s2">"event"</span><span class="p">,</span>
-	<span class="n">explanatory.names</span> <span class="o">=</span> <span class="s2">"var"</span><span class="p">,</span>
-	<span class="n">main</span> <span class="o">=</span> <span class="n">paste</span><span class="p">(</span><span class="s2">"Gene:"</span><span class="p">,</span> <span class="n">colnames</span><span class="p">(</span><span class="n">all</span><span class="p">)[</span><span class="n">j</span><span class="p">])</span>
+  <span class="n">ndf</span><span class="p">,</span>
+  <span class="n">times</span> <span class="o">=</span> <span class="s2">"time"</span><span class="p">,</span>
+  <span class="n">status</span> <span class="o">=</span> <span class="s2">"event"</span><span class="p">,</span>
+  <span class="n">explanatory.names</span> <span class="o">=</span> <span class="s2">"var"</span><span class="p">,</span>
+  <span class="n">main</span> <span class="o">=</span> <span class="n">paste</span><span class="p">(</span><span class="s2">"Gene:"</span><span class="p">,</span> <span class="n">colnames</span><span class="p">(</span><span class="n">all</span><span class="p">)[</span><span class="n">j</span><span class="p">])</span>
 <span class="p">)</span></code></pre></figure>
 
-<p><img src="/RTCGA/figure/source/Usecases/unnamed-chunk-14-1.png" alt="plot of chunk unnamed-chunk-14" /></p>
+<p>Load: <a href="https://raw.githubusercontent.com/MarcinKosinski/RTCGA_UseCases/master/gallery/671f60ff865c0c6ce6d7666c5e9576e7.rda"><code class="highlighter-rouge">archivist::aread('MarcinKosinski/RTCGA_UseCases/671f60ff865c0c6ce6d7666c5e9576e7')</code></a>
+<img src="/RTCGA/figure/source/Usecases/unnamed-chunk-14-1.png" alt="plot of chunk unnamed-chunk-14" /></p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">pushGitHubRepo</span><span class="p">()</span></code></pre></figure>
 
 
   

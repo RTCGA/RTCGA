@@ -70,6 +70,15 @@ createGitHubRepo(
 {% endhighlight %}
 
 
+
+{% highlight r %}
+# every object of class ggplot will be archived
+# during print
+library(ggplot2)
+addHooksToPrint(class=c("ggplot", "ggsurvplot"))
+{% endhighlight %}
+
+
 # Download clinical datasets
 
 
@@ -84,11 +93,11 @@ dir.create('UseCases')
 for(i in releaseDates) {
   try({
     downloadTCGA(
-    	"BRCA",
-    	dataSet = "Merge_Clinical.Level_1",
-    	date = i,
-    	destDir = "UseCases"
-    	) 
+      "BRCA",
+      dataSet = "Merge_Clinical.Level_1",
+      date = i,
+      destDir = "UseCases"
+      ) 
     cat(i,"\n")
   }, silent = TRUE)
 }
@@ -104,9 +113,9 @@ for(i in releaseDates) {
 library(RTCGA.rnaseq)
 library(dplyr)
 BRCA.rnaseq.fil <- BRCA.rnaseq %>%
-	filter(substr(bcr_patient_barcode, 14, 15) == "01") %>%
-	mutate(bcr_patient_barcode = 
-	substr(bcr_patient_barcode, 1, 12))
+  filter(substr(bcr_patient_barcode, 14, 15) == "01") %>%
+  mutate(bcr_patient_barcode = 
+  substr(bcr_patient_barcode, 1, 12))
 {% endhighlight %}
 
 ## Load all clinical data
@@ -114,9 +123,9 @@ BRCA.rnaseq.fil <- BRCA.rnaseq %>%
 
 {% highlight r %}
 files <- list.files(
-	path = "UseCases",
-	pattern="BRCA.clin.mer",
-	recursive = TRUE
+  path = "UseCases",
+  pattern="BRCA.clin.mer",
+  recursive = TRUE
 )
 files <- file.path("UseCases",files)
 
@@ -148,50 +157,50 @@ selected <- c(
 
 
 read_and_joinTCGA <- function(file){
-	readTCGA(file, dataType = "clinical") -> clin
-	names_clin <- gsub(x = names(clin),"_", "")
+  readTCGA(file, dataType = "clinical") -> clin
+  names_clin <- gsub(x = names(clin),"_", "")
 
 # there are differences in col.names between releases
-	which(names_clin == 
-	'patient.stageevent.tnmcategories.pathologiccategories.pathologict') ->
-		this.col
-	
-	bcr_patient_barcode <- 
-		grep('bcrpatientbarcode',
-		names_clin)
-	
-	days_to_death <- 
-		which(names_clin == 
-		'patient.daystodeath')
-	
-	patient.vital_status <- 
-		which(names_clin == 
-		'patient.vitalstatus')
-	
-	followup <- 
-		which(names_clin == 
-		'patient.daystolastfollowup')
-	
+  which(names_clin == 
+  'patient.stageevent.tnmcategories.pathologiccategories.pathologict') ->
+    this.col
+  
+  bcr_patient_barcode <- 
+    grep('bcrpatientbarcode',
+    names_clin)
+  
+  days_to_death <- 
+    which(names_clin == 
+    'patient.daystodeath')
+  
+  patient.vital_status <- 
+    which(names_clin == 
+    'patient.vitalstatus')
+  
+  followup <- 
+    which(names_clin == 
+    'patient.daystolastfollowup')
+  
 names(clin)[this.col] <- 'stageevent'
 names(clin)[patient.vital_status] <- 'patient.vital_status'
-	
-	clin %>%
-	filter(stageevent != "tx") %>% 
-	mutate(stageevent = 
-	 substr(stageevent, 1, 2)) %>% 
-	survivalTCGA(
-	 extract.cols = "stageevent",
-	 extract.names = FALSE,
-	 barcode.name = names(clin)[bcr_patient_barcode],
-	 event.name = 'patient.vital_status',
-	 days.to.followup.name = names(clin)[followup],
-	 days.to.death.name = names(clin)[days_to_death]
-	) %>% 
-	unique %>% 
-	left_join(
-		BRCA.rnaseq.fil,
-		by = "bcr_patient_barcode"
-	) 
+  
+  clin %>%
+    filter(stageevent != "tx") %>% 
+    mutate(stageevent = 
+     substr(stageevent, 1, 2)) %>% 
+    survivalTCGA(
+      extract.cols = "stageevent",
+      extract.names = FALSE,
+      barcode.name = names(clin)[bcr_patient_barcode],
+      event.name = 'patient.vital_status',
+      days.to.followup.name =  names(clin)[followup],
+      days.to.death.name = names(clin)[days_to_death]
+      ) %>% 
+    unique %>% 
+    left_join(
+      BRCA.rnaseq.fil,
+      by = "bcr_patient_barcode"
+    ) 
 }
 {% endhighlight %}
 
@@ -206,18 +215,18 @@ for (i in seq_along(files)) {
     all <- read_and_joinTCGA(files[i])
     for (j in seq_along(selected)) {
       selectedCat <- cut(all[,selected[j]+4],
-      c(-100,median(all[,selected[j]+4], na.rm = TRUE),10^9))
+    c(-100,median(all[,selected[j]+4], na.rm = TRUE),10^9))
       
       if (min(table(selectedCat)) >= 20) {
         ndf <- data.frame(
-        	time = all$times,
-        	event = all$patient.vital_status ==1,
-        	var = selectedCat
+          time = all$times,
+          event = all$patient.vital_status ==1,
+          var = selectedCat
         )
         pvalues[i,j] <- 
-        	survdiff(
-        	 Surv(time, event)~var,
-        	 data=ndf)$chisq
+          survdiff(
+           Surv(time, event)~var,
+           data=ndf)$chisq
       }
     }
 
@@ -257,12 +266,8 @@ archive(n, alink = TRUE)
 
 {% highlight r %}
 library(lubridate)
-library(ggplot2)
-
 dates <- substr(names, 62, 69)
 drd <- na.omit(data.frame(data=ymd(dates), v = n))
-
-
 
 ggplot(drd[-1,], aes(data,v)) + 
   geom_point(size=3) +
@@ -271,14 +276,9 @@ ggplot(drd[-1,], aes(data,v)) +
   ggtitle("BRCA")
 {% endhighlight %}
 
+Load: [`archivist::aread('MarcinKosinski/RTCGA_UseCases/9713383c4369434449da350e0a08a61a')`](https://raw.githubusercontent.com/MarcinKosinski/RTCGA_UseCases/master/gallery/9713383c4369434449da350e0a08a61a.rda)
 ![plot of chunk unnamed-chunk-11](/RTCGA/figure/source/Usecases/unnamed-chunk-11-1.png)
 
-
-{% highlight r %}
-archive(.Last.value, alink = TRUE)
-{% endhighlight %}
-
-[`archivist::aread('MarcinKosinski/RTCGA_UseCases/f9e884084b84794d762a535f3facec85')`](https://raw.githubusercontent.com/MarcinKosinski/RTCGA_UseCases/master/gallery/f9e884084b84794d762a535f3facec85.rda)
 
 {% highlight r %}
 archive(drd, alink = TRUE)
@@ -293,9 +293,9 @@ archive(drd, alink = TRUE)
 pvalues <- pvalues[1:length(names),]
 plotPValues <- function(i) {
   drd <- data.frame(
-  	data = ymd(substr(names, 62, 69)),
-  	v = pvalues[,i],
-  	p = 1-pchisq(pvalues[,i],1)
+    data = ymd(substr(names, 62, 69)),
+    v = pvalues[,i],
+    p = 1-pchisq(pvalues[,i],1)
   )
   
   drd <- drd[drd$v > 0,]
@@ -308,18 +308,20 @@ plotPValues <- function(i) {
     geom_text(data=drd[c(which.max(drd$p), which.min(drd$p)),],
     color="red", nudge_y = .025) + 
     ggtitle(paste0("Gene: ", colnames(all)[selected[i]])) +
-  	theme_RTCGA()
+    theme_RTCGA()
 }
 
 plotPValues( 135 )
 {% endhighlight %}
 
+Load: [`archivist::aread('MarcinKosinski/RTCGA_UseCases/f71605df250842d472d4891dee6ac91d')`](https://raw.githubusercontent.com/MarcinKosinski/RTCGA_UseCases/master/gallery/f71605df250842d472d4891dee6ac91d.rda)
 ![plot of chunk unnamed-chunk-13](/RTCGA/figure/source/Usecases/unnamed-chunk-13-1.png)
 
 {% highlight r %}
 plotPValues( 47 )
 {% endhighlight %}
 
+Load: [`archivist::aread('MarcinKosinski/RTCGA_UseCases/fb297480eb54c5deec3c838ce05e1134')`](https://raw.githubusercontent.com/MarcinKosinski/RTCGA_UseCases/master/gallery/fb297480eb54c5deec3c838ce05e1134.rda)
 ![plot of chunk unnamed-chunk-13](/RTCGA/figure/source/Usecases/unnamed-chunk-13-2.png)
 
 # Low p-value, small group
@@ -331,25 +333,31 @@ j <- 15789+4
 #all[,j] <- as.numeric(as.character(all[,j]))
 
 vv <- cut(
-	all[,j],
-	c(-100,0,100),
-	labels = c("low expression", "high expression")
+  all[,j],
+  c(-100,0,100),
+  labels = c("low expression", "high expression")
 )
 ndf <- data.frame(
-	time = pmax(all$times, 1),
-	event = all$patient.vital_status ==1,
-	var = vv
+  time = pmax(all$times, 1),
+  event = all$patient.vital_status ==1,
+  var = vv
 )
 ndf <- na.omit(ndf)
 
 kmTCGA(
-	ndf,
-	times = "time",
-	status = "event",
-	explanatory.names = "var",
-	main = paste("Gene:", colnames(all)[j])
+  ndf,
+  times = "time",
+  status = "event",
+  explanatory.names = "var",
+  main = paste("Gene:", colnames(all)[j])
 )
 {% endhighlight %}
 
+Load: [`archivist::aread('MarcinKosinski/RTCGA_UseCases/671f60ff865c0c6ce6d7666c5e9576e7')`](https://raw.githubusercontent.com/MarcinKosinski/RTCGA_UseCases/master/gallery/671f60ff865c0c6ce6d7666c5e9576e7.rda)
 ![plot of chunk unnamed-chunk-14](/RTCGA/figure/source/Usecases/unnamed-chunk-14-1.png)
+
+
+{% highlight r %}
+pushGitHubRepo()
+{% endhighlight %}
 
