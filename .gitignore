@@ -57,3 +57,5 @@ vignettes/*.pdf
 *.xdy
 *.tdo
 .Rproj.user
+
+_site/
