@@ -28,8 +28,8 @@ clear please post an issue on
 library(RTCGA.clinical)
 survivalTCGA(BRCA.clinical, OV.clinical, extract.cols = "admin.disease_code") -> BRCAOV.survInfo
 kmTCGA(BRCAOV.survInfo, explanatory.names = "admin.disease_code",
-			 xlim = c(0,4000))
-					 
+       xlim = c(0,4000))
+           
 }
 \author{
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}

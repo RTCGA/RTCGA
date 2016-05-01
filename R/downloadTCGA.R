@@ -61,112 +61,112 @@
 #' @rdname downloadTCGA
 #' @export
 downloadTCGA <- function(cancerTypes, dataSet = "Merge_Clinical.Level_1", destDir,
-												 date = NULL, untarFile = TRUE, removeTar = TRUE, allDataSets = FALSE) {
-	
-	assert_that(is.character(cancerTypes) & (length(cancerTypes) > 0))
-	assert_that(is.character(dataSet) & (length(dataSet) == 1))
-	assert_that(is.character(destDir))
-	assert_that(is.null(date) || (is.character(date) & (length(date) == 1)))
-	assert_that(is.logical(untarFile) & (length(untarFile) == 1))
-	assert_that(is.logical(removeTar) & (length(removeTar) == 1))
-	assert_that(is.logical(allDataSets) & (length(allDataSets) == 1))
-	
-	# check if there was '/' mark at the end of directory destDir <- checkDirectory( destDir ) no need since I am using file.path
-	# function
-	
-	# # does the dir exist?  if (!file.exists(destDir)) { dir.create(destDir) }
-	
-	# ensure which date was specified
-	lastReleaseDate <- whichDateToUse(date = date)
-	
-	
-	for (element in cancerTypes) {
-		
-		
-		tryCatch({
-			# get index of page containing datasets fot this date of release and Cohort Code
-			filesParentURL <- parentURL(lastReleaseDate, element)
-			
-			
-			elementIndexes <- xml2::read_html(filesParentURL) %>% html_nodes("a") %>% html_attr("href") %>% grep(pattern = dataSet, value = TRUE) %>% 
-				gsub(pattern = "^[ \t]+", replacement = "") %>% grep(pattern = "gz$", value = TRUE)  #! md5
-		}, error = function(con) {
-			stop(paste("Data from ", lastReleaseDate, " can not be downloaded. Use other date from checkTCGA('Dates')."))
-		})
-		
-		elementIndexesNO_FFPELength <- elementIndexes %>%
-			grep("FFPE", x = . ,
-					 value = TRUE,
-					 invert = TRUE) %>% 
-			length()
-		
-		linksToData <- ifelse( elementIndexesNO_FFPELength < 1,
-													 elementIndexes[1],
-													 elementIndexes %>%
-													 	grep("FFPE", x = . ,
-													 			 value = TRUE,
-													 			 invert = TRUE) %>% .[1])
-		
-		if (length(elementIndexes) > 1 & !allDataSets){
-			cat('There were more than one datasets matching the dataSet parameter. \nDownloaded only \n',
-					linksToData, "\n\nAll matches were \n\n", paste(elementIndexes, collapse = "\n"), sep="")
-		}
-		if (allDataSets) {
-			linksToData <- elementIndexes
-		}                       
-		sapply(linksToData, function(linkToData){
-			# http://gdac.broadinstitute.org/runs/stddata__2015_02_04/data/BRCA/20150204/
-			file.create(file.path(destDir, linkToData))
-			download.file(url = paste0(filesParentURL, "/", linkToData), destfile = file.path(destDir, linkToData))
-			if (untarFile) {
-				untar(file.path(destDir, linkToData), exdir = destDir)
-			}
-			if (removeTar) {
-				file.remove(file.path(destDir, linkToData))
-			}
-		})
-	}
-	
+                         date = NULL, untarFile = TRUE, removeTar = TRUE, allDataSets = FALSE) {
+  
+  assert_that(is.character(cancerTypes) & (length(cancerTypes) > 0))
+  assert_that(is.character(dataSet) & (length(dataSet) == 1))
+  assert_that(is.character(destDir))
+  assert_that(is.null(date) || (is.character(date) & (length(date) == 1)))
+  assert_that(is.logical(untarFile) & (length(untarFile) == 1))
+  assert_that(is.logical(removeTar) & (length(removeTar) == 1))
+  assert_that(is.logical(allDataSets) & (length(allDataSets) == 1))
+  
+  # check if there was '/' mark at the end of directory destDir <- checkDirectory( destDir ) no need since I am using file.path
+  # function
+  
+  # # does the dir exist?  if (!file.exists(destDir)) { dir.create(destDir) }
+  
+  # ensure which date was specified
+  lastReleaseDate <- whichDateToUse(date = date)
+  
+  
+  for (element in cancerTypes) {
+    
+    
+    tryCatch({
+      # get index of page containing datasets fot this date of release and Cohort Code
+      filesParentURL <- parentURL(lastReleaseDate, element)
+      
+      
+      elementIndexes <- xml2::read_html(filesParentURL) %>% html_nodes("a") %>% html_attr("href") %>% grep(pattern = dataSet, value = TRUE) %>% 
+        gsub(pattern = "^[ \t]+", replacement = "") %>% grep(pattern = "gz$", value = TRUE)  #! md5
+    }, error = function(con) {
+      stop(paste("Data from ", lastReleaseDate, " can not be downloaded. Use other date from checkTCGA('Dates')."))
+    })
+    
+    elementIndexesNO_FFPELength <- elementIndexes %>%
+      grep("FFPE", x = . ,
+           value = TRUE,
+           invert = TRUE) %>% 
+      length()
+    
+    linksToData <- ifelse( elementIndexesNO_FFPELength < 1,
+                           elementIndexes[1],
+                           elementIndexes %>%
+                             grep("FFPE", x = . ,
+                                  value = TRUE,
+                                  invert = TRUE) %>% .[1])
+    
+    if (length(elementIndexes) > 1 & !allDataSets){
+      cat('There were more than one datasets matching the dataSet parameter. \nDownloaded only \n',
+          linksToData, "\n\nAll matches were \n\n", paste(elementIndexes, collapse = "\n"), sep="")
+    }
+    if (allDataSets) {
+      linksToData <- elementIndexes
+    }                       
+    sapply(linksToData, function(linkToData){
+      # http://gdac.broadinstitute.org/runs/stddata__2015_02_04/data/BRCA/20150204/
+      file.create(file.path(destDir, linkToData))
+      download.file(url = paste0(filesParentURL, "/", linkToData), destfile = file.path(destDir, linkToData))
+      if (untarFile) {
+        untar(file.path(destDir, linkToData), exdir = destDir)
+      }
+      if (removeTar) {
+        file.remove(file.path(destDir, linkToData))
+      }
+    })
+  }
+  
 }
 
 
 
 
 checkDirectory <- function(directory) {
-	# if (is.null(directory)) { directory <- get('.repoDir', envir = .ArchivistEnv) } else {
-	if (!grepl("/$", x = directory, perl = TRUE)) {
-		directory <- paste0(directory, "/")
-	}
-	# }
-	return(directory)
+  # if (is.null(directory)) { directory <- get('.repoDir', envir = .ArchivistEnv) } else {
+  if (!grepl("/$", x = directory, perl = TRUE)) {
+    directory <- paste0(directory, "/")
+  }
+  # }
+  return(directory)
 }
 
 
 
 parentURL <- function(lastReleaseDate, element) {
-	# 'stddata__2015_02_04' - lastReleaseDate
-	paste0("http://gdac.broadinstitute.org/runs/", lastReleaseDate, "/data/", element, "/", paste0(unlist(stri_extract_all_regex(str = lastReleaseDate, 
-																																																															 pattern = "[0-9]+")), collapse = ""))
+  # 'stddata__2015_02_04' - lastReleaseDate
+  paste0("http://gdac.broadinstitute.org/runs/", lastReleaseDate, "/data/", element, "/", paste0(unlist(stri_extract_all_regex(str = lastReleaseDate, 
+                                                                                                                               pattern = "[0-9]+")), collapse = ""))
 }
 
 whichDateToUse <- function(date) {
-	if (!is.null(date)) {
-		if (date %in% availableDates()) {
-			# .availableDates in availableDates function
-			paste0("stddata__", gsub(x = date, pattern = "-", replacement = "_"))
-		} else {
-			stop("Wrong date format or unavailable date of release. Use availableDates() function to recieve proper format and available dates.")
-		}
-	} else {
-		if (!exists(".lastReleaseDate", envir = .RTCGAEnv)) {
-			
-			if (!exists("..availableDates", envir = .RTCGAEnv)) {
-				invisible(availableDates())
-			}
-			# happens only once
-			availableDates() %>% tail(1) %>% gsub(pattern = "-", replacement = "_", fixed = TRUE) %>% paste0("stddata__", .) %>% assign(x = ".lastReleaseDate", 
-																																																																	value = ., envir = .RTCGAEnv)
-		}
-		get(".lastReleaseDate", envir = .RTCGAEnv)
-	}
+  if (!is.null(date)) {
+    if (date %in% availableDates()) {
+      # .availableDates in availableDates function
+      paste0("stddata__", gsub(x = date, pattern = "-", replacement = "_"))
+    } else {
+      stop("Wrong date format or unavailable date of release. Use availableDates() function to recieve proper format and available dates.")
+    }
+  } else {
+    if (!exists(".lastReleaseDate", envir = .RTCGAEnv)) {
+      
+      if (!exists("..availableDates", envir = .RTCGAEnv)) {
+        invisible(availableDates())
+      }
+      # happens only once
+      availableDates() %>% tail(1) %>% gsub(pattern = "-", replacement = "_", fixed = TRUE) %>% paste0("stddata__", .) %>% assign(x = ".lastReleaseDate", 
+                                                                                                                                  value = ., envir = .RTCGAEnv)
+    }
+    get(".lastReleaseDate", envir = .RTCGAEnv)
+  }
 }

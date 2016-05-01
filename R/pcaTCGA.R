@@ -47,8 +47,8 @@
 #' ## RNASeq expressions
 #' library(RTCGA.rnaseq)
 #' expressionsTCGA(BRCA.rnaseq, OV.rnaseq, HNSC.rnaseq) %>%
-#' 	rename(cohort = dataset) %>%	
-#' 	filter(substr(bcr_patient_barcode, 14, 15) == "01") -> BRCA.OV.HNSC.rnaseq.cancer
+#'   rename(cohort = dataset) %>%  
+#'   filter(substr(bcr_patient_barcode, 14, 15) == "01") -> BRCA.OV.HNSC.rnaseq.cancer
 #' 
 #' pcaTCGA(BRCA.OV.HNSC.rnaseq.cancer, "cohort")
 #' pcaTCGA(BRCA.OV.HNSC.rnaseq.cancer, "cohort", add.lines = FALSE)
@@ -61,51 +61,51 @@
 #' @rdname pcaTCGA
 #' @export
 pcaTCGA <- function(x, 
-									  group.names,
-										title = "",
-										return.pca = FALSE,
-										scale = TRUE,
-										center = TRUE,
-										var.scale = 1,
-										obs.scale = 1,
-										ellipse = TRUE,
-										circle = TRUE,
-										var.axes = FALSE,
-										alpha = 0.8,
-										add.lines = TRUE,
-									  ...) {
-	assert_that(is.data.frame(x))
-	assert_that(group.names %in% colnames(x), length(group.names) == 1)
+                    group.names,
+                    title = "",
+                    return.pca = FALSE,
+                    scale = TRUE,
+                    center = TRUE,
+                    var.scale = 1,
+                    obs.scale = 1,
+                    ellipse = TRUE,
+                    circle = TRUE,
+                    var.axes = FALSE,
+                    alpha = 0.8,
+                    add.lines = TRUE,
+                    ...) {
+  assert_that(is.data.frame(x))
+  assert_that(group.names %in% colnames(x), length(group.names) == 1)
 
 
-	x[sapply(x,is.numeric)] -> x.numeric
-	x.numeric %>% colSums() -> pca.col.sums
-	which(pca.col.sums == 0) -> pca.col.sums.only0
-	if (length(pca.col.sums.only0) > 0){
-		x.numeric[, -pca.col.sums.only0] -> x.numeric
-	}
-	# pca
-	x.numeric %>%
-		prcomp( scale = scale, center = center, ... ) -> PCA
-	
-	#rownames(PCA$rotation) <- 1:nrow(PCA$rotation) # no idea why this is neccessary anymore
-	ggbiplot(PCA, obs.scale = obs.scale, var.scale = var.scale,
-					 groups = x[,group.names] %>% unlist, ellipse = ellipse, circle = circle,
-					 var.axes=var.axes, alpha = alpha) + 
-		theme_RTCGA() +
-		ggtitle(title) -> pca.plot
-	
-	if (add.lines){
-		pca.plot <- pca.plot +
-			geom_abline(slope =  0, intercept = 0, linetype = 2, alpha = 0.5) +
-			geom_vline(xintercept = 0, linetype = 2, alpha = 0.5)
-	}
+  x[sapply(x,is.numeric)] -> x.numeric
+  x.numeric %>% colSums() -> pca.col.sums
+  which(pca.col.sums == 0) -> pca.col.sums.only0
+  if (length(pca.col.sums.only0) > 0){
+    x.numeric[, -pca.col.sums.only0] -> x.numeric
+  }
+  # pca
+  x.numeric %>%
+    prcomp( scale = scale, center = center, ... ) -> PCA
+  
+  #rownames(PCA$rotation) <- 1:nrow(PCA$rotation) # no idea why this is neccessary anymore
+  ggbiplot(PCA, obs.scale = obs.scale, var.scale = var.scale,
+           groups = x[,group.names] %>% unlist, ellipse = ellipse, circle = circle,
+           var.axes=var.axes, alpha = alpha) + 
+    theme_RTCGA() +
+    ggtitle(title) -> pca.plot
+  
+  if (add.lines){
+    pca.plot <- pca.plot +
+      geom_abline(slope =  0, intercept = 0, linetype = 2, alpha = 0.5) +
+      geom_vline(xintercept = 0, linetype = 2, alpha = 0.5)
+  }
 
-	if (return.pca) {
-		return(list(pca = PCA, pcaplot = pca.plot))
-	} else {
-		pca.plot
-	}
+  if (return.pca) {
+    return(list(pca = PCA, pcaplot = pca.plot))
+  } else {
+    pca.plot
+  }
 
-	
+  
 }

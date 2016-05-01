@@ -31,21 +31,21 @@
 #' @rdname installTCGA
 #' @export
 installTCGA <- function(packages = c('RTCGA.clinical', 'RTCGA.mutations',
-																		 'RTCGA.rnaseq', 'RTCGA.RPPA',
-																		 'RTCGA.mRNA', 'RTCGA.CNV',
-																		 'RTCGA.miRNASeq', 'RTCGA.PANCAN12',
-																		 'RTCGA.methylation'),
-												build_vignettes = TRUE, ...){
-	assert_that(is.character(packages) & length(packages) > 0 & 
-								all(packages %in% c('RTCGA.clinical', 'RTCGA.mutations',
-																		'RTCGA.rnaseq', 'RTCGA.RPPA',
-																		'RTCGA.mRNA', 'RTCGA.CNV',
-																		'RTCGA.miRNASeq', 'RTCGA.PANCAN12',
-																		'RTCGA.methylation')) )
-	assert_that(is.logical(build_vignettes))
-	sapply(packages, function(package){
-		devtools::install_github(file.path('RTCGA', package), 
-														 build_vignettes = build_vignettes, ...)
-	})
-	
+                                     'RTCGA.rnaseq', 'RTCGA.RPPA',
+                                     'RTCGA.mRNA', 'RTCGA.CNV',
+                                     'RTCGA.miRNASeq', 'RTCGA.PANCAN12',
+                                     'RTCGA.methylation'),
+                        build_vignettes = TRUE, ...){
+  assert_that(is.character(packages) & length(packages) > 0 & 
+                all(packages %in% c('RTCGA.clinical', 'RTCGA.mutations',
+                                    'RTCGA.rnaseq', 'RTCGA.RPPA',
+                                    'RTCGA.mRNA', 'RTCGA.CNV',
+                                    'RTCGA.miRNASeq', 'RTCGA.PANCAN12',
+                                    'RTCGA.methylation')) )
+  assert_that(is.logical(build_vignettes))
+  sapply(packages, function(package){
+    devtools::install_github(file.path('RTCGA', package), 
+                             build_vignettes = build_vignettes, ...)
+  })
+  
 }

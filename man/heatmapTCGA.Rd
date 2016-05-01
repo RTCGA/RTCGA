@@ -56,57 +56,57 @@ library(dplyr)
 
 
 expressionsTCGA(ACC.rnaseq, BLCA.rnaseq, BRCA.rnaseq, OV.rnaseq,
-								extract.cols = c("MET|4233", "ZNF500|26048", "ZNF501|115560")) \%>\%
-	rename(cohort = dataset,
-				 MET = `MET|4233`) \%>\%
-	#cancer samples
-	filter(substr(bcr_patient_barcode, 14, 15) == "01") \%>\%
-	mutate(MET = cut(MET,
-	 round(quantile(MET, probs = seq(0,1,0.25)), -2),
-	 include.lowest = TRUE,
-	 dig.lab = 5)) -> ACC_BLCA_BRCA_OV.rnaseq
+                extract.cols = c("MET|4233", "ZNF500|26048", "ZNF501|115560")) \%>\%
+  rename(cohort = dataset,
+         MET = `MET|4233`) \%>\%
+  #cancer samples
+  filter(substr(bcr_patient_barcode, 14, 15) == "01") \%>\%
+  mutate(MET = cut(MET,
+   round(quantile(MET, probs = seq(0,1,0.25)), -2),
+   include.lowest = TRUE,
+   dig.lab = 5)) -> ACC_BLCA_BRCA_OV.rnaseq
 
 ACC_BLCA_BRCA_OV.rnaseq \%>\%
-	select(-bcr_patient_barcode) \%>\%
-	group_by(cohort, MET) \%>\%
-	summarise_each(funs(median)) \%>\%
-	mutate(ZNF500 = round(`ZNF500|26048`),
-				 ZNF501 = round(`ZNF501|115560`)) -> ACC_BLCA_BRCA_OV.rnaseq.medians
+  select(-bcr_patient_barcode) \%>\%
+  group_by(cohort, MET) \%>\%
+  summarise_each(funs(median)) \%>\%
+  mutate(ZNF500 = round(`ZNF500|26048`),
+         ZNF501 = round(`ZNF501|115560`)) -> ACC_BLCA_BRCA_OV.rnaseq.medians
 heatmapTCGA(ACC_BLCA_BRCA_OV.rnaseq.medians,
-	"cohort", "MET", "ZNF500", title = "Heatmap of ZNF500 expression")
+  "cohort", "MET", "ZNF500", title = "Heatmap of ZNF500 expression")
 
 ## facet example
 library(RTCGA.mutations)
 library(dplyr)
 mutationsTCGA(BRCA.mutations, OV.mutations, ACC.mutations, BLCA.mutations) \%>\%
-	filter(Hugo_Symbol == 'TP53') \%>\%
-	filter(substr(bcr_patient_barcode, 14, 15) == "01") \%>\% # cancer tissue
-	mutate(bcr_patient_barcode = substr(bcr_patient_barcode, 1, 12)) -> ACC_BLCA_BRCA_OV.mutations
+  filter(Hugo_Symbol == 'TP53') \%>\%
+  filter(substr(bcr_patient_barcode, 14, 15) == "01") \%>\% # cancer tissue
+  mutate(bcr_patient_barcode = substr(bcr_patient_barcode, 1, 12)) -> ACC_BLCA_BRCA_OV.mutations
 
 mutationsTCGA(BRCA.mutations, OV.mutations, ACC.mutations, BLCA.mutations) -> ACC_BLCA_BRCA_OV.mutations_all
 
 ACC_BLCA_BRCA_OV.rnaseq \%>\%
-	mutate(bcr_patient_barcode = substr(bcr_patient_barcode, 1, 15)) \%>\%
-	filter(bcr_patient_barcode \%in\%
-	substr(ACC_BLCA_BRCA_OV.mutations_all$bcr_patient_barcode, 1, 15)) \%>\% 
-	# took patients for which we had any mutation information
-	# so avoided patients without any information about mutations
-	mutate(bcr_patient_barcode = substr(bcr_patient_barcode, 1, 12)) \%>\%
-	# strin_length(ACC_BLCA_BRCA_OV.mutations$bcr_patient_barcode) == 12
-	left_join(ACC_BLCA_BRCA_OV.mutations,
-	by = "bcr_patient_barcode") \%>\% #joined only with tumor patients
-	mutate(TP53 = ifelse(!is.na(Variant_Classification), "Mut", "WILD")) \%>\%
-	select(-bcr_patient_barcode, -Variant_Classification, -dataset, -Hugo_Symbol) \%>\% 
-	group_by(cohort, MET, TP53) \%>\% 
-	summarise_each(funs(median)) \%>\% 
-	mutate(ZNF501 = round(`ZNF501|115560`)) -> ACC_BLCA_BRCA_OV.rnaseq_TP53mutations_ZNF501medians
+  mutate(bcr_patient_barcode = substr(bcr_patient_barcode, 1, 15)) \%>\%
+  filter(bcr_patient_barcode \%in\%
+  substr(ACC_BLCA_BRCA_OV.mutations_all$bcr_patient_barcode, 1, 15)) \%>\% 
+  # took patients for which we had any mutation information
+  # so avoided patients without any information about mutations
+  mutate(bcr_patient_barcode = substr(bcr_patient_barcode, 1, 12)) \%>\%
+  # strin_length(ACC_BLCA_BRCA_OV.mutations$bcr_patient_barcode) == 12
+  left_join(ACC_BLCA_BRCA_OV.mutations,
+  by = "bcr_patient_barcode") \%>\% #joined only with tumor patients
+  mutate(TP53 = ifelse(!is.na(Variant_Classification), "Mut", "WILD")) \%>\%
+  select(-bcr_patient_barcode, -Variant_Classification, -dataset, -Hugo_Symbol) \%>\% 
+  group_by(cohort, MET, TP53) \%>\% 
+  summarise_each(funs(median)) \%>\% 
+  mutate(ZNF501 = round(`ZNF501|115560`)) -> ACC_BLCA_BRCA_OV.rnaseq_TP53mutations_ZNF501medians
 
 heatmapTCGA(ACC_BLCA_BRCA_OV.rnaseq_TP53mutations_ZNF501medians, "cohort", "MET",
-	fill = "ZNF501", facet.names = "TP53", title = "Heatmap of ZNF501 expression")
+  fill = "ZNF501", facet.names = "TP53", title = "Heatmap of ZNF501 expression")
 heatmapTCGA(ACC_BLCA_BRCA_OV.rnaseq_TP53mutations_ZNF501medians, "TP53", "MET",
-	fill = "ZNF501", facet.names = "cohort", title = "Heatmap of ZNF501 expression")
+  fill = "ZNF501", facet.names = "cohort", title = "Heatmap of ZNF501 expression")
 heatmapTCGA(ACC_BLCA_BRCA_OV.rnaseq_TP53mutations_ZNF501medians, "TP53", "cohort",
-	fill = "ZNF501", facet.names = "MET", title = "Heatmap of ZNF501 expression")
+  fill = "ZNF501", facet.names = "MET", title = "Heatmap of ZNF501 expression")
 }
 \author{
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}

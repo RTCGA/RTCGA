@@ -66,8 +66,8 @@ library(dplyr)
 ## RNASeq expressions
 library(RTCGA.rnaseq)
 expressionsTCGA(BRCA.rnaseq, OV.rnaseq, HNSC.rnaseq) \%>\%
-	rename(cohort = dataset) \%>\%	
-	filter(substr(bcr_patient_barcode, 14, 15) == "01") -> BRCA.OV.HNSC.rnaseq.cancer
+  rename(cohort = dataset) \%>\%  
+  filter(substr(bcr_patient_barcode, 14, 15) == "01") -> BRCA.OV.HNSC.rnaseq.cancer
 
 pcaTCGA(BRCA.OV.HNSC.rnaseq.cancer, "cohort")
 pcaTCGA(BRCA.OV.HNSC.rnaseq.cancer, "cohort", add.lines = FALSE)

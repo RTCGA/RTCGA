@@ -79,69 +79,69 @@
 #' @rdname survivalTCGA
 #' @export
 survivalTCGA <- function(..., extract.cols = NULL, extract.names = FALSE, 
-												 barcode.name = "patient.bcr_patient_barcode",
-												 event.name = "patient.vital_status",
-												 days.to.followup.name = "patient.days_to_last_followup",
-												 days.to.death.name = "patient.days_to_death"
-												 ) {
-	assert_that(is.null(extract.cols) | is.character(extract.cols))
-	assert_that(length(extract.names) == 1, is.logical(extract.names))
-	
+                         barcode.name = "patient.bcr_patient_barcode",
+                         event.name = "patient.vital_status",
+                         days.to.followup.name = "patient.days_to_last_followup",
+                         days.to.death.name = "patient.days_to_death"
+                         ) {
+  assert_that(is.null(extract.cols) | is.character(extract.cols))
+  assert_that(length(extract.names) == 1, is.logical(extract.names))
+  
 
- 	mapply(rep, 
- 		  sapply(substitute(list(...))[-1], deparse), 
- 		  lapply(list(...), nrow)) %>%	unlist -> dataset
-	
- 	if (extract.names){
- 	    dataset_or_not <- "dataset"
- 	} else {
- 	    dataset_or_not <- NULL
- 	}
+   mapply(rep, 
+       sapply(substitute(list(...))[-1], deparse), 
+       lapply(list(...), nrow)) %>%  unlist -> dataset
+  
+   if (extract.names){
+       dataset_or_not <- "dataset"
+   } else {
+       dataset_or_not <- NULL
+   }
 
-	bind_rows(...) %>%
-		mutate(dataset = dataset) %>%
-		select(one_of(
-			c(extract.cols,
-				barcode.name,
-				event.name,
-				days.to.followup.name,
-				days.to.death.name,
-				dataset_or_not)
-			)
-		) %>%
-		mutate_(.dots = setNames(paste0("toupper(as.character(",barcode.name,"))"),
-														 'bcr_patient_barcode')) %>%
-		#mutate(bcr_patient_barcode = toupper(as.character(patient.bcr_patient_barcode))) %>%
-		mutate_(.dots = setNames(paste0("ifelse(as.character(", event.name, ") %in% c('dead', 'deceased'),1,0)"),
-														 event.name)) %>%
-		mutate_(.dots = setNames(paste0('ifelse(!is.na(', days.to.followup.name, '),',
-														 'as.numeric(as.character(',days.to.followup.name, ')),',
-														 'as.numeric(as.character(',days.to.death.name,')))'),
-														 'times')) %>%
-		# mutate(patient.vital_status = ifelse(patient.vital_status %>%
-		# 							as.character() %in% c("dead", "deceased"),1,0),
-		# 	  times = ifelse( !is.na(patient.days_to_last_followup),
-		#  								patient.days_to_last_followup %>%
-		#  									as.character() %>%
-		#  									as.numeric(),
-		#  								patient.days_to_death %>%
-		#  									as.character() %>%
-		#  									as.numeric() ) ) %>%
-		filter(!is.na(times)) %>%
-		select(one_of(c("times",
-	 					'bcr_patient_barcode',
-	 					dataset_or_not,
-	 					event.name,
-	 					extract.cols))) %>%
-	    mutate(times = as.numeric(times)) %>%
-	    as.data.frame() #-> survData
-# 	class(survData) <- c("survivalTCGA", class(survData))
-# 	attr(survData, "status") <- "patient.vital_status"
-# 	attr(survData, "times") <- "times"
-# 	attr(survData, "explanatory.names") <- ifelse(length(c(extract.cols, dataset_or_not)) !=0,
-# 	                                              c(extract.cols, dataset_or_not),
-# 	                                              "1")
-	                                              
-	#survData
+  bind_rows(...) %>%
+    mutate(dataset = dataset) %>%
+    select(one_of(
+      c(extract.cols,
+        barcode.name,
+        event.name,
+        days.to.followup.name,
+        days.to.death.name,
+        dataset_or_not)
+      )
+    ) %>%
+    mutate_(.dots = setNames(paste0("toupper(as.character(",barcode.name,"))"),
+                             'bcr_patient_barcode')) %>%
+    #mutate(bcr_patient_barcode = toupper(as.character(patient.bcr_patient_barcode))) %>%
+    mutate_(.dots = setNames(paste0("ifelse(as.character(", event.name, ") %in% c('dead', 'deceased'),1,0)"),
+                             event.name)) %>%
+    mutate_(.dots = setNames(paste0('ifelse(!is.na(', days.to.followup.name, '),',
+                             'as.numeric(as.character(',days.to.followup.name, ')),',
+                             'as.numeric(as.character(',days.to.death.name,')))'),
+                             'times')) %>%
+    # mutate(patient.vital_status = ifelse(patient.vital_status %>%
+    #               as.character() %in% c("dead", "deceased"),1,0),
+    #     times = ifelse( !is.na(patient.days_to_last_followup),
+    #                  patient.days_to_last_followup %>%
+    #                    as.character() %>%
+    #                    as.numeric(),
+    #                  patient.days_to_death %>%
+    #                    as.character() %>%
+    #                    as.numeric() ) ) %>%
+    filter(!is.na(times)) %>%
+    select(one_of(c("times",
+             'bcr_patient_barcode',
+             dataset_or_not,
+             event.name,
+             extract.cols))) %>%
+      mutate(times = as.numeric(times)) %>%
+      as.data.frame() #-> survData
+#   class(survData) <- c("survivalTCGA", class(survData))
+#   attr(survData, "status") <- "patient.vital_status"
+#   attr(survData, "times") <- "times"
+#   attr(survData, "explanatory.names") <- ifelse(length(c(extract.cols, dataset_or_not)) !=0,
+#                                                 c(extract.cols, dataset_or_not),
+#                                                 "1")
+                                                
+  #survData
 }
 

@@ -313,94 +313,94 @@
 #' @rdname readTCGA
 #' @export
 readTCGA <- function(path, dataType, ...) {
-	assertthat::assert_that(is.character(path) & length(path) == 1)
-	assertthat::assert_that(is.character(dataType) & length(dataType) == 1)
-	assertthat::assert_that(dataType %in% c("clinical", "rnaseq", "mutations", "RPPA", "mRNA",
-																					"miRNASeq", "methylation", "isoforms"))
-	
-	if (dataType %in% c("clinical", "miRNASeq")) {
-		return(read.clinical(path, ...))
-	}
-	if (dataType %in% c("methylation")) {
-		return(read.methylation(path, ...))
-	}
-	if (dataType %in% c("rnaseq", "RPPA", "mRNA", "isoforms")) {
-		return(read.rnaseq(path, ...))
-	}
-	if (dataType == "mutations") {
-		return(read.mutations(path, ...))
-	}
+  assertthat::assert_that(is.character(path) & length(path) == 1)
+  assertthat::assert_that(is.character(dataType) & length(dataType) == 1)
+  assertthat::assert_that(dataType %in% c("clinical", "rnaseq", "mutations", "RPPA", "mRNA",
+                                          "miRNASeq", "methylation", "isoforms"))
+  
+  if (dataType %in% c("clinical", "miRNASeq")) {
+    return(read.clinical(path, ...))
+  }
+  if (dataType %in% c("methylation")) {
+    return(read.methylation(path, ...))
+  }
+  if (dataType %in% c("rnaseq", "RPPA", "mRNA", "isoforms")) {
+    return(read.rnaseq(path, ...))
+  }
+  if (dataType == "mutations") {
+    return(read.mutations(path, ...))
+  }
 }
 
 read.clinical <- function(clinicalDir, ...) {
-	
-	comboClinical <- fread(clinicalDir, data.table = FALSE)
-	
-	colNames <- comboClinical[, 1]
-	
-	comboClinical <- as.data.frame(t(comboClinical[, -1]), ...)
-	names(comboClinical) <- colNames
-	
-	return(comboClinical)
+  
+  comboClinical <- fread(clinicalDir, data.table = FALSE)
+  
+  colNames <- comboClinical[, 1]
+  
+  comboClinical <- as.data.frame(t(comboClinical[, -1]), ...)
+  names(comboClinical) <- colNames
+  
+  return(comboClinical)
 }
 
 read.methylation <- function(methylationDir, ...){
-	methylationData <- fread(methylationDir, data.table = FALSE)
-	first_row <- methylationData[1,]
-	Beta_value_column <- which(first_row == "Beta_value")
-	methylationData <- methylationData[,c(1, 3, 4, 5, Beta_value_column)]
-	colNames <- methylationData[,1]
-	methylationData <- as.data.frame(t(methylationData[,-1]), ...)
-	names(methylationData) <- colNames
-	row.names(methylationData)[1:3] <- c("TCGA-05.1", "TCGA-05.2", "TCGA-05.3")
-	x <- row.names(methylationData)[4]
-	row.names(methylationData)[4] <- sub("\\.3$", "", x)
-	methylationDataNumeric <- methylationData[-c(1:3), -1]
-	apply(methylationDataNumeric, MARGIN = 2, function(x){
-		as.numeric(as.character(x))
-	}) -> methylationDataNumeric
-	methylationDataCodes <- cbind(bcr_patient_barcode = row.names(methylationData)[-c(1:3)],
-																as.data.frame(methylationDataNumeric))
-	#attr(methylationDataCodes, "info") <- methylationData[c(1:3), -1]
-	return(methylationDataCodes) 
+  methylationData <- fread(methylationDir, data.table = FALSE)
+  first_row <- methylationData[1,]
+  Beta_value_column <- which(first_row == "Beta_value")
+  methylationData <- methylationData[,c(1, 3, 4, 5, Beta_value_column)]
+  colNames <- methylationData[,1]
+  methylationData <- as.data.frame(t(methylationData[,-1]), ...)
+  names(methylationData) <- colNames
+  row.names(methylationData)[1:3] <- c("TCGA-05.1", "TCGA-05.2", "TCGA-05.3")
+  x <- row.names(methylationData)[4]
+  row.names(methylationData)[4] <- sub("\\.3$", "", x)
+  methylationDataNumeric <- methylationData[-c(1:3), -1]
+  apply(methylationDataNumeric, MARGIN = 2, function(x){
+    as.numeric(as.character(x))
+  }) -> methylationDataNumeric
+  methylationDataCodes <- cbind(bcr_patient_barcode = row.names(methylationData)[-c(1:3)],
+                                as.data.frame(methylationDataNumeric))
+  #attr(methylationDataCodes, "info") <- methylationData[c(1:3), -1]
+  return(methylationDataCodes) 
 }
 
 read.rnaseq <- function(rnaseqDir, ...) {
-	rnaseqData <- fread(rnaseqDir, data.table = FALSE) %>% t()
-	colnames(rnaseqData) <- rnaseqData[1, ]
-	barcodes <- rownames(rnaseqData)
-	rnaseqData <- rnaseqData[-1, -1] %>%
-		apply(2, function(x) as.numeric(as.character(x))) %>%
-		as.data.frame(x = .) %>%
-		cbind(bcr_patient_barcode = barcodes[-1], .)
-	return(rnaseqData)
+  rnaseqData <- fread(rnaseqDir, data.table = FALSE) %>% t()
+  colnames(rnaseqData) <- rnaseqData[1, ]
+  barcodes <- rownames(rnaseqData)
+  rnaseqData <- rnaseqData[-1, -1] %>%
+    apply(2, function(x) as.numeric(as.character(x))) %>%
+    as.data.frame(x = .) %>%
+    cbind(bcr_patient_barcode = barcodes[-1], .)
+  return(rnaseqData)
 }
 
 read.mutations <- function(mutationsDir, ...) {
-	
-	element <- mutationsDir
-	
-	maf_files <- list.files(element) %>% file.path(element, .) %>% grep(x = ., pattern = "TCGA", value = TRUE)
-	# there are extra manifest.txt files
-	
-	barcodes <- list.files(element) %>% grep(x = ., pattern = "TCGA", value = TRUE) %>% substr(start = 1, stop = 15)
-	
-	pb <- txtProgressBar(min = 0, max = length(maf_files), style = 3)
-	tmp <- tempfile()
-	for (i in seq_along(maf_files)) {
-		
-		maf_data <- read.delim(maf_files[i])
-		n_col <- ncol(maf_data) + 1
-		maf_data[, n_col] <- barcodes[i]
-		names(maf_data)[n_col] <- "bcr_patient_barcode"
-		
-		invisible(write.table(x = maf_data, sep = "\t", file = tmp, append = TRUE, col.names = i==1, quote = FALSE, row.names = FALSE))
-		
-		
-		setTxtProgressBar(pb, i)
-	}
-	close(pb)
-	mutations_file <- read.delim(tmp)
-	file.remove(tmp)
-	return(mutations_file)
+  
+  element <- mutationsDir
+  
+  maf_files <- list.files(element) %>% file.path(element, .) %>% grep(x = ., pattern = "TCGA", value = TRUE)
+  # there are extra manifest.txt files
+  
+  barcodes <- list.files(element) %>% grep(x = ., pattern = "TCGA", value = TRUE) %>% substr(start = 1, stop = 15)
+  
+  pb <- txtProgressBar(min = 0, max = length(maf_files), style = 3)
+  tmp <- tempfile()
+  for (i in seq_along(maf_files)) {
+    
+    maf_data <- read.delim(maf_files[i])
+    n_col <- ncol(maf_data) + 1
+    maf_data[, n_col] <- barcodes[i]
+    names(maf_data)[n_col] <- "bcr_patient_barcode"
+    
+    invisible(write.table(x = maf_data, sep = "\t", file = tmp, append = TRUE, col.names = i==1, quote = FALSE, row.names = FALSE))
+    
+    
+    setTxtProgressBar(pb, i)
+  }
+  close(pb)
+  mutations_file <- read.delim(tmp)
+  file.remove(tmp)
+  return(mutations_file)
 } 
