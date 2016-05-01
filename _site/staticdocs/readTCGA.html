@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>readTCGA. RTCGA 1.1.18</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="
+Marcin Kosinski, &lt;a href='mailto:m.p.kosinski@gmail.com'&gt;m.p.kosinski@gmail.com&lt;/a&gt;
+
+Witold Chodor, &lt;a href='mailto:witoldchodor@gmail.com'&gt;witoldchodor@gmail.com&lt;/a&gt;
+">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">RTCGA 1.1.18</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Read TCGA data to the tidy format</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>readTCGA(path, dataType, ...)</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>path</dt>
+      <dd>See details and examples.</dd>
+      <dt>dataType</dt>
+      <dd>One of <code>'clinical', 'rnaseq', 'mutations', 'RPPA', 'mRNA', 'miRNASeq', 'methylation', 'isoforms'</code> depending on which type of data user is trying to read in the tidy format.</dd>
+      <dt>...</dt>
+      <dd>Further arguments passed to the <a href='http://www.inside-r.org/packages/cran/BiocGenerics/docs/as.data.frame'>as.data.frame</a>.</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+An output:
+<ul>
+<li> If <code>dataType = 'clinical'</code> a <code>data.frame</code> with clinical data.
+     </li>
+<li> If <code>dataType = 'rnaseq'</code> a <code>data.frame</code> with rnaseq data.
+     </li>
+<li> If <code>dataType = 'mutations'</code> a <code>data.frame</code> with mutations data.
+     </li>
+<li> If <code>dataType = 'RPPA'</code> a <code>data.frame</code> with RPPA data.
+     </li>
+<li> If <code>dataType = 'mRNA'</code> a <code>data.frame</code> with mRNA data.
+     </li>
+<li> If <code>dataType = 'miRNASeq'</code> a <code>data.frame</code> with miRNASeq data.
+     </li>
+<li> If <code>dataType = 'methylation'</code> a <code>data.frame</code> with methylation data.
+     </li>
+<li> If <code>dataType = 'isoforms'</code> a <code>data.frame</code> with isoforms data.
+</li>
+</ul></p>
+  
+      <p></dl></p>
+  
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p><code>readTCGA</code> function allows to read unzipped files: 
+<ul>
+<li> clinical data - <code>Merge_Clinical.Level_1</code> 
+     </li>
+<li> rnaseq data (genes' expressions) - <code>rnaseqv2__illuminahiseq_rnaseqv2</code>
+     </li>
+<li> genes' mutations data - <code>Mutation_Packager_Calls.Level</code>
+     </li>
+<li> Reverse phase protein array data (RPPA) - <code>protein_normalization__data.Level_3</code>
+     </li>
+<li> Merge transcriptome agilent data (mRNA) - 
+     <code>Merge_transcriptome__agilentg4502a_07_3__unc_edu__Level_3__unc_lowess_normalization_gene_level__data.Level_3</code>
+     </li>
+<li> miRNASeq data - 
+     <code>Merge_mirnaseq__illuminaga_mirnaseq__bcgsc_ca__Level_3__miR_gene_expression__data.Level_3</code> or 
+     <code>"Merge_mirnaseq__illuminahiseq_mirnaseq__bcgsc_ca__Level_3__miR_gene_expression__data.Level_3"</code>
+     </li>
+<li> methylation data - 
+     <code>Merge_methylation__humanmethylation27</code>
+     </li>
+<li> isoforms data - 
+     <code>Merge_rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_isoforms_normalized__data.Level_3</code> 
+     </li>
+</ul></p>
+  
+      <p>from TCGA project. Those files can be easily downloded with <a href='downloadTCGA.html'>downloadTCGA</a> function. See examples.</p>
+  
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+
+      <p>All cohort names can be checked using: <code> sub( x = names( infoTCGA() ), '-counts', '')</code>.</p>
+  
+      <p>Parameter <code>path</code> specification: 
+<ul>
+<li> If <code>dataType = 'clinical'</code> a path to a <code>cancerType.clin.merged.txt</code> file. 
+</li>
+<li> If <code>dataType = 'mutations'</code> a path to the unzziped folder <code>Mutation_Packager_Calls.Level</code> containing <code>.maf</code> files.
+</li>
+<li> If <code>dataType = 'rnaseq'</code> a path to the uzziped file <code>rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level</code>.
+</li>
+<li> If <code>dataType = 'RPPA'</code> a path to the unzipped file in folder <code>protein_normalization__data.Level_3</code>.
+</li>
+<li> If <code>dataType = 'mRNA'</code> a path to the unzipped file <code>cancerType.transcriptome__agilentg4502a_07_3__unc_edu__Level_3__unc_lowess_normalization_gene_level__data.data.txt</code>.
+</li>
+<li> If <code>dataType = 'miRNASeq'</code> a path to unzipped files <code>cancerType.mirnaseq__illuminahiseq_mirnaseq__bcgsc_ca__Level_3__miR_gene_expression__data.data.txt</code> or <code>cancerType.mirnaseq__illuminaga_mirnaseq__bcgsc_ca__Level_3__miR_gene_expression__data.data.txt</code>
+</li>
+<li> If <code>dataType = 'methylation'</code> a path to unzipped files <code>cancerType.methylation__humanmethylation27__jhu_usc_edu__Level_3__within_bioassay_data_set_function__data.data.txt</code>.
+</li>
+<li> If <code>dataType = 'isoforms'</code> a path to unzipped files <code>cancerType.rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_isoforms_normalized__data.data.txt</code>.
+</li>
+</ul></p>
+  
+      <p></p>
+  
+    </div>
+
+    <div class="Issues">
+      <h2>Issues</h2>
+
+      <p></p>
+  
+      <p>If you have any problems, issues or think that something is missing or is not
+clear please post an issue on 
+<a href = 'https://github.com/RTCGA/RTCGA/issues'>https://github.com/RTCGA/RTCGA/issues</a>.</p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>
+## Not run:  
+# 
+# ##############
+# ##### clinical
+# ##############
+# 
+# dir.create(&#39;data&#39;)
+# 
+# # downloading clinical data
+# # dataset = &quot;clinical&quot; is default parameter so we may omit it
+# downloadTCGA( cancerTypes = c(&#39;BRCA&#39;, &#39;OV&#39;),
+#               destDir = &#39;data&#39; )
+# 
+#     
+# # reading datasets    
+# sapply( c(&#39;BRCA&#39;, &#39;OV&#39;), function( element ){
+#     folder &lt;- grep( paste0( &#39;(_&#39;,element,&#39;\\.&#39;, &#39;|&#39;,&#39;_&#39;,element,&#39;-FFPE)&#39;, &#39;.*Clinical&#39;),
+#                     list.files(&#39;data/&#39;),value = TRUE)
+#     path &lt;- paste0( &#39;data/&#39;, folder, &#39;/&#39;, element, &#39;.clin.merged.txt&#39;)
+#     assign( value = readTCGA( path, &#39;clinical&#39; ), 
+#             x = paste0(element, &#39;.clin.data&#39;), envir = .GlobalEnv)
+#     })
+#      
+# ############
+# ##### rnaseq
+# ############
+# 
+# dir.create(&#39;data2&#39;)
+# 
+# # downloading rnaseq data
+# downloadTCGA( cancerTypes = &#39;BRCA&#39;, 
+# dataSet = &#39;rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level&#39;,
+#               destDir = &#39;data2&#39; )
+# 
+# # shortening paths and directories
+# list.files( &#39;data2/&#39;) %&gt;% 
+#     file.path( &#39;data2&#39;, .) %&gt;%
+#     file.rename( to = substr(.,start=1,stop=50))
+# 
+# # reading data
+# list.files( &#39;data2/&#39;) %&gt;% 
+#     file.path( &#39;data2&#39;, .) -&gt; folder
+# 
+# folder %&gt;%
+#     list.files %&gt;%
+#     file.path( folder, .) %&gt;%
+#     grep( pattern = &#39;illuminahiseq&#39;, x = ., value = TRUE) -&gt; pathRNA
+# readTCGA( path = pathRNA, dataType = &#39;rnaseq&#39; ) -&gt; my_data
+# 
+# 
+# ###############
+# ##### mutations
+# ###############
+# 
+# # Example directory in which untarred data will be stored
+# dir.create(&#39;data3&#39;)
+# 
+# 
+# downloadTCGA( cancerTypes = &#39;OV&#39;, 
+#               dataSet = &#39;Mutation_Packager_Calls.Level&#39;,
+#               destDir = &#39;data3&#39; )
+# 
+# # reading data
+# list.files( &#39;data3/&#39;) %&gt;% 
+#     file.path( &#39;data3&#39;, .) -&gt; folder
+# 
+# readTCGA(folder, &#39;mutations&#39;) -&gt; mut_file
+# 
+# #################
+# ##### methylation
+# #################
+# 
+# # Example directory in which untarred data will be stored
+# dir.create(&#39;data4&#39;)
+# 
+# # Download KIRP methylation data and store it in data4 folder
+# cancerType = &quot;KIRP&quot;
+# downloadTCGA(cancerTypes = cancerType,
+#              dataSet = &quot;Merge_methylation__humanmethylation27&quot;,
+#              destDir = &quot;data4&quot;)
+# 
+# # Shorten path of subdirectory with KIRP methylation data
+# list.files(path = &quot;data4&quot;, full.names = TRUE) %&gt;%
+#     file.rename(from = ., to = file.path(&quot;data4&quot;, paste0(cancerType, &quot;.methylation&quot;)))
+# 
+# # Remove manifest.txt file
+# list.files(path = &quot;data4&quot;, full.names = TRUE) %&gt;%
+#     list.files(path = ., full.names = TRUE) %&gt;% 
+#     grep(&quot;MANIFEST.txt&quot;, x = ., value = TRUE) %&gt;%
+#     file.remove()
+# 
+# # Read KIRP methylation data
+# path &lt;- list.files(path = &quot;data4&quot;, full.names = TRUE) %&gt;%
+#     list.files(path = ., full.names = TRUE)
+# 
+# KIRP.methylation &lt;- readTCGA(path, dataType = &quot;methylation&quot;)
+# 
+# 
+# ##########
+# ##### RPPA
+# ##########
+# 
+# # Directory in which untarred data will be stored
+# dir.create(&#39;data5&#39;)
+# 
+# # Download BRCA RPPA data and store it in data5 folder
+# cancerType = &quot;BRCA&quot;
+# downloadTCGA(cancerTypes = cancerType,
+#              dataSet = &quot;protein_normalization__data.Level_3&quot;,
+#              destDir = &quot;data5&quot;)
+# 
+# # Shorten path of subdirectory with BRCA RPPA data
+# list.files(path = &quot;data5&quot;, full.names = TRUE) %&gt;%
+#     file.rename(from = ., to = file.path(&quot;data5&quot;, paste0(cancerType, &quot;.RPPA&quot;)))
+# 
+# # Remove manifest.txt file
+# list.files(path = &quot;data5&quot;, full.names = TRUE) %&gt;%
+#     list.files(path = ., full.names = TRUE) %&gt;% 
+#     grep(&quot;MANIFEST.txt&quot;, x = ., value = TRUE) %&gt;%
+#     file.remove()
+# 
+# # Read BRCA RPPA data
+# path &lt;- list.files(path = &quot;data5&quot;, full.names = TRUE) %&gt;%
+#     list.files(path = ., full.names = TRUE)
+# 
+# BRCA.RPPA &lt;- readTCGA(path, dataType = &quot;RPPA&quot;)
+# 
+# 
+# ##########
+# ##### mRNA
+# ##########
+# 
+# # Directory in which untarred data will be stored
+# dir.create(&#39;data6&#39;)
+# 
+# # Download UCEC mRNA data and store it in data6 folder
+# cancerType = &quot;UCEC&quot;
+# downloadTCGA(cancerTypes = cancerType,
+# dataSet = &quot;Merge_transcriptome__agilentg4502a_07_3__unc_edu__Level_3__unc_lowess_normalization_gene_level__data.Level_3&quot;,
+#              destDir = &quot;data6&quot;)
+# 
+# # Shorten path of subdirectory with UCEC mRNA data
+# list.files(path = &quot;data6&quot;, full.names = TRUE) %&gt;%
+#     file.rename(from = ., to = file.path(&quot;data6&quot;,paste0(cancerType, &quot;.mRNA&quot;)))
+# 
+# # Remove manifest.txt file
+# list.files(path = &quot;data6&quot;, full.names = TRUE) %&gt;%
+#     list.files(path = ., full.names = TRUE) %&gt;% 
+#     grep(&quot;MANIFEST.txt&quot;, x = ., value = TRUE) %&gt;%
+#     file.remove()
+# 
+# # Read UCEC mRNA data
+# path &lt;- list.files(path = &quot;data6&quot;, full.names = TRUE) %&gt;%
+#     list.files(path = ., full.names = TRUE)
+# 
+# UCEC.mRNA &lt;- readTCGA(path, dataType = &quot;mRNA&quot;)
+# 
+# ##############
+# ##### miRNASeq
+# ##############
+# 
+# # Directory in which untarred data will be stored
+# dir.create(&#39;data7&#39;)
+# 
+# # Download BRCA miRNASeq data and store it in data7 folder
+# # Remember that miRNASeq data are produced by two machines:
+# # Illumina Genome Analyzer and Illumina HiSeq 2000 machines
+# cancerType &lt;- &quot;BRCA&quot;
+# downloadTCGA(cancerTypes = cancerType,
+# dataSet = &quot;Merge_mirnaseq__illuminaga_mirnaseq__bcgsc_ca__Level_3__miR_gene_expression__data.Level_3&quot;,
+#              destDir = &quot;data7&quot;)
+# 
+# downloadTCGA(cancerTypes = cancerType,
+# dataSet = &quot;Merge_mirnaseq__illuminahiseq_mirnaseq__bcgsc_ca__Level_3__miR_gene_expression__data.Level_3&quot;,
+#              destDir = &quot;data7&quot;)
+# 
+# # Shorten path of subdirectory with BRCA miRNASeq data
+# list.files(path = &quot;data7&quot;, full.names = TRUE) %&gt;%
+#     sapply(function(path){
+#         if (grepl(pattern = &quot;illuminaga&quot;, path)){
+#             file.rename(from = grep(pattern = &quot;illuminaga&quot;, path, value = TRUE),
+#                         to = file.path(&quot;data7&quot;,paste0(cancerType, &quot;.miRNASeq.illuminaga&quot;)))
+#         } else if (grepl(pattern = &quot;illuminahiseq&quot;, path)){
+#             file.rename(from = grep(pattern = &quot;illuminahiseq&quot;, path, value = TRUE),
+#                         to = file.path(&quot;data7&quot;,paste0(cancerType, &quot;.miRNASeq.illuminahiseq&quot;)))
+#         }
+#     })
+#     
+# # Remove manifest.txt file
+# list.files(path = &quot;data7&quot;, full.names = TRUE) %&gt;%
+#     list.files(path = ., full.names = TRUE) %&gt;% 
+#     grep(&quot;MANIFEST.txt&quot;, x = ., value = TRUE) %&gt;%
+#     file.remove()
+# 
+# # Read BRCA miRNASeq data
+# path &lt;- list.files(path = &quot;data7&quot;, full.names = TRUE) %&gt;%
+#     list.files(path = ., full.names = TRUE)
+# path_illuminaga &lt;- grep(&quot;illuminaga&quot;, path, fixed = TRUE, value = TRUE)
+# path_illuminahiseq &lt;- grep(&quot;illuminahiseq&quot;, path, fixed = TRUE, value = TRUE)
+# 
+# BRCA.miRNASeq.illuminaga &lt;- readTCGA(path_illuminaga, dataType = &quot;miRNASeq&quot;)
+# BRCA.miRNASeq.illuminahiseq &lt;- readTCGA(path_illuminahiseq, dataType = &quot;miRNASeq&quot;)
+# 
+# BRCA.miRNASeq.illuminaga &lt;- cbind(machine = &quot;Illumina Genome Analyzer&quot;, BRCA.miRNASeq.illuminaga)
+# BRCA.miRNASeq.illuminahiseq &lt;- cbind(machine = &quot;Illumina HiSeq 2000&quot;, BRCA.miRNASeq.illuminahiseq)
+# 
+# BRCA.miRNASeq &lt;- rbind(BRCA.miRNASeq.illuminaga, BRCA.miRNASeq.illuminahiseq)
+# 
+# ##############
+# ##### isoforms
+# ##############
+# 
+# # Directory in which untarred data will be stored
+# dir.create(&#39;data8&#39;)
+# 
+# # Download ACC isoforms data and store it in data8 folder
+# cancerType = &quot;ACC&quot;
+# downloadTCGA(cancerTypes = cancerType,
+# dataSet = &quot;Merge_rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_isoforms_normalized__data.Level_3&quot;,
+#              destDir = &quot;data8&quot;)
+# 
+# # Shorten path of subdirectory with ACC isoforms data
+# list.files(path = &quot;data8&quot;, full.names = TRUE) %&gt;%
+#     file.rename(from = ., to = file.path(&quot;data8&quot;,paste0(cancerType, &quot;.isoforms&quot;)))
+# 
+# # Remove manifest.txt file
+# list.files(path = &quot;data8&quot;, full.names = TRUE) %&gt;%
+#     list.files(path = ., full.names = TRUE) %&gt;% 
+#     grep(&quot;MANIFEST.txt&quot;, x = ., value = TRUE) %&gt;%
+#     file.remove()
+# 
+# # Read ACC isoforms data
+# path &lt;- list.files(path = &quot;data8&quot;, full.names = TRUE) %&gt;%
+#     list.files(path = ., full.names = TRUE)
+# 
+# ACC.isoforms &lt;- readTCGA(path, dataType = &quot;isoforms&quot;)
+# 
+# ## End(Not run)
+
+</div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>readTCGA</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+<span class = "pkg">RTCGA</span> website <a href = 'http://rtcga.github.io/RTCGA/Download.html'>http://rtcga.github.io/RTCGA/Download.html</a>.
+
+Other RTCGA: <code><a href='RTCGA-package.html'>RTCGA-package</a></code>,
+  <code><a href='boxplotTCGA.html'>boxplotTCGA</a></code>, <code><a href='checkTCGA.html'>checkTCGA</a></code>,
+  <code><a href='convertTCGA.html'>convertTCGA</a></code>, <code><a href='datasetsTCGA.html'>datasetsTCGA</a></code>,
+  <code><a href='downloadTCGA.html'>downloadTCGA</a></code>,
+  <code><a href='expressionsTCGA.html'>expressionsTCGA</a></code>, <code><a href='heatmapTCGA.html'>heatmapTCGA</a></code>,
+  <code><a href='infoTCGA.html'>infoTCGA</a></code>, <code><a href='installTCGA.html'>installTCGA</a></code>,
+  <code><a href='kmTCGA.html'>kmTCGA</a></code>, <code><a href='mutationsTCGA.html'>mutationsTCGA</a></code>,
+  <code><a href='pcaTCGA.html'>pcaTCGA</a></code>, <code><a href='survivalTCGA.html'>survivalTCGA</a></code>,
+  <code><a href='theme_RTCGA.html'>theme_RTCGA</a></code>
+
+    
+    <h2>Author</h2>
+    
+Marcin Kosinski, <a href='mailto:m.p.kosinski@gmail.com'>m.p.kosinski@gmail.com</a>
+
+Witold Chodor, <a href='mailto:witoldchodor@gmail.com'>witoldchodor@gmail.com</a>
+
+    
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

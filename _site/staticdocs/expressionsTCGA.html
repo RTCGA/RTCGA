@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>expressionsTCGA. RTCGA 1.1.18</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="
+Marcin Kosinski, &lt;a href='mailto:m.p.kosinski@gmail.com'&gt;m.p.kosinski@gmail.com&lt;/a&gt;
+">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">RTCGA 1.1.18</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Gather Expressions for TCGA Datasets</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>expressionsTCGA(..., extract.cols&nbsp;=&nbsp;NULL, extract.names&nbsp;=&nbsp;TRUE)</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>...</dt>
+      <dd>A data.frame or data.frames from TCGA study containing expressions informations.</dd>
+      <dt>extract.cols</dt>
+      <dd>A character specifing the names of columns to be extracted with <code>bcr_patient_barcode</code>. 
+If <code>NULL</code> (by default) all columns are returned.</dd>
+      <dt>extract.names</dt>
+      <dd>Logical, whether to extract names of passed data.frames in <code>...</code>.</dd>
+    </dl>
+    
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>Function gathers expressions over multiple TCGA datasets and extracts expressions for desired genes.
+See <a href='http://www.inside-r.org/packages/cran/RTCGA.rnaseq/docs/rnaseq'>rnaseq</a>, <a href='http://www.inside-r.org/packages/cran/RTCGA.mRNA/docs/mRNA'>mRNA</a>, <a href='http://www.inside-r.org/packages/cran/RTCGA.RPPA/docs/RPPA'>RPPA</a>, <a href='http://www.inside-r.org/packages/cran/RTCGA.miRNASeq/docs/miRNASeq'>miRNASeq</a>, <a href='http://www.inside-r.org/packages/cran/RTCGA.methylation/docs/methylation'>methylation</a>.</p>
+  
+    </div>
+
+    <div class="Note">
+      <h2>Note</h2>
+
+      <p>Input data.frames should contain column <code>bcr_patient_barcode</code> if <code>extract.cols</code> is specified.</p>
+  
+    </div>
+
+    <div class="Issues">
+      <h2>Issues</h2>
+
+      <p></p>
+  
+      <p>If you have any problems, issues or think that something is missing or is not
+clear please post an issue on 
+<a href = 'https://github.com/RTCGA/RTCGA/issues'>https://github.com/RTCGA/RTCGA/issues</a>.</p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>
+## for all examples
+library(dplyr)
+library(tidyr)
+library(ggplot2) 
+
+## RNASeq expressions
+library(RTCGA.rnaseq)
+expressionsTCGA(BRCA.rnaseq, OV.rnaseq, HNSC.rnaseq,
+               extract.cols = &quot;VENTX|27287&quot;) %&gt;%
+  rename(cohort = dataset,
+         VENTX = `VENTX|27287`) %&gt;%  
+ filter(substr(bcr_patient_barcode, 14, 15) == &quot;01&quot;) %&gt;% #cancer samples
+  ggplot(aes(y = log1p(VENTX),
+             x = reorder(cohort, log1p(VENTX), median),
+             fill = cohort)) + 
+  geom_boxplot() +
+  theme_RTCGA() +
+  scale_fill_brewer(palette = &quot;Dark2&quot;)
+</div>
+<strong class='message'>Scale for &#39;fill&#39; is already present. Adding another scale for
+&#39;fill&#39;, which will replace the existing scale.</strong>
+<p><img src='expressionsTCGA-3.png' alt='' width='540' height='400' /></p>
+<div class='input'>  
+## mRNA expressions  
+library(tidyr)
+library(RTCGA.mRNA)
+expressionsTCGA(BRCA.mRNA, COAD.mRNA, LUSC.mRNA, UCEC.mRNA,
+               extract.cols = c(&quot;ARHGAP24&quot;, &quot;TRAV20&quot;)) %&gt;%
+  rename(cohort = dataset) %&gt;%
+  select(-bcr_patient_barcode) %&gt;%
+  gather(cohort) -&gt; data2plot
+names(data2plot)[2] &lt;- &quot;mRNA&quot;
+data2plot %&gt;%
+  ggplot(aes(y = value,
+             x = reorder(cohort, value, mean),
+             fill = cohort)) + 
+  geom_boxplot() +
+  theme_RTCGA() +
+  scale_fill_brewer(palette = &quot;Set3&quot;) +
+  facet_grid(mRNA~.) +
+  theme(legend.position = &quot;top&quot;)
+</div>
+<strong class='message'>Scale for &#39;fill&#39; is already present. Adding another scale for
+&#39;fill&#39;, which will replace the existing scale.</strong>
+<strong class='warning'>Warning message:
+Removed 2 rows containing non-finite values (stat_boxplot).</strong>
+<p><img src='expressionsTCGA-7.png' alt='' width='540' height='400' /></p>
+<div class='input'>
+
+## RPPA expressions
+library(RTCGA.RPPA)
+expressionsTCGA(ACC.RPPA, BLCA.RPPA, BRCA.RPPA,
+    extract.cols = c(&quot;4E-BP1_pS65&quot;, &quot;4E-BP1&quot;)) %&gt;%
+  rename(cohort = dataset) %&gt;%
+  select(-bcr_patient_barcode) %&gt;%
+  gather(cohort) -&gt; data2plot
+names(data2plot)[2] &lt;- &quot;RPPA&quot;
+data2plot %&gt;%
+  ggplot(aes(fill = cohort, 
+             y = value,
+             x = RPPA)) +
+  geom_boxplot() +
+  theme_dark(base_size = 15) +
+  scale_fill_manual(values = c(&quot;#eb6420&quot;, &quot;#207de5&quot;, &quot;#fbca04&quot;)) +
+  coord_flip() +
+  theme(legend.position = &quot;top&quot;) +
+  geom_jitter(alpha = 0.5, col = &quot;white&quot;, size = 0.6, width = 0.7)
+</div>
+<p><img src='expressionsTCGA-9.png' alt='' width='540' height='400' /></p>
+<div class='input'>
+
+
+## miRNASeq expressions 
+library(RTCGA.miRNASeq)
+# miRNASeq has bcr_patienct_barcode in rownames...
+mutate(ACC.miRNASeq, 
+   bcr_patient_barcode = substr(rownames(ACC.miRNASeq), 1, 25)) -&gt; ACC.miRNASeq.bcr
+mutate(CESC.miRNASeq, 
+   bcr_patient_barcode = substr(rownames(CESC.miRNASeq), 1, 25)) -&gt; CESC.miRNASeq.bcr
+mutate(CHOL.miRNASeq, 
+   bcr_patient_barcode = substr(rownames(CHOL.miRNASeq), 1, 25)) -&gt; CHOL.miRNASeq.bcr
+mutate(LAML.miRNASeq, 
+   bcr_patient_barcode = substr(rownames(LAML.miRNASeq), 1, 25)) -&gt; LAML.miRNASeq.bcr
+mutate(PAAD.miRNASeq, 
+   bcr_patient_barcode = substr(rownames(PAAD.miRNASeq), 1, 25)) -&gt; PAAD.miRNASeq.bcr
+mutate(THYM.miRNASeq, 
+   bcr_patient_barcode = substr(rownames(THYM.miRNASeq), 1, 25)) -&gt; THYM.miRNASeq.bcr
+mutate(LGG.miRNASeq, 
+   bcr_patient_barcode = substr(rownames(LGG.miRNASeq), 1, 25)) -&gt; LGG.miRNASeq.bcr
+mutate(STAD.miRNASeq, 
+   bcr_patient_barcode = substr(rownames(STAD.miRNASeq), 1, 25)) -&gt; STAD.miRNASeq.bcr
+
+
+expressionsTCGA(ACC.miRNASeq.bcr, CESC.miRNASeq.bcr, CHOL.miRNASeq.bcr, 
+            LAML.miRNASeq.bcr, PAAD.miRNASeq.bcr, THYM.miRNASeq.bcr,
+            LGG.miRNASeq.bcr, STAD.miRNASeq.bcr,
+ extract.cols = c(&quot;machine&quot;, &quot;hsa-mir-101-1&quot;, &quot;miRNA_ID&quot;)) %&gt;%
+               rename(cohort = dataset) %&gt;%
+  filter(miRNA_ID == &quot;read_count&quot;) %&gt;%
+  select(-bcr_patient_barcode, -miRNA_ID) %&gt;%
+  gather(cohort, machine) -&gt; data2plot
+names(data2plot)[3:4] &lt;- c(&quot;drop&quot;,&quot;value&quot;)
+data2plot %&gt;%
+  select(-drop) %&gt;%
+  mutate(value = as.numeric(value)) %&gt;%
+  ggplot(aes(x = cohort,
+             y = log1p(value),
+             fill = as.factor(machine)) )+
+  geom_boxplot() +
+ theme_RTCGA(base_size = 13) +
+  coord_flip() +
+  theme(legend.position = &quot;top&quot;) +
+  scale_fill_brewer(palette = &quot;Paired&quot;) +
+  ggtitle(&quot;hsa-mir-101-1&quot;)
+</div>
+<strong class='message'>Scale for &#39;fill&#39; is already present. Adding another scale for
+&#39;fill&#39;, which will replace the existing scale.</strong>
+<p><img src='expressionsTCGA-12.png' alt='' width='540' height='400' /></p>
+<div class='input'></div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>expressionsTCGA</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+<span class = "pkg">RTCGA</span> website <a href = 'http://rtcga.github.io/RTCGA/Visualizations.html'>http://rtcga.github.io/RTCGA/Visualizations.html</a>.
+
+Other RTCGA: <code><a href='RTCGA-package.html'>RTCGA-package</a></code>,
+  <code><a href='boxplotTCGA.html'>boxplotTCGA</a></code>, <code><a href='checkTCGA.html'>checkTCGA</a></code>,
+  <code><a href='convertTCGA.html'>convertTCGA</a></code>, <code><a href='datasetsTCGA.html'>datasetsTCGA</a></code>,
+  <code><a href='downloadTCGA.html'>downloadTCGA</a></code>, <code><a href='heatmapTCGA.html'>heatmapTCGA</a></code>,
+  <code><a href='infoTCGA.html'>infoTCGA</a></code>, <code><a href='installTCGA.html'>installTCGA</a></code>,
+  <code><a href='kmTCGA.html'>kmTCGA</a></code>, <code><a href='mutationsTCGA.html'>mutationsTCGA</a></code>,
+  <code><a href='pcaTCGA.html'>pcaTCGA</a></code>, <code><a href='readTCGA.html'>readTCGA</a></code>,
+  <code><a href='survivalTCGA.html'>survivalTCGA</a></code>, <code><a href='theme_RTCGA.html'>theme_RTCGA</a></code>
+
+    
+    <h2>Author</h2>
+    
+Marcin Kosinski, <a href='mailto:m.p.kosinski@gmail.com'>m.p.kosinski@gmail.com</a>
+
+    
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>convertTCGA. RTCGA 1.1.18</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="
+Marcin Kosinski, &lt;a href='mailto:m.p.kosinski@gmail.com'&gt;m.p.kosinski@gmail.com&lt;/a&gt;
+">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">RTCGA 1.1.18</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Convert data from RTCGA family to Bioconductor classes</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>convertTCGA(dataSet, dataType&nbsp;=&nbsp;"expression")</div>
+<div>convertPANCAN12(dataSet)</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>dataSet</dt>
+      <dd>A data.frame to be converted to <a href='http://www.inside-r.org/packages/cran/Biobase/docs/class.ExpressionSet'>ExpressionSet</a> or <a href='http://www.inside-r.org/packages/cran/GenomicRanges/docs/GRanges-class'>GRanges</a>.</dd>
+      <dt>dataType</dt>
+      <dd>One of <code>expression</code> or <code>CNV</code> (for <span class = "pkg">RTCGA.CNV</span> datasets).</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+Functions return an <a href='http://www.inside-r.org/packages/cran/Biobase/docs/class.ExpressionSet'>ExpressionSet</a> or a <a href='http://www.inside-r.org/packages/cran/GenomicRanges/docs/GRanges-class'>GRanges</a> for <span class = "pkg">RTCGA.CNV</span>
+</dl></p>
+  
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>Functions use <span class = "pkg">Biobase</span> (<a href = 'http://bioconductor.org/packages/release/bioc/html/Biobase.html'>http://bioconductor.org/packages/release/bioc/html/Biobase.html</a>) package to transform
+data from packages from RTCGA data family to Bioconductor classes (<span class = "pkg">RTCGA.rnaseq</span>, <span class = "pkg">RTCGA.RPPA</span>, <span class = "pkg">RTCGA.PANCAN12</span>,
+<span class = "pkg">mRNA</span>, <span class = "pkg">RTCGA.methylation</span> to <a href='http://www.inside-r.org/packages/cran/Biobase/docs/class.ExpressionSet'>ExpressionSet</a> and <span class = "pkg">RTCGA.CNV</span> to <a href='http://www.inside-r.org/packages/cran/GenomicRanges/docs/GRanges-class'>GRanges</a>). For <span class = "pkg">RTCGA.PANCAN12</span> there is sense to convert
+<code>expression.cb1, expression.cb2, cnv.cb</code>.</p>
+  
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+
+      <p>This functionality is motivated by that we were asked to offer the data in Bioconductor-friendly classes because many users already
+have their data in one of the core infrastructure classes. Data of the same type in compatible
+containers promotes interoperability and makes it easy to combine and organize.</p>
+  
+      <p>Bioconductor classes were designed to capitalize on the biological structure of the data. If
+data have a range-based component it's natural, for Bioconductor users, to store and access
+these as a GRanges where they can extract position, strand etc. in the same way. Similarly for
+ExpressionSet. This class holds expression data along with experiment metadata and comes with
+built in accessors to extract and manipulate data. The idea is to offer a common API to the
+data; extracting the start position in a GRanges is always start(). With a data.frame it is
+different each time (unless select() is implemented) as the column names and organization of
+data can be different.</p>
+  
+      <p>AnnotationHub and the soon to come ExperimentHub will host many different types of data. A
+primary goal moving forward is to offer similar data in a consistent format. For example, CNV
+data in AnnotationHub is offered as a GRanges and as more CNV are added we will ask that they
+too are packaged as GRanges. The aim is that streamlined data on the back-end will make for a
+more intuitive experience on the front-end.</p>
+  
+    </div>
+
+    <div class="Biobase and GenomicRanges">
+      <h2>Biobase and GenomicRanges</h2>
+
+      <p></p>
+  
+      <p>This function use tools from the fantastic <span class = "pkg">Biobase</span> (and <span class = "pkg">GenomicRanges</span> for CNV)
+package, so you'll need to make sure to have it installed.</p>
+  
+    </div>
+
+    <div class="Issues">
+      <h2>Issues</h2>
+
+      <p></p>
+  
+      <p>If you have any problems, issues or think that something is missing or is not
+clear please post an issue on 
+<a href = 'https://github.com/RTCGA/RTCGA/issues'>https://github.com/RTCGA/RTCGA/issues</a>.</p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>
+
+########
+########
+# Expression data
+########
+########
+library(RTCGA.rnaseq)
+library(Biobase)
+</div>
+<strong class='message'>Loading required package: BiocGenerics</strong>
+<strong class='message'>Loading required package: parallel</strong>
+<strong class='message'>
+Attaching package: ‘BiocGenerics’
+</strong>
+<strong class='message'>The following objects are masked from ‘package:parallel’:
+
+    clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,
+    clusterExport, clusterMap, parApply, parCapply, parLapply,
+    parLapplyLB, parRapply, parSapply, parSapplyLB
+</strong>
+<strong class='message'>The following objects are masked from ‘package:dplyr’:
+
+    combine, intersect, setdiff, union
+</strong>
+<strong class='message'>The following objects are masked from ‘package:stats’:
+
+    IQR, mad, xtabs
+</strong>
+<strong class='message'>The following objects are masked from ‘package:base’:
+
+    anyDuplicated, append, as.data.frame, as.vector, cbind,
+    colnames, do.call, duplicated, eval, evalq, Filter, Find,
+    get, grep, grepl, intersect, is.unsorted, lapply, lengths,
+    Map, mapply, match, mget, order, paste, pmax, pmax.int,
+    pmin, pmin.int, Position, rank, rbind, Reduce, rownames,
+    sapply, setdiff, sort, table, tapply, union, unique,
+    unlist, unsplit
+</strong>
+<strong class='message'>Welcome to Bioconductor
+
+    Vignettes contain introductory material; view with
+    &#39;browseVignettes()&#39;. To cite Bioconductor, see
+    &#39;citation(&quot;Biobase&quot;)&#39;, and for packages
+    &#39;citation(&quot;pkgname&quot;)&#39;.
+</strong>
+<div class='input'>convertTCGA(BRCA.rnaseq) -&gt; BRCA.rnaseq_ExpressionSet
+## Not run: 
+# library(RTCGA.PANCAN12)
+# convertPANCAN12(expression.cb1) -&gt; PANCAN12_ExpressionSet
+# library(RTCGA.RPPA)
+# convertTCGA(BRCA.RPPA) -&gt; BRCA.RPPA_ExpressionSet
+# library(RTCGA.methylation)
+# convertTCGA(BRCA.methylation) -&gt; BRCA.methylation_ExpressionSet
+# library(RTCGA.mRNA)
+# convertTCGA(BRCA.mRNA) -&gt; BRCA.mRNA_ExpressionSet 
+# ########
+# ########
+# # CNV
+# ########
+# ########
+# library(RTCGA.CNV)
+# library(GRanges)
+# convertTCGA(BRCA.CNV, &quot;CNV&quot;) -&gt; BRCA.CNV_GRanges
+# 
+# ## End(Not run)
+
+</div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>convertPANCAN12</li><li>convertTCGA</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+<span class = "pkg">RTCGA</span> website <a href = 'http://rtcga.github.io/RTCGA/Download.html'>http://rtcga.github.io/RTCGA/Download.html</a>.
+
+Other RTCGA: <code><a href='RTCGA-package.html'>RTCGA-package</a></code>,
+  <code><a href='boxplotTCGA.html'>boxplotTCGA</a></code>, <code><a href='checkTCGA.html'>checkTCGA</a></code>,
+  <code><a href='datasetsTCGA.html'>datasetsTCGA</a></code>, <code><a href='downloadTCGA.html'>downloadTCGA</a></code>,
+  <code><a href='expressionsTCGA.html'>expressionsTCGA</a></code>, <code><a href='heatmapTCGA.html'>heatmapTCGA</a></code>,
+  <code><a href='infoTCGA.html'>infoTCGA</a></code>, <code><a href='installTCGA.html'>installTCGA</a></code>,
+  <code><a href='kmTCGA.html'>kmTCGA</a></code>, <code><a href='mutationsTCGA.html'>mutationsTCGA</a></code>,
+  <code><a href='pcaTCGA.html'>pcaTCGA</a></code>, <code><a href='readTCGA.html'>readTCGA</a></code>,
+  <code><a href='survivalTCGA.html'>survivalTCGA</a></code>, <code><a href='theme_RTCGA.html'>theme_RTCGA</a></code>
+
+    
+    <h2>Author</h2>
+    
+Marcin Kosinski, <a href='mailto:m.p.kosinski@gmail.com'>m.p.kosinski@gmail.com</a>
+
+    
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

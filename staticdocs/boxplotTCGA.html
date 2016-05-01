@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>boxplotTCGA. RTCGA 1.1.18</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="
+Marcin Kosinski, &lt;a href='mailto:m.p.kosinski@gmail.com'&gt;m.p.kosinski@gmail.com&lt;/a&gt;
+">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">RTCGA 1.1.18</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Create Boxplots for TCGA Datasets</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>boxplotTCGA(data, x, y, fill&nbsp;=&nbsp;x, coord.flip&nbsp;=&nbsp;TRUE, facet.names&nbsp;=&nbsp;NULL, ylab&nbsp;=&nbsp;y, xlab&nbsp;=&nbsp;x, legend.title&nbsp;=&nbsp;xlab, legend&nbsp;=&nbsp;"top", ...)</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>data</dt>
+      <dd>A data.frame from TCGA study containing variables to be plotted.</dd>
+      <dt>x</dt>
+      <dd>A character name of variable containing groups.</dd>
+      <dt>y</dt>
+      <dd>A character name of continous variable to be plotted.</dd>
+      <dt>fill</dt>
+      <dd>A character names of fill variable. By default, the same as <code>x</code>.</dd>
+      <dt>coord.flip</dt>
+      <dd>Whether to flip coordinates.</dd>
+      <dt>facet.names</dt>
+      <dd>A character of length maximum 2 containing names of variables to produce facets. See examples.</dd>
+      <dt>ylab</dt>
+      <dd>The name of y label. Remember about <code>coord.flip</code>.</dd>
+      <dt>xlab</dt>
+      <dd>The name of x label. Remember about <code>coord.flip</code>.</dd>
+      <dt>legend.title</dt>
+      <dd>A character with legend's title.</dd>
+      <dt>legend</dt>
+      <dd>A character specifying legend position. Allowed values are one of
+c("top", "bottom", "left", "right", "none"). Default is "top" side position.
+to remove the legend use legend = "none".</dd>
+      <dt>...</dt>
+      <dd>Further arguments passed to <a href='http://www.inside-r.org/packages/cran/ggplot2/docs/geom_boxplot'>geom_boxplot</a>.</dd>
+    </dl>
+    
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>Function creates boxplots (<a href='http://www.inside-r.org/packages/cran/ggplot2/docs/geom_boxplot'>geom_boxplot</a>) for TCGA Datasets.</p>
+  
+    </div>
+
+    <div class="Issues">
+      <h2>Issues</h2>
+
+      <p></p>
+  
+      <p>If you have any problems, issues or think that something is missing or is not
+clear please post an issue on 
+<a href = 'https://github.com/RTCGA/RTCGA/issues'>https://github.com/RTCGA/RTCGA/issues</a>.</p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>library(RTCGA)
+library(RTCGA.rnaseq)
+</div>
+<strong class='message'>Loading required package: knitr</strong>
+<div class='input'># perfrom plot
+library(dplyr)
+</div>
+<strong class='message'>
+Attaching package: ‘dplyr’
+</strong>
+<strong class='message'>The following objects are masked from ‘package:stats’:
+
+    filter, lag
+</strong>
+<strong class='message'>The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+</strong>
+<div class='input'>expressionsTCGA(ACC.rnaseq, BLCA.rnaseq, BRCA.rnaseq, OV.rnaseq,
+  extract.cols = &quot;MET|4233&quot;) %&gt;%
+  rename(cohort = dataset,
+  MET = `MET|4233`) %&gt;%  
+  #cancer samples
+  filter(substr(bcr_patient_barcode, 14, 15) == &quot;01&quot;) -&gt; ACC_BLCA_BRCA_OV.rnaseq
+  
+
+boxplotTCGA(ACC_BLCA_BRCA_OV.rnaseq, &quot;cohort&quot;, &quot;MET&quot;)
+</div>
+<p><img src='boxplotTCGA-8.png' alt='' width='540' height='400' /></p>
+<div class='input'>boxplotTCGA(ACC_BLCA_BRCA_OV.rnaseq, &quot;cohort&quot;, &quot;log1p(MET)&quot;)
+</div>
+<p><img src='boxplotTCGA-10.png' alt='' width='540' height='400' /></p>
+<div class='input'>boxplotTCGA(ACC_BLCA_BRCA_OV.rnaseq, &quot;reorder(cohort,log1p(MET), median)&quot;, &quot;log1p(MET)&quot;)
+</div>
+<p><img src='boxplotTCGA-12.png' alt='' width='540' height='400' /></p>
+<div class='input'>boxplotTCGA(ACC_BLCA_BRCA_OV.rnaseq, &quot;reorder(cohort,log1p(MET), max)&quot;, &quot;log1p(MET)&quot;)
+</div>
+<p><img src='boxplotTCGA-14.png' alt='' width='540' height='400' /></p>
+<div class='input'>boxplotTCGA(ACC_BLCA_BRCA_OV.rnaseq, &quot;reorder(cohort,log1p(MET), median)&quot;, &quot;log1p(MET)&quot;,
+xlab = &quot;Cohort Type&quot;, ylab = &quot;Logarithm of MET&quot;)
+</div>
+<p><img src='boxplotTCGA-16.png' alt='' width='540' height='400' /></p>
+<div class='input'>boxplotTCGA(ACC_BLCA_BRCA_OV.rnaseq, &quot;reorder(cohort,log1p(MET), median)&quot;, &quot;log1p(MET)&quot;, 
+xlab = &quot;Cohort Type&quot;, ylab = &quot;Logarithm of MET&quot;, legend.title = &quot;Cohorts&quot;)
+</div>
+<p><img src='boxplotTCGA-18.png' alt='' width='540' height='400' /></p>
+<div class='input'>boxplotTCGA(ACC_BLCA_BRCA_OV.rnaseq, &quot;reorder(cohort,log1p(MET), median)&quot;, &quot;log1p(MET)&quot;, 
+xlab = &quot;Cohort Type&quot;, ylab = &quot;Logarithm of MET&quot;, legend.title = &quot;Cohorts&quot;, legend = &quot;bottom&quot;)
+</div>
+<p><img src='boxplotTCGA-20.png' alt='' width='540' height='400' /></p>
+<div class='input'>
+## facet example
+library(RTCGA.mutations)
+library(dplyr)
+mutationsTCGA(BRCA.mutations, OV.mutations, ACC.mutations, BLCA.mutations) %&gt;% 
+  filter(Hugo_Symbol == &#39;TP53&#39;) %&gt;%
+  filter(substr(bcr_patient_barcode, 14, 15) == &quot;01&quot;) %&gt;% # cancer tissue
+  mutate(bcr_patient_barcode = substr(bcr_patient_barcode, 1, 12)) -&gt; ACC_BLCA_BRCA_OV.mutations
+
+mutationsTCGA(BRCA.mutations, OV.mutations, ACC.mutations, BLCA.mutations) -&gt; ACC_BLCA_BRCA_OV.mutations_all
+
+ACC_BLCA_BRCA_OV.rnaseq %&gt;%
+  mutate(bcr_patient_barcode = substr(bcr_patient_barcode, 1, 15)) %&gt;%
+  filter(bcr_patient_barcode %in% 
+  substr(ACC_BLCA_BRCA_OV.mutations_all$bcr_patient_barcode, 1, 15)) %&gt;%
+  # took patients for which we had any mutation information
+  # so avoided patients without any information about mutations
+  mutate(bcr_patient_barcode = substr(bcr_patient_barcode, 1, 12)) %&gt;%
+  # strin_length(ACC_BLCA_BRCA_OV.mutations$bcr_patient_barcode) == 12
+  left_join(ACC_BLCA_BRCA_OV.mutations,
+  by = &quot;bcr_patient_barcode&quot;) %&gt;% #joined only with tumor patients
+  mutate(TP53 = ifelse(!is.na(Variant_Classification), &quot;Mut&quot;, &quot;WILD&quot;)) %&gt;%
+  select(cohort, MET, TP53) -&gt; ACC_BLCA_BRCA_OV.rnaseq_TP53mutations
+
+boxplotTCGA(ACC_BLCA_BRCA_OV.rnaseq_TP53mutations, &quot;reorder(cohort,log1p(MET), median)&quot;, &quot;log1p(MET)&quot;, 
+xlab = &quot;Cohort Type&quot;, ylab = &quot;Logarithm of MET&quot;, legend.title = &quot;Cohorts&quot;, legend = &quot;bottom&quot;,
+facet.names = c(&quot;TP53&quot;))
+</div>
+<p><img src='boxplotTCGA-22.png' alt='' width='540' height='400' /></p>
+<div class='input'>
+boxplotTCGA(ACC_BLCA_BRCA_OV.rnaseq_TP53mutations, &quot;reorder(cohort,log1p(MET), median)&quot;, &quot;log1p(MET)&quot;, 
+xlab = &quot;Cohort Type&quot;, ylab = &quot;Logarithm of MET&quot;, legend.title = &quot;Cohorts&quot;, legend = &quot;bottom&quot;,
+fill = c(&quot;TP53&quot;))
+</div>
+<p><img src='boxplotTCGA-24.png' alt='' width='540' height='400' /></p>
+<div class='input'></div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>boxplotTCGA</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+<span class = "pkg">RTCGA</span> website <a href = 'http://rtcga.github.io/RTCGA/Visualizations.html'>http://rtcga.github.io/RTCGA/Visualizations.html</a>.
+
+Other RTCGA: <code><a href='RTCGA-package.html'>RTCGA-package</a></code>,
+  <code><a href='checkTCGA.html'>checkTCGA</a></code>, <code><a href='convertTCGA.html'>convertTCGA</a></code>,
+  <code><a href='datasetsTCGA.html'>datasetsTCGA</a></code>, <code><a href='downloadTCGA.html'>downloadTCGA</a></code>,
+  <code><a href='expressionsTCGA.html'>expressionsTCGA</a></code>, <code><a href='heatmapTCGA.html'>heatmapTCGA</a></code>,
+  <code><a href='infoTCGA.html'>infoTCGA</a></code>, <code><a href='installTCGA.html'>installTCGA</a></code>,
+  <code><a href='kmTCGA.html'>kmTCGA</a></code>, <code><a href='mutationsTCGA.html'>mutationsTCGA</a></code>,
+  <code><a href='pcaTCGA.html'>pcaTCGA</a></code>, <code><a href='readTCGA.html'>readTCGA</a></code>,
+  <code><a href='survivalTCGA.html'>survivalTCGA</a></code>, <code><a href='theme_RTCGA.html'>theme_RTCGA</a></code>
+
+    
+    <h2>Author</h2>
+    
+Marcin Kosinski, <a href='mailto:m.p.kosinski@gmail.com'>m.p.kosinski@gmail.com</a>
+
+    
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

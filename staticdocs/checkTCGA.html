@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>checkTCGA. RTCGA 1.1.18</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="
+Marcin Kosinski, &lt;a href='mailto:m.p.kosinski@gmail.com'&gt;m.p.kosinski@gmail.com&lt;/a&gt;
+">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">RTCGA 1.1.18</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Information about datasets from TCGA project</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>checkTCGA(what, cancerType, date&nbsp;=&nbsp;NULL)</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>what</dt>
+      <dd>One of <code>DataSets</code> or <code>Dates</code>.</dd>
+      <dt>cancerType</dt>
+      <dd>A character of length 1 containing abbreviation (Cohort code - <a href = 'http://gdac.broadinstitute.org/'>http://gdac.broadinstitute.org/</a>)
+of types of cancers to check for.</dd>
+      <dt>date</dt>
+      <dd>A <code>NULL</code> or character specifying from which date informations should be checked.
+By default (<code>date = NULL</code>) the newest available date is used. All available dates can be checked on 
+<a href = 'http://gdac.broadinstitute.org/runs/'>http://gdac.broadinstitute.org/runs/</a> or by using <code>checkTCGA('Dates')</code> 
+function. Required format <code>'YYYY-MM-DD'</code>.</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+<ul>
+<li> If <code>what='DataSets'</code> a data.frame of available datasets' names (to pass to the <a href='downloadTCGA.html'>downloadTCGA</a> function) and sizes.
+     </li>
+<li> If <code>what='Dates'</code> a vector of available dates to pass to the <a href='downloadTCGA.html'>downloadTCGA</a> function.
+     </li>
+</ul></p>
+  
+      <p></dl></p>
+  
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>The <code>checkTCGA</code> function let's to check</p>
+  
+      <p><ul>
+<li> <code>DataSets</code>: TCGA datasets' names for current release date and cohort.
+     </li>
+<li> <code>Dates</code>: TCGA datasets' dates of release.
+ </li>
+</ul></p>
+  
+      <p></p>
+  
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+
+      <p><ul>
+<li> If <code>what='DataSets'</code> enables to check TCGA datasets' names for current release date and cohort.
+     </li>
+<li> If <code>what='Dates'</code> enables to check dates of TCGA datasets' releases.
+     </li>
+</ul></p>
+  
+      <p></p>
+  
+    </div>
+
+    <div class="Issues">
+      <h2>Issues</h2>
+
+      <p></p>
+  
+      <p>If you have any problems, issues or think that something is missing or is not
+clear please post an issue on 
+<a href = 'https://github.com/RTCGA/RTCGA/issues'>https://github.com/RTCGA/RTCGA/issues</a>.</p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>
+############################# 
+
+# names for current release date and cohort
+checkTCGA(&#39;DataSets&#39;, &#39;BRCA&#39; )
+</div>
+<div class='output'>   Size
+1   37M
+2   50K
+3  723K
+4  135K
+5  135K
+6   77K
+7   78K
+8  1.5M
+9   57K
+10 1.2K
+11 160K
+12 3.4M
+13  86K
+14  83M
+15 3.2G
+16 1.1M
+17  15M
+18 2.9M
+19  44M
+20 1.3M
+21 2.6G
+22 277M
+23 195M
+24 298M
+25  93M
+26 869M
+27 249M
+28 2.8G
+29 243M
+30  18M
+31  18M
+32 5.3M
+33 4.6M
+34  37M
+35 399M
+36  10M
+37 1.1G
+38  81M
+39 1.9M
+40  37M
+41 1.5G
+42 6.6M
+43 7.4M
+                                                                                                                                            Name
+1  BRCA-FFPE.Merge_methylation__humanmethylation450__jhu_usc_edu__Level_3__within_bioassay_data_set_function__data.Level_3.2016012800.0.0.tar.gz
+2                   BRCA-FFPE.Merge_mirnaseq__illuminahiseq_mirnaseq__bcgsc_ca__Level_3__miR_gene_expression__data.Level_3.2016012800.0.0.tar.gz
+3                BRCA-FFPE.Merge_mirnaseq__illuminahiseq_mirnaseq__bcgsc_ca__Level_3__miR_isoform_expression__data.Level_3.2016012800.0.0.tar.gz
+4                         BRCA-FFPE.Merge_snp__genome_wide_snp_6__broad_mit_edu__Level_3__segmented_scna_hg18__seg.Level_3.2016012800.0.0.tar.gz
+5                         BRCA-FFPE.Merge_snp__genome_wide_snp_6__broad_mit_edu__Level_3__segmented_scna_hg19__seg.Level_3.2016012800.0.0.tar.gz
+6      BRCA-FFPE.Merge_snp__genome_wide_snp_6__broad_mit_edu__Level_3__segmented_scna_minus_germline_cnv_hg18__seg.Level_3.2016012800.0.0.tar.gz
+7      BRCA-FFPE.Merge_snp__genome_wide_snp_6__broad_mit_edu__Level_3__segmented_scna_minus_germline_cnv_hg19__seg.Level_3.2016012800.0.0.tar.gz
+8                                                                                 BRCA-FFPE.Methylation_Preprocess.Level_3.2016012800.0.0.tar.gz
+9                                                                               BRCA-FFPE.miRseq_Mature_Preprocess.Level_3.2016012800.0.0.tar.gz
+10                                                                                     BRCA-FFPE.miRseq_Preprocess.Level_3.2016012800.0.0.tar.gz
+11                                                                                        BRCA.Clinical_Pick_Tier1.Level_4.2016012800.0.0.tar.gz
+12                                                                                             BRCA.Merge_Clinical.Level_1.2016012800.0.0.tar.gz
+13                              BRCA.Merge_cna__illuminahiseq_dnaseqc__hms_harvard_edu__Level_3__segmentation__seg.Level_3.2016012800.0.0.tar.gz
+14       BRCA.Merge_methylation__humanmethylation27__jhu_usc_edu__Level_3__within_bioassay_data_set_function__data.Level_3.2016012800.0.0.tar.gz
+15      BRCA.Merge_methylation__humanmethylation450__jhu_usc_edu__Level_3__within_bioassay_data_set_function__data.Level_3.2016012800.0.0.tar.gz
+16                          BRCA.Merge_mirnaseq__illuminaga_mirnaseq__bcgsc_ca__Level_3__miR_gene_expression__data.Level_3.2016012800.0.0.tar.gz
+17                       BRCA.Merge_mirnaseq__illuminaga_mirnaseq__bcgsc_ca__Level_3__miR_isoform_expression__data.Level_3.2016012800.0.0.tar.gz
+18                       BRCA.Merge_mirnaseq__illuminahiseq_mirnaseq__bcgsc_ca__Level_3__miR_gene_expression__data.Level_3.2016012800.0.0.tar.gz
+19                    BRCA.Merge_mirnaseq__illuminahiseq_mirnaseq__bcgsc_ca__Level_3__miR_isoform_expression__data.Level_3.2016012800.0.0.tar.gz
+20                     BRCA.Merge_protein_exp__mda_rppa_core__mdanderson_org__Level_3__protein_normalization__data.Level_3.2016012800.0.0.tar.gz
+21                                BRCA.Merge_rnaseq__illuminahiseq_rnaseq__unc_edu__Level_3__exon_expression__data.Level_3.2016012800.0.0.tar.gz
+22                                BRCA.Merge_rnaseq__illuminahiseq_rnaseq__unc_edu__Level_3__gene_expression__data.Level_3.2016012800.0.0.tar.gz
+23                     BRCA.Merge_rnaseq__illuminahiseq_rnaseq__unc_edu__Level_3__splice_junction_expression__data.Level_3.2016012800.0.0.tar.gz
+24                                 BRCA.Merge_rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes__data.Level_3.2016012800.0.0.tar.gz
+25                      BRCA.Merge_rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level_3.2016012800.0.0.tar.gz
+26                              BRCA.Merge_rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_isoforms__data.Level_3.2016012800.0.0.tar.gz
+27                   BRCA.Merge_rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_isoforms_normalized__data.Level_3.2016012800.0.0.tar.gz
+28                        BRCA.Merge_rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__exon_quantification__data.Level_3.2016012800.0.0.tar.gz
+29                    BRCA.Merge_rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__junction_quantification__data.Level_3.2016012800.0.0.tar.gz
+30                             BRCA.Merge_snp__genome_wide_snp_6__broad_mit_edu__Level_3__segmented_scna_hg18__seg.Level_3.2016012800.0.0.tar.gz
+31                             BRCA.Merge_snp__genome_wide_snp_6__broad_mit_edu__Level_3__segmented_scna_hg19__seg.Level_3.2016012800.0.0.tar.gz
+32          BRCA.Merge_snp__genome_wide_snp_6__broad_mit_edu__Level_3__segmented_scna_minus_germline_cnv_hg18__seg.Level_3.2016012800.0.0.tar.gz
+33          BRCA.Merge_snp__genome_wide_snp_6__broad_mit_edu__Level_3__segmented_scna_minus_germline_cnv_hg19__seg.Level_3.2016012800.0.0.tar.gz
+34       BRCA.Merge_transcriptome__agilentg4502a_07_3__unc_edu__Level_3__unc_lowess_normalization_gene_level__data.Level_3.2016012800.0.0.tar.gz
+35                                                                                     BRCA.Methylation_Preprocess.Level_3.2016012800.0.0.tar.gz
+36                                                                                    BRCA.Mutation_Packager_Calls.Level_3.2016012800.0.0.tar.gz
+37                                                                                 BRCA.Mutation_Packager_Coverage.Level_3.2016012800.0.0.tar.gz
+38                                                                          BRCA.Mutation_Packager_Oncotated_Calls.Level_3.2016012800.0.0.tar.gz
+39                                                                                      BRCA.RPPA_AnnotateWithGene.Level_3.2016012800.0.0.tar.gz
+40                                                                                     BRCA.mRNA_Preprocess_Median.Level_3.2016012800.0.0.tar.gz
+41                                                                                         BRCA.mRNAseq_Preprocess.Level_3.2016012800.0.0.tar.gz
+42                                                                                   BRCA.miRseq_Mature_Preprocess.Level_3.2016012800.0.0.tar.gz
+43                                                                                          BRCA.miRseq_Preprocess.Level_3.2016012800.0.0.tar.gz
+</div>
+<div class='input'>## Not run: 
+# checkTCGA(&#39;DataSets&#39;, &#39;OV&#39;, tail(checkTCGA(&#39;Dates&#39;))[3] )
+# #checkTCGA(&#39;DataSets&#39;, &#39;OV&#39;, checkTCGA(&#39;Dates&#39;)[5] ) # error
+# ## End(Not run)
+# dates of TCGA datasets&#39; releases.
+checkTCGA(&#39;Dates&#39;)
+</div>
+<div class='output'> [1] &quot;2011-10-26&quot; &quot;2011-11-15&quot; &quot;2011-11-28&quot; &quot;2011-12-06&quot; &quot;2011-12-30&quot;
+ [6] &quot;2012-01-10&quot; &quot;2012-01-24&quot; &quot;2012-02-17&quot; &quot;2012-03-06&quot; &quot;2012-03-21&quot;
+[11] &quot;2012-04-12&quot; &quot;2012-04-25&quot; &quot;2012-05-15&quot; &quot;2012-05-25&quot; &quot;2012-06-06&quot;
+[16] &quot;2012-06-23&quot; &quot;2012-07-07&quot; &quot;2012-07-25&quot; &quot;2012-08-04&quot; &quot;2012-08-25&quot;
+[21] &quot;2012-09-13&quot; &quot;2012-10-04&quot; &quot;2012-10-18&quot; &quot;2012-10-20&quot; &quot;2012-10-24&quot;
+[26] &quot;2012-11-02&quot; &quot;2012-11-14&quot; &quot;2012-12-06&quot; &quot;2012-12-21&quot; &quot;2013-01-16&quot;
+[31] &quot;2013-02-03&quot; &quot;2013-02-22&quot; &quot;2013-03-09&quot; &quot;2013-03-26&quot; &quot;2013-04-06&quot;
+[36] &quot;2013-04-21&quot; &quot;2013-05-08&quot; &quot;2013-05-23&quot; &quot;2013-06-06&quot; &quot;2013-06-23&quot;
+[41] &quot;2013-07-15&quot; &quot;2013-08-09&quot; &quot;2013-09-23&quot; &quot;2013-10-10&quot; &quot;2013-11-14&quot;
+[46] &quot;2013-12-10&quot; &quot;2014-01-15&quot; &quot;2014-02-15&quot; &quot;2014-03-16&quot; &quot;2014-04-16&quot;
+[51] &quot;2014-05-18&quot; &quot;2014-06-14&quot; &quot;2014-07-15&quot; &quot;2014-09-02&quot; &quot;2014-10-17&quot;
+[56] &quot;2014-12-06&quot; &quot;2015-02-02&quot; &quot;2015-02-04&quot; &quot;2015-04-02&quot; &quot;2015-06-01&quot;
+[61] &quot;2015-08-21&quot; &quot;2015-11-01&quot; &quot;2016-01-28&quot;
+</div>
+<div class='input'>
+############################# 
+## Not run: 
+# # TCGA datasets&#39; names availability for 
+# # current release date and cancer type.
+# 
+# releaseDate &lt;- &#39;2015-08-21&#39;
+# cancerTypes &lt;- c(&#39;OV&#39;, &#39;BRCA&#39;)
+# 
+# cancerTypes %&gt;% sapply(function(element){
+#   grep(x = checkTCGA(&#39;DataSets&#39;, element, releaseDate)[, 1], 
+#       pattern = &#39;humanmethylation450&#39;, value = TRUE) %&gt;%
+#        as.vector()
+#        })
+#        
+# ## End(Not run)
+</div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>checkTCGA</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+<span class = "pkg">RTCGA</span> website <a href = 'http://rtcga.github.io/RTCGA/Download.html'>http://rtcga.github.io/RTCGA/Download.html</a>.
+
+Other RTCGA: <code><a href='RTCGA-package.html'>RTCGA-package</a></code>,
+  <code><a href='boxplotTCGA.html'>boxplotTCGA</a></code>, <code><a href='convertTCGA.html'>convertTCGA</a></code>,
+  <code><a href='datasetsTCGA.html'>datasetsTCGA</a></code>, <code><a href='downloadTCGA.html'>downloadTCGA</a></code>,
+  <code><a href='expressionsTCGA.html'>expressionsTCGA</a></code>, <code><a href='heatmapTCGA.html'>heatmapTCGA</a></code>,
+  <code><a href='infoTCGA.html'>infoTCGA</a></code>, <code><a href='installTCGA.html'>installTCGA</a></code>,
+  <code><a href='kmTCGA.html'>kmTCGA</a></code>, <code><a href='mutationsTCGA.html'>mutationsTCGA</a></code>,
+  <code><a href='pcaTCGA.html'>pcaTCGA</a></code>, <code><a href='readTCGA.html'>readTCGA</a></code>,
+  <code><a href='survivalTCGA.html'>survivalTCGA</a></code>, <code><a href='theme_RTCGA.html'>theme_RTCGA</a></code>
+
+    
+    <h2>Author</h2>
+    
+Marcin Kosinski, <a href='mailto:m.p.kosinski@gmail.com'>m.p.kosinski@gmail.com</a>
+
+    
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

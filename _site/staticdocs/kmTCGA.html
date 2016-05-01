@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>kmTCGA. RTCGA 1.1.18</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="
+Marcin Kosinski, &lt;a href='mailto:m.p.kosinski@gmail.com'&gt;m.p.kosinski@gmail.com&lt;/a&gt;
+">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">RTCGA 1.1.18</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Plot Kaplan-Meier Estimates of Survival Curves for Survival Data</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>kmTCGA(x, times&nbsp;=&nbsp;"times", status&nbsp;=&nbsp;"patient.vital_status", explanatory.names&nbsp;=&nbsp;"1", main&nbsp;=&nbsp;"Survival Curves", risk.table&nbsp;=&nbsp;TRUE, risk.table.y.text&nbsp;=&nbsp;FALSE, conf.int&nbsp;=&nbsp;TRUE, return.survfit&nbsp;=&nbsp;FALSE, pval&nbsp;=&nbsp;FALSE, ...)</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>x</dt>
+      <dd>A <code>data.frame</code> containing survival information. See <a href='survivalTCGA.html'>survivalTCGA</a>.</dd>
+      <dt>times</dt>
+      <dd>The name of time variable.</dd>
+      <dt>status</dt>
+      <dd>The name of status variable.</dd>
+      <dt>explanatory.names</dt>
+      <dd>Names of explanatory variables to use in survival curves plot.</dd>
+      <dt>main</dt>
+      <dd>Title of the plot.</dd>
+      <dt>risk.table</dt>
+      <dd>Whether to show risk tables.</dd>
+      <dt>risk.table.y.text</dt>
+      <dd>Whether to show long strata names in legend of the risk table.</dd>
+      <dt>conf.int</dt>
+      <dd>Whether to show confidence intervals.</dd>
+      <dt>return.survfit</dt>
+      <dd>Should return survfit object additionaly to survival plot?</dd>
+      <dt>pval</dt>
+      <dd>Whether to add p-value of the log-rank test to the plot?</dd>
+      <dt>...</dt>
+      <dd>Further arguments passed to <a href='http://www.inside-r.org/packages/cran/survminer/docs/ggsurvplot'>ggsurvplot</a>.</dd>
+    </dl>
+    
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>Plots Kaplan-Meier estimates of survival curves for survival data.</p>
+  
+    </div>
+
+    <div class="Issues">
+      <h2>Issues</h2>
+
+      <p></p>
+  
+      <p>If you have any problems, issues or think that something is missing or is not
+clear please post an issue on 
+<a href = 'https://github.com/RTCGA/RTCGA/issues'>https://github.com/RTCGA/RTCGA/issues</a>.</p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>
+## Extracting Survival Data
+library(RTCGA.clinical)
+survivalTCGA(BRCA.clinical, OV.clinical, extract.cols = &quot;admin.disease_code&quot;) -&gt; BRCAOV.survInfo
+
+# first munge data, then extract survival info
+library(dplyr)
+BRCA.clinical %&gt;%
+    filter(patient.drugs.drug.therapy_types.therapy_type %in%
+               c(&quot;chemotherapy&quot;, &quot;hormone therapy&quot;)) %&gt;%
+    rename(therapy = patient.drugs.drug.therapy_types.therapy_type) %&gt;%
+    survivalTCGA(extract.cols = c(&quot;therapy&quot;))  -&gt; BRCA.survInfo.chemo
+                 
+# first extract survival info, then munge data                  
+    survivalTCGA(BRCA.clinical, 
+                 extract.cols = c(&quot;patient.drugs.drug.therapy_types.therapy_type&quot;))  %&gt;%
+    filter(patient.drugs.drug.therapy_types.therapy_type %in%
+               c(&quot;chemotherapy&quot;, &quot;hormone therapy&quot;)) %&gt;%
+    rename(therapy = patient.drugs.drug.therapy_types.therapy_type) -&gt; BRCA.survInfo.chemo
+
+## Kaplan-Meier Survival Curves
+kmTCGA(BRCAOV.survInfo, explanatory.names = &quot;admin.disease_code&quot;,  pval = TRUE)
+</div>
+<p><img src='kmTCGA-2.png' alt='' width='540' height='400' /></p>
+<div class='input'>
+kmTCGA(BRCAOV.survInfo, explanatory.names = &quot;admin.disease_code&quot;, main = &quot;&quot;,
+       xlim = c(0,4000))
+</div>
+<p><img src='kmTCGA-4.png' alt='' width='540' height='400' /></p>
+<div class='input'> 
+kmTCGA(BRCA.survInfo.chemo, explanatory.names = &quot;therapy&quot;, xlim = c(0, 3000), conf.int = FALSE)
+</div>
+<p><img src='kmTCGA-6.png' alt='' width='540' height='400' /></p>
+<div class='input'></div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>kmTCGA</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+<span class = "pkg">RTCGA</span> website <a href = 'http://rtcga.github.io/RTCGA/Visualizations.html'>http://rtcga.github.io/RTCGA/Visualizations.html</a>.
+
+Other RTCGA: <code><a href='RTCGA-package.html'>RTCGA-package</a></code>,
+  <code><a href='boxplotTCGA.html'>boxplotTCGA</a></code>, <code><a href='checkTCGA.html'>checkTCGA</a></code>,
+  <code><a href='convertTCGA.html'>convertTCGA</a></code>, <code><a href='datasetsTCGA.html'>datasetsTCGA</a></code>,
+  <code><a href='downloadTCGA.html'>downloadTCGA</a></code>,
+  <code><a href='expressionsTCGA.html'>expressionsTCGA</a></code>, <code><a href='heatmapTCGA.html'>heatmapTCGA</a></code>,
+  <code><a href='infoTCGA.html'>infoTCGA</a></code>, <code><a href='installTCGA.html'>installTCGA</a></code>,
+  <code><a href='mutationsTCGA.html'>mutationsTCGA</a></code>, <code><a href='pcaTCGA.html'>pcaTCGA</a></code>,
+  <code><a href='readTCGA.html'>readTCGA</a></code>, <code><a href='survivalTCGA.html'>survivalTCGA</a></code>,
+  <code><a href='theme_RTCGA.html'>theme_RTCGA</a></code>
+
+    
+    <h2>Author</h2>
+    
+Marcin Kosinski, <a href='mailto:m.p.kosinski@gmail.com'>m.p.kosinski@gmail.com</a>
+
+    
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>Index. RTCGA 1.1.18</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="Marcin Kosinski &lt;m.p.kosinski@gmail.com&gt;, Przemyslaw Biecek
+&lt;przemyslaw.biecek@gmail.com&gt;">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">RTCGA 1.1.18</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <div class="row">
+  <div class="span8">
+    <p><a href="https://travis-ci.org/RTCGA/RTCGA"><img src="https://travis-ci.org/RTCGA/RTCGA.svg?branch=master" alt="Travis-CI Build Status"/></a>
+<a href="http://www.repostatus.org/#active"><img src="http://www.repostatus.org/badges/latest/active.svg" alt="Project Status: Active - The project has reached a stable, usable state and is being actively developed."/></a><a href="https://github.com/RTCGA/RTCGA/pulls"><img src="http://githubbadges.herokuapp.com/RTCGA/RTCGA/pulls.svg?style=flat" alt="Pending Pull-Requests"/></a>
+<a href="https://github.com/RTCGA/RTCGA/issues"><img src="http://githubbadges.herokuapp.com/RTCGA/RTCGA/issues.svg" alt="Github Issues"/></a></p>
+
+<h1>The family of R packages containing TCGA data</h1>
+
+<p><img src="https://raw.githubusercontent.com/RTCGA/RTCGA/master/RTCGA_workflow_ver3.png" alt="Workflow of RTCGA package"/></p>
+
+<p>Data packages submitted to Bioconductor</p>
+
+<ul>
+<li><a href="http://bioconductor.org/packages/3.2/data/experiment/html/RTCGA.mutations.html">RTCGA.mutations</a></li>
+<li><a href="http://bioconductor.org/packages/3.2/data/experiment/html/RTCGA.rnaseq.html">RTCGA.rnaseq</a></li>
+<li><a href="http://bioconductor.org/packages/3.2/data/experiment/html/RTCGA.clinical.html">RTCGA.clinical</a></li>
+<li><a href="http://bioconductor.org/packages/RTCGA.PANCAN12/">RTCGA.PANCAN12</a></li>
+<li><a href="http://bioconductor.org/packages/RTCGA.mRNA/">RTCGA.mRNA</a></li>
+<li><a href="http://bioconductor.org/packages/RTCGA.miRNASeq/">RTCGA.miRNASeq</a></li>
+<li><a href="http://bioconductor.org/packages/RTCGA.RPPA/">RTCGA.RPPA</a></li>
+<li><a href="http://bioconductor.org/packages/RTCGA.CNV/">RTCGA.CNV</a></li>
+<li><a href="http://bioconductor.org/packages/RTCGA.methylation/">RTCGA.methylation</a></li>
+</ul>
+
+<h3>Installation of packages from the <code>RTCGA</code> family:</h3>
+
+<p>Windows users:</p>
+
+<blockquote>
+<p>Make sure you have <a href="http://cran.r-project.org/bin/windows/Rtools/">rtools</a> installed on your computer.</p>
+</blockquote>
+
+<pre><code class="R"># packages that are published to devel version of Bioconductor
+BiocInstaller::useDevel() # swiches to devel branchof Bioconductor - don&#39;t use this line if you are interested in release versions
+source(&quot;https://bioconductor.org/biocLite.R&quot;) # downloads bioClite function
+</code></pre>
+
+<table><thead>
+<tr>
+<th align="left">package</th>
+<th align="left">installation</th>
+<th align="left">help</th>
+<th align="left">vignettes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">RTCGA.rnaseq</td>
+<td align="left"><code>biocLite(&#39;RTCGA.rnaseq&#39;)</code></td>
+<td align="left"><code>?rnaseq</code></td>
+<td align="left"><code>browseVignettes(&#39;RTCGA.rnaseq&#39;)</code></td>
+</tr>
+<tr>
+<td align="left">RTCGA.clinical</td>
+<td align="left"><code>biocLite(&#39;RTCGA.clinical&#39;)</code></td>
+<td align="left"><code>?clinical</code></td>
+<td align="left"><code>browseVignettes(&#39;RTCGA.clinical&#39;)</code></td>
+</tr>
+<tr>
+<td align="left">RTCGA.mutations</td>
+<td align="left"><code>biocLite(&#39;RTCGA.mutations&#39;)</code></td>
+<td align="left"><code>?mutations</code></td>
+<td align="left"><code>browseVignettes(&#39;RTCGA.mutations&#39;)</code></td>
+</tr>
+<tr>
+<td align="left">RTCGA.mRNA</td>
+<td align="left"><code>biocLite(&#39;RTCGA.mRNA&#39;)</code></td>
+<td align="left"><code>?mRNA</code></td>
+<td align="left"><code>browseVignettes(&#39;RTCGA.mRNA&#39;)</code></td>
+</tr>
+<tr>
+<td align="left">RTCGA.miRNASeq</td>
+<td align="left"><code>biocLite(&#39;RTCGA.miRNASeq&#39;)</code></td>
+<td align="left"><code>?miRNASeq</code></td>
+<td align="left"><code>browseVignettes(&#39;RTCGA.miRNASeq&#39;)</code></td>
+</tr>
+<tr>
+<td align="left">RTCGA.PANCAN12</td>
+<td align="left"><code>biocLite(&#39;RTCGA.PANCAN12&#39;)</code></td>
+<td align="left"><code>?pancan12</code></td>
+<td align="left"><code>browseVignettes(&#39;RTCGA.PANCAN12&#39;)</code></td>
+</tr>
+<tr>
+<td align="left">RTCGA.RPPA</td>
+<td align="left"><code>biocLite(&#39;RTCGA.RPPA&#39;)</code></td>
+<td align="left"><code>?RPPA</code></td>
+<td align="left"><code>browseVignettes(&#39;RTCGA.RPPA&#39;)</code></td>
+</tr>
+<tr>
+<td align="left">RTCGA.CNV</td>
+<td align="left"><code>biocLite(&#39;RTCGA.CNV&#39;)</code></td>
+<td align="left"><code>?CNV</code></td>
+<td align="left"><code>browseVignettes(&#39;RTCGA.CNV&#39;)</code></td>
+</tr>
+<tr>
+<td align="left">RTCGA.methylation</td>
+<td align="left"><code>biocLite(&#39;RTCGA.methylation&#39;)</code></td>
+<td align="left"><code>?methylation</code></td>
+<td align="left"><code>browseVignettes(&#39;RTCGA.methylation&#39;)</code></td>
+</tr>
+</tbody></table>
+
+<pre><code class="R"># version of packages held at github.com/RTCGA - I try to keep them with the same state as devel versions of Bioconductor
+library(RTCGA)
+installTCGA(&quot;RTCGA.PANCAN12&quot;)
+installTCGA(&quot;RTCGA.CNV&quot;)
+installTCGA(&quot;RTCGA.RPPA&quot;)
+installTCGA(&quot;RTCGA.mRNA&quot;)
+installTCGA(&quot;RTCGA.miRNASeq&quot;)
+installTCGA(&quot;RTCGA.methylation&quot;)
+# or for all just type installTCGA()
+</code></pre>
+
+<h1>RTCGA</h1>
+
+<p>Packages from the <code>RTCGA.data</code> - family/factory are based on the <code>RTCGA</code> package</p>
+
+<h3>Installation of the <a href="https://github.com/RTCGA/RTCGA"><code>RTCGA</code></a> package:</h3>
+
+<p>To get started, install the latest version of <strong>RTCGA</strong> from Bioconductor:</p>
+
+<pre><code class="R">BiocInstaller::useDevel() # swiches to devel branch of Bioconductor
+source(&quot;https://bioconductor.org/biocLite.R&quot;) # downloads bioClite function
+biocLite(&quot;RTCGA&quot;) # installs a package
+</code></pre>
+
+<p>or use below code to download the development version which is like to be less bugged than the release version on Bioconductor:</p>
+
+<pre><code class="R">if (!require(devtools)) {
+    install.packages(&quot;devtools&quot;)
+    require(devtools)
+}
+install_github(&quot;RTCGA/RTCGA&quot;, build_vignettes = TRUE)
+</code></pre>
+
+<p>To check Use Cases run</p>
+
+<pre><code class="R">browseVignettes(&quot;RTCGA&quot;)
+</code></pre>
+
+<h4> Authors: </h4>
+
+<blockquote>
+<p>Marcin Kosiński, <a href="mailto:m.p.kosinski@gmail.com">m.p.kosinski@gmail.com</a></p>
+
+<p>Przemysław Biecek, <a href="mailto:przemyslaw.biecek@gmail.com">przemyslaw.biecek@gmail.com</a></p>
+
+<p>Witold Chodor, <a href="mailto:witoldchodor@gmail.com">witoldchodor@gmail.com</a></p>
+</blockquote>
+
+<p>This repository is synchronized with it&#39;s <a href="https://hedgehog.fhcrc.org/bioconductor/trunk/madman/Rpacks/RTCGA">Bioconductor&#39;s SVN devel mirror</a>.</p>
+
+<p><img src="https://avatars3.githubusercontent.com/u/15612915?v=3&amp;s=300" alt="RTCGA logo"/></p>
+
+
+    <h2>Help topics</h2>
+
+    <h3></h3>
+    
+    
+    <ul class="index">
+        
+      <li>
+        <code><a href="boxplotTCGA.html">boxplotTCGA</a></code><br />Create Boxplots for TCGA Datasets</li>
+            
+      <li>
+        <code><a href="checkTCGA.html">checkTCGA</a></code><br />Information about datasets from TCGA project</li>
+            
+      <li>
+        <code><a href="convertTCGA.html">convertTCGA</a></code>(convertPANCAN12)<br />Convert data from RTCGA family to Bioconductor classes</li>
+            
+      <li>
+        <code><a href="datasetsTCGA.html">datasetsTCGA</a></code><br />RTCGA.data - The Family of R Packages with Data from The Cancer Genome Atlas Study</li>
+            
+      <li>
+        <code><a href="downloadTCGA.html">downloadTCGA</a></code><br />Download TCGA data</li>
+            
+      <li>
+        <code><a href="expressionsTCGA.html">expressionsTCGA</a></code><br />Gather Expressions for TCGA Datasets</li>
+            
+      <li>
+        <code><a href="heatmapTCGA.html">heatmapTCGA</a></code><br />Create Heatmaps for TCGA Datasets</li>
+            
+      <li>
+        <code><a href="infoTCGA.html">infoTCGA</a></code><br />Information about cohorts from TCGA project</li>
+            
+      <li>
+        <code><a href="installTCGA.html">installTCGA</a></code><br />Install packages from RTCGA family</li>
+            
+      <li>
+        <code><a href="kmTCGA.html">kmTCGA</a></code><br />Plot Kaplan-Meier Estimates of Survival Curves for Survival Data</li>
+            
+      <li>
+        <code><a href="mutationsTCGA.html">mutationsTCGA</a></code><br />Gather Mutations for TCGA Datasets</li>
+            
+      <li>
+        <code><a href="pcaTCGA.html">pcaTCGA</a></code><br />Plot Two Main Components of Principal Component Analysis</li>
+            
+      <li>
+        <code><a href="readTCGA.html">readTCGA</a></code><br />Read TCGA data to the tidy format</li>
+            
+      <li>
+        <code><a href="RTCGA-package.html">RTCGA-package</a></code>(RTCGA)<br />The Caner Genome Atlas data integration</li>
+            
+      <li>
+        <code><a href="survivalTCGA.html">survivalTCGA</a></code><br />Extract Survival Information From RTCGA.clinical Datasets</li>
+            
+      <li>
+        <code><a href="theme_RTCGA.html">theme_RTCGA</a></code><br />RTCGA Theme For ggplot2</li>
+    
+    </ul>
+  </div>
+  
+  <div class="span3 offset1">
+    <h2>Vignettes</h2>
+    <ul>
+      <li><a href="vignettes/RTCGA_Workflow.html">Integrating TCGA Data - RTCGA Workflow</a></li>
+    </ul>
+        
+    <h2>Dependencies</h2>
+    <ul>
+      
+      <li><strong>Imports</strong>: XML, assertthat, stringi, rvest, data.table, xml2, devtools, dplyr, purrr, knitr, survival, survminer, ggplot2, ggthemes, viridis, scales</li>
+      <li><strong>Suggests</strong>: testthat, pander, Biobase, GenomicRanges, IRanges, S4Vectors, RTCGA.rnaseq, RTCGA.clinical, RTCGA.mutations, RTCGA.RPPA, RTCGA.mRNA, RTCGA.miRNASeq, RTCGA.methylation, RTCGA.CNV, RTCGA.PANCAN12, magrittr, tidyr</li>
+      
+    </ul>
+    <h2>Authors</h2>
+    <ul>
+    </ul>
+
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

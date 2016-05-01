@@ -49,6 +49,39 @@ library(RTCGA)
 # Reproducible Research Support: [`archivist.github`](marcinkosinski.github.io/archivist.github)
 
 
+{% highlight text %}
+Error in readChar(con, 5L, useBytes = TRUE): cannot open the connection
+{% endhighlight %}
+
+
+
+{% highlight text %}
+Error in readChar(con, 5L, useBytes = TRUE): cannot open the connection
+{% endhighlight %}
+
+
+
+{% highlight text %}
+Error in readChar(con, 5L, useBytes = TRUE): cannot open the connection
+{% endhighlight %}
+
+
+
+{% highlight text %}
+Error in aoptions("github_token", github_token): object 'github_token' not found
+{% endhighlight %}
+
+
+
+{% highlight text %}
+Error in aoptions("password", user.password): object 'user.password' not found
+{% endhighlight %}
+
+
+
+{% highlight text %}
+Error in checkDirectory(repoDir): There is no such repository as RTCGA_UseCases
+{% endhighlight %}
 
 
 
@@ -66,7 +99,7 @@ createGitHubRepo(
 
 
 {% highlight text %}
-[1] "MarcinKosinski"
+Error in stopifnot(is.character(password) & length(password) == 1): object 'user.password' not found
 {% endhighlight %}
 
 
@@ -76,6 +109,12 @@ createGitHubRepo(
 # during print
 library(ggplot2)
 addHooksToPrint(class=c("ggplot", "ggsurvplot"))
+{% endhighlight %}
+
+
+
+{% highlight text %}
+Error: is.character(repoDir) is not TRUE
 {% endhighlight %}
 
 
@@ -241,25 +280,47 @@ for (i in seq_along(files)) {
 archive(names, alink = TRUE)
 {% endhighlight %}
 
-[`archivist::aread('MarcinKosinski/RTCGA_UseCases/374e1c871a6bd2158a05d23691165e10')`](https://raw.githubusercontent.com/MarcinKosinski/RTCGA_UseCases/master/gallery/374e1c871a6bd2158a05d23691165e10.rda)
+
+
+{% highlight text %}
+Error: length(repo) == 1 is not TRUE
+{% endhighlight %}
+
+
 
 {% highlight r %}
 archive(files, alink = TRUE)
 {% endhighlight %}
 
-[`archivist::aread('MarcinKosinski/RTCGA_UseCases/10079ab0be4f49e499b4feb769498661')`](https://raw.githubusercontent.com/MarcinKosinski/RTCGA_UseCases/master/gallery/10079ab0be4f49e499b4feb769498661.rda)
+
+
+{% highlight text %}
+Error: length(repo) == 1 is not TRUE
+{% endhighlight %}
+
+
 
 {% highlight r %}
 archive(pvalues, alink = TRUE)
 {% endhighlight %}
 
-[`archivist::aread('MarcinKosinski/RTCGA_UseCases/fce8d759c55e9c8e22be7f00bbb65474')`](https://raw.githubusercontent.com/MarcinKosinski/RTCGA_UseCases/master/gallery/fce8d759c55e9c8e22be7f00bbb65474.rda)
+
+
+{% highlight text %}
+Error: length(repo) == 1 is not TRUE
+{% endhighlight %}
+
+
 
 {% highlight r %}
 archive(n, alink = TRUE)
 {% endhighlight %}
 
-[`archivist::aread('MarcinKosinski/RTCGA_UseCases/2af646398735bf53164391220c6ed6f7')`](https://raw.githubusercontent.com/MarcinKosinski/RTCGA_UseCases/master/gallery/2af646398735bf53164391220c6ed6f7.rda)
+
+
+{% highlight text %}
+Error: length(repo) == 1 is not TRUE
+{% endhighlight %}
 
 # Number of observations in BRCA / next releases
 
@@ -276,21 +337,39 @@ ggplot(drd[-1,], aes(data,v)) +
   ggtitle("BRCA")
 {% endhighlight %}
 
-Load: [`archivist::aread('MarcinKosinski/RTCGA_UseCases/9713383c4369434449da350e0a08a61a')`](https://raw.githubusercontent.com/MarcinKosinski/RTCGA_UseCases/master/gallery/9713383c4369434449da350e0a08a61a.rda)
-![plot of chunk unnamed-chunk-11](/RTCGA/figure/source/Usecases/unnamed-chunk-11-1.png)
+
+
+{% highlight text %}
+Error: ggplot2 doesn't know how to deal with data of class Date
+{% endhighlight %}
 
 
 {% highlight r %}
 archive(drd, alink = TRUE)
 {% endhighlight %}
 
-[`archivist::aread('MarcinKosinski/RTCGA_UseCases/eb3ebcb10010d05f33498efa26686834')`](https://raw.githubusercontent.com/MarcinKosinski/RTCGA_UseCases/master/gallery/eb3ebcb10010d05f33498efa26686834.rda)
+
+
+{% highlight text %}
+Error: length(repo) == 1 is not TRUE
+{% endhighlight %}
 
 # p-values for selected genes
 
 
 {% highlight r %}
 pvalues <- pvalues[1:length(names),]
+{% endhighlight %}
+
+
+
+{% highlight text %}
+Error in pvalues[1:length(names), ]: subscript out of bounds
+{% endhighlight %}
+
+
+
+{% highlight r %}
 plotPValues <- function(i) {
   drd <- data.frame(
     data = ymd(substr(names, 62, 69)),
@@ -314,14 +393,12 @@ plotPValues <- function(i) {
 plotPValues( 135 )
 {% endhighlight %}
 
-Load: [`archivist::aread('MarcinKosinski/RTCGA_UseCases/f71605df250842d472d4891dee6ac91d')`](https://raw.githubusercontent.com/MarcinKosinski/RTCGA_UseCases/master/gallery/f71605df250842d472d4891dee6ac91d.rda)
 ![plot of chunk unnamed-chunk-13](/RTCGA/figure/source/Usecases/unnamed-chunk-13-1.png)
 
 {% highlight r %}
 plotPValues( 47 )
 {% endhighlight %}
 
-Load: [`archivist::aread('MarcinKosinski/RTCGA_UseCases/fb297480eb54c5deec3c838ce05e1134')`](https://raw.githubusercontent.com/MarcinKosinski/RTCGA_UseCases/master/gallery/fb297480eb54c5deec3c838ce05e1134.rda)
 ![plot of chunk unnamed-chunk-13](/RTCGA/figure/source/Usecases/unnamed-chunk-13-2.png)
 
 # Low p-value, small group
@@ -329,6 +406,17 @@ Load: [`archivist::aread('MarcinKosinski/RTCGA_UseCases/fb297480eb54c5deec3c838c
 
 {% highlight r %}
 all <- read_and_joinTCGA(files[20])
+{% endhighlight %}
+
+
+
+{% highlight text %}
+Error in if (input == "" || length(grep("\\n|\\r", input)) > 0) {: missing value where TRUE/FALSE needed
+{% endhighlight %}
+
+
+
+{% highlight r %}
 j <- 15789+4
 #all[,j] <- as.numeric(as.character(all[,j]))
 
@@ -337,13 +425,45 @@ vv <- cut(
   c(-100,0,100),
   labels = c("low expression", "high expression")
 )
+{% endhighlight %}
+
+
+
+{% highlight text %}
+Error in all[, j]: object of type 'builtin' is not subsettable
+{% endhighlight %}
+
+
+
+{% highlight r %}
 ndf <- data.frame(
   time = pmax(all$times, 1),
   event = all$patient.vital_status ==1,
   var = vv
 )
-ndf <- na.omit(ndf)
+{% endhighlight %}
 
+
+
+{% highlight text %}
+Error in all$times: object of type 'builtin' is not subsettable
+{% endhighlight %}
+
+
+
+{% highlight r %}
+ndf <- na.omit(ndf)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+Error in na.omit(ndf): object 'ndf' not found
+{% endhighlight %}
+
+
+
+{% highlight r %}
 kmTCGA(
   ndf,
   times = "time",
@@ -353,11 +473,20 @@ kmTCGA(
 )
 {% endhighlight %}
 
-Load: [`archivist::aread('MarcinKosinski/RTCGA_UseCases/671f60ff865c0c6ce6d7666c5e9576e7')`](https://raw.githubusercontent.com/MarcinKosinski/RTCGA_UseCases/master/gallery/671f60ff865c0c6ce6d7666c5e9576e7.rda)
-![plot of chunk unnamed-chunk-14](/RTCGA/figure/source/Usecases/unnamed-chunk-14-1.png)
+
+
+{% highlight text %}
+Error in is.data.frame(x): object 'ndf' not found
+{% endhighlight %}
 
 
 {% highlight r %}
 pushGitHubRepo()
+{% endhighlight %}
+
+
+
+{% highlight text %}
+Error: is.character(repo) & length(repo) == 1 is not TRUE
 {% endhighlight %}
 

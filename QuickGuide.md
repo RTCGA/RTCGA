@@ -1,6 +1,6 @@
 ---
 layout:  page
-title: "Cox Survival Analysis"
+title: "Quick Guide"
 comments:  true
 published:  true
 author: "Marcin Kosiński"

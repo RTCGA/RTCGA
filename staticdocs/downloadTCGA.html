@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>downloadTCGA. RTCGA 1.1.18</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="
+Marcin Kosinski, &lt;a href='mailto:m.p.kosinski@gmail.com'&gt;m.p.kosinski@gmail.com&lt;/a&gt;
+">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">RTCGA 1.1.18</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Download TCGA data</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>downloadTCGA(cancerTypes, dataSet&nbsp;=&nbsp;"Merge_Clinical.Level_1", destDir, date&nbsp;=&nbsp;NULL, untarFile&nbsp;=&nbsp;TRUE, removeTar&nbsp;=&nbsp;TRUE, allDataSets&nbsp;=&nbsp;FALSE)</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>cancerTypes</dt>
+      <dd>A character vector containing abbreviations (Cohort code) of types of cancers to download from 
+<a href = 'http://gdac.broadinstitute.org/'>http://gdac.broadinstitute.org/</a>. For easy access from R check details below.</dd>
+      <dt>dataSet</dt>
+      <dd>A part of the name of dataSet to be downloaded from <a href = 'http://gdac.broadinstitute.org/runs/'>http://gdac.broadinstitute.org/runs/</a>. By default the Merged Clinical dataSet is downloaded (value <code>dataSet = 'Merge_Clinical.Level_1'</code>). Available datasets' names can be checked using <a href='checkTCGA.html'>checkTCGA</a> function.</dd>
+      <dt>destDir</dt>
+      <dd>A character specifying a directory into which <code>dataSet</code>s will be downloaded.</dd>
+      <dt>date</dt>
+      <dd>A <code>NULL</code> or character specifying from which date <code>dataSet</code>s should be downloaded.
+By default (<code>date = NULL</code>) the newest available date is used. All available dates can be checked on 
+<a href = 'http://gdac.broadinstitute.org/runs/'>http://gdac.broadinstitute.org/runs/</a> or by using <a href='checkTCGA.html'>checkTCGA</a> 
+function. Required format <code>'YYYY-MM-DD'</code>.</dd>
+      <dt>untarFile</dt>
+      <dd>Logical - should the downloaded file be untarred. Default is <code>TRUE</code>.</dd>
+      <dt>removeTar</dt>
+      <dd>Logical - should the downloaded <code>.tar</code> file be removed after untarring.
+Default is <code>TRUE</code>.</dd>
+      <dt>allDataSets</dt>
+      <dd>Logical - should download all datasets matching <code>dataSet</code> parameter or only the first one (without <code>FFPE</code> phrase if possible).</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+No values. It only downloads files.
+</dl></p>
+  
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>Enables to download TCGA data from specified dates of releases of concrete Cohorts of cancer types.
+Pass a name of required dataset to the <code>dataSet</code> parameter. By default the Merged Clinical
+dataSet is downloaded (value <code>dataSet = 'Merge_Clinical.Level_1'</code>) from the newest available date of the release.</p>
+  
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+
+      <p>All cohort names can be checked using: <code> sub( x = names( infoTCGA() ), '-counts', '' )</code>.</p>
+  
+    </div>
+
+    <div class="Issues">
+      <h2>Issues</h2>
+
+      <p></p>
+  
+      <p>If you have any problems, issues or think that something is missing or is not
+clear please post an issue on 
+<a href = 'https://github.com/RTCGA/RTCGA/issues'>https://github.com/RTCGA/RTCGA/issues</a>.</p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>
+
+dir.create( &#39;hre&#39;)
+
+downloadTCGA( cancerTypes = &#39;ACC&#39;, dataSet = &#39;miR_gene_expression&#39;, 
+destDir = &#39;hre&#39;, date =  tail( checkTCGA(&#39;Dates&#39;), 2 )[1] )
+</div>
+<div class='output'>There were more than one datasets matching the dataSet parameter. 
+Downloaded only 
+gdac.broadinstitute.org_ACC.Merge_mirnaseq__illuminahiseq_mirnaseq__bcgsc_ca__Level_3__miR_gene_expression__data.Level_3.2015110100.0.0.tar.gz
+
+All matches were 
+
+gdac.broadinstitute.org_ACC.Merge_mirnaseq__illuminahiseq_mirnaseq__bcgsc_ca__Level_3__miR_gene_expression__data.Level_3.2015110100.0.0.tar.gz
+gdac.broadinstitute.org_ACC.Merge_mirnaseq__illuminahiseq_mirnaseq__bcgsc_ca__Level_3__miR_gene_expression__data.aux.2015110100.0.0.tar.gz
+gdac.broadinstitute.org_ACC.Merge_mirnaseq__illuminahiseq_mirnaseq__bcgsc_ca__Level_3__miR_gene_expression__data.mage-tab.2015110100.0.0.tar.gz</div>
+<div class='input'>
+## Not run: 
+# downloadTCGA( cancerTypes = c(&#39;BRCA&#39;, &#39;OV&#39;), destDir = &#39;hre&#39;,
+#  date = tail( checkTCGA(&#39;Dates&#39;), 2 )[1] )
+# ## End(Not run)
+
+
+
+</div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>downloadTCGA</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+<span class = "pkg">RTCGA</span> website <a href = 'http://rtcga.github.io/RTCGA/Download.html'>http://rtcga.github.io/RTCGA/Download.html</a>.
+
+Other RTCGA: <code><a href='RTCGA-package.html'>RTCGA-package</a></code>,
+  <code><a href='boxplotTCGA.html'>boxplotTCGA</a></code>, <code><a href='checkTCGA.html'>checkTCGA</a></code>,
+  <code><a href='convertTCGA.html'>convertTCGA</a></code>, <code><a href='datasetsTCGA.html'>datasetsTCGA</a></code>,
+  <code><a href='expressionsTCGA.html'>expressionsTCGA</a></code>, <code><a href='heatmapTCGA.html'>heatmapTCGA</a></code>,
+  <code><a href='infoTCGA.html'>infoTCGA</a></code>, <code><a href='installTCGA.html'>installTCGA</a></code>,
+  <code><a href='kmTCGA.html'>kmTCGA</a></code>, <code><a href='mutationsTCGA.html'>mutationsTCGA</a></code>,
+  <code><a href='pcaTCGA.html'>pcaTCGA</a></code>, <code><a href='readTCGA.html'>readTCGA</a></code>,
+  <code><a href='survivalTCGA.html'>survivalTCGA</a></code>, <code><a href='theme_RTCGA.html'>theme_RTCGA</a></code>
+
+    
+    <h2>Author</h2>
+    
+Marcin Kosinski, <a href='mailto:m.p.kosinski@gmail.com'>m.p.kosinski@gmail.com</a>
+
+    
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

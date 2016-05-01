@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>heatmapTCGA. RTCGA 1.1.18</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="
+Marcin Kosinski, &lt;a href='mailto:m.p.kosinski@gmail.com'&gt;m.p.kosinski@gmail.com&lt;/a&gt;
+">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">RTCGA 1.1.18</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Create Heatmaps for TCGA Datasets</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>heatmapTCGA(data, x, y, fill, legend.title&nbsp;=&nbsp;"Expression", legend&nbsp;=&nbsp;"right", title&nbsp;=&nbsp;"Heatmap of expression", facet.names&nbsp;=&nbsp;NULL, tile.size&nbsp;=&nbsp;0.1, tile.color&nbsp;=&nbsp;"white", ...)</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>data</dt>
+      <dd>A data.frame from TCGA study containing variables to be plotted.</dd>
+      <dt>x, y</dt>
+      <dd>A character name of variable containing groups.</dd>
+      <dt>fill</dt>
+      <dd>A character names of fill variable.</dd>
+      <dt>legend.title</dt>
+      <dd>A character with legend's title.</dd>
+      <dt>legend</dt>
+      <dd>A character specifying legend position. Allowed values are one of
+c("top", "bottom", "left", "right", "none"). Default is "top" side position.
+to remove the legend use legend = "none".</dd>
+      <dt>title</dt>
+      <dd>A character with plot title.</dd>
+      <dt>facet.names</dt>
+      <dd>A character of length maximum 2 containing names of variables to produce facets. See examples.</dd>
+      <dt>tile.size, tile.color</dt>
+      <dd>A size and color passed to <a href='http://www.inside-r.org/packages/cran/ggplot2/docs/geom_tile'>geom_tile</a>.</dd>
+      <dt>...</dt>
+      <dd>Further arguments passed to <a href='http://www.inside-r.org/packages/cran/ggplot2/docs/geom_tile'>geom_tile</a>.</dd>
+    </dl>
+    
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>Function creates heatmaps (<a href='http://www.inside-r.org/packages/cran/ggplot2/docs/geom_tile'>geom_tile</a>) for TCGA Datasets.</p>
+  
+    </div>
+
+    <div class="Note">
+      <h2>Note</h2>
+
+      <p><code>heatmapTCGA</code> uses <a href='http://www.inside-r.org/packages/cran/viridis/docs/scale_viridis'>scale_fill_viridis</a> from <span class = "pkg">viridis</span> package which is a port of the new 
+<code>matplotlib</code> color maps (<span class = "pkg">viridis</span> - the default -, <code>magma</code>, <code>plasma</code> and <code>inferno</code>) to <code>R</code>.
+<code>matplotlib</code> <a href = 'http://matplotlib.org/'>http://matplotlib.org/</a> is a popular plotting library for <code>python</code>.
+ These color maps are designed in such a way that they will analytically be perfectly perceptually-uniform, 
+ both in regular form and also when converted to black-and-white. 
+ They are also designed to be perceived by readers with the most common form of color blindness.</p>
+  
+    </div>
+
+    <div class="Issues">
+      <h2>Issues</h2>
+
+      <p></p>
+  
+      <p>If you have any problems, issues or think that something is missing or is not
+clear please post an issue on 
+<a href = 'https://github.com/RTCGA/RTCGA/issues'>https://github.com/RTCGA/RTCGA/issues</a>.</p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'> 
+ 
+library(RTCGA.rnaseq)
+# perfrom plot
+library(dplyr)
+
+
+expressionsTCGA(ACC.rnaseq, BLCA.rnaseq, BRCA.rnaseq, OV.rnaseq,
+                extract.cols = c(&quot;MET|4233&quot;, &quot;ZNF500|26048&quot;, &quot;ZNF501|115560&quot;)) %&gt;%
+  rename(cohort = dataset,
+         MET = `MET|4233`) %&gt;%
+  #cancer samples
+  filter(substr(bcr_patient_barcode, 14, 15) == &quot;01&quot;) %&gt;%
+  mutate(MET = cut(MET,
+   round(quantile(MET, probs = seq(0,1,0.25)), -2),
+   include.lowest = TRUE,
+   dig.lab = 5)) -&gt; ACC_BLCA_BRCA_OV.rnaseq
+
+ACC_BLCA_BRCA_OV.rnaseq %&gt;%
+  select(-bcr_patient_barcode) %&gt;%
+  group_by(cohort, MET) %&gt;%
+  summarise_each(funs(median)) %&gt;%
+  mutate(ZNF500 = round(`ZNF500|26048`),
+         ZNF501 = round(`ZNF501|115560`)) -&gt; ACC_BLCA_BRCA_OV.rnaseq.medians
+heatmapTCGA(ACC_BLCA_BRCA_OV.rnaseq.medians,
+  &quot;cohort&quot;, &quot;MET&quot;, &quot;ZNF500&quot;, title = &quot;Heatmap of ZNF500 expression&quot;)
+</div>
+<p><img src='heatmapTCGA-2.png' alt='' width='540' height='400' /></p>
+<div class='input'>
+## facet example
+library(RTCGA.mutations)
+library(dplyr)
+mutationsTCGA(BRCA.mutations, OV.mutations, ACC.mutations, BLCA.mutations) %&gt;%
+  filter(Hugo_Symbol == &#39;TP53&#39;) %&gt;%
+  filter(substr(bcr_patient_barcode, 14, 15) == &quot;01&quot;) %&gt;% # cancer tissue
+  mutate(bcr_patient_barcode = substr(bcr_patient_barcode, 1, 12)) -&gt; ACC_BLCA_BRCA_OV.mutations
+
+mutationsTCGA(BRCA.mutations, OV.mutations, ACC.mutations, BLCA.mutations) -&gt; ACC_BLCA_BRCA_OV.mutations_all
+
+ACC_BLCA_BRCA_OV.rnaseq %&gt;%
+  mutate(bcr_patient_barcode = substr(bcr_patient_barcode, 1, 15)) %&gt;%
+  filter(bcr_patient_barcode %in%
+  substr(ACC_BLCA_BRCA_OV.mutations_all$bcr_patient_barcode, 1, 15)) %&gt;% 
+  # took patients for which we had any mutation information
+  # so avoided patients without any information about mutations
+  mutate(bcr_patient_barcode = substr(bcr_patient_barcode, 1, 12)) %&gt;%
+  # strin_length(ACC_BLCA_BRCA_OV.mutations$bcr_patient_barcode) == 12
+  left_join(ACC_BLCA_BRCA_OV.mutations,
+  by = &quot;bcr_patient_barcode&quot;) %&gt;% #joined only with tumor patients
+  mutate(TP53 = ifelse(!is.na(Variant_Classification), &quot;Mut&quot;, &quot;WILD&quot;)) %&gt;%
+  select(-bcr_patient_barcode, -Variant_Classification, -dataset, -Hugo_Symbol) %&gt;% 
+  group_by(cohort, MET, TP53) %&gt;% 
+  summarise_each(funs(median)) %&gt;% 
+  mutate(ZNF501 = round(`ZNF501|115560`)) -&gt; ACC_BLCA_BRCA_OV.rnaseq_TP53mutations_ZNF501medians
+
+heatmapTCGA(ACC_BLCA_BRCA_OV.rnaseq_TP53mutations_ZNF501medians, &quot;cohort&quot;, &quot;MET&quot;,
+  fill = &quot;ZNF501&quot;, facet.names = &quot;TP53&quot;, title = &quot;Heatmap of ZNF501 expression&quot;)
+</div>
+<p><img src='heatmapTCGA-4.png' alt='' width='540' height='400' /></p>
+<div class='input'>heatmapTCGA(ACC_BLCA_BRCA_OV.rnaseq_TP53mutations_ZNF501medians, &quot;TP53&quot;, &quot;MET&quot;,
+  fill = &quot;ZNF501&quot;, facet.names = &quot;cohort&quot;, title = &quot;Heatmap of ZNF501 expression&quot;)
+</div>
+<p><img src='heatmapTCGA-6.png' alt='' width='540' height='400' /></p>
+<div class='input'>heatmapTCGA(ACC_BLCA_BRCA_OV.rnaseq_TP53mutations_ZNF501medians, &quot;TP53&quot;, &quot;cohort&quot;,
+  fill = &quot;ZNF501&quot;, facet.names = &quot;MET&quot;, title = &quot;Heatmap of ZNF501 expression&quot;)
+</div>
+<p><img src='heatmapTCGA-8.png' alt='' width='540' height='400' /></p></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>heatmapTCGA</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+<span class = "pkg">RTCGA</span> website <a href = 'http://rtcga.github.io/RTCGA/Visualizations.html'>http://rtcga.github.io/RTCGA/Visualizations.html</a>.
+
+Other RTCGA: <code><a href='RTCGA-package.html'>RTCGA-package</a></code>,
+  <code><a href='boxplotTCGA.html'>boxplotTCGA</a></code>, <code><a href='checkTCGA.html'>checkTCGA</a></code>,
+  <code><a href='convertTCGA.html'>convertTCGA</a></code>, <code><a href='datasetsTCGA.html'>datasetsTCGA</a></code>,
+  <code><a href='downloadTCGA.html'>downloadTCGA</a></code>,
+  <code><a href='expressionsTCGA.html'>expressionsTCGA</a></code>, <code><a href='infoTCGA.html'>infoTCGA</a></code>,
+  <code><a href='installTCGA.html'>installTCGA</a></code>, <code><a href='kmTCGA.html'>kmTCGA</a></code>,
+  <code><a href='mutationsTCGA.html'>mutationsTCGA</a></code>, <code><a href='pcaTCGA.html'>pcaTCGA</a></code>,
+  <code><a href='readTCGA.html'>readTCGA</a></code>, <code><a href='survivalTCGA.html'>survivalTCGA</a></code>,
+  <code><a href='theme_RTCGA.html'>theme_RTCGA</a></code>
+
+    
+    <h2>Author</h2>
+    
+Marcin Kosinski, <a href='mailto:m.p.kosinski@gmail.com'>m.p.kosinski@gmail.com</a>
+
+    
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

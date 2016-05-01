@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>mutationsTCGA. RTCGA 1.1.18</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="
+Marcin Kosinski, &lt;a href='mailto:m.p.kosinski@gmail.com'&gt;m.p.kosinski@gmail.com&lt;/a&gt;
+">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">RTCGA 1.1.18</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Gather Mutations for TCGA Datasets</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>mutationsTCGA(..., extract.cols&nbsp;=&nbsp;c("Hugo_Symbol", "Variant_Classification", "bcr_patient_barcode"), extract.names&nbsp;=&nbsp;TRUE, unique&nbsp;=&nbsp;TRUE)</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>...</dt>
+      <dd>A data.frame or data.frames from TCGA study containing mutations information (<span class = "pkg">RTCGA.mutations</span>).</dd>
+      <dt>extract.cols</dt>
+      <dd>A character specifing the names of columns to be extracted with <code>bcr_patient_barcode</code>. 
+If <code>NULL</code> all columns are returned.</dd>
+      <dt>extract.names</dt>
+      <dd>Logical, whether to extract names of passed data.frames in <code>...</code>.</dd>
+      <dt>unique</dt>
+      <dd>Should the outputed data be <a href='http://www.inside-r.org/packages/cran/BiocGenerics/docs/unique'>unique</a>. By default it's <code>TRUE</code>.</dd>
+    </dl>
+    
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>Function gathers mutations over multiple TCGA datasets and extracts mutations and further informations about them for desired genes.
+See <a href='http://www.inside-r.org/packages/cran/RTCGA.mutations/docs/mutations'>mutations</a>.</p>
+  
+    </div>
+
+    <div class="Note">
+      <h2>Note</h2>
+
+      <p>Input data.frames should contain column <code>bcr_patient_barcode</code> if <code>extract.cols</code> is specified.</p>
+  
+    </div>
+
+    <div class="Issues">
+      <h2>Issues</h2>
+
+      <p></p>
+  
+      <p>If you have any problems, issues or think that something is missing or is not
+clear please post an issue on 
+<a href = 'https://github.com/RTCGA/RTCGA/issues'>https://github.com/RTCGA/RTCGA/issues</a>.</p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>
+library(RTCGA)
+library(RTCGA.mutations)
+library(dplyr)
+mutationsTCGA(BRCA.mutations, OV.mutations) %&gt;%
+  filter(Hugo_Symbol == &#39;TP53&#39;) %&gt;%
+  filter(substr(bcr_patient_barcode, 14, 15) == &quot;01&quot;) %&gt;% # cancer tissue
+  mutate(bcr_patient_barcode = substr(bcr_patient_barcode, 1, 12)) -&gt; BRCA_OV.mutations
+
+library(RTCGA.clinical)
+survivalTCGA(BRCA.clinical, OV.clinical, extract.cols = &quot;admin.disease_code&quot;) %&gt;%
+  rename(disease = admin.disease_code)-&gt; BRCA_OV.clinical
+
+BRCA_OV.clinical %&gt;%
+  left_join(BRCA_OV.mutations,
+  by = &quot;bcr_patient_barcode&quot;) %&gt;%
+  mutate(TP53 = ifelse(!is.na(Variant_Classification), &quot;Mut&quot;,
+ &quot;WILDorNOINFO&quot;)) -&gt; BRCA_OV.clinical_mutations
+
+BRCA_OV.clinical_mutations %&gt;%
+  select(times, patient.vital_status, disease, TP53) -&gt; BRCA_OV.2plot
+kmTCGA(BRCA_OV.2plot, explanatory.names = c(&quot;TP53&quot;, &quot;disease&quot;),
+       break.time.by = 400, xlim = c(0,2000))
+</div>
+<p><img src='mutationsTCGA-2.png' alt='' width='540' height='400' /></p>
+<div class='input'></div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>mutationsTCGA</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+<span class = "pkg">RTCGA</span> website <a href = 'http://rtcga.github.io/RTCGA/Visualizations.html'>http://rtcga.github.io/RTCGA/Visualizations.html</a>.
+
+Other RTCGA: <code><a href='RTCGA-package.html'>RTCGA-package</a></code>,
+  <code><a href='boxplotTCGA.html'>boxplotTCGA</a></code>, <code><a href='checkTCGA.html'>checkTCGA</a></code>,
+  <code><a href='convertTCGA.html'>convertTCGA</a></code>, <code><a href='datasetsTCGA.html'>datasetsTCGA</a></code>,
+  <code><a href='downloadTCGA.html'>downloadTCGA</a></code>,
+  <code><a href='expressionsTCGA.html'>expressionsTCGA</a></code>, <code><a href='heatmapTCGA.html'>heatmapTCGA</a></code>,
+  <code><a href='infoTCGA.html'>infoTCGA</a></code>, <code><a href='installTCGA.html'>installTCGA</a></code>,
+  <code><a href='kmTCGA.html'>kmTCGA</a></code>, <code><a href='pcaTCGA.html'>pcaTCGA</a></code>,
+  <code><a href='readTCGA.html'>readTCGA</a></code>, <code><a href='survivalTCGA.html'>survivalTCGA</a></code>,
+  <code><a href='theme_RTCGA.html'>theme_RTCGA</a></code>
+
+    
+    <h2>Author</h2>
+    
+Marcin Kosinski, <a href='mailto:m.p.kosinski@gmail.com'>m.p.kosinski@gmail.com</a>
+
+    
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>
