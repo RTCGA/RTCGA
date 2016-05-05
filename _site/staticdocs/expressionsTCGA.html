@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>expressionsTCGA. RTCGA 1.1.18</title>
+<title>expressionsTCGA. RTCGA 1.2.0</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="
 Marcin Kosinski, &lt;a href='mailto:m.p.kosinski@gmail.com'&gt;m.p.kosinski@gmail.com&lt;/a&gt;
@@ -34,7 +34,7 @@ Marcin Kosinski, &lt;a href='mailto:m.p.kosinski@gmail.com'&gt;m.p.kosinski@gmai
     <div class="navbar">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="#">RTCGA 1.1.18</a>
+      <a class="brand" href="#">RTCGA 1.2.0</a>
       <div class="nav">
         <ul class="nav">
           <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
@@ -98,7 +98,9 @@ clear please post an issue on
 ## for all examples
 library(dplyr)
 library(tidyr)
-library(ggplot2) 
+</div>
+<strong class='error'>Error in library(tidyr): there is no package called ‘tidyr’</strong>
+<div class='input'>library(ggplot2) 
 
 ## RNASeq expressions
 library(RTCGA.rnaseq)
@@ -114,20 +116,28 @@ expressionsTCGA(BRCA.rnaseq, OV.rnaseq, HNSC.rnaseq,
   theme_RTCGA() +
   scale_fill_brewer(palette = &quot;Dark2&quot;)
 </div>
-<strong class='message'>Scale for &#39;fill&#39; is already present. Adding another scale for
-&#39;fill&#39;, which will replace the existing scale.</strong>
-<p><img src='expressionsTCGA-3.png' alt='' width='540' height='400' /></p>
+<strong class='message'>Scale for &#39;fill&#39; is already present. Adding another scale for &#39;fill&#39;,
+which will replace the existing scale.</strong>
+<p><img src='expressionsTCGA-5.png' alt='' width='540' height='400' /></p>
 <div class='input'>  
 ## mRNA expressions  
 library(tidyr)
-library(RTCGA.mRNA)
-expressionsTCGA(BRCA.mRNA, COAD.mRNA, LUSC.mRNA, UCEC.mRNA,
+</div>
+<strong class='error'>Error in library(tidyr): there is no package called ‘tidyr’</strong>
+<div class='input'>library(RTCGA.mRNA)
+</div>
+<strong class='error'>Error: package ‘RTCGA’ required by ‘RTCGA.mRNA’ could not be found</strong>
+<div class='input'>expressionsTCGA(BRCA.mRNA, COAD.mRNA, LUSC.mRNA, UCEC.mRNA,
                extract.cols = c(&quot;ARHGAP24&quot;, &quot;TRAV20&quot;)) %&gt;%
   rename(cohort = dataset) %&gt;%
   select(-bcr_patient_barcode) %&gt;%
   gather(cohort) -&gt; data2plot
-names(data2plot)[2] &lt;- &quot;mRNA&quot;
-data2plot %&gt;%
+</div>
+<strong class='error'>Error in expressionsTCGA(BRCA.mRNA, COAD.mRNA, LUSC.mRNA, UCEC.mRNA, extract.cols = c(&quot;ARHGAP24&quot;,     &quot;TRAV20&quot;)): object &#39;BRCA.mRNA&#39; not found</strong>
+<div class='input'>names(data2plot)[2] &lt;- &quot;mRNA&quot;
+</div>
+<strong class='error'>Error in names(data2plot)[2] &lt;- &quot;mRNA&quot;: object &#39;data2plot&#39; not found</strong>
+<div class='input'>data2plot %&gt;%
   ggplot(aes(y = value,
              x = reorder(cohort, value, mean),
              fill = cohort)) + 
@@ -137,11 +147,7 @@ data2plot %&gt;%
   facet_grid(mRNA~.) +
   theme(legend.position = &quot;top&quot;)
 </div>
-<strong class='message'>Scale for &#39;fill&#39; is already present. Adding another scale for
-&#39;fill&#39;, which will replace the existing scale.</strong>
-<strong class='warning'>Warning message:
-Removed 2 rows containing non-finite values (stat_boxplot).</strong>
-<p><img src='expressionsTCGA-7.png' alt='' width='540' height='400' /></p>
+<strong class='error'>Error in eval(expr, envir, enclos): object &#39;data2plot&#39; not found</strong>
 <div class='input'>
 
 ## RPPA expressions
@@ -151,8 +157,12 @@ expressionsTCGA(ACC.RPPA, BLCA.RPPA, BRCA.RPPA,
   rename(cohort = dataset) %&gt;%
   select(-bcr_patient_barcode) %&gt;%
   gather(cohort) -&gt; data2plot
-names(data2plot)[2] &lt;- &quot;RPPA&quot;
-data2plot %&gt;%
+</div>
+<strong class='error'>Error in function_list[[k]](value): could not find function &quot;gather&quot;</strong>
+<div class='input'>names(data2plot)[2] &lt;- &quot;RPPA&quot;
+</div>
+<strong class='error'>Error in names(data2plot)[2] &lt;- &quot;RPPA&quot;: object &#39;data2plot&#39; not found</strong>
+<div class='input'>data2plot %&gt;%
   ggplot(aes(fill = cohort, 
              y = value,
              x = RPPA)) +
@@ -163,30 +173,48 @@ data2plot %&gt;%
   theme(legend.position = &quot;top&quot;) +
   geom_jitter(alpha = 0.5, col = &quot;white&quot;, size = 0.6, width = 0.7)
 </div>
-<p><img src='expressionsTCGA-9.png' alt='' width='540' height='400' /></p>
+<strong class='error'>Error in eval(expr, envir, enclos): object &#39;data2plot&#39; not found</strong>
 <div class='input'>
 
 
 ## miRNASeq expressions 
 library(RTCGA.miRNASeq)
-# miRNASeq has bcr_patienct_barcode in rownames...
+</div>
+<strong class='error'>Error: package ‘RTCGA’ required by ‘RTCGA.miRNASeq’ could not be found</strong>
+<div class='input'># miRNASeq has bcr_patienct_barcode in rownames...
 mutate(ACC.miRNASeq, 
    bcr_patient_barcode = substr(rownames(ACC.miRNASeq), 1, 25)) -&gt; ACC.miRNASeq.bcr
-mutate(CESC.miRNASeq, 
+</div>
+<strong class='error'>Error in mutate_(.data, .dots = lazyeval::lazy_dots(...)): object &#39;ACC.miRNASeq&#39; not found</strong>
+<div class='input'>mutate(CESC.miRNASeq, 
    bcr_patient_barcode = substr(rownames(CESC.miRNASeq), 1, 25)) -&gt; CESC.miRNASeq.bcr
-mutate(CHOL.miRNASeq, 
+</div>
+<strong class='error'>Error in mutate_(.data, .dots = lazyeval::lazy_dots(...)): object &#39;CESC.miRNASeq&#39; not found</strong>
+<div class='input'>mutate(CHOL.miRNASeq, 
    bcr_patient_barcode = substr(rownames(CHOL.miRNASeq), 1, 25)) -&gt; CHOL.miRNASeq.bcr
-mutate(LAML.miRNASeq, 
+</div>
+<strong class='error'>Error in mutate_(.data, .dots = lazyeval::lazy_dots(...)): object &#39;CHOL.miRNASeq&#39; not found</strong>
+<div class='input'>mutate(LAML.miRNASeq, 
    bcr_patient_barcode = substr(rownames(LAML.miRNASeq), 1, 25)) -&gt; LAML.miRNASeq.bcr
-mutate(PAAD.miRNASeq, 
+</div>
+<strong class='error'>Error in mutate_(.data, .dots = lazyeval::lazy_dots(...)): object &#39;LAML.miRNASeq&#39; not found</strong>
+<div class='input'>mutate(PAAD.miRNASeq, 
    bcr_patient_barcode = substr(rownames(PAAD.miRNASeq), 1, 25)) -&gt; PAAD.miRNASeq.bcr
-mutate(THYM.miRNASeq, 
+</div>
+<strong class='error'>Error in mutate_(.data, .dots = lazyeval::lazy_dots(...)): object &#39;PAAD.miRNASeq&#39; not found</strong>
+<div class='input'>mutate(THYM.miRNASeq, 
    bcr_patient_barcode = substr(rownames(THYM.miRNASeq), 1, 25)) -&gt; THYM.miRNASeq.bcr
-mutate(LGG.miRNASeq, 
+</div>
+<strong class='error'>Error in mutate_(.data, .dots = lazyeval::lazy_dots(...)): object &#39;THYM.miRNASeq&#39; not found</strong>
+<div class='input'>mutate(LGG.miRNASeq, 
    bcr_patient_barcode = substr(rownames(LGG.miRNASeq), 1, 25)) -&gt; LGG.miRNASeq.bcr
-mutate(STAD.miRNASeq, 
+</div>
+<strong class='error'>Error in mutate_(.data, .dots = lazyeval::lazy_dots(...)): object &#39;LGG.miRNASeq&#39; not found</strong>
+<div class='input'>mutate(STAD.miRNASeq, 
    bcr_patient_barcode = substr(rownames(STAD.miRNASeq), 1, 25)) -&gt; STAD.miRNASeq.bcr
-
+</div>
+<strong class='error'>Error in mutate_(.data, .dots = lazyeval::lazy_dots(...)): object &#39;STAD.miRNASeq&#39; not found</strong>
+<div class='input'>
 
 expressionsTCGA(ACC.miRNASeq.bcr, CESC.miRNASeq.bcr, CHOL.miRNASeq.bcr, 
             LAML.miRNASeq.bcr, PAAD.miRNASeq.bcr, THYM.miRNASeq.bcr,
@@ -196,8 +224,12 @@ expressionsTCGA(ACC.miRNASeq.bcr, CESC.miRNASeq.bcr, CHOL.miRNASeq.bcr,
   filter(miRNA_ID == &quot;read_count&quot;) %&gt;%
   select(-bcr_patient_barcode, -miRNA_ID) %&gt;%
   gather(cohort, machine) -&gt; data2plot
-names(data2plot)[3:4] &lt;- c(&quot;drop&quot;,&quot;value&quot;)
-data2plot %&gt;%
+</div>
+<strong class='error'>Error in expressionsTCGA(ACC.miRNASeq.bcr, CESC.miRNASeq.bcr, CHOL.miRNASeq.bcr,     LAML.miRNASeq.bcr, PAAD.miRNASeq.bcr, THYM.miRNASeq.bcr,     LGG.miRNASeq.bcr, STAD.miRNASeq.bcr, extract.cols = c(&quot;machine&quot;,         &quot;hsa-mir-101-1&quot;, &quot;miRNA_ID&quot;)): object &#39;ACC.miRNASeq.bcr&#39; not found</strong>
+<div class='input'>names(data2plot)[3:4] &lt;- c(&quot;drop&quot;,&quot;value&quot;)
+</div>
+<strong class='error'>Error in names(data2plot)[3:4] &lt;- c(&quot;drop&quot;, &quot;value&quot;): object &#39;data2plot&#39; not found</strong>
+<div class='input'>data2plot %&gt;%
   select(-drop) %&gt;%
   mutate(value = as.numeric(value)) %&gt;%
   ggplot(aes(x = cohort,
@@ -210,9 +242,7 @@ data2plot %&gt;%
   scale_fill_brewer(palette = &quot;Paired&quot;) +
   ggtitle(&quot;hsa-mir-101-1&quot;)
 </div>
-<strong class='message'>Scale for &#39;fill&#39; is already present. Adding another scale for
-&#39;fill&#39;, which will replace the existing scale.</strong>
-<p><img src='expressionsTCGA-12.png' alt='' width='540' height='400' /></p>
+<strong class='error'>Error in eval(expr, envir, enclos): object &#39;data2plot&#39; not found</strong>
 <div class='input'></div></pre>
   </div>
   <div class="span4">

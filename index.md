@@ -4,9 +4,11 @@ layout: page
 
 
 <h2>Workflow of RTCGA package</h2>
-<img src='https://raw.githubusercontent.com/RTCGA/RTCGA/master/RTCGA_workflow_ver3.png', width="1000"> 
+<img src='https://raw.githubusercontent.com/RTCGA/RTCGA/master/RTCGA_workflow_ver3.png'> 
 
-The Cancer Genome Atlas (TCGA) is a comprehensive and coordinated effort to accelerate our understanding of the molecular basis of cancer through the application of genome analysis technologies, including large-scale genome sequencing. We converted selected datasets from this study into few separate packages that are hosted on Bioconductor. These R packages make selected datasets easier to access and manage. Data sets in RTCGA.data packages are large and cover complex relations between clinical outcomes and genetic background.
+> The Cancer Genome Atlas (TCGA) is a comprehensive and coordinated effort to accelerate our understanding of the molecular basis of cancer through the application of genome analysis technologies, including large-scale genome sequencing. 
+
+We converted selected datasets from this study into few separate packages that are hosted on Bioconductor. These R packages make selected datasets easier to access and manage. Data sets in RTCGA.data packages are large and cover complex relations between clinical outcomes and genetic background.
 
 These packages will be useful for at least three audiences: biostatisticians that work with cancer data; researchers that are working on large scale algorithms, for them RTGCA will be a perfect blasting site; teachers that are presenting data analysis method on real data problems.
 
@@ -25,7 +27,10 @@ These packages will be useful for at least three audiences: biostatisticians tha
 </ul>
 <div id="installation-of-packages-from-the-rtcga-family" class="section level3">
 <h3>Installation of packages from the <code>RTCGA</code> family:</h3>
-<p>Windows users: &gt; Make sure you have <a href="http://cran.r-project.org/bin/windows/Rtools/">rtools</a> installed on your computer.</p>
+<p>Windows users: 
+
+> Make sure you have <a href="http://cran.r-project.org/bin/windows/Rtools/">rtools</a> installed on your computer.
+</p>
 <pre class="r"><code># packages that are published to devel version of Bioconductor
 BiocInstaller::useDevel() 
 # swiches to devel branchof Bioconductor 
@@ -143,7 +148,4 @@ Authors:
 </div>
 
 
-
-
-</div>
 
