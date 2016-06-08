@@ -1,3 +1,6 @@
+sudo: false
+os:
+  - linux
 language: r
 assert: false
 r_packages:
@@ -37,4 +40,3 @@ bioc_packages:
  - GenomicRanges
  - IRanges
  - S4Vectors
-sudo: required
