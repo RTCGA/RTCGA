@@ -24,18 +24,17 @@ r_packages:
  - purrr
  - viridis
  - scales
-r_github_packages:
- - RTCGA/RTCGA.rnaseq
- - RTCGA/RTCGA.clinical
- - RTCGA/RTCGA.mutations
- - RTCGA/RTCGA.CNV
- - RTCGA/RTCGA.PANCAN12
- - RTCGA/RTCGA.RPPA
- - RTCGA/RTCGA.mRNA
- - RTCGA/RTCGA.miRNASeq
- - RTCGA/RTCGA.methylation
- - kassambara/survminer
+ - survminer
 bioc_packages:
+ - RTCGA.rnaseq
+ - RTCGA.clinical
+ - RTCGA.mutations
+ - RTCGA.CNV
+ - RTCGA.PANCAN12
+ - RTCGA.RPPA
+ - RTCGA.mRNA
+ - RTCGA.miRNASeq
+ - RTCGA.methylation
  - Biobase
  - GenomicRanges
  - IRanges
