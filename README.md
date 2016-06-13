@@ -33,8 +33,6 @@ Windows users:
 > Make sure you have [rtools](http://cran.r-project.org/bin/windows/Rtools/) installed on your computer.
 
 ```{R}
-# packages that are published to devel version of Bioconductor
-BiocInstaller::useDevel() # swiches to devel branchof Bioconductor - don't use this line if you are interested in release versions
 source("https://bioconductor.org/biocLite.R") # downloads bioClite function
 ```
 
@@ -51,27 +49,19 @@ source("https://bioconductor.org/biocLite.R") # downloads bioClite function
 |RTCGA.methylation |`biocLite('RTCGA.methylation')` |`?methylation` |`browseVignettes('RTCGA.methylation')` |
 
 ```{R}
-# version of packages held at github.com/RTCGA - I try to keep them with the same state as devel versions of Bioconductor
-library(RTCGA)
-installTCGA("RTCGA.PANCAN12")
-installTCGA("RTCGA.CNV")
-installTCGA("RTCGA.RPPA")
-installTCGA("RTCGA.mRNA")
-installTCGA("RTCGA.miRNASeq")
-installTCGA("RTCGA.methylation")
-# or for all just type installTCGA()
+# version of packages held at github.com/RTCGA - I try to keep them with the same state as versions on Bioconductor
+?RTCGA::installTCGA()
 ```
 
 # RTCGA
 
-Packages from the `RTCGA.data` - family/factory are based on the `RTCGA` package
+Data packages are based on the `RTCGA` software package
 
 
 ### Installation of the [`RTCGA`](https://github.com/RTCGA/RTCGA) package: 
 To get started, install the latest version of **RTCGA** from Bioconductor:
 
 ```{R}
-BiocInstaller::useDevel() # swiches to devel branch of Bioconductor
 source("https://bioconductor.org/biocLite.R") # downloads bioClite function
 biocLite("RTCGA") # installs a package
 ```
