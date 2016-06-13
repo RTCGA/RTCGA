@@ -39,9 +39,9 @@ Imports:
     ggplot2,
     ggthemes,
     viridis,
+    knitr,
     scales
 Suggests:
-    knitr,
     testthat,
     pander,
     Biobase,
