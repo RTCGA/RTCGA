@@ -34,7 +34,6 @@ Imports:
     devtools,
     dplyr,
     purrr,
-    knitr,
     survival,
     survminer,
     ggplot2,
@@ -42,6 +41,7 @@ Imports:
     viridis,
     scales
 Suggests:
+    knitr,
     testthat,
     pander,
     Biobase,
