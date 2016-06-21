@@ -34,6 +34,9 @@
 #' @importFrom assertthat assert_that
 #' @importFrom XML readHTMLTable
 #' @importFrom devtools install_github
+#' @importFrom devtools create
+#' @importFrom devtools as.package
+#' @importFrom rmarkdown render
 #' @import survminer
 #' @import survival
 #' @importFrom viridis scale_fill_viridis
@@ -43,6 +46,13 @@
 #' @importFrom ggthemes scale_fill_tableau
 #' @import ggplot2
 #' @importFrom purrr map_if
+#' @importFrom stats as.formula 
+#' @importFrom stats na.omit
+#' @importFrom stats prcomp 
+#' @importFrom stats predict 
+#' @importFrom stats qchisq 
+#' @importFrom stats reformulate
+#' @importFrom stats setNames
 #' 
 #' @examples
 #' \dontrun{

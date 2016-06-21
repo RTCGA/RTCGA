@@ -20,6 +20,11 @@
 #' 
 #' \pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA}{http://rtcga.github.io/RTCGA}.
 #' 
+#' @section devtools:
+#'
+#' This function use tools from the fantastic \pkg{devtools}
+#' package, so you'll need to make sure to have it installed.
+#' 
 #' @examples 
 #' 
 #' \dontrun{
@@ -36,6 +41,11 @@ installTCGA <- function(packages = c('RTCGA.clinical', 'RTCGA.mutations',
                                      'RTCGA.miRNASeq', 'RTCGA.PANCAN12',
                                      'RTCGA.methylation'),
                         build_vignettes = TRUE, ...){
+	
+	if (!requireNamespace("devtools", quietly = TRUE)) {
+    stop("devtools package required for installTCGA function")
+	}
+	
   assert_that(is.character(packages) & length(packages) > 0 & 
                 all(packages %in% c('RTCGA.clinical', 'RTCGA.mutations',
                                     'RTCGA.rnaseq', 'RTCGA.RPPA',

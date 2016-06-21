@@ -25,6 +25,13 @@ If you have any problems, issues or think that something is missing or is not
 clear please post an issue on 
 \href{https://github.com/RTCGA/RTCGA/issues}{https://github.com/RTCGA/RTCGA/issues}.
 }
+
+\section{devtools}{
+
+
+This function use tools from the fantastic \pkg{devtools}
+package, so you'll need to make sure to have it installed.
+}
 \examples{
 
 \dontrun{

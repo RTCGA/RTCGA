@@ -31,7 +31,6 @@ Imports:
     rvest,
     data.table,
     xml2,
-    devtools,
     dplyr,
     purrr,
     survival,
@@ -42,6 +41,8 @@ Imports:
     knitr,
     scales
 Suggests:
+    devtools,
+    rmarkdown,
     testthat,
     pander,
     Biobase,
