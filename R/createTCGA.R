@@ -14,26 +14,25 @@ createTCGA <- function(name,
 											 dataSetFile,
 											 dataType,
 											 formatLink,
-											 BugReports,
+											 releaseDate = tail(checkTCGA('Dates'),1), 
+											 BugReports = "https://github.com/RTCGA/RTCGA/issues",
 											 check = FALSE, 
 											 rstudio = TRUE, 
 											 description = 
-											 	list(Package = name,
-											 			 Version = paste0(releaseDate,".0.0"),
+											 	list(Package = paste0("RTCGA.",name, ".",gsub("-", "", releaseDate)),
+											 			 Version = paste0(gsub("-", "", releaseDate),".0.0"),
 											 			 Date = releaseDate,
+											 			 Title = paste0(name, " datasets from The Cancer Genome Atlas Project"),
 											 			 Repository = "Bioconductor",
 											 			 BugReports = BugReports,
 											 			 Depends =  "R (>= 3.3.0), RTCGA",
 											 			 Suggests = "knitr, rmarkdown",
 											 			 biocViews = "Annotation Data",
 														 VignetteBuilder = "knitr",
+														 License = "GPL-2",
 														 NeedsCompilation = "no",
-											 			 Author = paste0(author, " <", email, ">"),
-											 			 Description = paste0(
-"Package provides ", name, " datasets from The Cancer Genome
-Atlas Project for all cohorts types from
-http://gdac.broadinstitute.org/. ", name, " data format is explained here ",
-formatLink, " . Data from ", releaseDate, " snapshot.")
+											 			 `Authors@R` = paste0(author, " <", email, ">"),
+											 			 Description = paste0("Package provides ", name, " datasets from The Cancer Genome Atlas Project for all cohorts types from http://gdac.broadinstitute.org/. ", name, " data format is explained here ", formatLink, " . Data from ", releaseDate, " snapshot.")
 											 	)) {
 
 	if (!requireNamespace("rmarkdown", quietly = TRUE)) {
@@ -45,20 +44,20 @@ formatLink, " . Data from ", releaseDate, " snapshot.")
 	
 	
 	cat("Creating package skeleton ... \n")
-	devtools::create(path = file.path(path, name),
+	devtools::create(path = file.path(path, name), 
 									 description = description,
 									 check = check,
 									 rstudio = rstudio)
-	pkg <- devtools::as.package(path)
+	pkg <- devtools::as.package(file.path(path, name))
 	cat("Creating vignettes directory ... \n")
-	path <- file.path(pkg$path, "vignettes", paste0(name, ".Rmd"))
+	vig.path <- file.path(pkg$path, "vignettes", paste0(name, ".Rmd"))
 	dir.create(file.path(pkg$path, "vignettes"))
-	file.create(path)
+	file.create(vig.path)
 	
 	name <- name
 	releaseDate <- releaseDate
-	author <- author
 	dataSetFile <- dataSetFile
+	
 	
 	cat("Creating vignette ... \n")
 	readLines(system.file("createTCGA.Rmd",package = "RTCGA")) %>%
@@ -66,16 +65,19 @@ formatLink, " . Data from ", releaseDate, " snapshot.")
 		gsub( "`r releaseDate`", releaseDate, . ) %>%
 		gsub( "`r author`", author, . ) %>%
 		gsub( "dataSetFile", dataSetFile, . ) %>%
-		cat(file=path, sep="\n")
+		gsub( "\"dataType\"", paste0("\"", dataType, "\""), . ) %>%
+		gsub( "`r gsub('-', '', releaseDate)`", gsub('-', '', releaseDate), .) %>%
+		cat(file=vig.path, sep="\n")
 	
 	cat("Rendering vignette: downloading data ... \n")
-  rmarkdown::render(input = path)
+  rmarkdown::render(input = vig.path)
   
-  cat("Setting eval to FALSE in vignette  ... \n")
-  readLines(path) %>%
+  cat("Setting eval to FALSE in vignette after first run ... \n")
+  readLines(vig.path) %>%
     gsub( "eval=TRUE", "eval=TRUE", . ) %>%
-  	cat(file=path, sep="\n")
+  	cat(file=vig.path, sep="\n")
   cat("Creating documentation  ... \n")
   # create documentation
   
 }
+

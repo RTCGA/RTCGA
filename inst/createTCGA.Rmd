@@ -1,11 +1,11 @@
 ---
-title: "Using `RTCGA` package to download `r name` data that are included in RTCGA.`r name` package"
+title: "Using `RTCGA` package to download `r name` data that are included in RTCGA.`r name`.`r gsub('-', '', releaseDate)` package"
 subtitle: "Date of datasets release: `r releaseDate`"
 author: "`r author`"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Using RTCGA to download `r name` data as included in RTCGA.`r name`}
+  %\VignetteIndexEntry{Using RTCGA to download `r name` data as included in RTCGA.`r name`.`r gsub('-', '', releaseDate)`}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -51,15 +51,16 @@ Use cases and examples are shown in `RTCGA` packages vignettes:
 # browseVignettes("RTCGA")
 ```
 
-# How to download `r name` data to gain the same datasets as in RTCGA.`r name` package?
+# How to download `r name` data to gain the same datasets as in RTCGA.`r name`.`r gsub('-', '', releaseDate)` package?
 
 There are many available date times of TCGA data releases. To see them all just type:
 ```{r}
 library(RTCGA)
+library(magrittr)
 # checkTCGA('Dates')
 ```
 
-Version `r paste0(gsub("-", "", releaseDate), ".*.*")` of RTCGA.`r name` package contains `r name` datasets which were released `r releaseDate`. They were downloaded in the following way (which is mainly copied from [http://rtcga.github.io/RTCGA/](http://rtcga.github.io/RTCGA/):
+Version `r gsub('-', '', releaseDate)` of RTCGA.`r name`.`r gsub('-', '', releaseDate)` package contains `r name` datasets which were released `r releaseDate`. They were downloaded in the following way (which is mainly copied from [http://rtcga.github.io/RTCGA/](http://rtcga.github.io/RTCGA/):
 
 ## Available cohorts
 
@@ -140,7 +141,7 @@ ls() %>%
    sapply(function(element){
       tryCatch({
          readTCGA(get(element, envir = .GlobalEnv),
-               dataType = dataType) -> read_file
+               dataType = "dataType") -> read_file
          	
 		     ## remove non-ASCII strings:
 		     for( i in 1:ncol(read_file)){
@@ -152,14 +153,14 @@ ls() %>%
                 x = sub("\\.path", "", x = element),
                 envir = .GlobalEnv )
       }, error = function(cond){
-         cat(element)
-      }) 
+        cat(element)
+      })
      invisible(NULL)
     }    
 )
 ```
 
-# Saving `r name` data to RTCGA.`r name` package
+# Saving `r name` data to RTCGA.`r name`.`r gsub('-', '', releaseDate)` package
 
 
 ```{r}
@@ -168,6 +169,6 @@ grep( name, ls(), value = TRUE) %>%
    paste0( collapse="," ) -> use_data_input
    # ...	Unquoted names of existing objects to save
 eval(parse(text=
-   paste0("devtools::use_data(",use_data_input,",compress=\"xz\")")
+   paste0("devtools::use_data(",use_data_input,",pkg='../',compress=\"xz\")")
 ))
 ```
