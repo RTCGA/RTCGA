@@ -74,7 +74,7 @@ Blog posts
 
 ## Future Plans: [ExperimentHub](http://bioconductor.org/packages/ExperimentHub/)
 
-Submit data from newest TCGA release to [ExperimentHub](http://bioconductor.org/packages/ExperimentHub/) - [https://github.com/RTCGA/RTCGA/issues/85](https://github.com/RTCGA/RTCGA/issues/85)
+Submit data from the newest TCGA release to [ExperimentHub](http://bioconductor.org/packages/ExperimentHub/) - [https://github.com/RTCGA/RTCGA/issues/85](https://github.com/RTCGA/RTCGA/issues/85)
 
 # I still have some time?
 
