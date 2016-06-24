@@ -101,3 +101,5 @@ Submit data from the newest TCGA release to [ExperimentHub](http://bioconductor.
 `heatmapTCGA()` - based [on this blog post](http://www.r-bloggers.com/making-faceted-heatmaps-with-ggplot2/) by [hrbrmstr](http://www.r-bloggers.com/author/hrbrmstr/)
 
 ![Heatmap of expressions](https://raw.githubusercontent.com/RTCGA/RTCGA/master/devel/bioinfo_article/figures/heatmap.png)
+
+# Thanks For Your Attention
