@@ -73,7 +73,7 @@ if (!require(devtools)) {
 }
 install_github("RTCGA/RTCGA", build_vignettes = TRUE)
 ```
-To check Use Cases run
+To check Use Cases visit [rtcga.github.io/RTCGA/Usecases/](rtcga.github.io/RTCGA/Usecases/) or run
 ```{R}
 browseVignettes("RTCGA")
 ```
