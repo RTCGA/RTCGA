@@ -19,8 +19,8 @@ output:
 ###  The list of blog-posts and conference talks about `RTCGA`
 
 * 2016-06 Stanford, USA 
-  	- [Integrating TCGA Data - RTCGA Workflow, Marcin Kosiński](http://bioconductor.org/help/course-materials/2016/BioC2016/)
-  	- [Flash Talk](http://rtcga.github.io/RTCGA/BioC2016/)
+		- [Integrating TCGA Data - RTCGA Workflow, Marcin Kosiński](http://bioconductor.org/help/course-materials/2016/BioC2016/)
+		- [Flash Talk](http://rtcga.github.io/RTCGA/BioC2016/)
 * 2016-05 R-Bloggers
 		- RTCGA factory of R packages - Quick Guide, Marcin Kosiński
 		- [Blog post](RTCGA factory of R packages - Quick Guide) -> [Also on R-Bloggers](http://www.r-bloggers.com/rtcga-factory-of-r-packages-quick-guide/)
@@ -35,5 +35,5 @@ Genome Atlas data, Przemysław Biecek](http://iimo.pl/img/Conference_of_Contempo
 		- 1st Team Data Analysis Marathon, Warsaw 2015
 		- [Data Used on Hackathon](https://www.facebook.com/events/921016974586900/)
 * 2015-03 Poznań, Poland 
-    - [Applications of RTCGA package for The Cancer Genome Atlas data integration](www.zwrotnikraka.pl/8-international-conference-contemporary-oncology-cancer-genomics-poznan/) 
-    - [Poster](https://github.com/RTCGA/RTCGA/raw/master/UseCases/BigDataInGenomics.pdf)
+		- [Applications of RTCGA package for The Cancer Genome Atlas data integration](www.zwrotnikraka.pl/8-international-conference-contemporary-oncology-cancer-genomics-poznan/) 
+		- [Poster](https://github.com/RTCGA/RTCGA/raw/master/UseCases/BigDataInGenomics.pdf)
