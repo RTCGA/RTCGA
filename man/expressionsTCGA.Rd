@@ -56,9 +56,7 @@ expressionsTCGA(BRCA.mRNA, COAD.mRNA, LUSC.mRNA, UCEC.mRNA,
                extract.cols = c("ARHGAP24", "TRAV20")) \%>\%
   rename(cohort = dataset) \%>\%
   select(-bcr_patient_barcode) \%>\%
-  gather(cohort) -> data2plot
-names(data2plot)[2] <- "mRNA"
-data2plot \%>\%
+  gather(key = "mRNA", value = "value", -cohort)  \%>\%
   ggplot(aes(y = value,
              x = reorder(cohort, value, mean),
              fill = cohort)) + 
@@ -75,9 +73,7 @@ expressionsTCGA(ACC.RPPA, BLCA.RPPA, BRCA.RPPA,
     extract.cols = c("4E-BP1_pS65", "4E-BP1")) \%>\%
   rename(cohort = dataset) \%>\%
   select(-bcr_patient_barcode) \%>\%
-  gather(cohort) -> data2plot
-names(data2plot)[2] <- "RPPA"
-data2plot \%>\%
+  gather(key = "RPPA", value = "value", -cohort)  \%>\%
   ggplot(aes(fill = cohort, 
              y = value,
              x = RPPA)) +
@@ -111,27 +107,24 @@ mutate(STAD.miRNASeq,
    bcr_patient_barcode = substr(rownames(STAD.miRNASeq), 1, 25)) -> STAD.miRNASeq.bcr
 
 
-expressionsTCGA(ACC.miRNASeq.bcr, CESC.miRNASeq.bcr, CHOL.miRNASeq.bcr, 
-            LAML.miRNASeq.bcr, PAAD.miRNASeq.bcr, THYM.miRNASeq.bcr,
-            LGG.miRNASeq.bcr, STAD.miRNASeq.bcr,
- extract.cols = c("machine", "hsa-mir-101-1", "miRNA_ID")) \%>\%
-               rename(cohort = dataset) \%>\%
-  filter(miRNA_ID == "read_count") \%>\%
-  select(-bcr_patient_barcode, -miRNA_ID) \%>\%
-  gather(cohort, machine) -> data2plot
-names(data2plot)[3:4] <- c("drop","value")
-data2plot \%>\%
-  select(-drop) \%>\%
-  mutate(value = as.numeric(value)) \%>\%
-  ggplot(aes(x = cohort,
-             y = log1p(value),
-             fill = as.factor(machine)) )+
-  geom_boxplot() +
- theme_RTCGA(base_size = 13) +
-  coord_flip() +
-  theme(legend.position = "top") +
-  scale_fill_brewer(palette = "Paired") +
-  ggtitle("hsa-mir-101-1")
+expressionsTCGA(ACC.miRNASeq.bcr, CESC.miRNASeq.bcr, CHOL.miRNASeq.bcr,
+             LAML.miRNASeq.bcr, PAAD.miRNASeq.bcr, THYM.miRNASeq.bcr,
+             LGG.miRNASeq.bcr, STAD.miRNASeq.bcr,
+  extract.cols = c("machine", "hsa-mir-101-1", "miRNA_ID")) \%>\%
+                rename(cohort = dataset) \%>\%
+   filter(miRNA_ID == "read_count") \%>\%
+   select(-bcr_patient_barcode, -miRNA_ID) \%>\%
+   gather(key = "key", value = "value", -cohort, -machine) \%>\%
+   mutate(value = as.numeric(value)) \%>\%
+   ggplot(aes(x = cohort,
+              y = log1p(value),
+              fill = as.factor(machine)) )+
+   geom_boxplot() +
+   theme_RTCGA(base_size = 13) +
+   coord_flip() +
+   theme(legend.position = "top") +
+   scale_fill_brewer(palette = "Paired") +
+   ggtitle("hsa-mir-101-1")
 
 
 }
