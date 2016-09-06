@@ -1,4 +1,6 @@
-
+#' @importFrom devtools create
+#' @importFrom devtools as.package
+#' @importFrom rmarkdown render
 
 
 #' @section devtools and rmarkdown:
