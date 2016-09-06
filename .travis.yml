@@ -19,7 +19,6 @@ r_packages:
  - survival
  - ggplot2
  - tidyr
- - rmarkdown
  - ggthemes
  - purrr
  - viridis
