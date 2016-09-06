@@ -18,17 +18,25 @@ output:
 
 ###  The list of blog-posts and conference talks about `RTCGA`
 
+- 2016-07 R-Bloggers
+	- BioC 2016 Conference Overview and Few Ways of Downloading TCGA Data, Marcin Kosiński
+	- [Blog post](http://r-addict.com/2016/07/22/BioC2016-RTCGA.html) -> [Also on R-Bloggers](http://www.r-bloggers.com/bioc-2016-conference-overview-and-few-ways-of-downloading-tcga-data/)
+
 - 2016-06 Stanford, USA 
 	* [Integrating TCGA Data - RTCGA Workflow, Marcin Kosiński](http://bioconductor.org/help/course-materials/2016/BioC2016/)
 	* [Flash Talk](http://rtcga.github.io/RTCGA/BioC2016/)
+
+- 2016-06 R-Bloggers
+	- Venn Diagram Comparison of Boruta, FSelectorRcpp and GLMnet Algorithms on TCGA data, Marcin Kosiński
+	- [Blog post](http://r-addict.com/2016/06/19/Venn-Diagram-RTCGA-Feature-Selection.html) -> [Also on R-Bloggers](http://www.r-bloggers.com/venn-diagram-comparison-of-boruta-fselectorrcpp-and-glmnet-algorithms/)
 		
 - 2016-05 R-Bloggers
 	- RTCGA factory of R packages - Quick Guide, Marcin Kosiński
-	- [Blog post](RTCGA factory of R packages - Quick Guide) -> [Also on R-Bloggers](http://www.r-bloggers.com/rtcga-factory-of-r-packages-quick-guide/)
+	- [Blog post](http://r-addict.com/2016/05/04/RTCGA-Quick-Guide.html) -> [Also on R-Bloggers](http://www.r-bloggers.com/rtcga-factory-of-r-packages-quick-guide/)
 
 - 2016-04 Warsaw, Poland 
 
-		* Data used for 2x(4h Workshop) R Tutorial for Biotechnologists at [The 5th Intercollegiate Biotechnology Symposium](http://msb.symbioza.edu.pl/en/)
+	* Data used for 2x(4h Workshop) R Tutorial for Biotechnologists at [The 5th Intercollegiate Biotechnology Symposium](http://msb.symbioza.edu.pl/en/)
 
 - 2016-03 Poznań, Poland 
 
