@@ -42,7 +42,6 @@ Imports:
     scales
 Suggests:
     devtools,
-    rmarkdown,
     testthat,
     pander,
     Biobase,
