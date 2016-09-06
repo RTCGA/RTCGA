@@ -24,35 +24,22 @@
 #' \pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA}{http://rtcga.github.io/RTCGA}.
 #' 
 #' @importFrom xml2 read_html
-#' @importFrom rvest html_nodes
-#' @importFrom rvest html_attr
-#' @importFrom rvest html_text
+#' @importFrom rvest html_nodes html_attr html_text
 #' @import knitr
 #' @import dplyr
 #' @importFrom data.table fread
 #' @importFrom stringi stri_extract_all_regex
 #' @importFrom assertthat assert_that
 #' @importFrom XML readHTMLTable
-#' @importFrom devtools install_github
-#' @importFrom devtools create
-#' @importFrom devtools as.package
-#' @importFrom rmarkdown render
 #' @import survminer
 #' @import survival
 #' @importFrom viridis scale_fill_viridis
 #' @importFrom scales comma
-#' @importFrom ggthemes theme_pander
-#' @importFrom ggthemes scale_colour_tableau
-#' @importFrom ggthemes scale_fill_tableau
+#' @importFrom ggthemes scale_colour_tableau scale_fill_tableau theme_pander
+#' @importFrom utils download.file read.delim setTxtProgressBar tail txtProgressBar untar write.table 
 #' @import ggplot2
 #' @importFrom purrr map_if
-#' @importFrom stats as.formula 
-#' @importFrom stats na.omit
-#' @importFrom stats prcomp 
-#' @importFrom stats predict 
-#' @importFrom stats qchisq 
-#' @importFrom stats reformulate
-#' @importFrom stats setNames
+#' @importFrom stats as.formula na.omit prcomp predict qchisq reformulate setNames
 #' 
 #' @examples
 #' \dontrun{
