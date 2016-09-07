@@ -5,6 +5,7 @@ language: r
 assert: false
 r_packages:
  - knitr
+ - rmarkdown
  - testthat
  - pander
  - XML
