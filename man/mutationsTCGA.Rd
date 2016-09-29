@@ -33,7 +33,6 @@ clear please post an issue on
 }
 \examples{
 
-library(RTCGA)
 library(RTCGA.mutations)
 library(dplyr)
 mutationsTCGA(BRCA.mutations, OV.mutations) \%>\%
