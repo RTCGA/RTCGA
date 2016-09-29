@@ -30,7 +30,6 @@
 #' 
 #' @examples 
 #' 
-#' library(RTCGA)
 #' library(RTCGA.mutations)
 #' library(dplyr)
 #' mutationsTCGA(BRCA.mutations, OV.mutations) %>%
