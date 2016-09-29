@@ -60,7 +60,7 @@ Suggests:
     magrittr,
     tidyr
 Repository: Bioconductor
-biocViews: Software, DataImport, DataRepresentation, Preprocessing
+biocViews: Software, DataImport, DataRepresentation, Preprocessing, RNASeq
 VignetteBuilder: knitr
 NeedsCompilation: no
 RoxygenNote: 5.0.1
