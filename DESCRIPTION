@@ -2,8 +2,14 @@ Package: RTCGA
 Title: The Cancer Genome Atlas Data Integration
 Version: 1.5.1
 Date: 2016-12-01
-Author: Marcin Kosinski <m.p.kosinski@gmail.com>, Przemyslaw Biecek
-    <przemyslaw.biecek@gmail.com>
+Authors@R: c(
+    person("Marcin", "Kosinski", role = c("aut", "cre"),
+    email = "m.p.kosinski@gmail.com"),
+    person("Przemyslaw", "Biecek", role = c("ctb"),
+    email = "przemyslaw.biecek@gmail.com"),
+    person("Witold", "Chodor", role = c("ctb"),
+    email = "witoldchodor@gmail.com")
+    )
 Maintainer: Marcin Kosinski <m.p.kosinski@gmail.com>
 Description: The Cancer Genome Atlas (TCGA) Data Portal provides a
     platform for researchers to search, download, and analyze data

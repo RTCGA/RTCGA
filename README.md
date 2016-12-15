@@ -5,7 +5,7 @@
 # The family of R packages containing TCGA data
 
 
-![Workflow of RTCGA package](https://raw.githubusercontent.com/RTCGA/RTCGA/master/RTCGA_workflow.png)
+<img src="https://raw.githubusercontent.com/RTCGA/RTCGA/master/RTCGA_workflow.png" height="500" width="800">
 
 Data packages submitted to Bioconductor from 2016-01-28 release date of TCGA data.
 
@@ -65,7 +65,8 @@ source("https://bioconductor.org/biocLite.R") # downloads bioClite function
 |RTCGA.methylation          |`biocLite('RTCGA.methylation')`          |`?methylation`          |`2015-11-01` |
 
 ```{R}
-# version of packages held at github.com/RTCGA - I try to keep them with the same state as devel versions of Bioconductor
+# version of packages held at github.com/RTCGA 
+# I try to keep them with the same state as devel versions of Bioconductor
 library(RTCGA)
 installTCGA("RTCGA.clinical.20160128")
 installTCGA("RTCGA.mutations.20160128")
