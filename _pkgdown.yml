@@ -3,7 +3,7 @@ templates:
     bootswatch: flatly
 
 reference:
-  - title: Data Download
+  - title: Download Data
     desc:  Information Required for Data Download
     contents:
       - infoTCGA
