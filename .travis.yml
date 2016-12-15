@@ -3,6 +3,8 @@ os:
   - linux
 language: r
 assert: false
+r: bioc-devel
+bioc_required: true
 r_packages:
  - knitr
  - rmarkdown
@@ -39,3 +41,9 @@ bioc_packages:
  - GenomicRanges
  - IRanges
  - S4Vectors
+ - BiocCheck
+
+after_script:
+  - ls -lah
+  - FILE=$(ls -1t *.tar.gz | head -n 1)
+  - Rscript -e "library(BiocCheck); BiocCheck(\"${FILE}\")"
