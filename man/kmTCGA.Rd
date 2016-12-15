@@ -54,8 +54,6 @@ kmTCGA(BRCAOV.survInfo, explanatory.names = "admin.disease_code",  pval = TRUE)
 kmTCGA(BRCAOV.survInfo, explanatory.names = "admin.disease_code", main = "",
        xlim = c(0,4000))
        
-\dontrun{
-##### dontrun untill survminer (CRAN package) version 0.2.4  
 # first munge data, then extract survival info
 library(dplyr)
 BRCA.clinical \%>\%
@@ -74,7 +72,6 @@ BRCA.clinical \%>\%
 
 kmTCGA(BRCA.survInfo.chemo, explanatory.names = "therapy",
        xlim = c(0, 3000), conf.int = FALSE)
-}
 
 }
 \author{
