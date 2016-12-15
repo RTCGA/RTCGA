@@ -1,0 +1,53 @@
+---
+title: "Web Applications"
+output:
+  html_document:
+    theme: readable
+    highlight: tango
+    fig_width: 17
+    fig_height: 10
+vignette: >
+  %\VignetteIndexEntry{Web Applications}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+- [Expression gene (RTCGA.mRNA)](http://mi2.mini.pw.edu.pl:8080/RTCGA/MMM/shiny/)
+- [Methylation explorator (RTCGA.methylation)](http://mi2.mini.pw.edu.pl:8080/RTCGA/JF/)
+- [Genes mutations  (RTCGA.mutations)](http://mi2.mini.pw.edu.pl:8080/RTCGA/DoBieGar/)
+- [Methylation profile and survival analysis (RTCGA.clinical+RTCGA.methylation)](http://mi2.mini.pw.edu.pl:8080/RTCGA/ASPP/shiny/)
+- [Protein expression (RTCGA.RPPA)](http://mi2.mini.pw.edu.pl:8080/RTCGA/ASMC/)
+- [mRNA Browser (RTCGA.mRNA)](http://mi2.mini.pw.edu.pl:8080/RTCGA/KRWK/shiny/)
+
+<h2><a href="http://mi2.mini.pw.edu.pl:8080/RTCGA/MMM/shiny/">Expression gene (RTCGA.mRNA)</a></h2>
+<a href="http://mi2.mini.pw.edu.pl:8080/RTCGA/MMM/shiny/">
+<img src="https://raw.githubusercontent.com/RTCGA/RTCGA/gh-pages/MMM.png" height="500" width="800">
+</a>
+
+<h2><a href="http://mi2.mini.pw.edu.pl:8080/RTCGA/JF/">Methylation explorator (RTCGA.methylation)</a></h2>
+<a href="http://mi2.mini.pw.edu.pl:8080/RTCGA/JF/">
+  <img src="https://raw.githubusercontent.com/RTCGA/RTCGA/gh-pages/JF.png"  height="500" width="800">
+</a>
+
+
+<h2><a href="http://mi2.mini.pw.edu.pl:8080/RTCGA/DoBieGar/"> Genes mutations  (RTCGA.mutations)</a></h2>
+<a href="http://mi2.mini.pw.edu.pl:8080/RTCGA/DoBieGar/">
+ <img src="https://raw.githubusercontent.com/RTCGA/RTCGA/gh-pages/DoBieGar.png"  height="500" width="800">
+ </a>
+
+
+<h2><a href="http://mi2.mini.pw.edu.pl:8080/RTCGA/ASPP/shiny/">Methylation profile and survival analysis (RTCGA.clinical+RTCGA.methylation)</a></h2>
+<a href="http://mi2.mini.pw.edu.pl:8080/RTCGA/ASPP/shiny/">
+<img src="https://raw.githubusercontent.com/RTCGA/RTCGA/gh-pages/ASPP.png"  height="500" width="800">
+</a>
+
+<h2><a href="http://mi2.mini.pw.edu.pl:8080/RTCGA/ASMC/">Protein expression (RTCGA.RPPA)</a></h2>
+<a href="http://mi2.mini.pw.edu.pl:8080/RTCGA/ASMC/">
+<img src="https://raw.githubusercontent.com/RTCGA/RTCGA/gh-pages/ASMC.png"  height="500" width="800">
+</a>
+
+
+<h2><a href="http://mi2.mini.pw.edu.pl:8080/RTCGA/KRWK/shiny/">mRNA Browser (RTCGA.mRNA)</a></h2>
+
+<a href="http://mi2.mini.pw.edu.pl:8080/RTCGA/KRWK/shiny/">
+  <img src="https://raw.githubusercontent.com/RTCGA/RTCGA/gh-pages/KRWK.png"  height="500" width="800">	
+</a>

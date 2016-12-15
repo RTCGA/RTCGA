@@ -33,7 +33,7 @@ opts_chunk$set(
 ```
 
 
-![Workflow of RTCGA package](https://raw.githubusercontent.com/RTCGA/RTCGA/master/RTCGA_workflow_ver3.png)
+<img src="https://raw.githubusercontent.com/RTCGA/RTCGA/master/RTCGA_workflow.png" height="500" width="800">
 
 Data packages submitted to Bioconductor from 2016-01-28 release date of TCGA data.
 
