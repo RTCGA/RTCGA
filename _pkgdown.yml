@@ -1,0 +1,31 @@
+templates:
+  params:
+    bootswatch: flatly
+
+reference:
+  - title: Data Download
+    desc:  Information Required for Data Download
+    contents:
+      - infoTCGA
+      - checkTCGA
+      - downloadTCGA
+      - readTCGA
+  - title: Existing Data Packages
+    desc: Data Packages Available on Bioconductor
+    contents:
+      - installTCGA
+      - createTCGA
+      - datasetsTCGA
+      - convertTCGA
+  - title: Manipulate Data
+    contents: 
+    - survivalTCGA
+    - mutationsTCGA
+    - expressionsTCGA
+  - title: Visualize Data
+    contents:
+    - kmTCGA
+    - pcaTCGA
+    - heatmapTCGA
+    - boxplotTCGA
+contents: theme_RTCGA
