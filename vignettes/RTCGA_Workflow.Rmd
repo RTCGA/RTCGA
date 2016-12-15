@@ -1,8 +1,8 @@
 ---
 title: "RTCGA package workflow"
 subtitle: "[rtcga.github.io/RTCGA/](https://rtcga.github.io/RTCGA/)"
-author: "Marcin Kosinski"
-date: "2016-03-23"
+author: "Marcin Kosinski&nbsp;&nbsp;<small><a href='http://r-addict.com'><i class='fa fa-comment'></i></a>&nbsp;&nbsp;<a href='https://stackoverflow.com/users/3857701'><i class='fa fa-stack-overflow'></i></a>&nbsp;&nbsp;<a href='https://github.com/MarcinKosinski'><i class='fa fa-github'></i></a>&nbsp;&nbsp;<a href='mailto:m.p.kosinski@gmail.com'><i class='fa fa-envelope-o'></i></a></small><br>"
+date: "2016-12-09"
 output:
   html_document:
     theme: readable
@@ -15,13 +15,44 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
 ---
 
+```{r, include=FALSE}
+htmltools::tagList(rmarkdown::html_dependency_font_awesome())
+library(knitr)
+opts_chunk$set(
+	comment = "",
+	fig.width = 12, 
+	message = FALSE,
+	warning = FALSE,
+	tidy.opts = list(
+		keep.blank.line = TRUE,	
+		width.cutoff = 150
+		),
+	options(width = 200),
+	eval = TRUE
+)
+```
+
+
 ![Workflow of RTCGA package](https://raw.githubusercontent.com/RTCGA/RTCGA/master/RTCGA_workflow_ver3.png)
 
-## Data packages submitted to Bioconductor
+Data packages submitted to Bioconductor from 2016-01-28 release date of TCGA data.
 
-- [RTCGA.mutations](http://bioconductor.org/packages/RTCGA.mutations.html)
-- [RTCGA.rnaseq](http://bioconductor.org/packages/RTCGA.rnaseq.html)
-- [RTCGA.clinical](http://bioconductor.org/packages/RTCGA.clinical.html)
+- [RTCGA.mutations.20160128](http://bioconductor.org/packages/RTCGA.mutations.20160128/)
+- [RTCGA.rnaseq.20160128](http://bioconductor.org/packages/RTCGA.rnaseq.20160128/)
+- [RTCGA.clinical.20160128](http://bioconductor.org/packages/RTCGA.clinical.20160128/)
+- [RTCGA.mRNA.20160128](http://bioconductor.org/packages/RTCGA.mRNA.20160128/)
+- [RTCGA.miRNASeq.20160128](http://bioconductor.org/packages/RTCGA.miRNASeq.20160128/)
+- [RTCGA.RPPA.20160128](http://bioconductor.org/packages/RTCGA.RPPA.20160128/)
+- [RTCGA.CNV.20160128](http://bioconductor.org/packages/RTCGA.CNV.20160128/)
+- [RTCGA.methylation.20160128](http://bioconductor.org/packages/RTCGA.methylation.20160128/)
+
+
+
+Data packages submitted to Bioconductor from 2015-11-01 release date of TCGA data.
+
+- [RTCGA.mutations](http://bioconductor.org/packages/RTCGA.mutations/)
+- [RTCGA.rnaseq](http://bioconductor.org/packages/RTCGA.rnaseq/)
+- [RTCGA.clinical](http://bioconductor.org/packages/RTCGA.clinical/)
 - [RTCGA.PANCAN12](http://bioconductor.org/packages/RTCGA.PANCAN12/)
 - [RTCGA.mRNA](http://bioconductor.org/packages/RTCGA.mRNA/)
 - [RTCGA.miRNASeq](http://bioconductor.org/packages/RTCGA.miRNASeq/)

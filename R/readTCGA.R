@@ -1,5 +1,5 @@
 ## RTCGA package for R
-#' @title Read TCGA data to the tidy format
+#' @title Read TCGA data to the tidy Format
 #'
 #' @description \code{readTCGA} function allows to read unzipped files: 
 #' \itemize{
@@ -16,26 +16,17 @@
 #'      \code{Merge_methylation__humanmethylation27}
 #'      \item isoforms data - 
 #'      \code{Merge_rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_isoforms_normalized__data.Level_3} 
+#'      \item CNV data - \code{segmented_scna_minus_germline_cnv_hg19}
 #'      }
 #' from TCGA project. Those files can be easily downloded with \link{downloadTCGA} function. See examples.
 #' 
 #' @param path See details and examples.
 #' 
-#' @param dataType One of \code{'clinical', 'rnaseq', 'mutations', 'RPPA', 'mRNA', 'miRNASeq', 'methylation', 'isoforms'} depending on which type of data user is trying to read in the tidy format.
+#' @param dataType One of \code{'clinical', 'rnaseq', 'mutations', 'RPPA', 'mRNA', 'miRNASeq', 'methylation', 'isoforms', 'CNV'} depending on which type of data user is trying to read in the tidy format.
 #' @param ... Further arguments passed to the \link{as.data.frame}.
 #' 
 #' @return 
-#' An output:
-#' \itemize{
-#'      \item If \code{dataType = 'clinical'} a \code{data.frame} with clinical data.
-#'      \item If \code{dataType = 'rnaseq'} a \code{data.frame} with rnaseq data.
-#'      \item If \code{dataType = 'mutations'} a \code{data.frame} with mutations data.
-#'      \item If \code{dataType = 'RPPA'} a \code{data.frame} with RPPA data.
-#'      \item If \code{dataType = 'mRNA'} a \code{data.frame} with mRNA data.
-#'      \item If \code{dataType = 'miRNASeq'} a \code{data.frame} with miRNASeq data.
-#'      \item If \code{dataType = 'methylation'} a \code{data.frame} with methylation data.
-#'      \item If \code{dataType = 'isoforms'} a \code{data.frame} with isoforms data.
-#' }
+#' An output is a \code{data.frame} with \code{dataType} data.
 #' 
 #' @details 
 #' All cohort names can be checked using: \code{ sub( x = names( infoTCGA() ), '-counts', '')}.
@@ -50,6 +41,7 @@
 #' \item If \code{dataType = 'miRNASeq'} a path to unzipped files \code{cancerType.mirnaseq__illuminahiseq_mirnaseq__bcgsc_ca__Level_3__miR_gene_expression__data.data.txt} or \code{cancerType.mirnaseq__illuminaga_mirnaseq__bcgsc_ca__Level_3__miR_gene_expression__data.data.txt}
 #' \item If \code{dataType = 'methylation'} a path to unzipped files \code{cancerType.methylation__humanmethylation27__jhu_usc_edu__Level_3__within_bioassay_data_set_function__data.data.txt}.
 #' \item If \code{dataType = 'isoforms'} a path to unzipped files \code{cancerType.rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_isoforms_normalized__data.data.txt}.
+#' \item If \code{dataType = 'CNV'} a path to unzipped files \code{cancerType.Merge_snp__genome_wide_snp_6__broad_mit_edu__Level_3__segmented_scna_minus_germline_cnv_hg18__seg.Level_3.txt}.
 #' }
 #' 
 #' 
@@ -80,18 +72,20 @@
 #' 
 #' # downloading clinical data
 #' # dataset = "clinical" is default parameter so we may omit it
-#' downloadTCGA( cancerTypes = c('BRCA', 'OV'),
-#'               destDir = 'data' )
-#' 
+#' downloadTCGA(cancerTypes = c('BRCA', 'OV'),
+#'              destDir = 'data' )
+#' # shorten paths so that they are shorter than 256 signs - windows issue
+#'  list.files("data", full.names = TRUE) %>%
+#'    file.rename(to = substr(., start = 1, stop = 50))
 #'     
 #' # reading datasets    
-#' sapply( c('BRCA', 'OV'), function( element ){
-#'     folder <- grep( paste0( '(_',element,'\\.', '|','_',element,'-FFPE)', '.*Clinical'),
-#'                     list.files('data/'),value = TRUE)
-#'     path <- paste0( 'data/', folder, '/', element, '.clin.merged.txt')
-#'     assign( value = readTCGA( path, 'clinical' ), 
-#'             x = paste0(element, '.clin.data'), envir = .GlobalEnv)
-#'     })
+#' sapply(c('BRCA', 'OV'), function(element){
+#'  path <- list.files('data', recursive = TRUE,
+#'                     full.names = TRUE, 
+#'                     patten = "clin.merged.txt")
+#'  assign(value = readTCGA( path, 'clinical' ), 
+#'         x = paste0(element, '.clin.data'),
+#'         envir = .GlobalEnv)})
 #'      
 #' ############
 #' ##### rnaseq
@@ -100,24 +94,18 @@
 #' dir.create('data2')
 #' 
 #' # downloading rnaseq data
-#' downloadTCGA( cancerTypes = 'BRCA', 
-#' dataSet = 'rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.Level',
-#'               destDir = 'data2' )
+#' downloadTCGA(cancerTypes = 'BRCA', 
+#'              dataSet = 'Level_3__RSEM_genes_normalized',
+#'              destDir = 'data2')
 #' 
-#' # shortening paths and directories
-#' list.files( 'data2/') %>% 
-#'     file.path( 'data2', .) %>%
-#'     file.rename( to = substr(.,start=1,stop=50))
+#' # shorten paths so that they are shorter than 256 signs - windows issue
+#' list.files("data2", full.names = TRUE) %>%
+#'    file.rename(to = substr(., start = 1, stop = 50))
 #' 
-#' # reading data
-#' list.files( 'data2/') %>% 
-#'     file.path( 'data2', .) -> folder
-#' 
-#' folder %>%
-#'     list.files %>%
-#'     file.path( folder, .) %>%
-#'     grep( pattern = 'illuminahiseq', x = ., value = TRUE) -> pathRNA
-#' readTCGA( path = pathRNA, dataType = 'rnaseq' ) -> my_data
+#' path_rnaseq <- list.files('data2', recursive = TRUE,
+#'                           full.names = TRUE, 
+#'                           patten = 'illuminahiseq')
+#' readTCGA(path = pathRNA, dataType = 'rnaseq') -> rnaseq_data
 #' 
 #' 
 #' ###############
@@ -128,15 +116,14 @@
 #' dir.create('data3')
 #' 
 #' 
-#' downloadTCGA( cancerTypes = 'OV', 
-#'               dataSet = 'Mutation_Packager_Calls.Level',
-#'               destDir = 'data3' )
+#' downloadTCGA(cancerTypes = 'OV', 
+#'              dataSet = 'Mutation_Packager_Calls.Level',
+#'              destDir = 'data3')
 #' 
 #' # reading data
-#' list.files( 'data3/') %>% 
-#'     file.path( 'data3', .) -> folder
+#' list.files('data3', recursive = TRUE) -> directory
 #' 
-#' readTCGA(folder, 'mutations') -> mut_file
+#' readTCGA(directory, 'mutations') -> mut_file
 #' 
 #' #################
 #' ##### methylation
@@ -153,18 +140,15 @@
 #' 
 #' # Shorten path of subdirectory with KIRP methylation data
 #' list.files(path = "data4", full.names = TRUE) %>%
-#'     file.rename(from = ., to = file.path("data4", paste0(cancerType, ".methylation")))
+#'     file.rename(to = file.path("data4", paste0(cancerType, ".methylation")))
 #' 
 #' # Remove manifest.txt file
-#' list.files(path = "data4", full.names = TRUE) %>%
-#'     list.files(path = ., full.names = TRUE) %>% 
-#'     grep("MANIFEST.txt", x = ., value = TRUE) %>%
-#'     file.remove()
+#' list.files(path = "data4", full.names = TRUE, 
+#'            recursive = TRUE, pattern = "MANIFEST") %>%
+#'            file.remove()
 #' 
 #' # Read KIRP methylation data
-#' path <- list.files(path = "data4", full.names = TRUE) %>%
-#'     list.files(path = ., full.names = TRUE)
-#' 
+#' path <- list.files(path = "data4", full.names = TRUE, recursive = TRUE)
 #' KIRP.methylation <- readTCGA(path, dataType = "methylation")
 #' 
 #' 
@@ -186,15 +170,12 @@
 #'     file.rename(from = ., to = file.path("data5", paste0(cancerType, ".RPPA")))
 #' 
 #' # Remove manifest.txt file
-#' list.files(path = "data5", full.names = TRUE) %>%
-#'     list.files(path = ., full.names = TRUE) %>% 
-#'     grep("MANIFEST.txt", x = ., value = TRUE) %>%
-#'     file.remove()
+#' list.files(path = "data5", full.names = TRUE,
+#'            recursive = TRUE, pattern = "MANIFEST") %>%
+#'            file.remove()
 #' 
 #' # Read BRCA RPPA data
-#' path <- list.files(path = "data5", full.names = TRUE) %>%
-#'     list.files(path = ., full.names = TRUE)
-#' 
+#' path <- list.files(path = "data5", full.names = TRUE, recursive = TRUE) 
 #' BRCA.RPPA <- readTCGA(path, dataType = "RPPA")
 #' 
 #' 
@@ -208,7 +189,7 @@
 #' # Download UCEC mRNA data and store it in data6 folder
 #' cancerType = "UCEC"
 #' downloadTCGA(cancerTypes = cancerType,
-#' dataSet = "Merge_transcriptome__agilentg4502a_07_3__unc_edu__Level_3__unc_lowess_normalization_gene_level__data.Level_3",
+#'              dataSet = "agilentg4502a_07_3__unc_edu__Level_3",
 #'              destDir = "data6")
 #' 
 #' # Shorten path of subdirectory with UCEC mRNA data
@@ -216,15 +197,12 @@
 #'     file.rename(from = ., to = file.path("data6",paste0(cancerType, ".mRNA")))
 #' 
 #' # Remove manifest.txt file
-#' list.files(path = "data6", full.names = TRUE) %>%
-#'     list.files(path = ., full.names = TRUE) %>% 
-#'     grep("MANIFEST.txt", x = ., value = TRUE) %>%
-#'     file.remove()
+#' list.files(path = "data6", full.names = TRUE,
+#'            recursive = TRUE, pattern = "MANIFEST") %>%
+#'            file.remove()
 #' 
 #' # Read UCEC mRNA data
-#' path <- list.files(path = "data6", full.names = TRUE) %>%
-#'     list.files(path = ., full.names = TRUE)
-#' 
+#' path <- list.files(path = "data6", full.names = TRUE, recursive = TRUE) 
 #' UCEC.mRNA <- readTCGA(path, dataType = "mRNA")
 #' 
 #' ##############
@@ -239,11 +217,13 @@
 #' # Illumina Genome Analyzer and Illumina HiSeq 2000 machines
 #' cancerType <- "BRCA"
 #' downloadTCGA(cancerTypes = cancerType,
-#' dataSet = "Merge_mirnaseq__illuminaga_mirnaseq__bcgsc_ca__Level_3__miR_gene_expression__data.Level_3",
+#' dataSet = paste0("Merge_mirnaseq__illuminaga_mirnaseq__bcgsc",
+#'                 "_ca__Level_3__miR_gene_expression__data.Level_3"),
 #'              destDir = "data7")
 #' 
 #' downloadTCGA(cancerTypes = cancerType,
-#' dataSet = "Merge_mirnaseq__illuminahiseq_mirnaseq__bcgsc_ca__Level_3__miR_gene_expression__data.Level_3",
+#' dataSet = paste0("Merge_mirnaseq__illuminahiseq_mirnaseq__",
+#'                  "bcgsc_ca__Level_3__miR_gene_expression__data.Level_3"),
 #'              destDir = "data7")
 #' 
 #' # Shorten path of subdirectory with BRCA miRNASeq data
@@ -259,22 +239,22 @@
 #'     })
 #'     
 #' # Remove manifest.txt file
-#' list.files(path = "data7", full.names = TRUE) %>%
-#'     list.files(path = ., full.names = TRUE) %>% 
-#'     grep("MANIFEST.txt", x = ., value = TRUE) %>%
-#'     file.remove()
+#' list.files(path = "data6", full.names = TRUE,
+#'            recursive = TRUE, pattern = "MANIFEST") %>%
+#'            file.remove()
 #' 
 #' # Read BRCA miRNASeq data
-#' path <- list.files(path = "data7", full.names = TRUE) %>%
-#'     list.files(path = ., full.names = TRUE)
+#' path <- list.files(path = "data7", full.names = TRUE, recursive = TRUE)
 #' path_illuminaga <- grep("illuminaga", path, fixed = TRUE, value = TRUE)
 #' path_illuminahiseq <- grep("illuminahiseq", path, fixed = TRUE, value = TRUE)
 #' 
 #' BRCA.miRNASeq.illuminaga <- readTCGA(path_illuminaga, dataType = "miRNASeq")
 #' BRCA.miRNASeq.illuminahiseq <- readTCGA(path_illuminahiseq, dataType = "miRNASeq")
 #' 
-#' BRCA.miRNASeq.illuminaga <- cbind(machine = "Illumina Genome Analyzer", BRCA.miRNASeq.illuminaga)
-#' BRCA.miRNASeq.illuminahiseq <- cbind(machine = "Illumina HiSeq 2000", BRCA.miRNASeq.illuminahiseq)
+#' BRCA.miRNASeq.illuminaga <- cbind(machine = "Illumina Genome Analyzer",
+#'                                   BRCA.miRNASeq.illuminaga)
+#' BRCA.miRNASeq.illuminahiseq <- cbind(machine = "Illumina HiSeq 2000",
+#'                                      BRCA.miRNASeq.illuminahiseq)
 #' 
 #' BRCA.miRNASeq <- rbind(BRCA.miRNASeq.illuminaga, BRCA.miRNASeq.illuminahiseq)
 #' 
@@ -288,7 +268,8 @@
 #' # Download ACC isoforms data and store it in data8 folder
 #' cancerType = "ACC"
 #' downloadTCGA(cancerTypes = cancerType,
-#' dataSet = "Merge_rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_isoforms_normalized__data.Level_3",
+#' dataSet = paste0("Merge_rnaseqv2__illuminahiseq_rnaseqv2__unc",
+#'                  "_edu__Level_3__RSEM_isoforms_normalized__data.Level_3"),
 #'              destDir = "data8")
 #' 
 #' # Shorten path of subdirectory with ACC isoforms data
@@ -296,15 +277,12 @@
 #'     file.rename(from = ., to = file.path("data8",paste0(cancerType, ".isoforms")))
 #' 
 #' # Remove manifest.txt file
-#' list.files(path = "data8", full.names = TRUE) %>%
-#'     list.files(path = ., full.names = TRUE) %>% 
-#'     grep("MANIFEST.txt", x = ., value = TRUE) %>%
-#'     file.remove()
+#' list.files(path = "data6", full.names = TRUE,
+#'            recursive = TRUE, pattern = "MANIFEST") %>%
+#'            file.remove()
 #' 
 #' # Read ACC isoforms data
-#' path <- list.files(path = "data8", full.names = TRUE) %>%
-#'     list.files(path = ., full.names = TRUE)
-#' 
+#' path <- list.files(path = "data8", full.names = TRUE, recursive = TRUE) 
 #' ACC.isoforms <- readTCGA(path, dataType = "isoforms")
 #' 
 #' }
@@ -313,94 +291,97 @@
 #' @rdname readTCGA
 #' @export
 readTCGA <- function(path, dataType, ...) {
-  assertthat::assert_that(is.character(path) & length(path) == 1)
-  assertthat::assert_that(is.character(dataType) & length(dataType) == 1)
-  assertthat::assert_that(dataType %in% c("clinical", "rnaseq", "mutations", "RPPA", "mRNA",
-                                          "miRNASeq", "methylation", "isoforms"))
-  
-  if (dataType %in% c("clinical", "miRNASeq")) {
-    return(read.clinical(path, ...))
-  }
-  if (dataType %in% c("methylation")) {
-    return(read.methylation(path, ...))
-  }
-  if (dataType %in% c("rnaseq", "RPPA", "mRNA", "isoforms")) {
-    return(read.rnaseq(path, ...))
-  }
-  if (dataType == "mutations") {
-    return(read.mutations(path, ...))
-  }
+	assertthat::assert_that(is.character(path) & length(path) == 1)
+	assertthat::assert_that(is.character(dataType) & length(dataType) == 1)
+	assertthat::assert_that(dataType %in% c("clinical", "rnaseq", "mutations", "RPPA", "mRNA",
+																					"miRNASeq", "methylation", "isoforms", "CNV"))
+	
+	if (dataType %in% c("clinical", "miRNASeq")) {
+		return(read.clinical(path, ...))
+	}
+	if (dataType %in% c("methylation")) {
+		return(read.methylation(path, ...))
+	}
+	if (dataType %in% c("rnaseq", "RPPA", "mRNA", "isoforms")) {
+		return(read.rnaseq(path, ...))
+	}
+	if (dataType == "mutations") {
+		return(read.mutations(path, ...))
+	}
+	if (dataType == "CNV") {
+		return(fread(path, data.table = FALSE, ...))
+	}
 }
 
 read.clinical <- function(clinicalDir, ...) {
-  
-  comboClinical <- fread(clinicalDir, data.table = FALSE)
-  
-  colNames <- comboClinical[, 1]
-  
-  comboClinical <- as.data.frame(t(comboClinical[, -1]), ...)
-  names(comboClinical) <- colNames
-  
-  return(comboClinical)
+	
+	comboClinical <- fread(clinicalDir, data.table = FALSE)
+	
+	colNames <- comboClinical[, 1]
+	
+	comboClinical <- as.data.frame(t(comboClinical[, -1]), ...)
+	names(comboClinical) <- colNames
+	
+	return(comboClinical)
 }
 
 read.methylation <- function(methylationDir, ...){
-  methylationData <- fread(methylationDir, data.table = FALSE)
-  first_row <- methylationData[1,]
-  Beta_value_column <- which(first_row == "Beta_value")
-  methylationData <- methylationData[,c(1, 3, 4, 5, Beta_value_column)]
-  colNames <- methylationData[,1]
-  methylationData <- as.data.frame(t(methylationData[,-1]), ...)
-  names(methylationData) <- colNames
-  row.names(methylationData)[1:3] <- c("TCGA-05.1", "TCGA-05.2", "TCGA-05.3")
-  x <- row.names(methylationData)[4]
-  row.names(methylationData)[4] <- sub("\\.3$", "", x)
-  methylationDataNumeric <- methylationData[-c(1:3), -1]
-  apply(methylationDataNumeric, MARGIN = 2, function(x){
-    as.numeric(as.character(x))
-  }) -> methylationDataNumeric
-  methylationDataCodes <- cbind(bcr_patient_barcode = row.names(methylationData)[-c(1:3)],
-                                as.data.frame(methylationDataNumeric))
-  #attr(methylationDataCodes, "info") <- methylationData[c(1:3), -1]
-  return(methylationDataCodes) 
+	methylationData <- fread(methylationDir, data.table = FALSE)
+	first_row <- methylationData[1,]
+	Beta_value_column <- which(first_row == "Beta_value")
+	methylationData <- methylationData[,c(1, 3, 4, 5, Beta_value_column)]
+	colNames <- methylationData[,1]
+	methylationData <- as.data.frame(t(methylationData[,-1]), ...)
+	names(methylationData) <- colNames
+	row.names(methylationData)[1:3] <- c("TCGA-05.1", "TCGA-05.2", "TCGA-05.3")
+	x <- row.names(methylationData)[4]
+	row.names(methylationData)[4] <- sub("\\.3$", "", x)
+	methylationDataNumeric <- methylationData[-c(1:3), -1]
+	apply(methylationDataNumeric, MARGIN = 2, function(x){
+		as.numeric(as.character(x))
+	}) -> methylationDataNumeric
+	methylationDataCodes <- cbind(bcr_patient_barcode = row.names(methylationData)[-c(1:3)],
+																as.data.frame(methylationDataNumeric))
+	#attr(methylationDataCodes, "info") <- methylationData[c(1:3), -1]
+	return(methylationDataCodes) 
 }
 
 read.rnaseq <- function(rnaseqDir, ...) {
-  rnaseqData <- fread(rnaseqDir, data.table = FALSE) %>% t()
-  colnames(rnaseqData) <- rnaseqData[1, ]
-  barcodes <- rownames(rnaseqData)
-  rnaseqData <- rnaseqData[-1, -1] %>%
-    apply(2, function(x) as.numeric(as.character(x))) %>%
-    as.data.frame(x = .) %>%
-    cbind(bcr_patient_barcode = barcodes[-1], .)
-  return(rnaseqData)
+	rnaseqData <- fread(rnaseqDir, data.table = FALSE) %>% t()
+	colnames(rnaseqData) <- rnaseqData[1, ]
+	barcodes <- rownames(rnaseqData)
+	rnaseqData <- rnaseqData[-1, -1] %>%
+		apply(2, function(x) as.numeric(as.character(x))) %>%
+		as.data.frame(x = .) %>%
+		cbind(bcr_patient_barcode = barcodes[-1], .)
+	return(rnaseqData)
 }
 
 read.mutations <- function(mutationsDir, ...) {
-  
-  element <- mutationsDir
-  
-  maf_files <- list.files(element) %>% file.path(element, .) %>% grep(x = ., pattern = "TCGA", value = TRUE)
-  # there are extra manifest.txt files
-  
-  barcodes <- list.files(element) %>% grep(x = ., pattern = "TCGA", value = TRUE) %>% substr(start = 1, stop = 15)
-  
-  pb <- txtProgressBar(min = 0, max = length(maf_files), style = 3)
-  tmp <- tempfile()
-  for (i in seq_along(maf_files)) {
-    
-    maf_data <- read.delim(maf_files[i])
-    n_col <- ncol(maf_data) + 1
-    maf_data[, n_col] <- barcodes[i]
-    names(maf_data)[n_col] <- "bcr_patient_barcode"
-    
-    invisible(write.table(x = maf_data, sep = "\t", file = tmp, append = TRUE, col.names = i==1, quote = FALSE, row.names = FALSE))
-    
-    
-    setTxtProgressBar(pb, i)
-  }
-  close(pb)
-  mutations_file <- read.delim(tmp)
-  file.remove(tmp)
-  return(mutations_file)
+	
+	element <- mutationsDir
+	
+	maf_files <- list.files(element) %>% file.path(element, .) %>% grep(x = ., pattern = "TCGA", value = TRUE)
+	# there are extra manifest.txt files
+	
+	barcodes <- list.files(element) %>% grep(x = ., pattern = "TCGA", value = TRUE) %>% substr(start = 1, stop = 15)
+	
+	pb <- txtProgressBar(min = 0, max = length(maf_files), style = 3)
+	tmp <- tempfile()
+	for (i in seq_along(maf_files)) {
+		
+		maf_data <- read.delim(maf_files[i])
+		n_col <- ncol(maf_data) + 1
+		maf_data[, n_col] <- barcodes[i]
+		names(maf_data)[n_col] <- "bcr_patient_barcode"
+		
+		invisible(write.table(x = maf_data, sep = "\t", file = tmp, append = TRUE, col.names = i==1, quote = FALSE, row.names = FALSE))
+		
+		
+		setTxtProgressBar(pb, i)
+	}
+	close(pb)
+	mutations_file <- read.delim(tmp)
+	file.remove(tmp)
+	return(mutations_file)
 } 

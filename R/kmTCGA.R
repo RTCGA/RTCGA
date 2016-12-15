@@ -26,6 +26,12 @@
 #' library(RTCGA.clinical)
 #' survivalTCGA(BRCA.clinical, OV.clinical, extract.cols = "admin.disease_code") -> BRCAOV.survInfo
 #' 
+#' ## Kaplan-Meier Survival Curves
+#' kmTCGA(BRCAOV.survInfo, explanatory.names = "admin.disease_code",  pval = TRUE)
+#' 
+#' kmTCGA(BRCAOV.survInfo, explanatory.names = "admin.disease_code", main = "",
+#'        xlim = c(0,4000))
+#'        
 #' # first munge data, then extract survival info
 #' library(dplyr)
 #' BRCA.clinical %>%
@@ -41,13 +47,9 @@
 #'                c("chemotherapy", "hormone therapy")) %>%
 #'     rename(therapy = patient.drugs.drug.therapy_types.therapy_type) -> BRCA.survInfo.chemo
 #' 
-#' ## Kaplan-Meier Survival Curves
-#' kmTCGA(BRCAOV.survInfo, explanatory.names = "admin.disease_code",  pval = TRUE)
 #' 
-#' kmTCGA(BRCAOV.survInfo, explanatory.names = "admin.disease_code", main = "",
-#'        xlim = c(0,4000))
-#'  
-#' kmTCGA(BRCA.survInfo.chemo, explanatory.names = "therapy", xlim = c(0, 3000), conf.int = FALSE)
+#' kmTCGA(BRCA.survInfo.chemo, explanatory.names = "therapy",
+#'        xlim = c(0, 3000), conf.int = FALSE)
 #' 
 #' @section Issues:
 #' 
@@ -62,44 +64,44 @@
 #' @rdname kmTCGA
 #' @export
 kmTCGA <- function(x, 
-                  times = "times",
-                  status = "patient.vital_status",
-                  explanatory.names = "1",
-                  main = "Survival Curves",
-                  risk.table = TRUE,
-                  risk.table.y.text = FALSE,
-                  conf.int = TRUE,
-                  return.survfit = FALSE, 
-                  pval = FALSE,
-                  ...) {
-  assert_that(is.data.frame(x))
-  assert_that(all(c(times, status, ifelse(explanatory.names == "1", times, explanatory.names)) %in% names(x)))
-  assert_that(length(times) == 1, length(status) == 1)
-  
-  # fit survival estimates
-  formu <- eval(as.formula(paste0("survival::Surv(", times, ",", status, ") ~ ",
-                                  paste0(explanatory.names, collapse = " + "))))
-  fit <- do.call(survival::survfit, list(formula = formu, data = x))
-         
-  # create survival plot
-  ggsurvplot(fit,
-             risk.table = risk.table, 
-             risk.table.y.text.col = TRUE,
-             legend = "top",
-             conf.int = conf.int, 
-             pval = pval,
-             main = main,
-             risk.table.y.text = FALSE,
-             ggtheme = theme_RTCGA(),
-             ...) -> survplot
-  # customize with RTCGA theme
+									times = "times",
+									status = "patient.vital_status",
+									explanatory.names = "1",
+									main = "Survival Curves",
+									risk.table = TRUE,
+									risk.table.y.text = FALSE,
+									conf.int = TRUE,
+									return.survfit = FALSE, 
+									pval = FALSE,
+									...) {
+	assert_that(is.data.frame(x))
+	assert_that(all(c(times, status, ifelse(explanatory.names == "1", times, explanatory.names)) %in% names(x)))
+	assert_that(length(times) == 1, length(status) == 1)
+	
+	# fit survival estimates
+	formu <- eval(as.formula(paste0("survival::Surv(", times, ",", status, ") ~ ",
+																	paste0(explanatory.names, collapse = " + "))))
+	fit <- do.call(survival::survfit, list(formula = formu, data = x))
+				 
+	# create survival plot
+	ggsurvplot(fit,
+						 risk.table = risk.table, 
+						 risk.table.y.text.col = TRUE,
+						 legend = "top",
+						 conf.int = conf.int, 
+						 pval = pval,
+						 main = main,
+						 risk.table.y.text = FALSE,
+						 ggtheme = theme_RTCGA(),
+						 ...) -> survplot
+	# customize with RTCGA theme
   #survplot$table <- survplot$table + theme_RTCGA()
   #survplot$plot <- survplot$plot + theme_RTCGA()
-  # return              
-  if (return.survfit) {
-    return(list(survplot = survplot, survfit = fit))
-  } else{
-    survplot
-  }
-  
+	# return							
+	if (return.survfit) {
+		return(list(survplot = survplot, survfit = fit))
+	} else{
+		survplot
+	}
+	
 }

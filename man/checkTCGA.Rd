@@ -2,7 +2,7 @@
 % Please edit documentation in R/checkTCGA.R
 \name{checkTCGA}
 \alias{checkTCGA}
-\title{Information about datasets from TCGA project}
+\title{Information About Datasets from TCGA Project}
 \usage{
 checkTCGA(what, cancerType, date = NULL)
 }
@@ -81,7 +81,8 @@ Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 
 Other RTCGA: \code{\link{RTCGA-package}},
   \code{\link{boxplotTCGA}}, \code{\link{convertTCGA}},
-  \code{\link{datasetsTCGA}}, \code{\link{downloadTCGA}},
+  \code{\link{createTCGA}}, \code{\link{datasetsTCGA}},
+  \code{\link{downloadTCGA}},
   \code{\link{expressionsTCGA}}, \code{\link{heatmapTCGA}},
   \code{\link{infoTCGA}}, \code{\link{installTCGA}},
   \code{\link{kmTCGA}}, \code{\link{mutationsTCGA}},

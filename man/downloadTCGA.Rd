@@ -2,7 +2,7 @@
 % Please edit documentation in R/downloadTCGA.R
 \name{downloadTCGA}
 \alias{downloadTCGA}
-\title{Download TCGA data}
+\title{Download TCGA Data}
 \usage{
 downloadTCGA(cancerTypes, dataSet = "Merge_Clinical.Level_1", destDir,
   date = NULL, untarFile = TRUE, removeTar = TRUE, allDataSets = FALSE)
@@ -69,7 +69,8 @@ Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 
 Other RTCGA: \code{\link{RTCGA-package}},
   \code{\link{boxplotTCGA}}, \code{\link{checkTCGA}},
-  \code{\link{convertTCGA}}, \code{\link{datasetsTCGA}},
+  \code{\link{convertTCGA}}, \code{\link{createTCGA}},
+  \code{\link{datasetsTCGA}},
   \code{\link{expressionsTCGA}}, \code{\link{heatmapTCGA}},
   \code{\link{infoTCGA}}, \code{\link{installTCGA}},
   \code{\link{kmTCGA}}, \code{\link{mutationsTCGA}},

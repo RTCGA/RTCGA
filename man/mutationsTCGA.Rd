@@ -36,24 +36,24 @@ clear please post an issue on
 library(RTCGA.mutations)
 library(dplyr)
 mutationsTCGA(BRCA.mutations, OV.mutations) \%>\%
-  filter(Hugo_Symbol == 'TP53') \%>\%
-  filter(substr(bcr_patient_barcode, 14, 15) == "01") \%>\% # cancer tissue
-  mutate(bcr_patient_barcode = substr(bcr_patient_barcode, 1, 12)) -> BRCA_OV.mutations
+	filter(Hugo_Symbol == 'TP53') \%>\%
+	filter(substr(bcr_patient_barcode, 14, 15) == "01") \%>\% # cancer tissue
+	mutate(bcr_patient_barcode = substr(bcr_patient_barcode, 1, 12)) -> BRCA_OV.mutations
 
 library(RTCGA.clinical)
 survivalTCGA(BRCA.clinical, OV.clinical, extract.cols = "admin.disease_code") \%>\%
-  rename(disease = admin.disease_code)-> BRCA_OV.clinical
+	rename(disease = admin.disease_code)-> BRCA_OV.clinical
 
 BRCA_OV.clinical \%>\%
-  left_join(BRCA_OV.mutations,
-  by = "bcr_patient_barcode") \%>\%
-  mutate(TP53 = ifelse(!is.na(Variant_Classification), "Mut",
+	left_join(BRCA_OV.mutations,
+	by = "bcr_patient_barcode") \%>\%
+	mutate(TP53 = ifelse(!is.na(Variant_Classification), "Mut",
  "WILDorNOINFO")) -> BRCA_OV.clinical_mutations
 
 BRCA_OV.clinical_mutations \%>\%
-  select(times, patient.vital_status, disease, TP53) -> BRCA_OV.2plot
+	select(times, patient.vital_status, disease, TP53) -> BRCA_OV.2plot
 kmTCGA(BRCA_OV.2plot, explanatory.names = c("TP53", "disease"),
-       break.time.by = 400, xlim = c(0,2000))
+			 break.time.by = 400, xlim = c(0,2000))
 
 }
 \author{
@@ -64,8 +64,8 @@ Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 
 Other RTCGA: \code{\link{RTCGA-package}},
   \code{\link{boxplotTCGA}}, \code{\link{checkTCGA}},
-  \code{\link{convertTCGA}}, \code{\link{datasetsTCGA}},
-  \code{\link{downloadTCGA}},
+  \code{\link{convertTCGA}}, \code{\link{createTCGA}},
+  \code{\link{datasetsTCGA}}, \code{\link{downloadTCGA}},
   \code{\link{expressionsTCGA}}, \code{\link{heatmapTCGA}},
   \code{\link{infoTCGA}}, \code{\link{installTCGA}},
   \code{\link{kmTCGA}}, \code{\link{pcaTCGA}},

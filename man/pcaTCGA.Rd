@@ -9,7 +9,7 @@ pcaTCGA(x, group.names, title = "", return.pca = FALSE, scale = TRUE,
   circle = TRUE, var.axes = FALSE, alpha = 0.8, add.lines = TRUE, ...)
 }
 \arguments{
-\item{x}{A \code{data.frame} or \code{matrix} containing i.e. expressions information. See \link{expressionsTCGA}.}
+\item{x}{A \code{data.frame} containing i.e. expressions information. See \link{expressionsTCGA}.}
 
 \item{group.names}{Names of group variable to use in labels of the plot.}
 
@@ -66,8 +66,8 @@ library(dplyr)
 ## RNASeq expressions
 library(RTCGA.rnaseq)
 expressionsTCGA(BRCA.rnaseq, OV.rnaseq, HNSC.rnaseq) \%>\%
-  rename(cohort = dataset) \%>\%  
-  filter(substr(bcr_patient_barcode, 14, 15) == "01") -> BRCA.OV.HNSC.rnaseq.cancer
+	rename(cohort = dataset) \%>\%	
+	filter(substr(bcr_patient_barcode, 14, 15) == "01") -> BRCA.OV.HNSC.rnaseq.cancer
 
 pcaTCGA(BRCA.OV.HNSC.rnaseq.cancer, "cohort")
 pcaTCGA(BRCA.OV.HNSC.rnaseq.cancer, "cohort", add.lines = FALSE)
@@ -85,8 +85,8 @@ Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 
 Other RTCGA: \code{\link{RTCGA-package}},
   \code{\link{boxplotTCGA}}, \code{\link{checkTCGA}},
-  \code{\link{convertTCGA}}, \code{\link{datasetsTCGA}},
-  \code{\link{downloadTCGA}},
+  \code{\link{convertTCGA}}, \code{\link{createTCGA}},
+  \code{\link{datasetsTCGA}}, \code{\link{downloadTCGA}},
   \code{\link{expressionsTCGA}}, \code{\link{heatmapTCGA}},
   \code{\link{infoTCGA}}, \code{\link{installTCGA}},
   \code{\link{kmTCGA}}, \code{\link{mutationsTCGA}},

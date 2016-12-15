@@ -1,7 +1,7 @@
 Package: RTCGA
 Title: The Cancer Genome Atlas Data Integration
-Version: 1.2.5
-Date: 2016-09-29
+Version: 1.5.1
+Date: 2016-12-01
 Author: Marcin Kosinski <m.p.kosinski@gmail.com>, Przemyslaw Biecek
     <przemyslaw.biecek@gmail.com>
 Maintainer: Marcin Kosinski <m.p.kosinski@gmail.com>
@@ -39,7 +39,9 @@ Imports:
     ggthemes,
     viridis,
     knitr,
-    scales
+    scales,
+    rmarkdown,
+    htmltools
 Suggests:
     devtools,
     testthat,
@@ -56,11 +58,19 @@ Suggests:
     RTCGA.miRNASeq,
     RTCGA.methylation,
     RTCGA.CNV,
+    RTCGA.rnaseq.20160128,
+    RTCGA.clinical.20160128,
+    RTCGA.mutations.20160128,
+    RTCGA.RPPA.20160128,
+    RTCGA.mRNA.20160128,
+    RTCGA.miRNASeq.20160128,
+    RTCGA.methylation.20160128,
+    RTCGA.CNV.20160128,
     RTCGA.PANCAN12,
     magrittr,
     tidyr
 Repository: Bioconductor
-biocViews: Software, DataImport, DataRepresentation, Preprocessing, RNASeq
+biocViews: Software, DataImport, DataRepresentation, Preprocessing, RNASeq, Survival, DNAMethylation, PrincipalComponent, Visualization
 VignetteBuilder: knitr
 NeedsCompilation: no
 RoxygenNote: 5.0.1

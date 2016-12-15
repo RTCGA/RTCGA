@@ -2,7 +2,7 @@
 % Please edit documentation in R/theme_RTCGA.R
 \name{theme_RTCGA}
 \alias{theme_RTCGA}
-\title{RTCGA Theme For ggplot2}
+\title{RTCGA Theme for ggplot2}
 \usage{
 theme_RTCGA(base_size = 11, base_family = "", ...)
 }
@@ -28,8 +28,8 @@ clear please post an issue on
 library(RTCGA.clinical)
 survivalTCGA(BRCA.clinical, OV.clinical, extract.cols = "admin.disease_code") -> BRCAOV.survInfo
 kmTCGA(BRCAOV.survInfo, explanatory.names = "admin.disease_code",
-       xlim = c(0,4000))
-           
+			 xlim = c(0,4000))
+					 
 }
 \author{
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}
@@ -39,8 +39,8 @@ Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 
 Other RTCGA: \code{\link{RTCGA-package}},
   \code{\link{boxplotTCGA}}, \code{\link{checkTCGA}},
-  \code{\link{convertTCGA}}, \code{\link{datasetsTCGA}},
-  \code{\link{downloadTCGA}},
+  \code{\link{convertTCGA}}, \code{\link{createTCGA}},
+  \code{\link{datasetsTCGA}}, \code{\link{downloadTCGA}},
   \code{\link{expressionsTCGA}}, \code{\link{heatmapTCGA}},
   \code{\link{infoTCGA}}, \code{\link{installTCGA}},
   \code{\link{kmTCGA}}, \code{\link{mutationsTCGA}},

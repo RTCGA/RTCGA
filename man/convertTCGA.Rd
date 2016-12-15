@@ -3,7 +3,7 @@
 \name{convertTCGA}
 \alias{convertPANCAN12}
 \alias{convertTCGA}
-\title{Convert data from RTCGA family to Bioconductor classes}
+\title{Convert Data from RTCGA Family to Bioconductor Classes}
 \usage{
 convertTCGA(dataSet, dataType = "expression")
 
@@ -97,7 +97,8 @@ Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 
 Other RTCGA: \code{\link{RTCGA-package}},
   \code{\link{boxplotTCGA}}, \code{\link{checkTCGA}},
-  \code{\link{datasetsTCGA}}, \code{\link{downloadTCGA}},
+  \code{\link{createTCGA}}, \code{\link{datasetsTCGA}},
+  \code{\link{downloadTCGA}},
   \code{\link{expressionsTCGA}}, \code{\link{heatmapTCGA}},
   \code{\link{infoTCGA}}, \code{\link{installTCGA}},
   \code{\link{kmTCGA}}, \code{\link{mutationsTCGA}},

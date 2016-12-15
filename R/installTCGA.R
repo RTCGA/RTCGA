@@ -1,9 +1,9 @@
 ## RTCGA package for R
-#' @title Install packages from RTCGA family
+#' @title Install Data Packages from RTCGA Family
 #'
-#' @description Function installs data packages from \href{https://github.com/RTCGA/}{https://github.com/RTCGA/}. Packages are listed \link{datasetsTCGA}.
+#' @description Function installs data packages from \href{https://github.com/RTCGA/}{https://github.com/RTCGA/}. Packages are listed in \link{datasetsTCGA}.
 #' 
-#' @param packages A character specifing the names of the data packages to be installed. By default installs all packages.
+#' @param packages A character specifing the names of the data packages to be installed. By default installs all packages from \code{.20160128} release.
 #' @param build_vignettes Should vignettes be build.
 #' @param ... Further arguments passed to \link[devtools]{install_github}.
 #' 
@@ -20,42 +20,32 @@
 #' 
 #' \pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA}{http://rtcga.github.io/RTCGA}.
 #' 
-#' @section devtools:
-#'
-#' This function use tools from the fantastic \pkg{devtools}
-#' package, so you'll need to make sure to have it installed.
-#' 
 #' @examples 
 #' 
 #' \dontrun{
-#' installTCGA()
-#' installTCGA('RTCGA.clinical')
+#' installTCGA() # it installs all!!! of them
+#' installTCGA('RTCGA.clinical.20160128')
 #' }
 #' 
 #' @family RTCGA
 #' @rdname installTCGA
 #' @export
-installTCGA <- function(packages = c('RTCGA.clinical', 'RTCGA.mutations',
-                                     'RTCGA.rnaseq', 'RTCGA.RPPA',
-                                     'RTCGA.mRNA', 'RTCGA.CNV',
-                                     'RTCGA.miRNASeq', 'RTCGA.PANCAN12',
-                                     'RTCGA.methylation'),
-                        build_vignettes = TRUE, ...){
+installTCGA <- function(packages = c('RTCGA.clinical.20160128', 'RTCGA.mutations.20160128',
+																		 'RTCGA.rnaseq.20160128', 'RTCGA.RPPA.20160128',
+																		 'RTCGA.mRNA.20160128', 'RTCGA.CNV.20160128',
+																		 'RTCGA.miRNASeq.20160128', 'RTCGA.PANCAN12.20160128',
+																		 'RTCGA.methylation.20160128'),
+												build_vignettes = TRUE, ...){
+	assert_that(is.character(packages) & length(packages) > 0 & 
+								all(packages %in% c('RTCGA.clinical', 'RTCGA.mutations', 'RTCGA.clinical.20160128', 'RTCGA.mutations.20160128',
+																		'RTCGA.rnaseq', 'RTCGA.RPPA', 'RTCGA.rnaseq.20160128', 'RTCGA.RPPA.20160128',
+																		'RTCGA.mRNA', 'RTCGA.CNV', 'RTCGA.mRNA.20160128', 'RTCGA.CNV.20160128',
+																		'RTCGA.miRNASeq', 'RTCGA.PANCAN12', 'RTCGA.miRNASeq.20160128',
+																		'RTCGA.methylation', 'RTCGA.methylation.20160128')) )
+	assert_that(is.logical(build_vignettes))
+	sapply(packages, function(package){
+		devtools::install_github(file.path('RTCGA', package), 
+														 build_vignettes = build_vignettes, ...)
+	})
 	
-	if (!requireNamespace("devtools", quietly = TRUE)) {
-    stop("devtools package required for installTCGA function")
-	}
-	
-  assert_that(is.character(packages) & length(packages) > 0 & 
-                all(packages %in% c('RTCGA.clinical', 'RTCGA.mutations',
-                                    'RTCGA.rnaseq', 'RTCGA.RPPA',
-                                    'RTCGA.mRNA', 'RTCGA.CNV',
-                                    'RTCGA.miRNASeq', 'RTCGA.PANCAN12',
-                                    'RTCGA.methylation')) )
-  assert_that(is.logical(build_vignettes))
-  sapply(packages, function(package){
-    devtools::install_github(file.path('RTCGA', package), 
-                             build_vignettes = build_vignettes, ...)
-  })
-  
 }

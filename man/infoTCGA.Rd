@@ -2,7 +2,7 @@
 % Please edit documentation in R/infoTCGA.R
 \name{infoTCGA}
 \alias{infoTCGA}
-\title{Information about cohorts from TCGA project}
+\title{Information About Cohorts from TCGA Project}
 \usage{
 infoTCGA()
 }
@@ -39,8 +39,8 @@ Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 
 Other RTCGA: \code{\link{RTCGA-package}},
   \code{\link{boxplotTCGA}}, \code{\link{checkTCGA}},
-  \code{\link{convertTCGA}}, \code{\link{datasetsTCGA}},
-  \code{\link{downloadTCGA}},
+  \code{\link{convertTCGA}}, \code{\link{createTCGA}},
+  \code{\link{datasetsTCGA}}, \code{\link{downloadTCGA}},
   \code{\link{expressionsTCGA}}, \code{\link{heatmapTCGA}},
   \code{\link{installTCGA}}, \code{\link{kmTCGA}},
   \code{\link{mutationsTCGA}}, \code{\link{pcaTCGA}},

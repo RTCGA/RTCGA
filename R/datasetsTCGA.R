@@ -1,9 +1,23 @@
 ## RTCGA package for R
-#' @title RTCGA.data - The Family of R Packages with Data from The Cancer Genome Atlas Study
+#' @title RTCGA - The Family of R Packages with Data from The Cancer Genome Atlas Study
 #'
 #' @description
+#' 
+#' Snapshots of the clinical, mutations, CNVs, rnaseq, RPPA, mRNA, miRNASeq and methylation datasets from the \code{2016-01-28}
+#' release date (check all dates of release with \code{checkTCGA('Dates')}) are included in the \code{RTCGA} family (factory) that contains below packages:
+#' \itemize{
+#'  \item \pkg{RTCGA.rnaseq.20160128} \link[RTCGA.rnaseq.20160128]{rnaseq.20160128}
+#'  \item \pkg{RTCGA.clinical.20160128} \link[RTCGA.clinical.20160128]{clinical.20160128}
+#'  \item \pkg{RTCGA.mutations.20160128} \link[RTCGA.mutations.20160128]{mutations.20160128}
+#'  \item \pkg{RTCGA.CNV.20160128} \link[RTCGA.CNV.20160128]{CNV.20160128}
+#'  \item \pkg{RTCGA.RPPA.20160128} \link[RTCGA.RPPA.20160128]{RPPA.20160128}
+#'  \item \pkg{RTCGA.mRNA.20160128} \link[RTCGA.mRNA.20160128]{mRNA.20160128}
+#'  \item \pkg{RTCGA.miRNASeq.20160128} \link[RTCGA.miRNASeq.20160128]{miRNASeq.20160128}
+#'  \item \pkg{RTCGA.methylation.20160128} \link[RTCGA.methylation.20160128]{methylation.20160128}
+#'  }
+#'  
 #' Snapshots of the clinical, mutations, CNVs, rnaseq, RPPA, mRNA, miRNASeq and methylation datasets from the \code{2015-11-01}
-#' release date (check all dates of release with \code{checkTCGA('Dates')}) are included in the \code{RTCGA.data} family (factory) that contains 9 packages:
+#' release date (check all dates of release with \code{checkTCGA('Dates')}) are also included in the \code{RTCGA} family (factory).
 #' \itemize{
 #'  \item \pkg{RTCGA.rnaseq} \link[RTCGA.rnaseq]{rnaseq}
 #'  \item \pkg{RTCGA.clinical} \link[RTCGA.clinical]{clinical}
@@ -17,7 +31,7 @@
 #'  }
 #'
 #' @details
-#' For more detailed information visit \pkg{RTCGA.data}  website
+#' For more detailed information visit \pkg{RTCGA} family  website
 #' \href{https://rtcga.github.io/RTCGA}{https://rtcga.github.io/RTCGA}. One can install all data packages with \link{installTCGA}.
 #'
 #'
@@ -49,7 +63,18 @@
 #' library(RTCGA)
 #' ?installTCGA
 #' 
-#' ## Bioconductor releases
+#' ## Bioconductor releases for data from 2016-01-28 release
+#' source('http://bioconductor.org/biocLite.R')
+#' biocLite(RTCGA.clinical.20160128)
+#' biocLite(RTCGA.mutations.20160128)
+#' biocLite(RTCGA.rnaseq.20160128)
+#' biocLite(RTCGA.CNV.20160128)
+#' biocLite(RTCGA.RPPA.20160128)
+#' biocLite(RTCGA.mRNA.20160128)
+#' biocLite(RTCGA.miRNASeq.20160128)
+#' biocLite(RTCGA.methylation.20160128)
+#' 
+#' ## Bioconductor releases for data from 2015-11-01 release
 #' source('http://bioconductor.org/biocLite.R')
 #' biocLite(RTCGA.clinical)
 #' biocLite(RTCGA.mutations)

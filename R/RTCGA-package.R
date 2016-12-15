@@ -38,6 +38,8 @@
 #' @importFrom ggthemes scale_colour_tableau scale_fill_tableau theme_pander
 #' @importFrom utils download.file read.delim setTxtProgressBar tail txtProgressBar untar write.table 
 #' @import ggplot2
+#' @importFrom htmltools tagList
+#' @importFrom rmarkdown html_dependency_font_awesome
 #' @importFrom purrr map_if
 #' @importFrom stats as.formula na.omit prcomp predict qchisq reformulate setNames
 #' 

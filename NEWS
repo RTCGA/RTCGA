@@ -1,9 +1,29 @@
-# Version 1.1.17
+# Version 1.5.1
 
-- `pcaTCGA`
-	- Works properly when all columns are non-constant.
+- Improved RTCGA workflow graph - https://raw.githubusercontent.com/RTCGA/RTCGA/master/RTCGA_workflow.png
+- Added `createTCGA` function which can now create RTCGA.dataType.releaseDate-like data packages. Most of the function result will be published in ExperimentHub on Bioconductor.
+- Check new data packages with datasets from `2016-01-28` release date from TCGA
+    - https://github.com/RTCGA/RTCGA.clinical.20160128
+    - https://github.com/RTCGA/RTCGA.mutations.20160128
+    - https://github.com/RTCGA/RTCGA.rnaseq.20160128
+    - https://github.com/RTCGA/RTCGA.RPPA.20160128
+    - https://github.com/RTCGA/RTCGA.CNV.20160128
+    - https://github.com/RTCGA/RTCGA.mRNA.20160128
+    - https://github.com/RTCGA/RTCGA.miRNASeq.20160128
+    - https://github.com/RTCGA/RTCGA.methylation.20160128
 
-# Version 1.1.15-1.1.16
+- `readTCGA` now has a `method` for `CNV` datasets.
+- You can now download packages from `.20160128` release with `installTCGA` function, which downloads them all by default.
+- Improved documentation titles.
+- Improved manual page of `installTCGA` after adding packages from `2016-01-08`.
+- Provided wider explanation for `?datasetsTCGA` after adding packages from `2016-01-08`.
+- Extended biocViews.
+
+# Version 1.3.3
+
+- Fixed examples in `expressionsTCGA` that broke after changes in dplyr, while moving to `tibble`s.
+
+# Version 1.1.15
 
 - New functions `heatmapTCGA`, `boxplotTCGA`, `kmTCGA`, `pcaTCGA`, `theme_RTCGA` for plotting [https://rtcga.github.io/RTCGA/Visualizations.html](https://rtcga.github.io/RTCGA/Visualizations.html)
 - New functions `mutationsTCGA`, `expressionsTCGA`, `survivalTCGA` for data manipulations.

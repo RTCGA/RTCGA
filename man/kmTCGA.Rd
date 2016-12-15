@@ -48,6 +48,14 @@ clear please post an issue on
 library(RTCGA.clinical)
 survivalTCGA(BRCA.clinical, OV.clinical, extract.cols = "admin.disease_code") -> BRCAOV.survInfo
 
+## Kaplan-Meier Survival Curves
+kmTCGA(BRCAOV.survInfo, explanatory.names = "admin.disease_code",  pval = TRUE)
+
+kmTCGA(BRCAOV.survInfo, explanatory.names = "admin.disease_code", main = "",
+       xlim = c(0,4000))
+       
+\dontrun{
+##### dontrun untill survminer (CRAN package) version 0.2.4  
 # first munge data, then extract survival info
 library(dplyr)
 BRCA.clinical \%>\%
@@ -63,13 +71,10 @@ BRCA.clinical \%>\%
                c("chemotherapy", "hormone therapy")) \%>\%
     rename(therapy = patient.drugs.drug.therapy_types.therapy_type) -> BRCA.survInfo.chemo
 
-## Kaplan-Meier Survival Curves
-kmTCGA(BRCAOV.survInfo, explanatory.names = "admin.disease_code",  pval = TRUE)
 
-kmTCGA(BRCAOV.survInfo, explanatory.names = "admin.disease_code", main = "",
-       xlim = c(0,4000))
- 
-kmTCGA(BRCA.survInfo.chemo, explanatory.names = "therapy", xlim = c(0, 3000), conf.int = FALSE)
+kmTCGA(BRCA.survInfo.chemo, explanatory.names = "therapy",
+       xlim = c(0, 3000), conf.int = FALSE)
+}
 
 }
 \author{
@@ -80,8 +85,8 @@ Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 
 Other RTCGA: \code{\link{RTCGA-package}},
   \code{\link{boxplotTCGA}}, \code{\link{checkTCGA}},
-  \code{\link{convertTCGA}}, \code{\link{datasetsTCGA}},
-  \code{\link{downloadTCGA}},
+  \code{\link{convertTCGA}}, \code{\link{createTCGA}},
+  \code{\link{datasetsTCGA}}, \code{\link{downloadTCGA}},
   \code{\link{expressionsTCGA}}, \code{\link{heatmapTCGA}},
   \code{\link{infoTCGA}}, \code{\link{installTCGA}},
   \code{\link{mutationsTCGA}}, \code{\link{pcaTCGA}},

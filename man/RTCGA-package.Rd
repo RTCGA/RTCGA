@@ -34,7 +34,8 @@ Witold Chodor [ctb] \email{witoldchodor@gmail.com}
 
 Other RTCGA: \code{\link{boxplotTCGA}},
   \code{\link{checkTCGA}}, \code{\link{convertTCGA}},
-  \code{\link{datasetsTCGA}}, \code{\link{downloadTCGA}},
+  \code{\link{createTCGA}}, \code{\link{datasetsTCGA}},
+  \code{\link{downloadTCGA}},
   \code{\link{expressionsTCGA}}, \code{\link{heatmapTCGA}},
   \code{\link{infoTCGA}}, \code{\link{installTCGA}},
   \code{\link{kmTCGA}}, \code{\link{mutationsTCGA}},
