@@ -54,6 +54,9 @@
 <li>
   <a href="../articles/index.html">Articles</a>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -137,7 +140,7 @@ clear please post an issue on
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><span class="pkg">RTCGA</span> website <a href = 'http://rtcga.github.io/RTCGA/Download.html'>http://rtcga.github.io/RTCGA/Download.html</a>.</p>
+    <p><span class="pkg">RTCGA</span> website <a href = 'http://rtcga.github.io/RTCGA/'>http://rtcga.github.io/RTCGA/</a>.</p>
     <p>Other RTCGA: <code><a href='RTCGA-package.html'>RTCGA-package</a></code>,
   <code><a href='boxplotTCGA.html'>boxplotTCGA</a></code>, <code><a href='convertTCGA.html'>convertTCGA</a></code>,
   <code><a href='createTCGA.html'>createTCGA</a></code>, <code><a href='datasetsTCGA.html'>datasetsTCGA</a></code>,
@@ -154,7 +157,7 @@ clear please post an issue on
 <span class='co'>############################# </span>
 
 <span class='co'># names for current release date and cohort</span>
-<span class='fu'>checkTCGA</span>(<span class='st'>'DataSets'</span>, <span class='st'>'BRCA'</span> )</div><div class='output co'>#&gt;    Size
+<span class='fu'>checkTCGA</span>(<span class='st'>'DataSets'</span>, <span class='st'>'BRCA'</span>)</div><div class='output co'>#&gt;    Size
 #&gt; 1   37M
 #&gt; 2   50K
 #&gt; 3  723K
@@ -242,8 +245,8 @@ clear please post an issue on
 #&gt; 41                                                                                         BRCA.mRNAseq_Preprocess.Level_3.2016012800.0.0.tar.gz
 #&gt; 42                                                                                   BRCA.miRseq_Mature_Preprocess.Level_3.2016012800.0.0.tar.gz
 #&gt; 43                                                                                          BRCA.miRseq_Preprocess.Level_3.2016012800.0.0.tar.gz</div><div class='input'><span class='co'>## Not run: ------------------------------------</span>
-<span class='co'># checkTCGA('DataSets', 'OV', tail(checkTCGA('Dates'))[3] )</span>
-<span class='co'># #checkTCGA('DataSets', 'OV', checkTCGA('Dates')[5] ) # error</span>
+<span class='co'># checkTCGA('DataSets', 'OV', tail(checkTCGA('Dates'))[3])</span>
+<span class='co'># #checkTCGA('DataSets', 'OV', checkTCGA('Dates')[5]) # error</span>
 <span class='co'>## ---------------------------------------------</span>
 <span class='co'># dates of TCGA datasets' releases.</span>
 <span class='fu'>checkTCGA</span>(<span class='st'>'Dates'</span>)</div><div class='output co'>#&gt;  [1] &quot;2011-10-26&quot; &quot;2011-11-15&quot; &quot;2011-11-28&quot; &quot;2011-12-06&quot; &quot;2011-12-30&quot;

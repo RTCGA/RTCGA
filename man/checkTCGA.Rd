@@ -49,10 +49,10 @@ clear please post an issue on
 ############################# 
 
 # names for current release date and cohort
-checkTCGA('DataSets', 'BRCA' )
+checkTCGA('DataSets', 'BRCA')
 \dontrun{
-checkTCGA('DataSets', 'OV', tail(checkTCGA('Dates'))[3] )
-#checkTCGA('DataSets', 'OV', checkTCGA('Dates')[5] ) # error
+checkTCGA('DataSets', 'OV', tail(checkTCGA('Dates'))[3])
+#checkTCGA('DataSets', 'OV', checkTCGA('Dates')[5]) # error
 }
 # dates of TCGA datasets' releases.
 checkTCGA('Dates')
@@ -77,7 +77,7 @@ cancerTypes \%>\% sapply(function(element){
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 }
 \seealso{
-\pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA/Download.html}{http://rtcga.github.io/RTCGA/Download.html}.
+\pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA/}{http://rtcga.github.io/RTCGA/}.
 
 Other RTCGA: \code{\link{RTCGA-package}},
   \code{\link{boxplotTCGA}}, \code{\link{convertTCGA}},

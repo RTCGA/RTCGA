@@ -81,9 +81,11 @@ library(dplyr)
 mutationsTCGA(BRCA.mutations, OV.mutations, ACC.mutations, BLCA.mutations) \%>\%
   filter(Hugo_Symbol == 'TP53') \%>\%
   filter(substr(bcr_patient_barcode, 14, 15) == "01") \%>\% # cancer tissue
-  mutate(bcr_patient_barcode = substr(bcr_patient_barcode, 1, 12)) -> ACC_BLCA_BRCA_OV.mutations
+  mutate(bcr_patient_barcode = substr(bcr_patient_barcode, 1, 12)) ->
+   ACC_BLCA_BRCA_OV.mutations
 
-mutationsTCGA(BRCA.mutations, OV.mutations, ACC.mutations, BLCA.mutations) -> ACC_BLCA_BRCA_OV.mutations_all
+mutationsTCGA(BRCA.mutations, OV.mutations, ACC.mutations, BLCA.mutations) ->
+  ACC_BLCA_BRCA_OV.mutations_all
 
 ACC_BLCA_BRCA_OV.rnaseq \%>\%
   mutate(bcr_patient_barcode = substr(bcr_patient_barcode, 1, 15)) \%>\%
@@ -99,20 +101,24 @@ ACC_BLCA_BRCA_OV.rnaseq \%>\%
   select(-bcr_patient_barcode, -Variant_Classification, -dataset, -Hugo_Symbol) \%>\% 
   group_by(cohort, MET, TP53) \%>\% 
   summarise_each(funs(median)) \%>\% 
-  mutate(ZNF501 = round(`ZNF501|115560`)) -> ACC_BLCA_BRCA_OV.rnaseq_TP53mutations_ZNF501medians
+  mutate(ZNF501 = round(`ZNF501|115560`)) -> 
+  ACC_BLCA_BRCA_OV.rnaseq_TP53mutations_ZNF501medians
 
 heatmapTCGA(ACC_BLCA_BRCA_OV.rnaseq_TP53mutations_ZNF501medians, "cohort", "MET",
-  fill = "ZNF501", facet.names = "TP53", title = "Heatmap of ZNF501 expression")
+            fill = "ZNF501", facet.names = "TP53", 
+            title = "Heatmap of ZNF501 expression")
 heatmapTCGA(ACC_BLCA_BRCA_OV.rnaseq_TP53mutations_ZNF501medians, "TP53", "MET",
-  fill = "ZNF501", facet.names = "cohort", title = "Heatmap of ZNF501 expression")
+            fill = "ZNF501", facet.names = "cohort",
+            title = "Heatmap of ZNF501 expression")
 heatmapTCGA(ACC_BLCA_BRCA_OV.rnaseq_TP53mutations_ZNF501medians, "TP53", "cohort",
-  fill = "ZNF501", facet.names = "MET", title = "Heatmap of ZNF501 expression")
+            fill = "ZNF501", facet.names = "MET",
+            title = "Heatmap of ZNF501 expression")
 }
 \author{
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 }
 \seealso{
-\pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA/Visualizations.html}{http://rtcga.github.io/RTCGA/Visualizations.html}.
+\pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA/articles/Visualizations.html}{http://rtcga.github.io/RTCGA/articles/Visualizations.html}.
 
 Other RTCGA: \code{\link{RTCGA-package}},
   \code{\link{boxplotTCGA}}, \code{\link{checkTCGA}},

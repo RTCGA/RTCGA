@@ -60,7 +60,7 @@ kmTCGA(BRCA_OV.2plot, explanatory.names = c("TP53", "disease"),
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 }
 \seealso{
-\pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA/Visualizations.html}{http://rtcga.github.io/RTCGA/Visualizations.html}.
+\pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA/articles/Visualizations.html}{http://rtcga.github.io/RTCGA/articles/Visualizations.html}.
 
 Other RTCGA: \code{\link{RTCGA-package}},
   \code{\link{boxplotTCGA}}, \code{\link{checkTCGA}},

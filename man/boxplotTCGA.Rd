@@ -60,11 +60,12 @@ boxplotTCGA(ACC_BLCA_BRCA_OV.rnaseq, "cohort", "log1p(MET)")
 boxplotTCGA(ACC_BLCA_BRCA_OV.rnaseq, "reorder(cohort,log1p(MET), median)", "log1p(MET)")
 boxplotTCGA(ACC_BLCA_BRCA_OV.rnaseq, "reorder(cohort,log1p(MET), max)", "log1p(MET)")
 boxplotTCGA(ACC_BLCA_BRCA_OV.rnaseq, "reorder(cohort,log1p(MET), median)", "log1p(MET)",
-xlab = "Cohort Type", ylab = "Logarithm of MET")
+            xlab = "Cohort Type", ylab = "Logarithm of MET")
 boxplotTCGA(ACC_BLCA_BRCA_OV.rnaseq, "reorder(cohort,log1p(MET), median)", "log1p(MET)", 
-xlab = "Cohort Type", ylab = "Logarithm of MET", legend.title = "Cohorts")
+            xlab = "Cohort Type", ylab = "Logarithm of MET", legend.title = "Cohorts")
 boxplotTCGA(ACC_BLCA_BRCA_OV.rnaseq, "reorder(cohort,log1p(MET), median)", "log1p(MET)", 
-xlab = "Cohort Type", ylab = "Logarithm of MET", legend.title = "Cohorts", legend = "bottom")
+            xlab = "Cohort Type", ylab = "Logarithm of MET", 
+            legend.title = "Cohorts", legend = "bottom")
 
 ## facet example
 library(RTCGA.mutations)
@@ -72,9 +73,11 @@ library(dplyr)
 mutationsTCGA(BRCA.mutations, OV.mutations, ACC.mutations, BLCA.mutations) \%>\% 
   filter(Hugo_Symbol == 'TP53') \%>\%
   filter(substr(bcr_patient_barcode, 14, 15) == "01") \%>\% # cancer tissue
-  mutate(bcr_patient_barcode = substr(bcr_patient_barcode, 1, 12)) -> ACC_BLCA_BRCA_OV.mutations
+  mutate(bcr_patient_barcode = substr(bcr_patient_barcode, 1, 12)) -> 
+  ACC_BLCA_BRCA_OV.mutations
 
-mutationsTCGA(BRCA.mutations, OV.mutations, ACC.mutations, BLCA.mutations) -> ACC_BLCA_BRCA_OV.mutations_all
+mutationsTCGA(BRCA.mutations, OV.mutations, ACC.mutations, BLCA.mutations) -> 
+  ACC_BLCA_BRCA_OV.mutations_all
 
 ACC_BLCA_BRCA_OV.rnaseq \%>\%
   mutate(bcr_patient_barcode = substr(bcr_patient_barcode, 1, 15)) \%>\%
@@ -89,13 +92,13 @@ ACC_BLCA_BRCA_OV.rnaseq \%>\%
   mutate(TP53 = ifelse(!is.na(Variant_Classification), "Mut", "WILD")) \%>\%
   select(cohort, MET, TP53) -> ACC_BLCA_BRCA_OV.rnaseq_TP53mutations
 
-boxplotTCGA(ACC_BLCA_BRCA_OV.rnaseq_TP53mutations, "reorder(cohort,log1p(MET), median)", "log1p(MET)", 
-xlab = "Cohort Type", ylab = "Logarithm of MET", legend.title = "Cohorts", legend = "bottom",
-facet.names = c("TP53"))
+boxplotTCGA(ACC_BLCA_BRCA_OV.rnaseq_TP53mutations, "reorder(cohort,log1p(MET), median)",
+            "log1p(MET)", xlab = "Cohort Type", ylab = "Logarithm of MET", 
+            legend.title = "Cohorts", legend = "bottom", facet.names = c("TP53"))
 
-boxplotTCGA(ACC_BLCA_BRCA_OV.rnaseq_TP53mutations, "reorder(cohort,log1p(MET), median)", "log1p(MET)", 
-xlab = "Cohort Type", ylab = "Logarithm of MET", legend.title = "Cohorts", legend = "bottom",
-fill = c("TP53"))
+boxplotTCGA(ACC_BLCA_BRCA_OV.rnaseq_TP53mutations, "reorder(cohort,log1p(MET), median)",
+            "log1p(MET)", xlab = "Cohort Type", ylab = "Logarithm of MET",
+            legend.title = "Cohorts", legend = "bottom", fill = c("TP53"))
 
 
 }
@@ -103,7 +106,7 @@ fill = c("TP53"))
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 }
 \seealso{
-\pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA/Visualizations.html}{http://rtcga.github.io/RTCGA/Visualizations.html}.
+\pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA/articles/Visualizations.html}{http://rtcga.github.io/RTCGA/articles/Visualizations.html}.
 
 Other RTCGA: \code{\link{RTCGA-package}},
   \code{\link{checkTCGA}}, \code{\link{convertTCGA}},

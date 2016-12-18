@@ -54,6 +54,9 @@
 <li>
   <a href="../articles/index.html">Articles</a>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -133,7 +136,7 @@ clear please post an issue on
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><span class="pkg">RTCGA</span> website <a href = 'http://rtcga.github.io/RTCGA/Visualizations.html'>http://rtcga.github.io/RTCGA/Visualizations.html</a>.</p>
+    <p><span class="pkg">RTCGA</span> website <a href = 'http://rtcga.github.io/RTCGA/articles/Visualizations.html'>http://rtcga.github.io/RTCGA/articles/Visualizations.html</a>.</p>
     <p>Other RTCGA: <code><a href='RTCGA-package.html'>RTCGA-package</a></code>,
   <code><a href='boxplotTCGA.html'>boxplotTCGA</a></code>, <code><a href='checkTCGA.html'>checkTCGA</a></code>,
   <code><a href='convertTCGA.html'>convertTCGA</a></code>, <code><a href='createTCGA.html'>createTCGA</a></code>,
@@ -178,9 +181,11 @@ clear please post an issue on
 <span class='fu'><a href='mutationsTCGA.html'>mutationsTCGA</a></span>(<span class='no'>BRCA.mutations</span>, <span class='no'>OV.mutations</span>, <span class='no'>ACC.mutations</span>, <span class='no'>BLCA.mutations</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>filter</span>(<span class='no'>Hugo_Symbol</span> <span class='kw'>==</span> <span class='st'>'TP53'</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>filter</span>(<span class='fu'>substr</span>(<span class='no'>bcr_patient_barcode</span>, <span class='fl'>14</span>, <span class='fl'>15</span>) <span class='kw'>==</span> <span class='st'>"01"</span>) <span class='kw'>%&gt;%</span> <span class='co'># cancer tissue</span>
-  <span class='fu'>mutate</span>(<span class='kw'>bcr_patient_barcode</span> <span class='kw'>=</span> <span class='fu'>substr</span>(<span class='no'>bcr_patient_barcode</span>, <span class='fl'>1</span>, <span class='fl'>12</span>)) <span class='kw'>-&gt;</span> <span class='no'>ACC_BLCA_BRCA_OV.mutations</span>
+  <span class='fu'>mutate</span>(<span class='kw'>bcr_patient_barcode</span> <span class='kw'>=</span> <span class='fu'>substr</span>(<span class='no'>bcr_patient_barcode</span>, <span class='fl'>1</span>, <span class='fl'>12</span>)) <span class='kw'>-&gt;</span>
+   <span class='no'>ACC_BLCA_BRCA_OV.mutations</span>
 
-<span class='fu'><a href='mutationsTCGA.html'>mutationsTCGA</a></span>(<span class='no'>BRCA.mutations</span>, <span class='no'>OV.mutations</span>, <span class='no'>ACC.mutations</span>, <span class='no'>BLCA.mutations</span>) <span class='kw'>-&gt;</span> <span class='no'>ACC_BLCA_BRCA_OV.mutations_all</span>
+<span class='fu'><a href='mutationsTCGA.html'>mutationsTCGA</a></span>(<span class='no'>BRCA.mutations</span>, <span class='no'>OV.mutations</span>, <span class='no'>ACC.mutations</span>, <span class='no'>BLCA.mutations</span>) <span class='kw'>-&gt;</span>
+  <span class='no'>ACC_BLCA_BRCA_OV.mutations_all</span>
 
 <span class='no'>ACC_BLCA_BRCA_OV.rnaseq</span> <span class='kw'>%&gt;%</span>
   <span class='fu'>mutate</span>(<span class='kw'>bcr_patient_barcode</span> <span class='kw'>=</span> <span class='fu'>substr</span>(<span class='no'>bcr_patient_barcode</span>, <span class='fl'>1</span>, <span class='fl'>15</span>)) <span class='kw'>%&gt;%</span>
@@ -196,12 +201,16 @@ clear please post an issue on
   <span class='fu'>select</span>(-<span class='no'>bcr_patient_barcode</span>, -<span class='no'>Variant_Classification</span>, -<span class='no'>dataset</span>, -<span class='no'>Hugo_Symbol</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>group_by</span>(<span class='no'>cohort</span>, <span class='no'>MET</span>, <span class='no'>TP53</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>summarise_each</span>(<span class='fu'>funs</span>(<span class='no'>median</span>)) <span class='kw'>%&gt;%</span>
-  <span class='fu'>mutate</span>(<span class='kw'>ZNF501</span> <span class='kw'>=</span> <span class='fu'>round</span>(<span class='no'>`ZNF501|115560`</span>)) <span class='kw'>-&gt;</span> <span class='no'>ACC_BLCA_BRCA_OV.rnaseq_TP53mutations_ZNF501medians</span>
+  <span class='fu'>mutate</span>(<span class='kw'>ZNF501</span> <span class='kw'>=</span> <span class='fu'>round</span>(<span class='no'>`ZNF501|115560`</span>)) <span class='kw'>-&gt;</span>
+  <span class='no'>ACC_BLCA_BRCA_OV.rnaseq_TP53mutations_ZNF501medians</span>
 
 <span class='fu'>heatmapTCGA</span>(<span class='no'>ACC_BLCA_BRCA_OV.rnaseq_TP53mutations_ZNF501medians</span>, <span class='st'>"cohort"</span>, <span class='st'>"MET"</span>,
-  <span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"ZNF501"</span>, <span class='kw'>facet.names</span> <span class='kw'>=</span> <span class='st'>"TP53"</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Heatmap of ZNF501 expression"</span>)</div><img src='heatmapTCGA-4.png' alt='' width='540' height='400' /><div class='input'><span class='fu'>heatmapTCGA</span>(<span class='no'>ACC_BLCA_BRCA_OV.rnaseq_TP53mutations_ZNF501medians</span>, <span class='st'>"TP53"</span>, <span class='st'>"MET"</span>,
-  <span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"ZNF501"</span>, <span class='kw'>facet.names</span> <span class='kw'>=</span> <span class='st'>"cohort"</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Heatmap of ZNF501 expression"</span>)</div><img src='heatmapTCGA-6.png' alt='' width='540' height='400' /><div class='input'><span class='fu'>heatmapTCGA</span>(<span class='no'>ACC_BLCA_BRCA_OV.rnaseq_TP53mutations_ZNF501medians</span>, <span class='st'>"TP53"</span>, <span class='st'>"cohort"</span>,
-  <span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"ZNF501"</span>, <span class='kw'>facet.names</span> <span class='kw'>=</span> <span class='st'>"MET"</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Heatmap of ZNF501 expression"</span>)</div><img src='heatmapTCGA-8.png' alt='' width='540' height='400' /></pre>
+            <span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"ZNF501"</span>, <span class='kw'>facet.names</span> <span class='kw'>=</span> <span class='st'>"TP53"</span>,
+            <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Heatmap of ZNF501 expression"</span>)</div><img src='heatmapTCGA-4.png' alt='' width='540' height='400' /><div class='input'><span class='fu'>heatmapTCGA</span>(<span class='no'>ACC_BLCA_BRCA_OV.rnaseq_TP53mutations_ZNF501medians</span>, <span class='st'>"TP53"</span>, <span class='st'>"MET"</span>,
+            <span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"ZNF501"</span>, <span class='kw'>facet.names</span> <span class='kw'>=</span> <span class='st'>"cohort"</span>,
+            <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Heatmap of ZNF501 expression"</span>)</div><img src='heatmapTCGA-6.png' alt='' width='540' height='400' /><div class='input'><span class='fu'>heatmapTCGA</span>(<span class='no'>ACC_BLCA_BRCA_OV.rnaseq_TP53mutations_ZNF501medians</span>, <span class='st'>"TP53"</span>, <span class='st'>"cohort"</span>,
+            <span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"ZNF501"</span>, <span class='kw'>facet.names</span> <span class='kw'>=</span> <span class='st'>"MET"</span>,
+            <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Heatmap of ZNF501 expression"</span>)</div><img src='heatmapTCGA-8.png' alt='' width='540' height='400' /></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

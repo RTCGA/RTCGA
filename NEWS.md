@@ -1,5 +1,6 @@
 # Version 1.5.1
 
+- New version of RTCGA website - http://rtcga.github.io/RTCGA/, based on [pkgdown](http://github.com/hadley/pkgdown/)
 - Improved RTCGA workflow graph - https://raw.githubusercontent.com/RTCGA/RTCGA/master/RTCGA_workflow.png
 - Added `createTCGA` function which can now create RTCGA.dataType.releaseDate-like data packages. Most of the function result will be published in ExperimentHub on Bioconductor.
 - Check new data packages with datasets from `2016-01-28` release date from TCGA
@@ -18,6 +19,8 @@
 - Improved manual page of `installTCGA` after adding packages from `2016-01-08`.
 - Provided wider explanation for `?datasetsTCGA` after adding packages from `2016-01-08`.
 - Extended biocViews.
+- Shortened examples and improved their code appearance.
+- Subsitute old URLs in manual pages with new ones - RTCGA website has new architecture.
 
 # Version 1.3.3
 
