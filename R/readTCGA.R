@@ -58,7 +58,7 @@
 #' 
 #' @seealso 
 #' 
-#' \pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA/Download.html}{http://rtcga.github.io/RTCGA/Download.html}.
+#' \pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA/articles/Data_Download.html}{http://rtcga.github.io/RTCGA/articles/Data_Download.html}.
 #' 
 #' @examples 
 #' 

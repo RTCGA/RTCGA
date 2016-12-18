@@ -40,19 +40,22 @@
 #' 
 #' @seealso 
 #' 
-#' \pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA/Download.html}{http://rtcga.github.io/RTCGA/Download.html}.
+#' \pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA/articles/Data_Download.html}{http://rtcga.github.io/RTCGA/articles/Data_Download.html}.
 #' 
 #' @examples
 #' 
 #'
-#' dir.create( 'hre')
+#' dir.create('hre')
 #' 
-#' downloadTCGA( cancerTypes = 'ACC', dataSet = 'miR_gene_expression', 
-#' destDir = 'hre', date =  tail( checkTCGA('Dates'), 2 )[1] )
+#' downloadTCGA(cancerTypes = 'ACC',
+#'              dataSet = 'miR_gene_expression',
+#'              destDir = 'hre',
+#'              date = tail(checkTCGA('Dates'), 2)[1])
 #'
 #' \dontrun{
-#' downloadTCGA( cancerTypes = c('BRCA', 'OV'), destDir = 'hre',
-#'  date = tail( checkTCGA('Dates'), 2 )[1] )
+#' downloadTCGA(cancerTypes = c('BRCA', 'OV'),
+#'              destDir = 'hre',
+#'              date = tail(checkTCGA('Dates'), 2)[1])
 #' }
 #' 
 #' 

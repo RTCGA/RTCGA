@@ -36,7 +36,7 @@
   <body>
     <div class="container template-reference-topic">
       <header>
-      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
@@ -57,7 +57,18 @@
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/RTCGA/RTCGA">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://twitter.com/kosinski_rblog">
+    <span class="fa fa-twitter"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -120,21 +131,27 @@ clear please post an issue on
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'>library</span>(<span class='no'>RTCGA.mutations</span>)</div><div class='output co'>#&gt; <span class='error'>Error: package ‘RTCGA’ required by ‘RTCGA.mutations’ could not be found</span></div><div class='input'><span class='fu'>library</span>(<span class='no'>dplyr</span>)
+<span class='fu'>library</span>(<span class='no'>RTCGA.mutations</span>)
+<span class='fu'>library</span>(<span class='no'>dplyr</span>)
 <span class='fu'>mutationsTCGA</span>(<span class='no'>BRCA.mutations</span>, <span class='no'>OV.mutations</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>filter</span>(<span class='no'>Hugo_Symbol</span> <span class='kw'>==</span> <span class='st'>'TP53'</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>filter</span>(<span class='fu'>substr</span>(<span class='no'>bcr_patient_barcode</span>, <span class='fl'>14</span>, <span class='fl'>15</span>) <span class='kw'>==</span> <span class='st'>"01"</span>) <span class='kw'>%&gt;%</span> <span class='co'># cancer tissue</span>
-  <span class='fu'>mutate</span>(<span class='kw'>bcr_patient_barcode</span> <span class='kw'>=</span> <span class='fu'>substr</span>(<span class='no'>bcr_patient_barcode</span>, <span class='fl'>1</span>, <span class='fl'>12</span>)) <span class='kw'>-&gt;</span> <span class='no'>BRCA_OV.mutations</span></div><div class='output co'>#&gt; <span class='error'>Error in lapply(list(...), nrow): object &#39;BRCA.mutations&#39; not found</span></div><div class='input'>
-<span class='fu'>library</span>(<span class='no'>RTCGA.clinical</span>)</div><div class='output co'>#&gt; <span class='error'>Error: package ‘RTCGA’ required by ‘RTCGA.clinical’ could not be found</span></div><div class='input'><span class='fu'><a href='survivalTCGA.html'>survivalTCGA</a></span>(<span class='no'>BRCA.clinical</span>, <span class='no'>OV.clinical</span>, <span class='kw'>extract.cols</span> <span class='kw'>=</span> <span class='st'>"admin.disease_code"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>rename</span>(<span class='kw'>disease</span> <span class='kw'>=</span> <span class='no'>admin.disease_code</span>)<span class='kw'>-&gt;</span> <span class='no'>BRCA_OV.clinical</span></div><div class='output co'>#&gt; <span class='error'>Error in lapply(list(...), nrow): object &#39;BRCA.clinical&#39; not found</span></div><div class='input'>
+  <span class='fu'>mutate</span>(<span class='kw'>bcr_patient_barcode</span> <span class='kw'>=</span> <span class='fu'>substr</span>(<span class='no'>bcr_patient_barcode</span>, <span class='fl'>1</span>, <span class='fl'>12</span>)) <span class='kw'>-&gt;</span> <span class='no'>BRCA_OV.mutations</span>
+
+<span class='fu'>library</span>(<span class='no'>RTCGA.clinical</span>)
+<span class='fu'><a href='survivalTCGA.html'>survivalTCGA</a></span>(<span class='no'>BRCA.clinical</span>, <span class='no'>OV.clinical</span>, <span class='kw'>extract.cols</span> <span class='kw'>=</span> <span class='st'>"admin.disease_code"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>rename</span>(<span class='kw'>disease</span> <span class='kw'>=</span> <span class='no'>admin.disease_code</span>)<span class='kw'>-&gt;</span> <span class='no'>BRCA_OV.clinical</span>
+
 <span class='no'>BRCA_OV.clinical</span> <span class='kw'>%&gt;%</span>
   <span class='fu'>left_join</span>(<span class='no'>BRCA_OV.mutations</span>,
   <span class='kw'>by</span> <span class='kw'>=</span> <span class='st'>"bcr_patient_barcode"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>mutate</span>(<span class='kw'>TP53</span> <span class='kw'>=</span> <span class='fu'>ifelse</span>(!<span class='fu'>is.na</span>(<span class='no'>Variant_Classification</span>), <span class='st'>"Mut"</span>,
- <span class='st'>"WILDorNOINFO"</span>)) <span class='kw'>-&gt;</span> <span class='no'>BRCA_OV.clinical_mutations</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object &#39;BRCA_OV.clinical&#39; not found</span></div><div class='input'>
+ <span class='st'>"WILDorNOINFO"</span>)) <span class='kw'>-&gt;</span> <span class='no'>BRCA_OV.clinical_mutations</span>
+
 <span class='no'>BRCA_OV.clinical_mutations</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>select</span>(<span class='no'>times</span>, <span class='no'>patient.vital_status</span>, <span class='no'>disease</span>, <span class='no'>TP53</span>) <span class='kw'>-&gt;</span> <span class='no'>BRCA_OV.2plot</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object &#39;BRCA_OV.clinical_mutations&#39; not found</span></div><div class='input'><span class='fu'><a href='kmTCGA.html'>kmTCGA</a></span>(<span class='no'>BRCA_OV.2plot</span>, <span class='kw'>explanatory.names</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"TP53"</span>, <span class='st'>"disease"</span>),
-       <span class='kw'>break.time.by</span> <span class='kw'>=</span> <span class='fl'>400</span>, <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0</span>,<span class='fl'>2000</span>))</div><div class='output co'>#&gt; <span class='error'>Error in is.data.frame(x): object &#39;BRCA_OV.2plot&#39; not found</span></div><div class='input'>
+  <span class='fu'>select</span>(<span class='no'>times</span>, <span class='no'>patient.vital_status</span>, <span class='no'>disease</span>, <span class='no'>TP53</span>) <span class='kw'>-&gt;</span> <span class='no'>BRCA_OV.2plot</span>
+<span class='fu'><a href='kmTCGA.html'>kmTCGA</a></span>(<span class='no'>BRCA_OV.2plot</span>, <span class='kw'>explanatory.names</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"TP53"</span>, <span class='st'>"disease"</span>),
+       <span class='kw'>break.time.by</span> <span class='kw'>=</span> <span class='fl'>400</span>, <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0</span>,<span class='fl'>2000</span>))</div><img src='mutationsTCGA-2.png' alt='' width='540' height='400' /><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

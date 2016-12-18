@@ -25,4 +25,8 @@ _site/
 hre/
 text_createTCGA/
 docs/
+vignettes/Visualizations.Rmd
+vignettes/Visualizations.html
+vignettes/Data_Download.html
+vignettes/Data_Download.Rmd
 

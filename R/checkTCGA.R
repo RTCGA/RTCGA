@@ -39,17 +39,17 @@
 #' 
 #' @seealso 
 #' 
-#' \pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA/Download.html}{http://rtcga.github.io/RTCGA/Download.html}.
+#' \pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA/}{http://rtcga.github.io/RTCGA/}.
 #' 
 #' @examples
 #' 
 #' ############################# 
 #' 
 #' # names for current release date and cohort
-#' checkTCGA('DataSets', 'BRCA' )
+#' checkTCGA('DataSets', 'BRCA')
 #' \dontrun{
-#' checkTCGA('DataSets', 'OV', tail(checkTCGA('Dates'))[3] )
-#' #checkTCGA('DataSets', 'OV', checkTCGA('Dates')[5] ) # error
+#' checkTCGA('DataSets', 'OV', tail(checkTCGA('Dates'))[3])
+#' #checkTCGA('DataSets', 'OV', checkTCGA('Dates')[5]) # error
 #' }
 #' # dates of TCGA datasets' releases.
 #' checkTCGA('Dates')

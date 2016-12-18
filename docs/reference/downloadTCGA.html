@@ -36,7 +36,7 @@
   <body>
     <div class="container template-reference-topic">
       <header>
-      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
@@ -57,7 +57,18 @@
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/RTCGA/RTCGA">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://twitter.com/kosinski_rblog">
+    <span class="fa fa-twitter"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -136,7 +147,8 @@ clear please post an issue on
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 
-<span class='fu'>dir.create</span>( <span class='st'>'hre'</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: &#39;hre&#39; already exists</span></div><div class='input'>
+<span class='fu'>dir.create</span>( <span class='st'>'hre'</span>)
+
 <span class='fu'>downloadTCGA</span>( <span class='kw'>cancerTypes</span> <span class='kw'>=</span> <span class='st'>'ACC'</span>, <span class='kw'>dataSet</span> <span class='kw'>=</span> <span class='st'>'miR_gene_expression'</span>,
 <span class='kw'>destDir</span> <span class='kw'>=</span> <span class='st'>'hre'</span>, <span class='kw'>date</span> <span class='kw'>=</span>  <span class='fu'>tail</span>( <span class='fu'><a href='checkTCGA.html'>checkTCGA</a></span>(<span class='st'>'Dates'</span>), <span class='fl'>2</span> )[<span class='fl'>1</span>] )</div><div class='output co'>#&gt; There were more than one datasets matching the dataSet parameter. 
 #&gt; Downloaded only 

@@ -1,3 +1,12 @@
+navbar:
+  type: inverse
+  right:
+    - icon: fa-github fa-lg
+      href: https://github.com/RTCGA/RTCGA
+    - icon: fa-twitter
+      href: https://twitter.com/kosinski_rblog
+
+
 templates:
   params:
     bootswatch: flatly
@@ -19,13 +28,14 @@ reference:
       - convertTCGA
   - title: Manipulate Data
     contents: 
-    - survivalTCGA
-    - mutationsTCGA
-    - expressionsTCGA
+      - survivalTCGA
+      - mutationsTCGA
+      - expressionsTCGA
   - title: Visualize Data
     contents:
-    - kmTCGA
-    - pcaTCGA
-    - heatmapTCGA
-    - boxplotTCGA
-contents: theme_RTCGA
+      - kmTCGA
+      - pcaTCGA
+      - heatmapTCGA
+      - boxplotTCGA
+  - title: Miscellaneous
+    contents: theme_RTCGA

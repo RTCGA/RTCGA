@@ -36,7 +36,7 @@
   <body>
     <div class="container template-reference-topic">
       <header>
-      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
@@ -57,7 +57,18 @@
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/RTCGA/RTCGA">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://twitter.com/kosinski_rblog">
+    <span class="fa fa-twitter"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -131,27 +142,31 @@ clear please post an issue on
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='co'>## Extracting Survival Data</span>
-<span class='fu'>library</span>(<span class='no'>RTCGA.clinical</span>)</div><div class='output co'>#&gt; <span class='error'>Error: package ‘RTCGA’ required by ‘RTCGA.clinical’ could not be found</span></div><div class='input'><span class='fu'><a href='survivalTCGA.html'>survivalTCGA</a></span>(<span class='no'>BRCA.clinical</span>, <span class='no'>OV.clinical</span>, <span class='kw'>extract.cols</span> <span class='kw'>=</span> <span class='st'>"admin.disease_code"</span>) <span class='kw'>-&gt;</span> <span class='no'>BRCAOV.survInfo</span></div><div class='output co'>#&gt; <span class='error'>Error in lapply(list(...), nrow): object &#39;BRCA.clinical&#39; not found</span></div><div class='input'>
+<span class='fu'>library</span>(<span class='no'>RTCGA.clinical</span>)
+<span class='fu'><a href='survivalTCGA.html'>survivalTCGA</a></span>(<span class='no'>BRCA.clinical</span>, <span class='no'>OV.clinical</span>, <span class='kw'>extract.cols</span> <span class='kw'>=</span> <span class='st'>"admin.disease_code"</span>) <span class='kw'>-&gt;</span> <span class='no'>BRCAOV.survInfo</span>
+
 <span class='co'>## Kaplan-Meier Survival Curves</span>
-<span class='fu'>kmTCGA</span>(<span class='no'>BRCAOV.survInfo</span>, <span class='kw'>explanatory.names</span> <span class='kw'>=</span> <span class='st'>"admin.disease_code"</span>,  <span class='kw'>pval</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in is.data.frame(x): object &#39;BRCAOV.survInfo&#39; not found</span></div><div class='input'>
+<span class='fu'>kmTCGA</span>(<span class='no'>BRCAOV.survInfo</span>, <span class='kw'>explanatory.names</span> <span class='kw'>=</span> <span class='st'>"admin.disease_code"</span>,  <span class='kw'>pval</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><img src='kmTCGA-2.png' alt='' width='540' height='400' /><div class='input'>
 <span class='fu'>kmTCGA</span>(<span class='no'>BRCAOV.survInfo</span>, <span class='kw'>explanatory.names</span> <span class='kw'>=</span> <span class='st'>"admin.disease_code"</span>, <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>""</span>,
-       <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0</span>,<span class='fl'>4000</span>))</div><div class='output co'>#&gt; <span class='error'>Error in is.data.frame(x): object &#39;BRCAOV.survInfo&#39; not found</span></div><div class='input'>
+       <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0</span>,<span class='fl'>4000</span>))</div><img src='kmTCGA-4.png' alt='' width='540' height='400' /><div class='input'>
 <span class='co'># first munge data, then extract survival info</span>
 <span class='fu'>library</span>(<span class='no'>dplyr</span>)
 <span class='no'>BRCA.clinical</span> <span class='kw'>%&gt;%</span>
     <span class='fu'>filter</span>(<span class='no'>patient.drugs.drug.therapy_types.therapy_type</span> <span class='kw'>%in%</span>
                <span class='fu'>c</span>(<span class='st'>"chemotherapy"</span>, <span class='st'>"hormone therapy"</span>)) <span class='kw'>%&gt;%</span>
     <span class='fu'>rename</span>(<span class='kw'>therapy</span> <span class='kw'>=</span> <span class='no'>patient.drugs.drug.therapy_types.therapy_type</span>) <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='survivalTCGA.html'>survivalTCGA</a></span>(<span class='kw'>extract.cols</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"therapy"</span>))  <span class='kw'>-&gt;</span> <span class='no'>BRCA.survInfo.chemo</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object &#39;BRCA.clinical&#39; not found</span></div><div class='input'>
+    <span class='fu'><a href='survivalTCGA.html'>survivalTCGA</a></span>(<span class='kw'>extract.cols</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"therapy"</span>))  <span class='kw'>-&gt;</span> <span class='no'>BRCA.survInfo.chemo</span>
+
 <span class='co'># first extract survival info, then munge data                  </span>
     <span class='fu'><a href='survivalTCGA.html'>survivalTCGA</a></span>(<span class='no'>BRCA.clinical</span>,
                  <span class='kw'>extract.cols</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"patient.drugs.drug.therapy_types.therapy_type"</span>))  <span class='kw'>%&gt;%</span>
     <span class='fu'>filter</span>(<span class='no'>patient.drugs.drug.therapy_types.therapy_type</span> <span class='kw'>%in%</span>
                <span class='fu'>c</span>(<span class='st'>"chemotherapy"</span>, <span class='st'>"hormone therapy"</span>)) <span class='kw'>%&gt;%</span>
-    <span class='fu'>rename</span>(<span class='kw'>therapy</span> <span class='kw'>=</span> <span class='no'>patient.drugs.drug.therapy_types.therapy_type</span>) <span class='kw'>-&gt;</span> <span class='no'>BRCA.survInfo.chemo</span></div><div class='output co'>#&gt; <span class='error'>Error in lapply(list(...), nrow): object &#39;BRCA.clinical&#39; not found</span></div><div class='input'>
+    <span class='fu'>rename</span>(<span class='kw'>therapy</span> <span class='kw'>=</span> <span class='no'>patient.drugs.drug.therapy_types.therapy_type</span>) <span class='kw'>-&gt;</span> <span class='no'>BRCA.survInfo.chemo</span>
+
 
 <span class='fu'>kmTCGA</span>(<span class='no'>BRCA.survInfo.chemo</span>, <span class='kw'>explanatory.names</span> <span class='kw'>=</span> <span class='st'>"therapy"</span>,
-       <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0</span>, <span class='fl'>3000</span>), <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in is.data.frame(x): object &#39;BRCA.survInfo.chemo&#39; not found</span></div><div class='input'>
+       <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0</span>, <span class='fl'>3000</span>), <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><img src='kmTCGA-6.png' alt='' width='540' height='400' /><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

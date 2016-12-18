@@ -36,7 +36,7 @@
   <body>
     <div class="container template-reference-topic">
       <header>
-      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
@@ -57,7 +57,18 @@
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/RTCGA/RTCGA">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://twitter.com/kosinski_rblog">
+    <span class="fa fa-twitter"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -123,7 +134,8 @@ clear please post an issue on
 <span class='fu'>library</span>(<span class='no'>ggplot2</span>)
 
 <span class='co'>## RNASeq expressions</span>
-<span class='fu'>library</span>(<span class='no'>RTCGA.rnaseq</span>)</div><div class='output co'>#&gt; <span class='error'>Error: package ‘RTCGA’ required by ‘RTCGA.rnaseq’ could not be found</span></div><div class='input'><span class='fu'>expressionsTCGA</span>(<span class='no'>BRCA.rnaseq</span>, <span class='no'>OV.rnaseq</span>, <span class='no'>HNSC.rnaseq</span>,
+<span class='fu'>library</span>(<span class='no'>RTCGA.rnaseq</span>)
+<span class='fu'>expressionsTCGA</span>(<span class='no'>BRCA.rnaseq</span>, <span class='no'>OV.rnaseq</span>, <span class='no'>HNSC.rnaseq</span>,
                <span class='kw'>extract.cols</span> <span class='kw'>=</span> <span class='st'>"VENTX|27287"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>rename</span>(<span class='kw'>cohort</span> <span class='kw'>=</span> <span class='no'>dataset</span>,
          <span class='kw'>VENTX</span> <span class='kw'>=</span> <span class='no'>`VENTX|27287`</span>) <span class='kw'>%&gt;%</span>
@@ -133,10 +145,12 @@ clear please post an issue on
              <span class='kw'>fill</span> <span class='kw'>=</span> <span class='no'>cohort</span>)) +
   <span class='fu'>geom_boxplot</span>() +
   <span class='fu'><a href='theme_RTCGA.html'>theme_RTCGA</a></span>() +
-  <span class='fu'>scale_fill_brewer</span>(<span class='kw'>palette</span> <span class='kw'>=</span> <span class='st'>"Dark2"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in expressionsTCGA(BRCA.rnaseq, OV.rnaseq, HNSC.rnaseq, extract.cols = &quot;VENTX|27287&quot;): object &#39;BRCA.rnaseq&#39; not found</span></div><div class='input'>
+  <span class='fu'>scale_fill_brewer</span>(<span class='kw'>palette</span> <span class='kw'>=</span> <span class='st'>"Dark2"</span>)</div><div class='output co'>#&gt; <span class='message'>Scale for &#39;fill&#39; is already present. Adding another scale for &#39;fill&#39;, which</span>
+#&gt; <span class='message'>will replace the existing scale.</span></div><img src='expressionsTCGA-3.png' alt='' width='540' height='400' /><div class='input'>
 <span class='co'>## mRNA expressions  </span>
 <span class='fu'>library</span>(<span class='no'>tidyr</span>)
-<span class='fu'>library</span>(<span class='no'>RTCGA.mRNA</span>)</div><div class='output co'>#&gt; <span class='error'>Error: package ‘RTCGA’ required by ‘RTCGA.mRNA’ could not be found</span></div><div class='input'><span class='fu'>expressionsTCGA</span>(<span class='no'>BRCA.mRNA</span>, <span class='no'>COAD.mRNA</span>, <span class='no'>LUSC.mRNA</span>, <span class='no'>UCEC.mRNA</span>,
+<span class='fu'>library</span>(<span class='no'>RTCGA.mRNA</span>)
+<span class='fu'>expressionsTCGA</span>(<span class='no'>BRCA.mRNA</span>, <span class='no'>COAD.mRNA</span>, <span class='no'>LUSC.mRNA</span>, <span class='no'>UCEC.mRNA</span>,
                <span class='kw'>extract.cols</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"ARHGAP24"</span>, <span class='st'>"TRAV20"</span>)) <span class='kw'>%&gt;%</span>
   <span class='fu'>rename</span>(<span class='kw'>cohort</span> <span class='kw'>=</span> <span class='no'>dataset</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>select</span>(-<span class='no'>bcr_patient_barcode</span>) <span class='kw'>%&gt;%</span>
@@ -148,10 +162,12 @@ clear please post an issue on
   <span class='fu'><a href='theme_RTCGA.html'>theme_RTCGA</a></span>() +
   <span class='fu'>scale_fill_brewer</span>(<span class='kw'>palette</span> <span class='kw'>=</span> <span class='st'>"Set3"</span>) +
   <span class='fu'>facet_grid</span>(<span class='no'>mRNA</span>~<span class='no'>.</span>) +
-  <span class='fu'>theme</span>(<span class='kw'>legend.position</span> <span class='kw'>=</span> <span class='st'>"top"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in expressionsTCGA(BRCA.mRNA, COAD.mRNA, LUSC.mRNA, UCEC.mRNA, extract.cols = c(&quot;ARHGAP24&quot;,     &quot;TRAV20&quot;)): object &#39;BRCA.mRNA&#39; not found</span></div><div class='input'>
+  <span class='fu'>theme</span>(<span class='kw'>legend.position</span> <span class='kw'>=</span> <span class='st'>"top"</span>)</div><div class='output co'>#&gt; <span class='message'>Scale for &#39;fill&#39; is already present. Adding another scale for &#39;fill&#39;, which</span>
+#&gt; <span class='message'>will replace the existing scale.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 2 rows containing non-finite values (stat_boxplot).</span></div><img src='expressionsTCGA-7.png' alt='' width='540' height='400' /><div class='input'>
 
 <span class='co'>## RPPA expressions</span>
-<span class='fu'>library</span>(<span class='no'>RTCGA.RPPA</span>)</div><div class='output co'>#&gt; <span class='error'>Error: package ‘RTCGA’ required by ‘RTCGA.RPPA’ could not be found</span></div><div class='input'><span class='fu'>expressionsTCGA</span>(<span class='no'>ACC.RPPA</span>, <span class='no'>BLCA.RPPA</span>, <span class='no'>BRCA.RPPA</span>,
+<span class='fu'>library</span>(<span class='no'>RTCGA.RPPA</span>)
+<span class='fu'>expressionsTCGA</span>(<span class='no'>ACC.RPPA</span>, <span class='no'>BLCA.RPPA</span>, <span class='no'>BRCA.RPPA</span>,
     <span class='kw'>extract.cols</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"4E-BP1_pS65"</span>, <span class='st'>"4E-BP1"</span>)) <span class='kw'>%&gt;%</span>
   <span class='fu'>rename</span>(<span class='kw'>cohort</span> <span class='kw'>=</span> <span class='no'>dataset</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>select</span>(-<span class='no'>bcr_patient_barcode</span>) <span class='kw'>%&gt;%</span>
@@ -164,20 +180,29 @@ clear please post an issue on
   <span class='fu'>scale_fill_manual</span>(<span class='kw'>values</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"#eb6420"</span>, <span class='st'>"#207de5"</span>, <span class='st'>"#fbca04"</span>)) +
   <span class='fu'>coord_flip</span>() +
   <span class='fu'>theme</span>(<span class='kw'>legend.position</span> <span class='kw'>=</span> <span class='st'>"top"</span>) +
-  <span class='fu'>geom_jitter</span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"white"</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>0.6</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; <span class='error'>Error in expressionsTCGA(ACC.RPPA, BLCA.RPPA, BRCA.RPPA, extract.cols = c(&quot;4E-BP1_pS65&quot;,     &quot;4E-BP1&quot;)): object &#39;ACC.RPPA&#39; not found</span></div><div class='input'>
+  <span class='fu'>geom_jitter</span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"white"</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>0.6</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>0.7</span>)</div><img src='expressionsTCGA-9.png' alt='' width='540' height='400' /><div class='input'>
 
 
 <span class='co'>## miRNASeq expressions </span>
-<span class='fu'>library</span>(<span class='no'>RTCGA.miRNASeq</span>)</div><div class='output co'>#&gt; <span class='error'>Error: package ‘RTCGA’ required by ‘RTCGA.miRNASeq’ could not be found</span></div><div class='input'><span class='co'># miRNASeq has bcr_patienct_barcode in rownames...</span>
+<span class='fu'>library</span>(<span class='no'>RTCGA.miRNASeq</span>)
+<span class='co'># miRNASeq has bcr_patienct_barcode in rownames...</span>
 <span class='fu'>mutate</span>(<span class='no'>ACC.miRNASeq</span>,
-   <span class='kw'>bcr_patient_barcode</span> <span class='kw'>=</span> <span class='fu'>substr</span>(<span class='fu'>rownames</span>(<span class='no'>ACC.miRNASeq</span>), <span class='fl'>1</span>, <span class='fl'>25</span>)) <span class='kw'>-&gt;</span> <span class='no'>ACC.miRNASeq.bcr</span></div><div class='output co'>#&gt; <span class='error'>Error in mutate_(.data, .dots = lazyeval::lazy_dots(...)): object &#39;ACC.miRNASeq&#39; not found</span></div><div class='input'><span class='fu'>mutate</span>(<span class='no'>CESC.miRNASeq</span>,
-   <span class='kw'>bcr_patient_barcode</span> <span class='kw'>=</span> <span class='fu'>substr</span>(<span class='fu'>rownames</span>(<span class='no'>CESC.miRNASeq</span>), <span class='fl'>1</span>, <span class='fl'>25</span>)) <span class='kw'>-&gt;</span> <span class='no'>CESC.miRNASeq.bcr</span></div><div class='output co'>#&gt; <span class='error'>Error in mutate_(.data, .dots = lazyeval::lazy_dots(...)): object &#39;CESC.miRNASeq&#39; not found</span></div><div class='input'><span class='fu'>mutate</span>(<span class='no'>CHOL.miRNASeq</span>,
-   <span class='kw'>bcr_patient_barcode</span> <span class='kw'>=</span> <span class='fu'>substr</span>(<span class='fu'>rownames</span>(<span class='no'>CHOL.miRNASeq</span>), <span class='fl'>1</span>, <span class='fl'>25</span>)) <span class='kw'>-&gt;</span> <span class='no'>CHOL.miRNASeq.bcr</span></div><div class='output co'>#&gt; <span class='error'>Error in mutate_(.data, .dots = lazyeval::lazy_dots(...)): object &#39;CHOL.miRNASeq&#39; not found</span></div><div class='input'><span class='fu'>mutate</span>(<span class='no'>LAML.miRNASeq</span>,
-   <span class='kw'>bcr_patient_barcode</span> <span class='kw'>=</span> <span class='fu'>substr</span>(<span class='fu'>rownames</span>(<span class='no'>LAML.miRNASeq</span>), <span class='fl'>1</span>, <span class='fl'>25</span>)) <span class='kw'>-&gt;</span> <span class='no'>LAML.miRNASeq.bcr</span></div><div class='output co'>#&gt; <span class='error'>Error in mutate_(.data, .dots = lazyeval::lazy_dots(...)): object &#39;LAML.miRNASeq&#39; not found</span></div><div class='input'><span class='fu'>mutate</span>(<span class='no'>PAAD.miRNASeq</span>,
-   <span class='kw'>bcr_patient_barcode</span> <span class='kw'>=</span> <span class='fu'>substr</span>(<span class='fu'>rownames</span>(<span class='no'>PAAD.miRNASeq</span>), <span class='fl'>1</span>, <span class='fl'>25</span>)) <span class='kw'>-&gt;</span> <span class='no'>PAAD.miRNASeq.bcr</span></div><div class='output co'>#&gt; <span class='error'>Error in mutate_(.data, .dots = lazyeval::lazy_dots(...)): object &#39;PAAD.miRNASeq&#39; not found</span></div><div class='input'><span class='fu'>mutate</span>(<span class='no'>THYM.miRNASeq</span>,
-   <span class='kw'>bcr_patient_barcode</span> <span class='kw'>=</span> <span class='fu'>substr</span>(<span class='fu'>rownames</span>(<span class='no'>THYM.miRNASeq</span>), <span class='fl'>1</span>, <span class='fl'>25</span>)) <span class='kw'>-&gt;</span> <span class='no'>THYM.miRNASeq.bcr</span></div><div class='output co'>#&gt; <span class='error'>Error in mutate_(.data, .dots = lazyeval::lazy_dots(...)): object &#39;THYM.miRNASeq&#39; not found</span></div><div class='input'><span class='fu'>mutate</span>(<span class='no'>LGG.miRNASeq</span>,
-   <span class='kw'>bcr_patient_barcode</span> <span class='kw'>=</span> <span class='fu'>substr</span>(<span class='fu'>rownames</span>(<span class='no'>LGG.miRNASeq</span>), <span class='fl'>1</span>, <span class='fl'>25</span>)) <span class='kw'>-&gt;</span> <span class='no'>LGG.miRNASeq.bcr</span></div><div class='output co'>#&gt; <span class='error'>Error in mutate_(.data, .dots = lazyeval::lazy_dots(...)): object &#39;LGG.miRNASeq&#39; not found</span></div><div class='input'><span class='fu'>mutate</span>(<span class='no'>STAD.miRNASeq</span>,
-   <span class='kw'>bcr_patient_barcode</span> <span class='kw'>=</span> <span class='fu'>substr</span>(<span class='fu'>rownames</span>(<span class='no'>STAD.miRNASeq</span>), <span class='fl'>1</span>, <span class='fl'>25</span>)) <span class='kw'>-&gt;</span> <span class='no'>STAD.miRNASeq.bcr</span></div><div class='output co'>#&gt; <span class='error'>Error in mutate_(.data, .dots = lazyeval::lazy_dots(...)): object &#39;STAD.miRNASeq&#39; not found</span></div><div class='input'>
+   <span class='kw'>bcr_patient_barcode</span> <span class='kw'>=</span> <span class='fu'>substr</span>(<span class='fu'>rownames</span>(<span class='no'>ACC.miRNASeq</span>), <span class='fl'>1</span>, <span class='fl'>25</span>)) <span class='kw'>-&gt;</span> <span class='no'>ACC.miRNASeq.bcr</span>
+<span class='fu'>mutate</span>(<span class='no'>CESC.miRNASeq</span>,
+   <span class='kw'>bcr_patient_barcode</span> <span class='kw'>=</span> <span class='fu'>substr</span>(<span class='fu'>rownames</span>(<span class='no'>CESC.miRNASeq</span>), <span class='fl'>1</span>, <span class='fl'>25</span>)) <span class='kw'>-&gt;</span> <span class='no'>CESC.miRNASeq.bcr</span>
+<span class='fu'>mutate</span>(<span class='no'>CHOL.miRNASeq</span>,
+   <span class='kw'>bcr_patient_barcode</span> <span class='kw'>=</span> <span class='fu'>substr</span>(<span class='fu'>rownames</span>(<span class='no'>CHOL.miRNASeq</span>), <span class='fl'>1</span>, <span class='fl'>25</span>)) <span class='kw'>-&gt;</span> <span class='no'>CHOL.miRNASeq.bcr</span>
+<span class='fu'>mutate</span>(<span class='no'>LAML.miRNASeq</span>,
+   <span class='kw'>bcr_patient_barcode</span> <span class='kw'>=</span> <span class='fu'>substr</span>(<span class='fu'>rownames</span>(<span class='no'>LAML.miRNASeq</span>), <span class='fl'>1</span>, <span class='fl'>25</span>)) <span class='kw'>-&gt;</span> <span class='no'>LAML.miRNASeq.bcr</span>
+<span class='fu'>mutate</span>(<span class='no'>PAAD.miRNASeq</span>,
+   <span class='kw'>bcr_patient_barcode</span> <span class='kw'>=</span> <span class='fu'>substr</span>(<span class='fu'>rownames</span>(<span class='no'>PAAD.miRNASeq</span>), <span class='fl'>1</span>, <span class='fl'>25</span>)) <span class='kw'>-&gt;</span> <span class='no'>PAAD.miRNASeq.bcr</span>
+<span class='fu'>mutate</span>(<span class='no'>THYM.miRNASeq</span>,
+   <span class='kw'>bcr_patient_barcode</span> <span class='kw'>=</span> <span class='fu'>substr</span>(<span class='fu'>rownames</span>(<span class='no'>THYM.miRNASeq</span>), <span class='fl'>1</span>, <span class='fl'>25</span>)) <span class='kw'>-&gt;</span> <span class='no'>THYM.miRNASeq.bcr</span>
+<span class='fu'>mutate</span>(<span class='no'>LGG.miRNASeq</span>,
+   <span class='kw'>bcr_patient_barcode</span> <span class='kw'>=</span> <span class='fu'>substr</span>(<span class='fu'>rownames</span>(<span class='no'>LGG.miRNASeq</span>), <span class='fl'>1</span>, <span class='fl'>25</span>)) <span class='kw'>-&gt;</span> <span class='no'>LGG.miRNASeq.bcr</span>
+<span class='fu'>mutate</span>(<span class='no'>STAD.miRNASeq</span>,
+   <span class='kw'>bcr_patient_barcode</span> <span class='kw'>=</span> <span class='fu'>substr</span>(<span class='fu'>rownames</span>(<span class='no'>STAD.miRNASeq</span>), <span class='fl'>1</span>, <span class='fl'>25</span>)) <span class='kw'>-&gt;</span> <span class='no'>STAD.miRNASeq.bcr</span>
+
 
 <span class='fu'>expressionsTCGA</span>(<span class='no'>ACC.miRNASeq.bcr</span>, <span class='no'>CESC.miRNASeq.bcr</span>, <span class='no'>CHOL.miRNASeq.bcr</span>,
              <span class='no'>LAML.miRNASeq.bcr</span>, <span class='no'>PAAD.miRNASeq.bcr</span>, <span class='no'>THYM.miRNASeq.bcr</span>,
@@ -196,7 +221,8 @@ clear please post an issue on
    <span class='fu'>coord_flip</span>() +
    <span class='fu'>theme</span>(<span class='kw'>legend.position</span> <span class='kw'>=</span> <span class='st'>"top"</span>) +
    <span class='fu'>scale_fill_brewer</span>(<span class='kw'>palette</span> <span class='kw'>=</span> <span class='st'>"Paired"</span>) +
-   <span class='fu'>ggtitle</span>(<span class='st'>"hsa-mir-101-1"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in expressionsTCGA(ACC.miRNASeq.bcr, CESC.miRNASeq.bcr, CHOL.miRNASeq.bcr,     LAML.miRNASeq.bcr, PAAD.miRNASeq.bcr, THYM.miRNASeq.bcr,     LGG.miRNASeq.bcr, STAD.miRNASeq.bcr, extract.cols = c(&quot;machine&quot;,         &quot;hsa-mir-101-1&quot;, &quot;miRNA_ID&quot;)): object &#39;ACC.miRNASeq.bcr&#39; not found</span></div><div class='input'>
+   <span class='fu'>ggtitle</span>(<span class='st'>"hsa-mir-101-1"</span>)</div><div class='output co'>#&gt; <span class='message'>Scale for &#39;fill&#39; is already present. Adding another scale for &#39;fill&#39;, which</span>
+#&gt; <span class='message'>will replace the existing scale.</span></div><img src='expressionsTCGA-12.png' alt='' width='540' height='400' /><div class='input'>
 
 </div></pre>
   </div>

@@ -36,7 +36,7 @@
   <body>
     <div class="container template-reference-topic">
       <header>
-      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
@@ -57,7 +57,18 @@
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/RTCGA/RTCGA">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://twitter.com/kosinski_rblog">
+    <span class="fa fa-twitter"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -137,7 +148,8 @@ clear please post an issue on
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 
-<span class='fu'>library</span>(<span class='no'>RTCGA.rnaseq</span>)</div><div class='output co'>#&gt; <span class='error'>Error: package ‘RTCGA’ required by ‘RTCGA.rnaseq’ could not be found</span></div><div class='input'><span class='co'># perfrom plot</span>
+<span class='fu'>library</span>(<span class='no'>RTCGA.rnaseq</span>)
+<span class='co'># perfrom plot</span>
 <span class='fu'>library</span>(<span class='no'>dplyr</span>)
 
 
@@ -150,21 +162,26 @@ clear please post an issue on
   <span class='fu'>mutate</span>(<span class='kw'>MET</span> <span class='kw'>=</span> <span class='fu'>cut</span>(<span class='no'>MET</span>,
    <span class='fu'>round</span>(<span class='fu'>quantile</span>(<span class='no'>MET</span>, <span class='kw'>probs</span> <span class='kw'>=</span> <span class='fu'>seq</span>(<span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>0.25</span>)), -<span class='fl'>2</span>),
    <span class='kw'>include.lowest</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-   <span class='kw'>dig.lab</span> <span class='kw'>=</span> <span class='fl'>5</span>)) <span class='kw'>-&gt;</span> <span class='no'>ACC_BLCA_BRCA_OV.rnaseq</span></div><div class='output co'>#&gt; <span class='error'>Error in expressionsTCGA(ACC.rnaseq, BLCA.rnaseq, BRCA.rnaseq, OV.rnaseq,     extract.cols = c(&quot;MET|4233&quot;, &quot;ZNF500|26048&quot;, &quot;ZNF501|115560&quot;)): object &#39;ACC.rnaseq&#39; not found</span></div><div class='input'>
+   <span class='kw'>dig.lab</span> <span class='kw'>=</span> <span class='fl'>5</span>)) <span class='kw'>-&gt;</span> <span class='no'>ACC_BLCA_BRCA_OV.rnaseq</span>
+
 <span class='no'>ACC_BLCA_BRCA_OV.rnaseq</span> <span class='kw'>%&gt;%</span>
   <span class='fu'>select</span>(-<span class='no'>bcr_patient_barcode</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>group_by</span>(<span class='no'>cohort</span>, <span class='no'>MET</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>summarise_each</span>(<span class='fu'>funs</span>(<span class='no'>median</span>)) <span class='kw'>%&gt;%</span>
   <span class='fu'>mutate</span>(<span class='kw'>ZNF500</span> <span class='kw'>=</span> <span class='fu'>round</span>(<span class='no'>`ZNF500|26048`</span>),
-         <span class='kw'>ZNF501</span> <span class='kw'>=</span> <span class='fu'>round</span>(<span class='no'>`ZNF501|115560`</span>)) <span class='kw'>-&gt;</span> <span class='no'>ACC_BLCA_BRCA_OV.rnaseq.medians</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object &#39;ACC_BLCA_BRCA_OV.rnaseq&#39; not found</span></div><div class='input'><span class='fu'>heatmapTCGA</span>(<span class='no'>ACC_BLCA_BRCA_OV.rnaseq.medians</span>,
-  <span class='st'>"cohort"</span>, <span class='st'>"MET"</span>, <span class='st'>"ZNF500"</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Heatmap of ZNF500 expression"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in ggplot(data, aes_string(y = y, x = x, fill = fill)): object &#39;ACC_BLCA_BRCA_OV.rnaseq.medians&#39; not found</span></div><div class='input'>
+         <span class='kw'>ZNF501</span> <span class='kw'>=</span> <span class='fu'>round</span>(<span class='no'>`ZNF501|115560`</span>)) <span class='kw'>-&gt;</span> <span class='no'>ACC_BLCA_BRCA_OV.rnaseq.medians</span>
+<span class='fu'>heatmapTCGA</span>(<span class='no'>ACC_BLCA_BRCA_OV.rnaseq.medians</span>,
+  <span class='st'>"cohort"</span>, <span class='st'>"MET"</span>, <span class='st'>"ZNF500"</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Heatmap of ZNF500 expression"</span>)</div><img src='heatmapTCGA-2.png' alt='' width='540' height='400' /><div class='input'>
 <span class='co'>## facet example</span>
-<span class='fu'>library</span>(<span class='no'>RTCGA.mutations</span>)</div><div class='output co'>#&gt; <span class='error'>Error: package ‘RTCGA’ required by ‘RTCGA.mutations’ could not be found</span></div><div class='input'><span class='fu'>library</span>(<span class='no'>dplyr</span>)
+<span class='fu'>library</span>(<span class='no'>RTCGA.mutations</span>)
+<span class='fu'>library</span>(<span class='no'>dplyr</span>)
 <span class='fu'><a href='mutationsTCGA.html'>mutationsTCGA</a></span>(<span class='no'>BRCA.mutations</span>, <span class='no'>OV.mutations</span>, <span class='no'>ACC.mutations</span>, <span class='no'>BLCA.mutations</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>filter</span>(<span class='no'>Hugo_Symbol</span> <span class='kw'>==</span> <span class='st'>'TP53'</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>filter</span>(<span class='fu'>substr</span>(<span class='no'>bcr_patient_barcode</span>, <span class='fl'>14</span>, <span class='fl'>15</span>) <span class='kw'>==</span> <span class='st'>"01"</span>) <span class='kw'>%&gt;%</span> <span class='co'># cancer tissue</span>
-  <span class='fu'>mutate</span>(<span class='kw'>bcr_patient_barcode</span> <span class='kw'>=</span> <span class='fu'>substr</span>(<span class='no'>bcr_patient_barcode</span>, <span class='fl'>1</span>, <span class='fl'>12</span>)) <span class='kw'>-&gt;</span> <span class='no'>ACC_BLCA_BRCA_OV.mutations</span></div><div class='output co'>#&gt; <span class='error'>Error in lapply(list(...), nrow): object &#39;BRCA.mutations&#39; not found</span></div><div class='input'>
-<span class='fu'><a href='mutationsTCGA.html'>mutationsTCGA</a></span>(<span class='no'>BRCA.mutations</span>, <span class='no'>OV.mutations</span>, <span class='no'>ACC.mutations</span>, <span class='no'>BLCA.mutations</span>) <span class='kw'>-&gt;</span> <span class='no'>ACC_BLCA_BRCA_OV.mutations_all</span></div><div class='output co'>#&gt; <span class='error'>Error in lapply(list(...), nrow): object &#39;BRCA.mutations&#39; not found</span></div><div class='input'>
+  <span class='fu'>mutate</span>(<span class='kw'>bcr_patient_barcode</span> <span class='kw'>=</span> <span class='fu'>substr</span>(<span class='no'>bcr_patient_barcode</span>, <span class='fl'>1</span>, <span class='fl'>12</span>)) <span class='kw'>-&gt;</span> <span class='no'>ACC_BLCA_BRCA_OV.mutations</span>
+
+<span class='fu'><a href='mutationsTCGA.html'>mutationsTCGA</a></span>(<span class='no'>BRCA.mutations</span>, <span class='no'>OV.mutations</span>, <span class='no'>ACC.mutations</span>, <span class='no'>BLCA.mutations</span>) <span class='kw'>-&gt;</span> <span class='no'>ACC_BLCA_BRCA_OV.mutations_all</span>
+
 <span class='no'>ACC_BLCA_BRCA_OV.rnaseq</span> <span class='kw'>%&gt;%</span>
   <span class='fu'>mutate</span>(<span class='kw'>bcr_patient_barcode</span> <span class='kw'>=</span> <span class='fu'>substr</span>(<span class='no'>bcr_patient_barcode</span>, <span class='fl'>1</span>, <span class='fl'>15</span>)) <span class='kw'>%&gt;%</span>
   <span class='fu'>filter</span>(<span class='no'>bcr_patient_barcode</span> <span class='kw'>%in%</span>
@@ -179,11 +196,12 @@ clear please post an issue on
   <span class='fu'>select</span>(-<span class='no'>bcr_patient_barcode</span>, -<span class='no'>Variant_Classification</span>, -<span class='no'>dataset</span>, -<span class='no'>Hugo_Symbol</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>group_by</span>(<span class='no'>cohort</span>, <span class='no'>MET</span>, <span class='no'>TP53</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>summarise_each</span>(<span class='fu'>funs</span>(<span class='no'>median</span>)) <span class='kw'>%&gt;%</span>
-  <span class='fu'>mutate</span>(<span class='kw'>ZNF501</span> <span class='kw'>=</span> <span class='fu'>round</span>(<span class='no'>`ZNF501|115560`</span>)) <span class='kw'>-&gt;</span> <span class='no'>ACC_BLCA_BRCA_OV.rnaseq_TP53mutations_ZNF501medians</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object &#39;ACC_BLCA_BRCA_OV.rnaseq&#39; not found</span></div><div class='input'>
+  <span class='fu'>mutate</span>(<span class='kw'>ZNF501</span> <span class='kw'>=</span> <span class='fu'>round</span>(<span class='no'>`ZNF501|115560`</span>)) <span class='kw'>-&gt;</span> <span class='no'>ACC_BLCA_BRCA_OV.rnaseq_TP53mutations_ZNF501medians</span>
+
 <span class='fu'>heatmapTCGA</span>(<span class='no'>ACC_BLCA_BRCA_OV.rnaseq_TP53mutations_ZNF501medians</span>, <span class='st'>"cohort"</span>, <span class='st'>"MET"</span>,
-  <span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"ZNF501"</span>, <span class='kw'>facet.names</span> <span class='kw'>=</span> <span class='st'>"TP53"</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Heatmap of ZNF501 expression"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in ggplot(data, aes_string(y = y, x = x, fill = fill)): object &#39;ACC_BLCA_BRCA_OV.rnaseq_TP53mutations_ZNF501medians&#39; not found</span></div><div class='input'><span class='fu'>heatmapTCGA</span>(<span class='no'>ACC_BLCA_BRCA_OV.rnaseq_TP53mutations_ZNF501medians</span>, <span class='st'>"TP53"</span>, <span class='st'>"MET"</span>,
-  <span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"ZNF501"</span>, <span class='kw'>facet.names</span> <span class='kw'>=</span> <span class='st'>"cohort"</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Heatmap of ZNF501 expression"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in ggplot(data, aes_string(y = y, x = x, fill = fill)): object &#39;ACC_BLCA_BRCA_OV.rnaseq_TP53mutations_ZNF501medians&#39; not found</span></div><div class='input'><span class='fu'>heatmapTCGA</span>(<span class='no'>ACC_BLCA_BRCA_OV.rnaseq_TP53mutations_ZNF501medians</span>, <span class='st'>"TP53"</span>, <span class='st'>"cohort"</span>,
-  <span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"ZNF501"</span>, <span class='kw'>facet.names</span> <span class='kw'>=</span> <span class='st'>"MET"</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Heatmap of ZNF501 expression"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in ggplot(data, aes_string(y = y, x = x, fill = fill)): object &#39;ACC_BLCA_BRCA_OV.rnaseq_TP53mutations_ZNF501medians&#39; not found</span></div></pre>
+  <span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"ZNF501"</span>, <span class='kw'>facet.names</span> <span class='kw'>=</span> <span class='st'>"TP53"</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Heatmap of ZNF501 expression"</span>)</div><img src='heatmapTCGA-4.png' alt='' width='540' height='400' /><div class='input'><span class='fu'>heatmapTCGA</span>(<span class='no'>ACC_BLCA_BRCA_OV.rnaseq_TP53mutations_ZNF501medians</span>, <span class='st'>"TP53"</span>, <span class='st'>"MET"</span>,
+  <span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"ZNF501"</span>, <span class='kw'>facet.names</span> <span class='kw'>=</span> <span class='st'>"cohort"</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Heatmap of ZNF501 expression"</span>)</div><img src='heatmapTCGA-6.png' alt='' width='540' height='400' /><div class='input'><span class='fu'>heatmapTCGA</span>(<span class='no'>ACC_BLCA_BRCA_OV.rnaseq_TP53mutations_ZNF501medians</span>, <span class='st'>"TP53"</span>, <span class='st'>"cohort"</span>,
+  <span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"ZNF501"</span>, <span class='kw'>facet.names</span> <span class='kw'>=</span> <span class='st'>"MET"</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Heatmap of ZNF501 expression"</span>)</div><img src='heatmapTCGA-8.png' alt='' width='540' height='400' /></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
