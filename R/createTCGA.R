@@ -223,7 +223,7 @@ cat(
 title: \"Using `RTCGA` package to download", dataType, "data that are included in", package, "package\" 
 subtitle: \"Date of datasets release:", releaseDate, "\"
 author: \"", author, "\"
-date: \"", Sys.Date(), "\"
+date: \"", as.character(Sys.Date()), "\"
 output: rmarkdown::html_vignette 
 vignette: > 
   %\\VignetteIndexEntry{Using RTCGA package to download", dataType, "data that are included in", package, "package\"}
