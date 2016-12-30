@@ -269,14 +269,6 @@ eh <- ExperimentHub()
 myfiles <- query(eh, ", paste0('"', package, '"'),")
 myfiles[[1]]  ## load the first resource in the list
 ```\n\n", file = file, append = TRUE)
-  cat("\n# Installation \n
-To install this package from GitHub use
-```{r, eval=FALSE}
-library(RTCGA) \n",
-paste0("installTCGA(\"", package, "\")"),
-"\n```\n
-Make sure you have [Rtools](https://cran.r-project.org/bin/windows/Rtools/) installed on your computer, if you are trying devtools on Windows.", 
-      file = file, append = TRUE)
 }
 
 createNOTEStcga <- function(readme, vignette, releaseDate) {
