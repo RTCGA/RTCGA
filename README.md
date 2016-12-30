@@ -64,30 +64,6 @@ source("https://bioconductor.org/biocLite.R") # downloads bioClite function
 |RTCGA.CNV                  |`biocLite('RTCGA.CNV')`                  |`?CNV`                  |`2015-11-01` |
 |RTCGA.methylation          |`biocLite('RTCGA.methylation')`          |`?methylation`          |`2015-11-01` |
 
-```{R}
-# version of packages held at github.com/RTCGA 
-# I try to keep them with the same state as devel versions of Bioconductor
-library(RTCGA)
-installTCGA("RTCGA.clinical.20160128")
-installTCGA("RTCGA.mutations.20160128")
-installTCGA("RTCGA.rnaseq.20160128")
-installTCGA("RTCGA.CNV.20160128")
-installTCGA("RTCGA.RPPA.20160128")
-installTCGA("RTCGA.mRNA.20160128")
-installTCGA("RTCGA.miRNASeq.20160128")
-installTCGA("RTCGA.methylation.20160128")
-installTCGA("RTCGA.PANCAN12")
-installTCGA("RTCGA.clinical")
-installTCGA("RTCGA.mutations")
-installTCGA("RTCGA.rnaseq")
-installTCGA("RTCGA.CNV")
-installTCGA("RTCGA.RPPA")
-installTCGA("RTCGA.mRNA")
-installTCGA("RTCGA.miRNASeq")
-installTCGA("RTCGA.methylation")
-# or for all just type installTCGA()
-```
-
 # RTCGA
 
 Packages from the `RTCGA.data` - family/factory are based on the `RTCGA` package
