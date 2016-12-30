@@ -323,7 +323,7 @@ createZZZtcga <- function(package){
   file.create("R/zzz.R")
 cat(
 '.onLoad <- function(libname, pkgname) {
-    titles <- read.csv(system.file("extdata", "metadata.csv", 
+    rda <- read.csv(system.file("extdata", "metadata.csv", 
                       package =', paste0('"', package, '"),'),'
                       stringsAsFactors=FALSE)$Title
     #rda <- gsub(".rda", "", titles, fixed=TRUE)
@@ -363,7 +363,13 @@ cat(
     BiocVersion = rep("3.4",', length(use_data_input), '),
     SourceUrl = "http://gdac.broadinstitute.org/",
     SourceVersion = ', paste0('"',releaseDate, '"'), ',
-    DataProvided = "TCGA",
+    SourceType = "zip",
+    Genome = "hg19",
+    TaxonomyID = 9606,
+    Species = "Homo sapiens",
+    Coordinate_1_based = TRUE,
+    DispatchClass = "Rda",
+    DataProvider = "TCGA",
     Maintainer = "Bioconductor Package Maintainer <maintainer@bioconductor.org>",
     RDataClass = rep("data.frame",', length(use_data_input), '),
     ResourceName = ',paste0('c("', paste0(use_data_input, collapse = '","'), '")'),')
