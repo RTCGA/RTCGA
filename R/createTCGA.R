@@ -178,9 +178,9 @@ createTCGA <- function(description = file.path(getwd(), 'DESCRIPTION'),
   # but how many times have you customized the output of a vignette
   # depending on the input of an automatical package creation?
   createREADMEtcga(desc.val.list$Package, dataType, releaseDate, releaseDate2, 
-                   dataSet, use_data_input, file = "README.md")
+                   dataSet, use_data_input, file = "README.md", createEnv)
   createVIGNETTEtcga(desc.val.list$Package, dataType, releaseDate, releaseDate2, 
-                     dataSet, use_data_input, file = vig.path, author = author)
+                     dataSet, use_data_input, file = vig.path, author = author, createEnv)
   createNOTEStcga(readme = "README.md", vignette = vig.path, releaseDate)
   
   # create manual pages
@@ -218,7 +218,7 @@ createTCGA <- function(description = file.path(getwd(), 'DESCRIPTION'),
 
 
 
-createVIGNETTEtcga <- function(package, dataType, releaseDate, releaseDate2, dataSet, use_data_input, file, author){
+createVIGNETTEtcga <- function(package, dataType, releaseDate, releaseDate2, dataSet, use_data_input, file, author, createEnv){
 cat(
 "---
 title: \"Using `RTCGA` package to download", dataType, "data that are included in", package, "package\" 
@@ -246,10 +246,10 @@ opts_chunk$set(
 )
 ```\n", file = file
 )
-  createREADMEtcga(package, dataType, releaseDate, releaseDate2, dataSet, use_data_input, file, first_append = TRUE)
+  createREADMEtcga(package, dataType, releaseDate, releaseDate2, dataSet, use_data_input, file, first_append = TRUE, createEnv)
 }
 
-createREADMEtcga <- function(package, dataType, releaseDate, releaseDate2, dataSet, use_data_input, file, first_append = FALSE){
+createREADMEtcga <- function(package, dataType, releaseDate, releaseDate2, dataSet, use_data_input, file, first_append = FALSE, createEnv){
     cat("#", package, "\n
 This package was created with [`RTCGA::createTCGA()`](http://rtcga.github.io/RTCGA/staticdocs/createTCGA.html) function and is a part of [RTCGA](http://rtcga.github.io/RTCGA/) project. It consist of
 data from [The Cancer Genome Atlas Project](https://cancergenome.nih.gov/abouttcga). \n
@@ -260,7 +260,8 @@ with `RTCGA::infoTCGA()`, release dates with `RTCGA::checkTCGA('Dates')` and dat
 The used data type for this package was `", dataSet, "` - all those information are included in the `DESCRIPTION` file. To see
 the manual page for included datasets run ", paste0("`?", dataType, ".", releaseDate2, "`"), "in R console. \n\n", file = file, append = first_append)
   sapply(use_data_input, function(dataset){
-    cat("- ", dataset, "\n", append = TRUE, file = file)
+	  el <- get(dataset, envir = createEnv)
+    cat("- ", dataset, "- class:", class(el), "- nrow:", nrow(el), "- ncol:", ncol(el), "\n", append = TRUE, file = file)
   }) -> dev_null
   cat("\n", file = file, append = TRUE)
   cat("Optionally, the data can be loaded through the [ExperimentHub](http://www.bioconductor.org/packages/3.4/bioc/vignettes/ExperimentHubData/inst/doc/ExperimentHubData.html) interface.\n
@@ -295,7 +296,7 @@ cat(
 #\' @param metadata A logical indicating whether load data into the workspace (default, \\code{FALSE}) or to only display the object's metadata (\\code{TRUE}). See examples.
 #\' 
 #\' @return 
-#\'   \\itemize{", file = out_file)
+#\'   \\itemize{\n", file = out_file)
 sapply(use_data_input, function(element){
 	el <- get(element, envir = createEnv)
 	cat("#' \\item", element, "- class:", class(el), "- nrow:", nrow(el), "- ncol:", ncol(el),"\n",
