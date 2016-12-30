@@ -293,6 +293,13 @@ cat(
 #\' 
 #\' @param metadata A logical indicating whether load data into the workspace (default, \\code{FALSE}) or to only display the object's metadata (\\code{TRUE}). See examples.
 #\' 
+#\' @return 
+#\'   \\itemize{", file = out_file)
+sapply(use_data_input, function(element){
+	cat("#' \\item", element, "- class:", class(get(element)), "- nrow:", nrow(get(element)), "- ncol:", ncol(get(element)),"\n",
+	    file = out_file, append = TRUE)})
+cat(	
+"#\' }
 #\' @examples
 #\' 
 #\' \\dontrun{
