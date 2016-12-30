@@ -178,14 +178,14 @@ createTCGA <- function(description = file.path(getwd(), 'DESCRIPTION'),
   # but how many times have you customized the output of a vignette
   # depending on the input of an automatical package creation?
   createREADMEtcga(desc.val.list$Package, dataType, releaseDate, releaseDate2, 
-                   dataSet, use_data_input, file = "README.md", createEnv)
+                   dataSet, use_data_input, file = "README.md", createEnv = createEnv)
   createVIGNETTEtcga(desc.val.list$Package, dataType, releaseDate, releaseDate2, 
-                     dataSet, use_data_input, file = vig.path, author = author, createEnv)
+                     dataSet, use_data_input, file = vig.path, author = author, createEnv = createEnv)
   createNOTEStcga(readme = "README.md", vignette = vig.path, releaseDate)
   
   # create manual pages
   cat("Creating documentation pages... \n")
-  createMANtcga(desc.val.list$Package, dataType, releaseDate, releaseDate2, use_data_input, createEnv)
+  createMANtcga(desc.val.list$Package, dataType, releaseDate, releaseDate2, use_data_input, createEnv = createEnv)
   # one need to roxygenize the manual page
   devtools::document(roclets=c('rd', 'collate', 'namespace'))
   rm(createEnv)
@@ -246,7 +246,7 @@ opts_chunk$set(
 )
 ```\n", file = file
 )
-  createREADMEtcga(package, dataType, releaseDate, releaseDate2, dataSet, use_data_input, file, first_append = TRUE, createEnv)
+  createREADMEtcga(package, dataType, releaseDate, releaseDate2, dataSet, use_data_input, file, first_append = TRUE, createEnv = createEnv)
 }
 
 createREADMEtcga <- function(package, dataType, releaseDate, releaseDate2, dataSet, use_data_input, file, first_append = FALSE, createEnv){
