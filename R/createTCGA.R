@@ -319,7 +319,7 @@ cat(
 #\' 
 #\' @aliases", paste0(use_data_input, collapse = ","), "
 #\' @name", paste0(dataType, ".", releaseDate2), "
-#\' @rdname", paste0(dataType, ".", releaseDate2), paste0("\n#'\n\"", use_data_input[1], "\""), file = out_file)
+#\' @rdname", paste0(dataType, ".", releaseDate2), paste0("\n#'\n\"", use_data_input[1], "\""), file = out_file, append = TRUE)
 if(length(use_data_input[-1]) > 0){
   sapply(use_data_input[-1], function(element){
     cat("\n#' @name", paste0(dataType, ".", releaseDate2), "\n#' @rdname", paste0(dataType, ".", releaseDate2), paste0("\n#' @format NULL \n#'\n\"",element,"\""),
