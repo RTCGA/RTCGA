@@ -168,7 +168,7 @@ createTCGA <- function(description = file.path(getwd(), 'DESCRIPTION'),
   mapply(save, list = use_data_input, 
          file = file.path("data", paste0(use_data_input, ".rda")),
          MoreArgs = list(envir = createEnv, compress = "xz")) -> dev_null
-  rm(createEnv)
+  
   
   cat("Customizing the vignette and README.md file... \n")
   vig.path <- file.path("vignettes", paste0(desc.val.list$Package, ".Rmd"))
@@ -188,6 +188,7 @@ createTCGA <- function(description = file.path(getwd(), 'DESCRIPTION'),
   createMANtcga(desc.val.list$Package, dataType, releaseDate, releaseDate2, use_data_input)
   # one need to roxygenize the manual page
   devtools::document(roclets=c('rd', 'collate', 'namespace'))
+  rm(createEnv)
 
   cat("Adding .Rbuildignore file for package completness... \n")
   # .RBuildignore
@@ -296,7 +297,8 @@ cat(
 #\' @return 
 #\'   \\itemize{", file = out_file)
 sapply(use_data_input, function(element){
-	cat("#' \\item", element, "- class:", class(get(element)), "- nrow:", nrow(get(element)), "- ncol:", ncol(get(element)),"\n",
+	el <- get(element, envir = createEnv)
+	cat("#' \\item", element, "- class:", class(el), "- nrow:", nrow(el), "- ncol:", ncol(el),"\n",
 	    file = out_file, append = TRUE)})
 cat(	
 "#\' }
