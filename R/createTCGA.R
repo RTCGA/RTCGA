@@ -326,7 +326,7 @@ cat(
     titles <- read.csv(system.file("extdata", "metadata.csv", 
                       package =', paste0('"', package, '"),'),'
                       stringsAsFactors=FALSE)$Title
-    rda <- gsub(".rda", "", titles, fixed=TRUE)
+    #rda <- gsub(".rda", "", titles, fixed=TRUE)
     if (!length(rda))
         stop("no .rda objects found in metadata")
 
@@ -337,7 +337,7 @@ cat(
             func = function(metadata = FALSE) {
                 if (!isNamespaceLoaded("ExperimentHub"))
                     attachNamespace("ExperimentHub")
-                eh <- AnnotationHub::query(ExperimentHub(), ', paste0('"', package, '"'),')
+                eh <- query(ExperimentHub(), ', paste0('"', package, '"'),')
                 ehid <- names(AnnotationHub::query(eh, xx))
                 if (!length(ehid))
                     stop(paste0("resource ", xx, 
