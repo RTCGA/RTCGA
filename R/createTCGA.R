@@ -185,7 +185,7 @@ createTCGA <- function(description = file.path(getwd(), 'DESCRIPTION'),
   
   # create manual pages
   cat("Creating documentation pages... \n")
-  createMANtcga(desc.val.list$Package, dataType, releaseDate, releaseDate2, use_data_input)
+  createMANtcga(desc.val.list$Package, dataType, releaseDate, releaseDate2, use_data_input, createEnv)
   # one need to roxygenize the manual page
   devtools::document(roclets=c('rd', 'collate', 'namespace'))
   rm(createEnv)
@@ -278,7 +278,7 @@ cat(notes, file = readme, append = TRUE)
 cat(notes, file = vignette, append = TRUE)
 }
 
-createMANtcga <- function(package, dataType, releaseDate, releaseDate2, use_data_input){
+createMANtcga <- function(package, dataType, releaseDate, releaseDate2, use_data_input, createEnv){
   dir.create("R")
   file.create(out_file <- file.path("R", paste0(dataType, "_datasets.R")))
   
