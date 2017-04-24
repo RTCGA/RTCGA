@@ -17,6 +17,7 @@
 #' @param alpha As in \code{ggbiplot}.
 #' @param title The title of a plot.
 #' @param add.lines Should axis lines be added to plot.
+#' @template roxlate-ggtheme
 #' 
 #' @return If \code{return.pca = TRUE} then a list containing a PCA plot (of class \code{ggplot}) and a \code{pca} model, the result of \link{prcomp} function.
 #' If not, then only PCA plot is returned.
@@ -73,6 +74,7 @@ pcaTCGA <- function(x,
                     var.axes = FALSE,
                     alpha = 0.8,
                     add.lines = TRUE,
+                    ggtheme = theme_RTCGA(),
                     ...) {
   assert_that(is.data.frame(x))
   assert_that(group.names %in% colnames(x), length(group.names) == 1)
@@ -92,7 +94,7 @@ pcaTCGA <- function(x,
   ggbiplot(PCA, obs.scale = obs.scale, var.scale = var.scale,
            groups = x[,group.names] %>% unlist, ellipse = ellipse, circle = circle,
            var.axes=var.axes, alpha = alpha) + 
-    theme_RTCGA() +
+    ggtheme +
     ggtitle(title) -> pca.plot
   
   if (add.lines){

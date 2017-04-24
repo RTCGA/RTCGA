@@ -16,6 +16,7 @@
 #' @param legend A character specifying legend position. Allowed values are one of
 #'  c("top", "bottom", "left", "right", "none"). Default is "top" side position.
 #'  to remove the legend use legend = "none". 
+#' @template roxlate-ggtheme
 #' 
 #' @section Issues:
 #' 
@@ -92,7 +93,7 @@
 #' @export
 boxplotTCGA <- function(data, x, y, fill = x, coord.flip = TRUE, 
                         facet.names = NULL, ylab = y, xlab = x, legend.title = xlab,  
-                        legend = "top", ...){
+                        legend = "top", ..., ggtheme = theme_RTCGA()){
   assert_that(is.null(facet.names) | 
                 (is.character(facet.names) & length(facet.names) %in% c(1,2)))
   
@@ -100,7 +101,7 @@ boxplotTCGA <- function(data, x, y, fill = x, coord.flip = TRUE,
                           x = x,
                           fill = fill)) + 
     geom_boxplot(...) +
-    theme_RTCGA() -> gplot
+    ggtheme -> gplot
   
   if (coord.flip)
     gplot <- gplot + coord_flip()
