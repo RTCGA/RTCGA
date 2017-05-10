@@ -1,4 +1,4 @@
-# Version 1.5.1
+# Version 1.7.1
 
 - New version of RTCGA website - http://rtcga.github.io/RTCGA/, based on [pkgdown](http://github.com/hadley/pkgdown/)
 - Improved RTCGA workflow graph - https://raw.githubusercontent.com/RTCGA/RTCGA/master/RTCGA_workflow.png
