@@ -7,7 +7,7 @@
 
 <img src="https://raw.githubusercontent.com/RTCGA/RTCGA/master/RTCGA_workflow.png" height="500" width="800">
 
-Data packages submitted to Bioconductor from 2016-01-28 release date of TCGA data.
+Data packages *that will be* submitted to Bioconductor from 2016-01-28 release date of TCGA data.
 
 - [RTCGA.mutations.20160128](http://bioconductor.org/packages/RTCGA.mutations.20160128/)
 - [RTCGA.rnaseq.20160128](http://bioconductor.org/packages/RTCGA.rnaseq.20160128/)
