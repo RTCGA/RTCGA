@@ -4,11 +4,15 @@
 \alias{survivalTCGA}
 \title{Extract Survival Information from Datasets Included in RTCGA.clinical and RTCGA.clinical.20160128 Packages}
 \usage{
-survivalTCGA(..., extract.cols = NULL, extract.names = FALSE,
+survivalTCGA(
+  ...,
+  extract.cols = NULL,
+  extract.names = FALSE,
   barcode.name = "patient.bcr_patient_barcode",
   event.name = "patient.vital_status",
   days.to.followup.name = "patient.days_to_last_followup",
-  days.to.death.name = "patient.days_to_death")
+  days.to.death.name = "patient.days_to_death"
+)
 }
 \arguments{
 \item{...}{A data.frame or data.frames from TCGA study containing clinical informations. See \link[RTCGA.clinical]{clinical}.}
@@ -49,6 +53,7 @@ If you have any problems, issues or think that something is missing or is not
 clear please post an issue on 
 \href{https://github.com/RTCGA/RTCGA/issues}{https://github.com/RTCGA/RTCGA/issues}.
 }
+
 \examples{
 
 ## Extracting Survival Data
@@ -80,22 +85,30 @@ BRCA.clinical \%>\%
 kmTCGA(BRCA.survInfo.chemo, explanatory.names = "therapy",
        xlim = c(0, 3000), conf.int = FALSE)
 }
+\seealso{
+\pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA/articles/Visualizations.html}{http://rtcga.github.io/RTCGA/articles/Visualizations.html}.
+
+Other RTCGA: 
+\code{\link{RTCGA-package}},
+\code{\link{boxplotTCGA}()},
+\code{\link{checkTCGA}()},
+\code{\link{convertTCGA}()},
+\code{\link{createTCGA}()},
+\code{\link{datasetsTCGA}},
+\code{\link{downloadTCGA}()},
+\code{\link{expressionsTCGA}()},
+\code{\link{heatmapTCGA}()},
+\code{\link{infoTCGA}()},
+\code{\link{installTCGA}()},
+\code{\link{kmTCGA}()},
+\code{\link{mutationsTCGA}()},
+\code{\link{pcaTCGA}()},
+\code{\link{readTCGA}()},
+\code{\link{theme_RTCGA}()}
+}
 \author{
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 }
-\seealso{
-\pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA/articles/Visualizations.html}{http://rtcga.github.io/RTCGA/articles/Visualizations.html}.
-
-Other RTCGA: \code{\link{RTCGA-package}},
-  \code{\link{boxplotTCGA}}, \code{\link{checkTCGA}},
-  \code{\link{convertTCGA}}, \code{\link{createTCGA}},
-  \code{\link{datasetsTCGA}}, \code{\link{downloadTCGA}},
-  \code{\link{expressionsTCGA}}, \code{\link{heatmapTCGA}},
-  \code{\link{infoTCGA}}, \code{\link{installTCGA}},
-  \code{\link{kmTCGA}}, \code{\link{mutationsTCGA}},
-  \code{\link{pcaTCGA}}, \code{\link{readTCGA}},
-  \code{\link{theme_RTCGA}}
-}
-
+\concept{RTCGA}

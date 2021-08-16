@@ -4,10 +4,20 @@
 \alias{kmTCGA}
 \title{Plot Kaplan-Meier Estimates of Survival Curves for Survival Data}
 \usage{
-kmTCGA(x, times = "times", status = "patient.vital_status",
-  explanatory.names = "1", main = "Survival Curves", risk.table = TRUE,
-  risk.table.y.text = FALSE, conf.int = TRUE, return.survfit = FALSE,
-  pval = FALSE, ...)
+kmTCGA(
+  x,
+  times = "times",
+  status = "patient.vital_status",
+  explanatory.names = "1",
+  main = "Survival Curves",
+  risk.table = TRUE,
+  risk.table.y.text = FALSE,
+  conf.int = TRUE,
+  return.survfit = FALSE,
+  pval = FALSE,
+  ggtheme = theme_RTCGA(),
+  ...
+)
 }
 \arguments{
 \item{x}{A \code{data.frame} containing survival information. See \link{survivalTCGA}.}
@@ -30,6 +40,8 @@ kmTCGA(x, times = "times", status = "patient.vital_status",
 
 \item{pval}{Whether to add p-value of the log-rank test to the plot?}
 
+\item{ggtheme}{a \code{ggtheme} to be used (set to \code{NULL}, if using \pkg{ggthemr} package)}
+
 \item{...}{Further arguments passed to \link[survminer]{ggsurvplot}.}
 }
 \description{
@@ -42,6 +54,7 @@ If you have any problems, issues or think that something is missing or is not
 clear please post an issue on 
 \href{https://github.com/RTCGA/RTCGA/issues}{https://github.com/RTCGA/RTCGA/issues}.
 }
+
 \examples{
 
 ## Extracting Survival Data
@@ -74,20 +87,28 @@ kmTCGA(BRCA.survInfo.chemo, explanatory.names = "therapy",
        xlim = c(0, 3000), conf.int = FALSE)
 
 }
-\author{
-Marcin Kosinski, \email{m.p.kosinski@gmail.com}
-}
 \seealso{
 \pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA/articles/Visualizations.html}{http://rtcga.github.io/RTCGA/articles/Visualizations.html}.
 
-Other RTCGA: \code{\link{RTCGA-package}},
-  \code{\link{boxplotTCGA}}, \code{\link{checkTCGA}},
-  \code{\link{convertTCGA}}, \code{\link{createTCGA}},
-  \code{\link{datasetsTCGA}}, \code{\link{downloadTCGA}},
-  \code{\link{expressionsTCGA}}, \code{\link{heatmapTCGA}},
-  \code{\link{infoTCGA}}, \code{\link{installTCGA}},
-  \code{\link{mutationsTCGA}}, \code{\link{pcaTCGA}},
-  \code{\link{readTCGA}}, \code{\link{survivalTCGA}},
-  \code{\link{theme_RTCGA}}
+Other RTCGA: 
+\code{\link{RTCGA-package}},
+\code{\link{boxplotTCGA}()},
+\code{\link{checkTCGA}()},
+\code{\link{convertTCGA}()},
+\code{\link{createTCGA}()},
+\code{\link{datasetsTCGA}},
+\code{\link{downloadTCGA}()},
+\code{\link{expressionsTCGA}()},
+\code{\link{heatmapTCGA}()},
+\code{\link{infoTCGA}()},
+\code{\link{installTCGA}()},
+\code{\link{mutationsTCGA}()},
+\code{\link{pcaTCGA}()},
+\code{\link{readTCGA}()},
+\code{\link{survivalTCGA}()},
+\code{\link{theme_RTCGA}()}
 }
-
+\author{
+Marcin Kosinski, \email{m.p.kosinski@gmail.com}
+}
+\concept{RTCGA}

@@ -1,23 +1,21 @@
 [![Travis-CI Build Status](https://travis-ci.org/RTCGA/RTCGA.svg?branch=master)](https://travis-ci.org/RTCGA/RTCGA)
-[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)[![Pending Pull-Requests](http://githubbadges.herokuapp.com/RTCGA/RTCGA/pulls.svg?style=flat)](https://github.com/RTCGA/RTCGA/pulls)
-[![Github Issues](http://githubbadges.herokuapp.com/RTCGA/RTCGA/issues.svg)](https://github.com/RTCGA/RTCGA/issues)
+[![Project Status: Inactive - The project has reached a stable, usable state but is not being actively developed.](http://www.repostatus.org/badges/latest/inactive.svg)](http://www.repostatus.org/#inactive)
 
 # The family of R packages containing TCGA data
 
 
 <img src="https://raw.githubusercontent.com/RTCGA/RTCGA/master/RTCGA_workflow.png" height="500" width="800">
 
-Data packages *that will be* submitted to Bioconductor from 2016-01-28 release date of TCGA data.
+Data packages **not yet** submitted to Bioconductor from 2016-01-28 release date of TCGA data.
 
-- [RTCGA.mutations.20160128](http://bioconductor.org/packages/RTCGA.mutations.20160128/)
-- [RTCGA.rnaseq.20160128](http://bioconductor.org/packages/RTCGA.rnaseq.20160128/)
-- [RTCGA.clinical.20160128](http://bioconductor.org/packages/RTCGA.clinical.20160128/)
-- [RTCGA.mRNA.20160128](http://bioconductor.org/packages/RTCGA.mRNA.20160128/)
-- [RTCGA.miRNASeq.20160128](http://bioconductor.org/packages/RTCGA.miRNASeq.20160128/)
-- [RTCGA.RPPA.20160128](http://bioconductor.org/packages/RTCGA.RPPA.20160128/)
-- [RTCGA.CNV.20160128](http://bioconductor.org/packages/RTCGA.CNV.20160128/)
-- [RTCGA.methylation.20160128](http://bioconductor.org/packages/RTCGA.methylation.20160128/)
-
+- [RTCGA.mutations.20160128](http://github.com/RTCGA/RTCGA.mutations.20160128/)
+- [RTCGA.rnaseq.20160128](http://github.com/RTCGA/RTCGA.rnaseq.20160128/)
+- [RTCGA.clinical.20160128](http://github.com/RTCGA/RTCGA.clinical.20160128/)
+- [RTCGA.mRNA.20160128](http://github.com/RTCGA/RTCGA.mRNA.20160128/)
+- [RTCGA.miRNASeq.20160128](http://github.com/RTCGA/RTCGA.miRNASeq.20160128/)
+- [RTCGA.RPPA.20160128](http://github.com/RTCGA/RTCGA.RPPA.20160128/)
+- [RTCGA.CNV.20160128](http://github.com/RTCGA/RTCGA.CNV.20160128/)
+- [RTCGA.methylation.20160128](http://github.com/RTCGA/RTCGA.methylation.20160128/)
 
 
 Data packages submitted to Bioconductor from 2015-11-01 release date of TCGA data.

@@ -20,7 +20,7 @@
 #' 
 #' \code{heatmapTCGA} uses \link{scale_fill_viridis} from \pkg{viridis} package which is a port of the new 
 #' \code{matplotlib} color maps (\pkg{viridis} - the default -, \code{magma}, \code{plasma} and \code{inferno}) to \code{R}.
-#' \code{matplotlib} \href{http://matplotlib.org/}{http://matplotlib.org/} is a popular plotting library for \code{python}.
+#' \code{matplotlib} \href{https://matplotlib.org/}{https://matplotlib.org/} is a popular plotting library for \code{python}.
 #'  These color maps are designed in such a way that they will analytically be perfectly perceptually-uniform, 
 #'  both in regular form and also when converted to black-and-white. 
 #'  They are also designed to be perceived by readers with the most common form of color blindness.

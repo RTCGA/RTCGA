@@ -4,9 +4,19 @@
 \alias{heatmapTCGA}
 \title{Create Heatmaps for TCGA Datasets}
 \usage{
-heatmapTCGA(data, x, y, fill, legend.title = "Expression", legend = "right",
-  title = "Heatmap of expression", facet.names = NULL, tile.size = 0.1,
-  tile.color = "white", ...)
+heatmapTCGA(
+  data,
+  x,
+  y,
+  fill,
+  legend.title = "Expression",
+  legend = "right",
+  title = "Heatmap of expression",
+  facet.names = NULL,
+  tile.size = 0.1,
+  tile.color = "white",
+  ...
+)
 }
 \arguments{
 \item{data}{A data.frame from TCGA study containing variables to be plotted.}
@@ -35,7 +45,7 @@ Function creates heatmaps (\link{geom_tile}) for TCGA Datasets.
 \note{
 \code{heatmapTCGA} uses \link{scale_fill_viridis} from \pkg{viridis} package which is a port of the new 
 \code{matplotlib} color maps (\pkg{viridis} - the default -, \code{magma}, \code{plasma} and \code{inferno}) to \code{R}.
-\code{matplotlib} \href{http://matplotlib.org/}{http://matplotlib.org/} is a popular plotting library for \code{python}.
+\code{matplotlib} \href{https://matplotlib.org/}{https://matplotlib.org/} is a popular plotting library for \code{python}.
  These color maps are designed in such a way that they will analytically be perfectly perceptually-uniform, 
  both in regular form and also when converted to black-and-white. 
  They are also designed to be perceived by readers with the most common form of color blindness.
@@ -47,6 +57,7 @@ If you have any problems, issues or think that something is missing or is not
 clear please post an issue on 
 \href{https://github.com/RTCGA/RTCGA/issues}{https://github.com/RTCGA/RTCGA/issues}.
 }
+
 \examples{
  
  
@@ -114,20 +125,28 @@ heatmapTCGA(ACC_BLCA_BRCA_OV.rnaseq_TP53mutations_ZNF501medians, "TP53", "cohort
             fill = "ZNF501", facet.names = "MET",
             title = "Heatmap of ZNF501 expression")
 }
-\author{
-Marcin Kosinski, \email{m.p.kosinski@gmail.com}
-}
 \seealso{
 \pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA/articles/Visualizations.html}{http://rtcga.github.io/RTCGA/articles/Visualizations.html}.
 
-Other RTCGA: \code{\link{RTCGA-package}},
-  \code{\link{boxplotTCGA}}, \code{\link{checkTCGA}},
-  \code{\link{convertTCGA}}, \code{\link{createTCGA}},
-  \code{\link{datasetsTCGA}}, \code{\link{downloadTCGA}},
-  \code{\link{expressionsTCGA}}, \code{\link{infoTCGA}},
-  \code{\link{installTCGA}}, \code{\link{kmTCGA}},
-  \code{\link{mutationsTCGA}}, \code{\link{pcaTCGA}},
-  \code{\link{readTCGA}}, \code{\link{survivalTCGA}},
-  \code{\link{theme_RTCGA}}
+Other RTCGA: 
+\code{\link{RTCGA-package}},
+\code{\link{boxplotTCGA}()},
+\code{\link{checkTCGA}()},
+\code{\link{convertTCGA}()},
+\code{\link{createTCGA}()},
+\code{\link{datasetsTCGA}},
+\code{\link{downloadTCGA}()},
+\code{\link{expressionsTCGA}()},
+\code{\link{infoTCGA}()},
+\code{\link{installTCGA}()},
+\code{\link{kmTCGA}()},
+\code{\link{mutationsTCGA}()},
+\code{\link{pcaTCGA}()},
+\code{\link{readTCGA}()},
+\code{\link{survivalTCGA}()},
+\code{\link{theme_RTCGA}()}
 }
-
+\author{
+Marcin Kosinski, \email{m.p.kosinski@gmail.com}
+}
+\concept{RTCGA}

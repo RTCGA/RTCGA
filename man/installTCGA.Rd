@@ -4,11 +4,14 @@
 \alias{installTCGA}
 \title{Install Data Packages from RTCGA Family}
 \usage{
-installTCGA(packages = c("RTCGA.clinical.20160128",
-  "RTCGA.mutations.20160128", "RTCGA.rnaseq.20160128", "RTCGA.RPPA.20160128",
-  "RTCGA.mRNA.20160128", "RTCGA.CNV.20160128", "RTCGA.miRNASeq.20160128",
-  "RTCGA.PANCAN12.20160128", "RTCGA.methylation.20160128"),
-  build_vignettes = TRUE, ...)
+installTCGA(
+  packages = c("RTCGA.clinical.20160128", "RTCGA.mutations.20160128",
+    "RTCGA.rnaseq.20160128", "RTCGA.RPPA.20160128", "RTCGA.mRNA.20160128",
+    "RTCGA.CNV.20160128", "RTCGA.miRNASeq.20160128", "RTCGA.PANCAN12.20160128",
+    "RTCGA.methylation.20160128"),
+  build_vignettes = TRUE,
+  ...
+)
 }
 \arguments{
 \item{packages}{A character specifing the names of the data packages to be installed. By default installs all packages from \code{.20160128} release.}
@@ -27,6 +30,7 @@ If you have any problems, issues or think that something is missing or is not
 clear please post an issue on 
 \href{https://github.com/RTCGA/RTCGA/issues}{https://github.com/RTCGA/RTCGA/issues}.
 }
+
 \examples{
 
 \dontrun{
@@ -35,20 +39,28 @@ installTCGA('RTCGA.clinical.20160128')
 }
 
 }
-\author{
-Marcin Kosinski, \email{m.p.kosinski@gmail.com}
-}
 \seealso{
 \pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA}{http://rtcga.github.io/RTCGA}.
 
-Other RTCGA: \code{\link{RTCGA-package}},
-  \code{\link{boxplotTCGA}}, \code{\link{checkTCGA}},
-  \code{\link{convertTCGA}}, \code{\link{createTCGA}},
-  \code{\link{datasetsTCGA}}, \code{\link{downloadTCGA}},
-  \code{\link{expressionsTCGA}}, \code{\link{heatmapTCGA}},
-  \code{\link{infoTCGA}}, \code{\link{kmTCGA}},
-  \code{\link{mutationsTCGA}}, \code{\link{pcaTCGA}},
-  \code{\link{readTCGA}}, \code{\link{survivalTCGA}},
-  \code{\link{theme_RTCGA}}
+Other RTCGA: 
+\code{\link{RTCGA-package}},
+\code{\link{boxplotTCGA}()},
+\code{\link{checkTCGA}()},
+\code{\link{convertTCGA}()},
+\code{\link{createTCGA}()},
+\code{\link{datasetsTCGA}},
+\code{\link{downloadTCGA}()},
+\code{\link{expressionsTCGA}()},
+\code{\link{heatmapTCGA}()},
+\code{\link{infoTCGA}()},
+\code{\link{kmTCGA}()},
+\code{\link{mutationsTCGA}()},
+\code{\link{pcaTCGA}()},
+\code{\link{readTCGA}()},
+\code{\link{survivalTCGA}()},
+\code{\link{theme_RTCGA}()}
 }
-
+\author{
+Marcin Kosinski, \email{m.p.kosinski@gmail.com}
+}
+\concept{RTCGA}

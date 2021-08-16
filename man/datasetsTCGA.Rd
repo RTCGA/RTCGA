@@ -2,6 +2,7 @@
 % Please edit documentation in R/datasetsTCGA.R
 \name{datasetsTCGA}
 \alias{datasetsTCGA}
+\alias{RTCGA.data}
 \title{RTCGA - The Family of R Packages with Data from The Cancer Genome Atlas Study}
 \description{
 Snapshots of the clinical, mutations, CNVs, rnaseq, RPPA, mRNA, miRNASeq and methylation datasets from the \code{2016-01-28}
@@ -42,6 +43,7 @@ If you have any problems, issues or think that something is missing or is not
 clear please post an issue on 
 \href{https://github.com/RTCGA/RTCGA/issues}{https://github.com/RTCGA/RTCGA/issues}.
 }
+
 \examples{
 
 
@@ -81,22 +83,30 @@ browseVignettes('RTCGA')
 }
 
 }
+\seealso{
+\pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA}{http://rtcga.github.io/RTCGA}.
+
+Other RTCGA: 
+\code{\link{RTCGA-package}},
+\code{\link{boxplotTCGA}()},
+\code{\link{checkTCGA}()},
+\code{\link{convertTCGA}()},
+\code{\link{createTCGA}()},
+\code{\link{downloadTCGA}()},
+\code{\link{expressionsTCGA}()},
+\code{\link{heatmapTCGA}()},
+\code{\link{infoTCGA}()},
+\code{\link{installTCGA}()},
+\code{\link{kmTCGA}()},
+\code{\link{mutationsTCGA}()},
+\code{\link{pcaTCGA}()},
+\code{\link{readTCGA}()},
+\code{\link{survivalTCGA}()},
+\code{\link{theme_RTCGA}()}
+}
 \author{
 Marcin Kosinski [aut, cre] \email{ m.p.kosinski@gmail.com } \cr
 Przemyslaw Biecek [aut] \email{ przemyslaw.biecek@gmail.com } \cr
 Witold Chodor [aut] \email{ witoldchodor@gmail.com }
 }
-\seealso{
-\pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA}{http://rtcga.github.io/RTCGA}.
-
-Other RTCGA: \code{\link{RTCGA-package}},
-  \code{\link{boxplotTCGA}}, \code{\link{checkTCGA}},
-  \code{\link{convertTCGA}}, \code{\link{createTCGA}},
-  \code{\link{downloadTCGA}},
-  \code{\link{expressionsTCGA}}, \code{\link{heatmapTCGA}},
-  \code{\link{infoTCGA}}, \code{\link{installTCGA}},
-  \code{\link{kmTCGA}}, \code{\link{mutationsTCGA}},
-  \code{\link{pcaTCGA}}, \code{\link{readTCGA}},
-  \code{\link{survivalTCGA}}, \code{\link{theme_RTCGA}}
-}
-
+\concept{RTCGA}

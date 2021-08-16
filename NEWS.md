@@ -1,3 +1,7 @@
+# Version 1.23.1
+
+- Merged Bioconductor git repo with GitHub git repo
+
 # Version 1.7.1
 
 - New version of RTCGA website - http://rtcga.github.io/RTCGA/, based on [pkgdown](http://github.com/hadley/pkgdown/)

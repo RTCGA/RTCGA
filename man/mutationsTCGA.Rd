@@ -4,8 +4,12 @@
 \alias{mutationsTCGA}
 \title{Gather Mutations for TCGA Datasets}
 \usage{
-mutationsTCGA(..., extract.cols = c("Hugo_Symbol", "Variant_Classification",
-  "bcr_patient_barcode"), extract.names = TRUE, unique = TRUE)
+mutationsTCGA(
+  ...,
+  extract.cols = c("Hugo_Symbol", "Variant_Classification", "bcr_patient_barcode"),
+  extract.names = TRUE,
+  unique = TRUE
+)
 }
 \arguments{
 \item{...}{A data.frame or data.frames from TCGA study containing mutations information (\pkg{RTCGA.mutations}).}
@@ -31,6 +35,7 @@ If you have any problems, issues or think that something is missing or is not
 clear please post an issue on 
 \href{https://github.com/RTCGA/RTCGA/issues}{https://github.com/RTCGA/RTCGA/issues}.
 }
+
 \examples{
 
 library(RTCGA.mutations)
@@ -56,20 +61,28 @@ kmTCGA(BRCA_OV.2plot, explanatory.names = c("TP53", "disease"),
        break.time.by = 400, xlim = c(0,2000))
 
 }
-\author{
-Marcin Kosinski, \email{m.p.kosinski@gmail.com}
-}
 \seealso{
 \pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA/articles/Visualizations.html}{http://rtcga.github.io/RTCGA/articles/Visualizations.html}.
 
-Other RTCGA: \code{\link{RTCGA-package}},
-  \code{\link{boxplotTCGA}}, \code{\link{checkTCGA}},
-  \code{\link{convertTCGA}}, \code{\link{createTCGA}},
-  \code{\link{datasetsTCGA}}, \code{\link{downloadTCGA}},
-  \code{\link{expressionsTCGA}}, \code{\link{heatmapTCGA}},
-  \code{\link{infoTCGA}}, \code{\link{installTCGA}},
-  \code{\link{kmTCGA}}, \code{\link{pcaTCGA}},
-  \code{\link{readTCGA}}, \code{\link{survivalTCGA}},
-  \code{\link{theme_RTCGA}}
+Other RTCGA: 
+\code{\link{RTCGA-package}},
+\code{\link{boxplotTCGA}()},
+\code{\link{checkTCGA}()},
+\code{\link{convertTCGA}()},
+\code{\link{createTCGA}()},
+\code{\link{datasetsTCGA}},
+\code{\link{downloadTCGA}()},
+\code{\link{expressionsTCGA}()},
+\code{\link{heatmapTCGA}()},
+\code{\link{infoTCGA}()},
+\code{\link{installTCGA}()},
+\code{\link{kmTCGA}()},
+\code{\link{pcaTCGA}()},
+\code{\link{readTCGA}()},
+\code{\link{survivalTCGA}()},
+\code{\link{theme_RTCGA}()}
 }
-
+\author{
+Marcin Kosinski, \email{m.p.kosinski@gmail.com}
+}
+\concept{RTCGA}
