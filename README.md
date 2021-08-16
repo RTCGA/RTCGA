@@ -1,4 +1,4 @@
-[![Travis-CI Build Status](https://travis-ci.org/RTCGA/RTCGA.svg?branch=master)](https://travis-ci.org/RTCGA/RTCGA)
+[![Travis-CI Build Status](https://api.travis-ci.com/RTCGA/RTCGA.svg?branch=master)](https://www.travis-ci.com/github/RTCGA/RTCGA)
 [![Project Status: Inactive - The project has reached a stable, usable state but is not being actively developed.](http://www.repostatus.org/badges/latest/inactive.svg)](http://www.repostatus.org/#inactive)
 
 # The family of R packages containing TCGA data
