@@ -42,6 +42,9 @@ bioc_packages:
  - IRanges
  - S4Vectors
  - BiocCheck
+ 
+install:
+- R -e "BiocManager::install(version = '3.12')"
 
 after_script:
   - ls -lah
