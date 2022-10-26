@@ -20,11 +20,11 @@
 #'      \item If \code{what='Dates'} a vector of available dates to pass to the \link{downloadTCGA} function.
 #'      }
 #' @param what One of \code{DataSets} or \code{Dates}.     
-#' @param cancerType A character of length 1 containing abbreviation (Cohort code - \href{http://gdac.broadinstitute.org/}{http://gdac.broadinstitute.org/})
+#' @param cancerType A character of length 1 containing abbreviation (Cohort code - \href{https://gdac.broadinstitute.org/}{https://gdac.broadinstitute.org/})
 #'  of types of cancers to check for.
 #' @param date A \code{NULL} or character specifying from which date informations should be checked.
 #' By default (\code{date = NULL}) the newest available date is used. All available dates can be checked on 
-#' \href{http://gdac.broadinstitute.org/runs/}{http://gdac.broadinstitute.org/runs/} or by using \code{checkTCGA('Dates')} 
+#' \href{https://gdac.broadinstitute.org/runs/}{https://gdac.broadinstitute.org/runs/} or by using \code{checkTCGA('Dates')} 
 #' function. Required format \code{'YYYY-MM-DD'}.
 #' 
 #' 
@@ -39,7 +39,7 @@
 #' 
 #' @seealso 
 #' 
-#' \pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA/}{http://rtcga.github.io/RTCGA/}.
+#' \pkg{RTCGA} website \href{https://rtcga.github.io/RTCGA/}{https://rtcga.github.io/RTCGA/}.
 #' 
 #' @examples
 #' 
@@ -98,8 +98,10 @@ availableDataSets <- function(cancerType, date = NULL) {
 	# get index of page containing datasets fot this date of release and Cohort Code
 	filesParentURL <- parentURL(lastReleaseDate, element = cancerType)  #downloadTCGA.r
 	
+	
+	url <- getURL(filesParentURL, .opts = list(ssl.verifypeer = FALSE))
 	# get content of index page
-	readHTMLTable(filesParentURL)[[1]][-c(1:2), c(2,4)] -> check
+	readHTMLTable(url)[[1]][-c(1:2), c(2,4)] -> check
 	check[!grepl('md5', check[,1]) , ] -> check
 	check[!grepl('aux', check[,1]) , ] -> check
 	check[!grepl('mage-tab', check[,1]) , ] -> check
@@ -118,7 +120,7 @@ availableDates <- function() {
 	
 	if (!exists(x = ".availableDates3", envir = .RTCGAEnv)) {
 		# happens only once
-		readLines("http://gdac.broadinstitute.org/runs/") %>% assign(x = ".gdacContent", value = ., envir = .RTCGAEnv)
+		readLines("https://gdac.broadinstitute.org/runs/") %>% assign(x = ".gdacContent", value = ., envir = .RTCGAEnv)
 		
 		get(".gdacContent", envir = .RTCGAEnv) %>% grep(pattern = "stddata__20", value = TRUE) %>% gsub(pattern = "(<[^>]+>)| |/", replacement = "") %>% 
 			substring(first = 10, last = 19) %>% assign(x = ".availableDates", value = ., envir = .RTCGAEnv)
@@ -128,7 +130,7 @@ availableDates <- function() {
 		
 		############################################ 
 		
-		xml2::read_html("http://gdac.broadinstitute.org/runs/stddata__latest/") %>% html_nodes("h3") %>% html_text() %>%
+		xml2::read_html("https://gdac.broadinstitute.org/runs/stddata__latest/") %>% html_nodes("h3") %>% html_text() %>%
 			substring(first=1, last=10) %>% gsub(pattern = "_", replacement = "-", fixed = TRUE) %>% 
 			assign(x = ".lastWorkingDate", value = ., envir = .RTCGAEnv)
 		get(x = ".availableDates2", envir = .RTCGAEnv)[1:grep(get(x = ".lastWorkingDate", envir = .RTCGAEnv), 

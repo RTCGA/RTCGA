@@ -1,3 +1,7 @@
+# Version 1.27.1
+
+- Fixed http and https calls to https://gdac.broadinstitute.org/
+
 # Version 1.23.1
 
 - Merged Bioconductor git repo with GitHub git repo

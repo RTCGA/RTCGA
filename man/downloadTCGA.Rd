@@ -16,15 +16,15 @@ downloadTCGA(
 }
 \arguments{
 \item{cancerTypes}{A character vector containing abbreviations (Cohort code) of types of cancers to download from 
-\href{http://gdac.broadinstitute.org/}{http://gdac.broadinstitute.org/}. For easy access from R check details below.}
+\href{https://gdac.broadinstitute.org/}{https://gdac.broadinstitute.org/}. For easy access from R check details below.}
 
-\item{dataSet}{A part of the name of dataSet to be downloaded from \href{http://gdac.broadinstitute.org/runs/}{http://gdac.broadinstitute.org/runs/}. By default the Merged Clinical dataSet is downloaded (value \code{dataSet = 'Merge_Clinical.Level_1'}). Available datasets' names can be checked using \link{checkTCGA} function.}
+\item{dataSet}{A part of the name of dataSet to be downloaded from \href{https://gdac.broadinstitute.org/runs/}{https://gdac.broadinstitute.org/runs/}. By default the Merged Clinical dataSet is downloaded (value \code{dataSet = 'Merge_Clinical.Level_1'}). Available datasets' names can be checked using \link{checkTCGA} function.}
 
 \item{destDir}{A character specifying a directory into which \code{dataSet}s will be downloaded.}
 
 \item{date}{A \code{NULL} or character specifying from which date \code{dataSet}s should be downloaded.
 By default (\code{date = NULL}) the newest available date is used. All available dates can be checked on 
-\href{http://gdac.broadinstitute.org/runs/}{http://gdac.broadinstitute.org/runs/} or by using \link{checkTCGA} 
+\href{https://gdac.broadinstitute.org/runs/}{https://gdac.broadinstitute.org/runs/} or by using \link{checkTCGA} 
 function. Required format \code{'YYYY-MM-DD'}.}
 
 \item{untarFile}{Logical - should the downloaded file be untarred. Default is \code{TRUE}.}
@@ -73,7 +73,7 @@ downloadTCGA(cancerTypes = c('BRCA', 'OV'),
 
 }
 \seealso{
-\pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA/articles/Data_Download.html}{http://rtcga.github.io/RTCGA/articles/Data_Download.html}.
+\pkg{RTCGA} website \href{https://rtcga.github.io/RTCGA/articles/Data_Download.html}{https://rtcga.github.io/RTCGA/articles/Data_Download.html}.
 
 Other RTCGA: 
 \code{\link{RTCGA-package}},

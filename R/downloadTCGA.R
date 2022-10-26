@@ -6,15 +6,15 @@
 #' dataSet is downloaded (value \code{dataSet = 'Merge_Clinical.Level_1'}) from the newest available date of the release.
 #' 
 #' @param cancerTypes A character vector containing abbreviations (Cohort code) of types of cancers to download from 
-#' \href{http://gdac.broadinstitute.org/}{http://gdac.broadinstitute.org/}. For easy access from R check details below.
+#' \href{https://gdac.broadinstitute.org/}{https://gdac.broadinstitute.org/}. For easy access from R check details below.
 #' 
-#' @param dataSet A part of the name of dataSet to be downloaded from \href{http://gdac.broadinstitute.org/runs/}{http://gdac.broadinstitute.org/runs/}. By default the Merged Clinical dataSet is downloaded (value \code{dataSet = 'Merge_Clinical.Level_1'}). Available datasets' names can be checked using \link{checkTCGA} function.
+#' @param dataSet A part of the name of dataSet to be downloaded from \href{https://gdac.broadinstitute.org/runs/}{https://gdac.broadinstitute.org/runs/}. By default the Merged Clinical dataSet is downloaded (value \code{dataSet = 'Merge_Clinical.Level_1'}). Available datasets' names can be checked using \link{checkTCGA} function.
 #' 
 #' @param destDir A character specifying a directory into which \code{dataSet}s will be downloaded.
 #' 
 #' @param date A \code{NULL} or character specifying from which date \code{dataSet}s should be downloaded.
 #' By default (\code{date = NULL}) the newest available date is used. All available dates can be checked on 
-#' \href{http://gdac.broadinstitute.org/runs/}{http://gdac.broadinstitute.org/runs/} or by using \link{checkTCGA} 
+#' \href{https://gdac.broadinstitute.org/runs/}{https://gdac.broadinstitute.org/runs/} or by using \link{checkTCGA} 
 #' function. Required format \code{'YYYY-MM-DD'}.
 #' 
 #' @param untarFile Logical - should the downloaded file be untarred. Default is \code{TRUE}.
@@ -40,7 +40,7 @@
 #' 
 #' @seealso 
 #' 
-#' \pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA/articles/Data_Download.html}{http://rtcga.github.io/RTCGA/articles/Data_Download.html}.
+#' \pkg{RTCGA} website \href{https://rtcga.github.io/RTCGA/articles/Data_Download.html}{https://rtcga.github.io/RTCGA/articles/Data_Download.html}.
 #' 
 #' @examples
 #' 
@@ -118,7 +118,7 @@ downloadTCGA <- function(cancerTypes, dataSet = "Merge_Clinical.Level_1", destDi
 			linksToData <- elementIndexes
 		}                       
 		sapply(linksToData, function(linkToData){
-			# http://gdac.broadinstitute.org/runs/stddata__2015_02_04/data/BRCA/20150204/
+			# https://gdac.broadinstitute.org/runs/stddata__2015_02_04/data/BRCA/20150204/
 			file.create(file.path(destDir, linkToData))
 			download.file(url = paste0(filesParentURL, "/", linkToData), destfile = file.path(destDir, linkToData))
 			if (untarFile) {
@@ -148,8 +148,11 @@ checkDirectory <- function(directory) {
 
 parentURL <- function(lastReleaseDate, element) {
 	# 'stddata__2015_02_04' - lastReleaseDate
-	paste0("http://gdac.broadinstitute.org/runs/", lastReleaseDate, "/data/", element, "/", paste0(unlist(stri_extract_all_regex(str = lastReleaseDate, 
-																																																															 pattern = "[0-9]+")), collapse = ""))
+	paste0("https://gdac.broadinstitute.org/runs/", 
+	       lastReleaseDate, "/data/", element, "/", 
+	       paste0(unlist(stri_extract_all_regex(str = lastReleaseDate, pattern = "[0-9]+")), collapse = ""),
+	       "/"
+	       )
 }
 
 whichDateToUse <- function(date) {

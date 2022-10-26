@@ -3,7 +3,7 @@
 #'
 #' @description Function restores codes and counts for each cohort from TCGA project.
 #'  
-#' @return A list with a tabular information from \href{http://gdac.broadinstitute.org/}{http://gdac.broadinstitute.org/}.
+#' @return A list with a tabular information from \href{https://gdac.broadinstitute.org/}{https://gdac.broadinstitute.org/}.
 #' 
 #' @section Issues:
 #' 
@@ -16,7 +16,7 @@
 #' 
 #' @seealso 
 #' 
-#' \pkg{RTCGA} website \href{http://rtcga.github.io/RTCGA/articles/Data_Download.html}{http://rtcga.github.io/RTCGA/articles/Data_Download.html}.
+#' \pkg{RTCGA} website \href{https://rtcga.github.io/RTCGA/articles/Data_Download.html}{https://rtcga.github.io/RTCGA/articles/Data_Download.html}.
 #' 
 #' @examples 
 #' 
@@ -33,7 +33,11 @@
 #' @rdname infoTCGA
 #' @export
 infoTCGA <- function() {
-	do.call(rbind, readHTMLTable("http://gdac.broadinstitute.org/")[-39]) -> x
+  
+  theurl <- getURL("https://gdac.broadinstitute.org/", 
+                   .opts = list(ssl.verifypeer = FALSE))
+  
+	do.call(rbind, readHTMLTable(theurl)[-39]) -> x
 	names(x) <- gsub(names(x), pattern = "\n", replacement = "", fixed = TRUE)
 	x
 } 

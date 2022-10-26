@@ -38,7 +38,7 @@
 #' @importFrom rmarkdown html_dependency_font_awesome
 #' @importFrom purrr map_if
 #' @importFrom stats as.formula na.omit prcomp predict qchisq reformulate setNames
-#' 
+#' @importFrom RCurl getURL
 #' @examples
 #' \dontrun{
 #' browseVignettes('RTCGA')
