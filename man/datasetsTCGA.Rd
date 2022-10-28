@@ -91,7 +91,6 @@ Other RTCGA:
 \code{\link{boxplotTCGA}()},
 \code{\link{checkTCGA}()},
 \code{\link{convertTCGA}()},
-\code{\link{createTCGA}()},
 \code{\link{downloadTCGA}()},
 \code{\link{expressionsTCGA}()},
 \code{\link{heatmapTCGA}()},

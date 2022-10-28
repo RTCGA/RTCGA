@@ -1,10 +1,9 @@
 \documentclass{bioinfo}
+%\usepackage{polski}
+%\usepackage[polish]{babel}
+%\usepackage[T1]{fontenc}
+%\usepackage[utf8]{inputenc} 
 \copyrightyear{2016} \pubyear{2016}
-
-\usepackage{graphicx}
-\usepackage{caption}
-\usepackage{subfigure}
-
 
 \access{Advance Access Publication Date: Day Month Year}
 \appnotes{Databases and ontologies}
@@ -15,7 +14,7 @@
 \subtitle{Databases and ontologies}
 
 \title[RTCGA Family of R packages]{RTCGA - The Family of R Packages Integrating Data from The Cancer Genome Atlas Study}
-\author[Marcin Kosi\'nski \textit{et~al}.]{Marcin Kosi\'nski\,$^{\text{\sfb 1,2,}*}$, Witold Chodor\,$^{\text{\sfb 2}}$ and Przemys\l{}aw Biecek\,$^{\text{\sfb1,2}}$}
+\author[Marcin Kosiński \textit{et~al}.]{Marcin Kosiński\,$^{\text{\sfb 1,2,}*}$, Witold Chodor\,$^{\text{\sfb 2}}$ and Przemysław Biecek\,$^{\text{\sfb1,2}}$}
 \address{$^{\text{\sf 1}}$Faculty of Mathematics and Information Science, Warsaw University of Technology, 00-662 Warsaw, Poland and \\
 $^{\text{\sf 2}}$Faculty of Mathematics, Informatics, and Mechanics, University of Warsaw, City, 02-097 Warsaw, Poland.}
 
@@ -25,48 +24,42 @@ $^{\text{\sf 2}}$Faculty of Mathematics, Informatics, and Mechanics, University 
 
 \editor{Associate Editor: XXXXXXX}
 
-\abstract{\textbf{Summary:} 
-We present a family of \textbf{R} packages called \textbf{RTCGA} that simplify access to data from the TCGA project.
-The Cancer Genome Atlas Project (TCGA) is a coordinated effort to accelerate the understanding of the molecular basis of cancer. It is a source of curated multi-platform data, including RNA-seq, DNA-seq, DNA Methylation, together with clinical data for over 11 thousand patients and 33 cancer types. This rich source of data is accessible in raw format from TCGA Data Portal. \textbf{RTCGA} packages facilitate access to these datasets, streamline merging characteristics from different platforms and support exploratory statistical analyses and visualizations. \\
-\textbf{Availability:} \textbf{RTCGA} family of \textbf{R} packages is freely available at GitHub http://rtcga.github.io/RTCGA/ and from
-the  Bioconductor  project  at  http://bioconductor.org/packages/RTCGA/ .\\
+\abstract{\textbf{Summary:} The following article presents RTCGA: a family of R packages with data from The Cancer Genome Atlas Project (TCGA) study \citet{TCGA}. TCGA is a comprehensive and coordinated effort to accelerate our understanding of the molecular basis of cancer through the application of genome analysis technologies, including large-scale genome sequencing [1]. We converted selected datasets from this study into few separate packages that are hosted on \citet{Bioconductor}. These R packages make selected datasets easier to access and manage. Datasets in RTCGA packages are large and cover complex relations between clinical outcomes and genetic background. These packages will be useful for at least three audiences: biostatisticians that work with cancer data; researchers that are working on large scale algorithms; teachers that are presenting data analysis method on real data problems \\
+\textbf{Availability:} \textsf{RTCGA} family of R packages is freely available from
+the  Bioconductor  project  at  http://bioconductor.org/packages/RTCGA/.\\
 \textbf{Contact:} \href{m.p.kosinski@gmail.com}{m.p.kosinski@gmail.com}}
 
 
 \maketitle
 
-\begin{figure*}
-\center
-	\includegraphics[width=0.9\linewidth]{figures/RTCGA_workflow.png}
-	\caption{The architecture of \textbf{RTCGA} family of R packages. \textbf{RTCGA} is a group of R libraries that were developed over the time. 
-	\newline In the first version (\textbf{1.0.0}), the software \textbf{RTCGA} package contained of functions designed to \textit{download} TCGA data (\texttt{downloadTCGA()}) and verify it's metadata; like \textit{cohort counts and names} (\texttt{infoTCGA()}), \textit{datasets names} and their \textit{dates of release} (\texttt{checkTCGA()}). \textit{Reading} data into the tidy format was also possible (\texttt{readTCGA()}). 
-	\newline In the next version (\textbf{1.2.0}), \textbf{RTCGA} increased by several number of functions created for \textit{data manipulations and visualizations}; \texttt{survivalTCGA()}, \texttt{expressionsTCGA()}, \texttt{mutationsTCGA()} for gathering the clinical outcomes, expressions data and mutations information, \texttt{kmTCGA()} for Kaplan-Meier estimates of survival curves, \texttt{pcaTCGA()} for Principal Components Analysis, \texttt{heatmapTCGA()} and \texttt{boxplotTCGA()} for for heatmaps and boxplots of expressions. This release was also equipped with a \textit{convertTCGA()} for converting \textbf{RTCGA} data into the Bioconductor classes and \textit{installTCGA()} for simplfied installation of the whole family of data packages. The latest (for that time: 2015-11-01) datasets from TCGA were packed into 8 data packages; \textit{RTCGA.clinical}, \textit{RTCGA.rnaseq}, \textit{RTCGA.mutations}, \textit{RTCGA.mRNA}, \textit{RTCGA.methylation}, \textit{RTCGA.RPPA}, \textit{RTCGA.miRNAseq}, \textit{RTCGA.CNV}.
-	\newline The last version (\textbf{1.7.1}) presents the \texit{createTCGA()} function that minimizes the effort of creating a data package from \textbf{RTCGA} family. With this function new 8 data packages (with the data from the last possible snapshot: 2016-01-28) were added to the ecosystem; \newline \textit{RTCGA.clinical.20160128}, \textit{RTCGA.rnaseq.20160128}, \textit{RTCGA.mutations.20160128}, \textit{RTCGA.mRNA.20160128}, \textit{RTCGA.methylation.20160128}, \textit{RTCGA.RPPA.20160128}, \textit{RTCGA.miRNAseq.20160128}, \textit{RTCGA.CNV.20160128}.}
-\label{fig:RTCGA_workflow_ver4}
-\end{figure*}
+\section{Motivation}
+The Cancer Genome Atlas (TCGA) Data Portal provides a platform for researchers to search, download, and analyze data sets generated by TCGA. It contains clinical information, genomic characterization data, and high level sequence analysis of the tumor genomes [1]. 
 
+TCGA data is available through Firehose Broad GDAC portal [1]. One can select cancer type (cohort) and data type (e.g. clinical, RNA expression, methylation, ..) and download a `tar.gz` file with compressed data. 
 
-\subsubsection*{Introduction}
-\cite{TCGAP} provides a platform for researchers to search, download, and analyze data sets generated by TCGA Project. It contains clinical information, genomic characterization data, and high level sequence analysis of the tumor genomes for 11 thousands patients, over 2.5 PT of data. Compressed \textit{tar.gz} files are available through \cite{BroadGDAC} and recently through \cite{GDC}. One can select a release (monthly snapshots), cancer type (cohort) and data type (e.g. clinical, RNA expression, methylation) and download a text file with raw data. 
+When working with many cancer types we find this approach burdensome:
 
-While working with many cohorts and cancer types we found this approach burdensome. Without easy-to-use API it is harder to reproduce results obtained in past.
 \begin{itemize}
-\item If one requires to download datasets containing e.g. information about genes' expressions for all available cohorts types, then one would have to go through the click-to-download process separately for each cohort. This is inconvenient and time-consuming.
-\item Some datasets (e.g. clinical) are not in a standard tidy data format, which is: one row for one observation and one column for one variable. Data for some platforms data is transposed (e.g. for expression columns stands for patients) for others data is unstructured (e.g. mutations). That becomes more onerous when investigating many clinical datasets at once.
-\item Data governance for many datasets for various cohorts saved in different folders with very long names may be exhausting and uncomfortable for researchers that are not very skilled in data management or data processing.
+\item If one requires to download datasets containing e.g. information about genes' expressions for all available cohorts types (TCGA collected data for more than 30 various cancer types) one would have to go through the click-to-download process many times, which is inconvenient and time-consuming.
+\item Clinical datasets from TCGA project are not in a standard tidy data format, which is: one row for one observation and one column for one variable. They are transposed which makes work with that data burdensome. That becomes more onerous when one would like to investigate
+many clinical datasets.
+\item Datasets containing information on some data types (e.g. gene's mutations) are not in one easy-to-handle file. Every patient has it's own file, what for many potential researchers may be an impassable barrier. 
+\item Data governance for many datasets for various cohorts saved in different folders with strange (default after untarring) names may be exhausting and uncomfortable for researchers that are not very skilled in data management or data processing.
 \end{itemize}
-For reasons listed above we prepared an uniform API to download and pre-process selected datasets along with set of R data packages with pre-processed data. 
-The prepared packages are useful for biostatisticians that work with cancer data along with researchers that work on scalable big data algorithms or lecturers that are are using real world case studies.
+For these reasons we prepared selected datasets from the TCGA project in an easy to handle and process way and embed them in 9 separate R packages. All packages can be installed from BioConductor.
 
-\subsubsection*{Using RTCGA packages}
-\color{red}{The general architecture of all packages in the \textbf{RTCGA} family is presented in the Figure 1 (where functions are presented as yellow boxes and packages are green boxes). All packages listed in this figure are available at Bioconductor.
-The software package \textbf{RTCGA} contains functions that facilitate download of data from particular date, cohort and platform. Other functions benefits data processing, analysis and visualizations. In figures 1b-1c we present example analyses and plots that cover Kaplan-Meier estimates of survival curves and Principal Component Analysis. Detailed instructions on how to apply these and other analyses, and on how to download the selected data are presented at the project's website. Different versions of data packages refer to particular snapshots of the data.}{Is this relevant to the new caption of the figure?}
+\section{Examples}
 
+\section*{Acknowledgements}
 
-\subsubsection*{Acknowledgements}
-This work was supported by NCN Grant 2016/21/B/ST6/02176.
+Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text
+text text text\vspace*{-12pt}
 
-\bibliographystyle{natbib}
+\section*{Funding}
+
+This work has been supported by the... Text Text  Text Text.\vspace*{-12pt}
+
+%\bibliographystyle{natbib}
 %\bibliographystyle{achemnat}
 %\bibliographystyle{plainnat}
 %\bibliographystyle{abbrv}
@@ -74,7 +67,10 @@ This work was supported by NCN Grant 2016/21/B/ST6/02176.
 %
 %\bibliographystyle{plain}
 %
-\bibliography{main}
+%\bibliography{Document}
 
 
+\begin{thebibliography}{}
+
+\end{thebibliography}
 \end{document}

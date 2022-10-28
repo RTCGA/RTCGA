@@ -44,11 +44,12 @@ many clinical datasets.
 For these reasons we prepared selected datasets from the TCGA project in an easy to handle and process way and embed them in 4 separate R packages. All packages can be installed from BioConductor by evaluating the following code:
 
 ```{r, eval=FALSE}
-source("https://bioconductor.org/biocLite.R")
-biocLite("RTCGA.clinical") 
-biocLite("RTCGA.rnaseq") 
-biocLite("RTCGA.mutations") 
-biocLite("RTCGA.cnv") # or developers version biocLite("mi2-warsaw/RTCGA.cnv")
+if (!requireNamespace("BiocManager", quietly=TRUE))
+    install.packages("BiocManager")
+BiocManager::install("RTCGA.clinical") 
+BiocManager::install("RTCGA.rnaseq") 
+BiocManager::install("RTCGA.mutations") 
+BiocManager::install("RTCGA.cnv") # or developers version BiocManager::install("mi2-warsaw/RTCGA.cnv")
 ```
 
 # Patient's barcode as a key to merge data 
@@ -195,7 +196,7 @@ where `cohort` corresponds to a specific Cohort of patients and `package` corres
 
 
 ```{r}
-#library(devtools);biocLite("mi2-warsaw/RTCGA.tools") 
+#library(devtools);BiocManager::install("mi2-warsaw/RTCGA.tools") 
 ```
 
 

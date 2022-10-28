@@ -1,3 +1,7 @@
+# Version 1.27.2
+
+- moved createTCGA() out of the package
+
 # Version 1.27.1
 
 - Fixed http and https calls to https://gdac.broadinstitute.org/

@@ -81,7 +81,6 @@ Other RTCGA:
 \code{\link{RTCGA-package}},
 \code{\link{boxplotTCGA}()},
 \code{\link{convertTCGA}()},
-\code{\link{createTCGA}()},
 \code{\link{datasetsTCGA}},
 \code{\link{downloadTCGA}()},
 \code{\link{expressionsTCGA}()},

@@ -1,7 +1,7 @@
 Package: RTCGA
 Title: The Cancer Genome Atlas Data Integration
-Version: 1.27.1
-Date: 2022-10-26
+Version: 1.27.2
+Date: 2022-10-28
 Authors@R: c(
     person("Marcin", "Kosinski", role = c("aut", "cre"),
     email = "m.p.kosinski@gmail.com"),
@@ -65,15 +65,6 @@ Suggests:
     RTCGA.miRNASeq,
     RTCGA.methylation,
     RTCGA.CNV,
-    RTCGA.rnaseq.20160128,
-    RTCGA.clinical.20160128,
-    RTCGA.mutations.20160128,
-    RTCGA.RPPA.20160128,
-    RTCGA.mRNA.20160128,
-    RTCGA.miRNASeq.20160128,
-    RTCGA.methylation.20160128,
-    RTCGA.CNV.20160128,
-    RTCGA.PANCAN12,
     magrittr,
     tidyr
 Repository: Bioconductor
